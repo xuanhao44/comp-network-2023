@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Linux开发环境搭建 &mdash; 计算机网络（2022春季）| 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="附录 C：网络实验室环境及设备简介" href="../appendix-c/index.html" />
+    <link rel="prev" title="1. Windows开发环境搭建" href="1win.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络（2022春季）| 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab1/index.html">Lab1：抓包程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab4：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab8：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab10：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">附录 B：网络编程实验环境</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1win.html">1. Windows开发环境搭建</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Linux开发环境搭建</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vscode">2.1. VScode的安装和配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：网络实验室环境及设备简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：致谢</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络（2022春季）| 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">附录 B：网络编程实验环境</a> &raquo;</li>
+      <li><span class="section-number">2. </span>Linux开发环境搭建</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/appendix-b/2linux.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="linux">
+<h1><span class="section-number">2. </span>Linux开发环境搭建<a class="headerlink" href="#linux" title="永久链接至标题"></a></h1>
+<p>为了简化环境，避免其他无关细节的干扰，如路由器、交换机等等，Linux网络编程实验环境是在一台物理计算机和Ubuntu虚拟机环境（也可以采用其他的Linux虚拟机环境）下进行。</p>
+<p>网络实验室提供有已经安装好的Ubuntu虚拟机环境，如果你想在自己的电脑上进行编译调试，那么你需要自行安装Linux虚拟机环境，虚拟机网络适配器选择为 NAT 模式。</p>
+<img alt="../_images/虚拟机.png" src="../_images/虚拟机.png" />
+<p>那么你在安装完Ubuntu虚拟机之后，还需要安装所有可能需要的依赖：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span> sudo apt-get install git make cmake libpcap-dev openssh-server
+</span><span class="hll"><span class="linenos">2</span> sudo apt-get install libreadline-dev libncurses-dev wireshark tshark g++
+</span></pre></div>
+</div>
+<img alt="../_images/实验环境.png" src="../_images/实验环境.png" />
+<p>上图是给出的示例图。其示例图中，物理机和虚拟机的网络号192.168.3.0，子网掩码255.255.255.0，虚拟机的网卡IP地址192.168.163.134，确保它们处在同一个网段内。你可以根据你电脑中虚拟网卡的网络号，设置虚拟网卡的IP地址（可以和上图的IP地址不一样，你只需要确保物理计算机的网卡、虚拟机的网卡、本协议栈的虚拟网卡这三张网卡保持在同一个网段内即可）。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p><strong>怎么样查看IP地址？</strong></p>
+<p>在Linux虚拟机环境下，打开terminal，输入ip addr命令，如下图所示。</p>
+</div>
+<img alt="../_images/ip.png" src="../_images/ip.png" />
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>在调试之前，必须修改include/config.h头文件中的NET_IF_IP宏定义，即需要自定义网卡的IP地址。该IP地址的网络号必须与你自己电脑中真实网卡的 <strong>网络号</strong> 一致（也就是和真实网卡处于同一个网段内）。</p>
+<p>注意：此处是 <strong>网络号</strong> 要和真实网卡一致，以确保它们处在同一个网段内， <strong>不是将自定义网卡（虚拟网卡）的IP地址设置成真实网卡的IP地址</strong> 。</p>
+</div>
+<img alt="../_images/vscode5.png" src="../_images/vscode5.png" />
+<section id="vscode">
+<h2><span class="section-number">2.1. </span>VScode的安装和配置<a class="headerlink" href="#vscode" title="永久链接至标题"></a></h2>
+<p>推荐同学们使用VSCode自带的调试工具，在Windows环境下远程调试Linux下的代码，这样就不需要在物理机上编辑代码在拷贝过去手动运行（或者在虚拟机记事本中编写代码），这将节省大量的时间。</p>
+<p>打开VScode，在左侧边栏的扩展商店中搜索并安装以下扩展：</p>
+<ol class="arabic simple">
+<li><p>Chinese (Simplified) Language Pack for Visual Studio Code</p></li>
+<li><p>Remote-SSH</p></li>
+<li><p>C/C++</p></li>
+<li><p>CMake Tools</p></li>
+</ol>
+<p>安装完成后重启 VSCode，在左侧边栏的远程资源管理器工具栏中点击 + 号，在顶部输入 ssh <a class="reference external" href="mailto:root&#37;&#52;&#48;XX&#46;XX&#46;XX">root<span>&#64;</span>XX<span>&#46;</span>XX<span>&#46;</span>XX</a>.XX（改为虚拟机 ip 地址）命令并一路回车。此时在工具栏中可以看到新添加的远程主机。在远程电脑上点击连接，输入密码后将会打开新窗口连接到远
+程主机中。在连接到远程主机之后，需要在再次搜索并安装上述扩展，将其安装在远程主机上。C/C++ 扩展在安装后可能需要一段时间来下载依赖文件。</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>在本实验中，VSCode 必须以 <strong>root身份登录到远程主机</strong>  中，否则将无法使用调试工具调试工程，因为本工程需要 root 权限操作网卡。</p>
+</div>
+<p>点击打开文件夹打开工程目录后即可进行代码操作（确保 CMakeLists.txt 处于当前根目录中）。此时可以在左侧边栏看到 CMake 工具栏。</p>
+<p>在配置好 VSCode 环境之后，即可使用 CMake 工具栏完成编译和调试操作。</p>
+<p>每次打开工程后首先需要配置 CMake，点击工具栏中的 Configure All Projects 按钮对当前工程进行配置，首次配置会弹出选择编译工具的提示，选择带有 linux 的一项。配置完成后，在工具栏中出现了本次实验的工程 net，在工程 net 中右键点击想要编译
+的程序 main，即可编译、调试、运行该程序。</p>
+<img alt="../_images/vscode6.png" src="../_images/vscode6.png" />
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>如果出现调试无法启动的情况，删除./vscode/lauch.json 即可。或将lauch.json 的 program 项改为 ${workspaceFolder}/build/main。</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1win.html" class="btn btn-neutral float-left" title="1. Windows开发环境搭建" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../appendix-c/index.html" class="btn btn-neutral float-right" title="附录 C：网络实验室环境及设备简介" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

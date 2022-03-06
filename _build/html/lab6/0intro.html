@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. 实 验目的 &mdash; 计算机网络（2022春季）| 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Lab7：协议栈之UDP协议实现" href="../lab7/index.html" />
+    <link rel="prev" title="Lab6：协议栈之ICMP协议实现" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络（2022春季）| 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab1/index.html">Lab1：抓包程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab4：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Lab6：协议栈之ICMP协议实现</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 实 验目的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2. 实验任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3. 实验原理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#icmp">3.1. ICMP协议概要</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.2. ICMP报文格式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">3.2.1. ICMP差错报文结构</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">3.2.2. ICMP询问报文结构</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">4. 实验环境与分组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">5. 代码实现与检测</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">5.1. ICMP数据报输入处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">5.2. ICMP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">5.3. 实验自测</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">6. 实验提交</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab8：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab10：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：网络实验室环境及设备简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：致谢</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络（2022春季）| 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Lab6：协议栈之ICMP协议实现</a> &raquo;</li>
+      <li><span class="section-number">1. </span>实 验目的</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/lab6/0intro.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">1. </span>实 验目的<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<ol class="arabic simple">
+<li><p>熟悉ICMP数据包格式；</p></li>
+<li><p>掌握ICMP数据包的的发送和接收处理过程。</p></li>
+</ol>
+</section>
+<section id="id2">
+<h1><span class="section-number">2. </span>实验任务<a class="headerlink" href="#id2" title="永久链接至标题"></a></h1>
+<p>在完成Lab5协议栈之IP协议的基础上，编写ICMP报文的发送、接收函数，使其能够发送和接收ICMP数据报文，并且能通过实验评测系统的测试。</p>
+</section>
+<section id="id3">
+<h1><span class="section-number">3. </span>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
+<section id="icmp">
+<h2><span class="section-number">3.1. </span>ICMP协议概要<a class="headerlink" href="#icmp" title="永久链接至标题"></a></h2>
+<p>从前面的实验可知，IP旨在让最终目标主机收到数据包，但在实际通信中，仅凭IP远远不够，还需要众多支持IP的相关技术才能够实现最终通信。例如，IP协议本身并没有为终端设备提供直接的方法来发现发往目的地址失败的IP数据包，也不能进行问题诊断。为解决这些不足，将Internet控制报文协议（Internet Control Message Protocol，ICMP）与IP结合使用，以便提供与IP协议层配置和IP数据包处理相关的诊断和控制信息。</p>
+<p>ICMP主要功能包括：确认IP包是否成功送达目标地址、通知发送过程当中IP包被废弃的具体原因、改善网络设置等。ICMP协议应用在许多网络管理命令中。例如，ping命令使用ICMP回送请求和应答报文，路由分析诊断程序tracert使用ICMP时间超过报文等。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.2. </span>ICMP报文格式<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<p>报文是在IP数据报内被封装传输的。ICMP头部8个字节，所有数据都在ICMP头部后面。ICMP报文格式具体见RFC777，RFC792规范。</p>
+<img alt="../_images/ICMP格式.png" src="../_images/ICMP格式.png" />
+<p>ICMP的消息大致可以分为两类：一类是通知出错原因的错误消息（又称差错报文，error message），另一类是用于诊断的查询消息（又称询问或信息报文，information message）。</p>
+<img alt="../_images/ICMP类型.png" src="../_images/ICMP类型.png" />
+<section id="id5">
+<h3><span class="section-number">3.2.1. </span>ICMP差错报文结构<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>差错报文保留IP数据包中的前8个字节意义：TCP、UDP前八字节都含有源端口号，可以反馈给源主机。接收ICMP差错报文的模块就会把它与某个协议和用户进程联系起来。其中协议：根据IP数据报首部中的协议字段来判断，用户进程：根据包含在IP数据报前8字节中的TCP、UDP报文首部中的TCP、UDP端口号判断。</p>
+<img alt="../_images/ICMP差错报文.png" src="../_images/ICMP差错报文.png" />
+</section>
+<section id="id6">
+<h3><span class="section-number">3.2.2. </span>ICMP询问报文结构<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<p>信息报文结构如下图。ICMP头部中的类型（Type）域用于说明ICMP报文的作用及格式，代码（Code）域用于详细说明某种ICMP报文的类型，其后的16位校验和（Checksum）字段涵盖了整个报文。标识仅适用于回显请求和应答ICMP报文。序列号序列号字段从0开始，并且每发送一个回显请求报文便增加1。数据字段是ping 程序在传出的回显请求中的可选数据区域中包含了一份本地时间拷贝。</p>
+<img alt="../_images/ICMP信息报文.png" src="../_images/ICMP信息报文.png" />
+<p>以下是常见的ICMP报文“类型”和“代码”字段用途。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 6%" />
+<col style="width: 6%" />
+<col style="width: 88%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>TYPE</p></th>
+<th class="head"><p>CODE</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>0</p></td>
+<td><p>询问报文：Echo Reply——回显应答（Ping应答）</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>0</p></td>
+<td><p>差错报文：Network Unreachable——网络不可达</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>1</p></td>
+<td><p>差错报文：Host Unreachable——主机不可达</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>差错报文：Protocol Unreachable——协议不可达</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>3</p></td>
+<td><p>差错报文：Port Unreachable——端口不可达</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>0</p></td>
+<td><p>询问报文：Echo request——回显请求（Ping请求）</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>0</p></td>
+<td><p>差错报文：TTL equals 0 during transit——传输期间生存时间为0</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>0</p></td>
+<td><p>差错报文：IP header bad (catchall error)——坏的IP首部（包括各种差错）</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section id="id7">
+<h1><span class="section-number">4. </span>实验环境与分组<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
+<p>要求在 Linux 环境下编译，独自完成。</p>
+</section>
+<section id="id8">
+<h1><span class="section-number">5. </span>代码实现与检测<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
+<p>请同学们认真阅读本实验提供的代码框架，并补充完整src/icmp.c文件中的icmp_in()函数、icmp_unreachable()函数。</p>
+<section id="id9">
+<h2><span class="section-number">5.1. </span>ICMP数据报输入处理<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<p>同学们需要自行实现icmp_in()函数，功能如下：</p>
+<p><strong>Step1</strong> ：首先做报头检测，如果接收到的包长小于ICMP头部长度，则丢弃不处理。</p>
+<p><strong>Step2</strong> ：接着，查看该报文的ICMP类型是否为回显请求。</p>
+<p><strong>Step3</strong> ：如果是，则回送一个回显应答（ping 应答），需要自行封装应答包。注意要调用buf_init()来初始化txbuf，然后封装报头和数据，数据部分可以拷贝来自接收的回显请求报文中的数据。</p>
+<p><strong>Step4</strong> ：填写校验和，ICMP的校验和和IP协议校验和算法是一样的。</p>
+<p><strong>Step5</strong> ：调用ip_out()函数将数据报发送出去。</p>
+</section>
+<section id="id10">
+<h2><span class="section-number">5.2. </span>ICMP数据报输出处理<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<p>本实验中，只需要输出icmp unreachable的差错报文。仅支持如下差错代码：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">icmp_code</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">ICMP_CODE_PROTOCOL_UNREACH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="c1">// 协议不可达</span>
+<span class="w">    </span><span class="n">ICMP_CODE_PORT_UNREACH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w">      </span><span class="c1">// 端口不可达</span>
+<span class="p">}</span><span class="w"> </span><span class="n">icmp_code_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>同学们需要自行实现icmp_unreachable()函数，功能如下：</p>
+<p><strong>Step1</strong> ：首先调用buf_init()来初始化txbuf，填写ICMP报头首部。</p>
+<p><strong>Step2</strong> ：接着，填写ICMP数据部分，包括IP数据报首部和IP数据报的前8个字节的数据字段，填写校验和。</p>
+<p><strong>Step3</strong> ：调用ip_out()函数将数据报发送出去。</p>
+</section>
+<section id="id11">
+<h2><span class="section-number">5.3. </span>实验自测<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<p>ICMP自测需要通过icmp_test测试。</p>
+<a class="reference internal image-reference" href="../_images/cmake9.png"><img alt="../_images/cmake9.png" src="../_images/cmake9.png" style="height: 500px;" /></a>
+<p>接着，打开VSCode的终端，到build目录下，输入ctest -R icmp_test进行自测。</p>
+<img alt="../_images/cmake14.png" src="../_images/cmake14.png" />
+<p>如果提示有错，请参照eth协议自测的排除方法来找bug。</p>
+</section>
+</section>
+<section id="id12">
+<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
+<p>请参考实验二的提交方式。</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Lab6：协议栈之ICMP协议实现" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../lab7/index.html" class="btn btn-neutral float-right" title="Lab7：协议栈之UDP协议实现" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
