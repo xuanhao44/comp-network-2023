@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. 实验目的 &mdash; 计算机网络（2022春季）| 哈工大（深圳） v1.0 文档</title>
+  <title>1. 实验目的 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -29,7 +29,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> 计算机网络（2022春季）| 哈工大（深圳）
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -58,15 +58,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#id8">3.4. ARP表</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">4. 实验环境与分组</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id10">5. 代码实现与检测</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id11">5.1. ARP初始化</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">5.2. ARP发送处理过程</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">5.3. ARP接收处理过程</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">5.4. 实验自测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">4. 代码实现与检测</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.1. ARP初始化</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">4.2. ARP发送处理过程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">4.3. ARP接收处理过程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.4. 实验自测</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id15">6. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">5. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab4：VLAN 与接口模式配置</a></li>
@@ -93,7 +92,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">计算机网络（2022春季）| 哈工大（深圳）</a>
+          <a href="../index.html">计算机网络实验指导书 - 2022春季 | 哈工大（深圳）</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -207,14 +206,10 @@
 </section>
 </section>
 <section id="id9">
-<h1><span class="section-number">4. </span>实验环境与分组<a class="headerlink" href="#id9" title="永久链接至标题"></a></h1>
-<p>要求在 Linux 环境下编译，独自完成。</p>
-</section>
-<section id="id10">
-<h1><span class="section-number">5. </span>代码实现与检测<a class="headerlink" href="#id10" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">4. </span>代码实现与检测<a class="headerlink" href="#id9" title="永久链接至标题"></a></h1>
 <p>请同学们认真阅读本实验提供的代码框架，并补充完整 src/arp.c 文件中的arp_req()函数、arp_out()函数和arp_in()函数。</p>
-<section id="id11">
-<h2><span class="section-number">5.1. </span>ARP初始化<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<section id="id10">
+<h2><span class="section-number">4.1. </span>ARP初始化<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>arp_init()函数实现ARP初始化功能，初始化流程如下：</p>
 <p><strong>1</strong> ：调用map_init()函数，初始化用于存储IP地址和MAC地址的ARP表arp_table，并设置超时时间为ARP_TIMEOUT_SEC。</p>
 <p><strong>2</strong> ：调用map_init()函数，初始化用于缓存来自IP层的数据包，并设置超时时间为ARP_MIN_INTERVAL。</p>
@@ -230,8 +225,8 @@
 <p><strong>Step3</strong> ：ARP操作类型为ARP_REQUEST，注意大小端转换。</p>
 <p><strong>Step4</strong> ：调用ethernet_out函数将ARP报文发送出去。</p>
 </section>
-<section id="id12">
-<h2><span class="section-number">5.2. </span>ARP发送处理过程<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
+<section id="id11">
+<h2><span class="section-number">4.2. </span>ARP发送处理过程<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现arp_out()函数，功能如下：</p>
 <p><strong>Step1</strong> ：根据IP地址来查找ARP表(arp_table)。</p>
 <p><strong>Step2</strong> ：如果能找到该IP地址对应的MAC地址，则将数据包直接发送给以太网层，即调用ethernet_out函数直接发出去。</p>
@@ -241,8 +236,8 @@
 <p>由于map数据结构的限制，相同ip的arp_buf长度仍为1，同学们可以自行设计数据结构实现不丢包。</p>
 </div>
 </section>
-<section id="id13">
-<h2><span class="section-number">5.3. </span>ARP接收处理过程<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<section id="id12">
+<h2><span class="section-number">4.3. </span>ARP接收处理过程<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现arp_in()函数，功能如下：</p>
 <p><strong>Step1</strong> ：首先判断数据长度，如果数据长度小于ARP头部长度，则认为数据包不完整，丢弃不处理。</p>
 <p><strong>Step2</strong> ：接着，做报头检查，查看报文是否完整，检测内容包括：ARP报头的硬件类型、上层协议类型、MAC硬件地址长度、IP协议地址长度、操作类型，检测这些内存是否符合协议规定。</p>
@@ -251,8 +246,8 @@
 <p>如果有，则说明ARP分组队列里面有待发送的数据包。也就是上一次调用arp_out()函数发送来自IP层的数据包时，由于没有找到对应的MAC地址进而先发送的ARP request报文，此时收到了该request的应答报文。然后，将缓存的数据包arp_buf再发送给以太网层，即调用ethernet_out()函数直接发出去，接着调用map_delete()函数将这个缓存的数据包删除掉。</p>
 <p>如果该接收报文的IP地址没有对应的arp_buf缓存，还需要判断接收到的报文是否为ARP_REQUEST请求报文，并且该请求报文的target_ip是本机的IP，则认为是请求本主机MAC地址的ARP请求报文，则调用arp_resp()函数回应一个响应报文。</p>
 </section>
-<section id="id14">
-<h2><span class="section-number">5.4. </span>实验自测<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
+<section id="id13">
+<h2><span class="section-number">4.4. </span>实验自测<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <p>ARP自测与eth自测的步骤类似。</p>
 <p>点击CMake工具栏，找到arp_test[arp_test.exe]，右键，选择“生成”进行编译。</p>
 <a class="reference internal image-reference" href="../_images/cmake7.png"><img alt="../_images/cmake7.png" src="../_images/cmake7.png" style="height: 500px;" /></a>
@@ -262,8 +257,8 @@
 <p>如果提示有错，请参照eth协议自测的排除方法来找bug。</p>
 </section>
 </section>
-<section id="id15">
-<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id15" title="永久链接至标题"></a></h1>
+<section id="id14">
+<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id14" title="永久链接至标题"></a></h1>
 <p>请参考实验二的提交方式。</p>
 </section>
 

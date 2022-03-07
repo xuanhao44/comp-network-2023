@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. 实验目的 &mdash; 计算机网络（2022春季）| 哈工大（深圳） v1.0 文档</title>
+  <title>1. 实验目的 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -29,7 +29,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> 计算机网络（2022春季）| 哈工大（深圳）
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -59,16 +59,15 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">4. 实验环境与分组</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">5. 代码实现与检测</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id10">5.1. IP数据报输入处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">5.2. 校验和算法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">5.3. IP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">5.4. IP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">5.5. 实验自测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">4. 代码实现与检测</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.1. IP数据报输入处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.2. 校验和算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">4.3. IP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">4.4. IP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.5. 实验自测</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id15">6. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">5. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
@@ -93,7 +92,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">计算机网络（2022春季）| 哈工大（深圳）</a>
+          <a href="../index.html">计算机网络实验指导书 - 2022春季 | 哈工大（深圳）</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -175,14 +174,10 @@
 </section>
 </section>
 <section id="id8">
-<h1><span class="section-number">4. </span>实验环境与分组<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
-<p>要求在 Linux 环境下编译，独自完成。</p>
-</section>
-<section id="id9">
-<h1><span class="section-number">5. </span>代码实现与检测<a class="headerlink" href="#id9" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">4. </span>代码实现与检测<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
 <p>请同学们认真阅读本实验提供的代码框架，并补充完整src/ip.c文件中的ip_in()函数、ip_out()函数和ip_fragment_out()函数，以及src/utils.c文件中的checksum16() 函数。</p>
-<section id="id10">
-<h2><span class="section-number">5.1. </span>IP数据报输入处理<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<section id="id9">
+<h2><span class="section-number">4.1. </span>IP数据报输入处理<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现ip_in()函数，功能如下：</p>
 <p><strong>Step1</strong> ：如果数据包的长度小于IP头部长度，丢弃不处理。</p>
 <p><strong>Step2</strong> ：接下来做报头检测，检查内容至少包括：IP头部的版本号是否是IPv4，总长度字段是否小于接收到的数据包的长度等，如果不符合这些要求，则丢弃不处理。</p>
@@ -192,8 +187,8 @@
 <p><strong>Step6</strong> ：调用buf_remove_header()函数去掉IP报头。</p>
 <p><strong>Step7</strong> ：调用net_ip()函数向上层传递数据包。如果是不能识别的协议类型，即调用icmp_unreachable()返回ICMP协议不可达信息。</p>
 </section>
-<section id="id11">
-<h2><span class="section-number">5.2. </span>校验和算法<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<section id="id10">
+<h2><span class="section-number">4.2. </span>校验和算法<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现checksum16()函数，功能如下：</p>
 <div class="admonition attention">
 <p class="admonition-title">注意</p>
@@ -210,23 +205,23 @@
 <p><strong>Step3</strong> ：判断相加后32bit结果值的高16位是否为0，如果不为0，则将高16位和低16位相加，依次循环，直至高16位为0为止。</p>
 <p><strong>Step4</strong> ：将上述的和（低16位）取反，即得到校验和。</p>
 </section>
-<section id="id12">
-<h2><span class="section-number">5.3. </span>IP数据报输出处理<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
+<section id="id11">
+<h2><span class="section-number">4.3. </span>IP数据报输出处理<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现ip_out()函数，功能如下：</p>
 <p><strong>Step1</strong> ：首先检查从上层传递下来的数据报包长是否大于IP协议最大负载包长（1500字节（MTU） 减去IP首部长度）。</p>
 <p><strong>Step2</strong> ：如果超过IP协议最大负载包长，则需要分片发送。首先调用buf_init()初始化一个ip_buf,将数据报包长截断，每个截断后的包长 = IP协议最大负载包长（1500字节 - IP首部长度），调用ip_fragment_out()函数发送出去。如果截断后最后的一个分片小于或等于IP协议最大负载包长，调用buf_init()初始化一个ip_buf，大小等于该分片大小，再调用ip_fragment_out()函数发送出去。注意，最后一个分片的MF = 0。</p>
 <p><strong>Step3</strong> ：如果没有超过IP协议最大负载包长，则直接调用ip_fragment_out()函数发送出去。</p>
 </section>
-<section id="id13">
-<h2><span class="section-number">5.4. </span>IP数据报输出处理<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<section id="id12">
+<h2><span class="section-number">4.4. </span>IP数据报输出处理<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现ip_fragment_out()函数，功能如下：</p>
 <p><strong>Step1</strong> ：调用buf_add_header()增加IP数据报头部缓存空间。</p>
 <p><strong>Step2</strong> ：填写IP数据报头部字段。</p>
 <p><strong>Step3</strong> ：先把IP头部的首部校验和字段填0，再调用checksum16函数计算校验和，然后把计算出来的校验和填入首部校验和字段。</p>
 <p><strong>Step4</strong> ：调用arp_out函数()将封装后的IP头部和数据发送出去。</p>
 </section>
-<section id="id14">
-<h2><span class="section-number">5.5. </span>实验自测<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
+<section id="id13">
+<h2><span class="section-number">4.5. </span>实验自测<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <p>IP自测需要通过ip_test和ip_frag_test测试。</p>
 <a class="reference internal image-reference" href="../_images/cmake8.png"><img alt="../_images/cmake8.png" src="../_images/cmake8.png" style="height: 500px;" /></a>
 <p>接着，打开VSCode的终端，到build目录下，输入ctest -R ip_test和ctest -R ip_frag_test进行自测。</p>
@@ -234,8 +229,8 @@
 <p>如果提示有错，请参照eth协议自测的排除方法来找bug。</p>
 </section>
 </section>
-<section id="id15">
-<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id15" title="永久链接至标题"></a></h1>
+<section id="id14">
+<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id14" title="永久链接至标题"></a></h1>
 <p>请参考实验二的提交方式。</p>
 </section>
 

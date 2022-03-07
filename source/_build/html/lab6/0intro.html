@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. 实 验目的 &mdash; 计算机网络（2022春季）| 哈工大（深圳） v1.0 文档</title>
+  <title>1. 实 验目的 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -29,7 +29,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> 计算机网络（2022春季）| 哈工大（深圳）
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -59,14 +59,13 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">4. 实验环境与分组</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">5. 代码实现与检测</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id9">5.1. ICMP数据报输入处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">5.2. ICMP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">5.3. 实验自测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">4. 代码实现与检测</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4.1. ICMP数据报输入处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.2. ICMP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.3. 实验自测</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id12">6. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">5. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
@@ -90,7 +89,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">计算机网络（2022春季）| 哈工大（深圳）</a>
+          <a href="../index.html">计算机网络实验指导书 - 2022春季 | 哈工大（深圳）</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -194,14 +193,10 @@
 </section>
 </section>
 <section id="id7">
-<h1><span class="section-number">4. </span>实验环境与分组<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
-<p>要求在 Linux 环境下编译，独自完成。</p>
-</section>
-<section id="id8">
-<h1><span class="section-number">5. </span>代码实现与检测<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">4. </span>代码实现与检测<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
 <p>请同学们认真阅读本实验提供的代码框架，并补充完整src/icmp.c文件中的icmp_in()函数、icmp_unreachable()函数。</p>
-<section id="id9">
-<h2><span class="section-number">5.1. </span>ICMP数据报输入处理<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<section id="id8">
+<h2><span class="section-number">4.1. </span>ICMP数据报输入处理<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现icmp_in()函数，功能如下：</p>
 <p><strong>Step1</strong> ：首先做报头检测，如果接收到的包长小于ICMP头部长度，则丢弃不处理。</p>
 <p><strong>Step2</strong> ：接着，查看该报文的ICMP类型是否为回显请求。</p>
@@ -209,8 +204,8 @@
 <p><strong>Step4</strong> ：填写校验和，ICMP的校验和和IP协议校验和算法是一样的。</p>
 <p><strong>Step5</strong> ：调用ip_out()函数将数据报发送出去。</p>
 </section>
-<section id="id10">
-<h2><span class="section-number">5.2. </span>ICMP数据报输出处理<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<section id="id9">
+<h2><span class="section-number">4.2. </span>ICMP数据报输出处理<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <p>本实验中，只需要输出icmp unreachable的差错报文。仅支持如下差错代码：</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">icmp_code</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
@@ -224,8 +219,8 @@
 <p><strong>Step2</strong> ：接着，填写ICMP数据部分，包括IP数据报首部和IP数据报的前8个字节的数据字段，填写校验和。</p>
 <p><strong>Step3</strong> ：调用ip_out()函数将数据报发送出去。</p>
 </section>
-<section id="id11">
-<h2><span class="section-number">5.3. </span>实验自测<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<section id="id10">
+<h2><span class="section-number">4.3. </span>实验自测<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>ICMP自测需要通过icmp_test测试。</p>
 <a class="reference internal image-reference" href="../_images/cmake9.png"><img alt="../_images/cmake9.png" src="../_images/cmake9.png" style="height: 500px;" /></a>
 <p>接着，打开VSCode的终端，到build目录下，输入ctest -R icmp_test进行自测。</p>
@@ -233,8 +228,8 @@
 <p>如果提示有错，请参照eth协议自测的排除方法来找bug。</p>
 </section>
 </section>
-<section id="id12">
-<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
+<section id="id11">
+<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id11" title="永久链接至标题"></a></h1>
 <p>请参考实验二的提交方式。</p>
 </section>
 

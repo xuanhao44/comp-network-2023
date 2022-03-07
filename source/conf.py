@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = '计算机网络（2022春季）| 哈工大（深圳）'
+project = '计算机网络实验指导书 - 2022春季 | 哈工大（深圳）'
 copyright = '2022, qiu'
 author = 'qiu'
 
@@ -33,7 +33,6 @@ master_doc = 'index'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = ['recommonmark',
-  'sphinx_markdown_tables',
   'sphinx.ext.autosectionlabel',
 ]
 

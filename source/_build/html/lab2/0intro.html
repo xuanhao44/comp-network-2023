@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. 实验目的 &mdash; 计算机网络（2022春季）| 哈工大（深圳） v1.0 文档</title>
+  <title>1. 实验目的 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -29,7 +29,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> 计算机网络（2022春季）| 哈工大（深圳）
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -58,16 +58,15 @@
 <li class="toctree-l3"><a class="reference internal" href="#id11">3.3. 以太网数据帧格式</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id12">4. 实验环境与分组</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id13">5. 代码实现与检测</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#ethernet-out">5.1. 以太网数据帧发送处理流程（ethernet_out()函数）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ethernet-in">5.2. 以太网数据帧接收处理流程（ethernet_in()函数）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">5.3. 实验自测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">4. 代码实现与检测</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ethernet-out">4.1. 以太网数据帧发送处理流程（ethernet_out()函数）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ethernet-in">4.2. 以太网数据帧接收处理流程（ethernet_in()函数）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.3. 实验自测</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id15">6. 实验提交</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id16">6.1. 实验设计报告</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id17">6.2. 实验代码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">5. 实验提交</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id15">5.1. 实验设计报告</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">5.2. 实验代码</a></li>
 </ul>
 </li>
 </ul>
@@ -97,7 +96,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">计算机网络（2022春季）| 哈工大（深圳）</a>
+          <a href="../index.html">计算机网络实验指导书 - 2022春季 | 哈工大（深圳）</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -170,8 +169,8 @@
 <section id="id6">
 <h3><span class="section-number">3.1.2. </span>网络数据包大端与小端<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
 <p>通过大学前两年的学习，相信同学们对大端小端的名词由来，已经有了一定的认识。大小端字节序在表示存储的字节顺序是有区别的。小端字节序：低字节存储于内存低地址，高字节存储于内存高地址。大端字节序：高字节存储于内存低地址，低字节存储于内存高地址。long 型数据 0x12345678，在小端字节序和大端字节序的存储方式：</p>
-<span id="id7"></span><table class="colwidths-given docutils align-center" id="id18">
-<caption><span class="caption-text">小端字节序</span><a class="headerlink" href="#id18" title="永久链接至表格"></a></caption>
+<span id="id7"></span><table class="colwidths-given docutils align-center" id="id17">
+<caption><span class="caption-text">小端字节序</span><a class="headerlink" href="#id17" title="永久链接至表格"></a></caption>
 <colgroup>
 <col style="width: 40%" />
 <col style="width: 60%" />
@@ -196,8 +195,8 @@
 </tr>
 </tbody>
 </table>
-<span id="id8"></span><table class="colwidths-given docutils align-center" id="id19">
-<caption><span class="caption-text">大端字节序</span><a class="headerlink" href="#id19" title="永久链接至表格"></a></caption>
+<span id="id8"></span><table class="colwidths-given docutils align-center" id="id18">
+<caption><span class="caption-text">大端字节序</span><a class="headerlink" href="#id18" title="永久链接至表格"></a></caption>
 <colgroup>
 <col style="width: 40%" />
 <col style="width: 60%" />
@@ -340,14 +339,10 @@
 </section>
 </section>
 <section id="id12">
-<h1><span class="section-number">4. </span>实验环境与分组<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
-<p>要求在 Linux 环境下编译，独自完成。</p>
-</section>
-<section id="id13">
-<h1><span class="section-number">5. </span>代码实现与检测<a class="headerlink" href="#id13" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">4. </span>代码实现与检测<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
 <p>请同学们认真阅读本实验提供的代码框架，并补充完整 src/ethernet.c 文件中的 ethernet_out()函数和ethernet_in()函数。</p>
 <section id="ethernet-out">
-<h2><span class="section-number">5.1. </span>以太网数据帧发送处理流程（ethernet_out()函数）<a class="headerlink" href="#ethernet-out" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">4.1. </span>以太网数据帧发送处理流程（ethernet_out()函数）<a class="headerlink" href="#ethernet-out" title="永久链接至标题"></a></h2>
 <p><strong>Step1</strong> ：首先判断数据长度，如果不足46则显式填充0，填充可以调用buf_add_padding()函数来实现。</p>
 <p><strong>Step2</strong> ：调用buf_add_header()函数添加以太网包头。</p>
 <p>可参考以下写法：</p>
@@ -361,13 +356,13 @@
 <p><strong>Step6</strong> ：调用驱动层封装好的driver_send()发送函数，将添加了以太网包头的数据帧发送到驱动层。</p>
 </section>
 <section id="ethernet-in">
-<h2><span class="section-number">5.2. </span>以太网数据帧接收处理流程（ethernet_in()函数）<a class="headerlink" href="#ethernet-in" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">4.2. </span>以太网数据帧接收处理流程（ethernet_in()函数）<a class="headerlink" href="#ethernet-in" title="永久链接至标题"></a></h2>
 <p><strong>Step1</strong> ：首先判断数据长度，如果数据长度小于以太网头部长度，则认为数据包不完整，丢弃不处理。</p>
 <p><strong>Step2</strong> ：调用buf_remove_header()函数移除加以太网包头。</p>
 <p><strong>Step3</strong> ：调用net_in()函数向上层传递数据包。</p>
 </section>
-<section id="id14">
-<h2><span class="section-number">5.3. </span>实验自测<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
+<section id="id13">
+<h2><span class="section-number">4.3. </span>实验自测<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <p>我们实验提供了自测程序，方便同学们对每一层的协议进行自测。</p>
 <p>首先请参考附录B <a class="reference internal" href="../appendix-b/1win.html"><span class="doc">Windows开发环境搭建</span></a> 搭建Windows的开发环境，或者，也可以参考附录B <a class="reference internal" href="../appendix-b/2linux.html"><span class="doc">Linux开发环境搭建</span></a> 搭建Linux的开发环境。</p>
 <p>下面以Windows开发环境为例，介绍如何进行实验自测。Linux开发环境下也可以用VSCode远程调试，完成实验自测，其操作步骤是类似的，在此就不一一赘述了。</p>
@@ -402,16 +397,16 @@
 <p>如果提示失败，也可以参考上述排错方法来找bug。</p>
 </section>
 </section>
-<section id="id15">
-<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id15" title="永久链接至标题"></a></h1>
+<section id="id14">
+<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id14" title="永久链接至标题"></a></h1>
 <p>本实验提交 <strong>实验设计报告</strong> 和 <strong>实验代码</strong> 。提交方法请参考实验一。</p>
-<section id="id16">
-<h2><span class="section-number">6.1. </span>实验设计报告<a class="headerlink" href="#id16" title="永久链接至标题"></a></h2>
+<section id="id15">
+<h2><span class="section-number">5.1. </span>实验设计报告<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
 <p>实验设计报告要求写出实验设计思路和运行结果 。</p>
 <p>实验设计报告会纳入评分（虽然不多），有分数追求的大佬（juanwang）们不要只放代码和指导书的截图。</p>
 </section>
-<section id="id17">
-<h2><span class="section-number">6.2. </span>实验代码<a class="headerlink" href="#id17" title="永久链接至标题"></a></h2>
+<section id="id16">
+<h2><span class="section-number">5.2. </span>实验代码<a class="headerlink" href="#id16" title="永久链接至标题"></a></h2>
 <p>不需要提交整个实验代码包，只需 <strong>提交你所修改过的代码</strong> 即可。</p>
 </section>
 </section>

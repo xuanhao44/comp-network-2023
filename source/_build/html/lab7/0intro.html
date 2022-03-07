@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. 实 验目的 &mdash; 计算机网络（2022春季）| 哈工大（深圳） v1.0 文档</title>
+  <title>1. 实 验目的 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -29,7 +29,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> 计算机网络（2022春季）| 哈工大（深圳）
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -57,15 +57,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#id5">3.3. UDP校验和计算方法</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">4. 实验环境与分组</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">5. 代码实现与检测</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id8">5.1. UDP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">5.2. UDP数据报输入处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">5.3. UDP校验和</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">5.4. 实验自测</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">4. 代码实现与检测</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4.1. UDP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4.2. UDP数据报输入处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.3. UDP校验和</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.4. 实验自测</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id12">6. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">5. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab8：RIP路由配置及协议分析</a></li>
@@ -88,7 +87,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">计算机网络（2022春季）| 哈工大（深圳）</a>
+          <a href="../index.html">计算机网络实验指导书 - 2022春季 | 哈工大（深圳）</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -155,22 +154,18 @@
 </section>
 </section>
 <section id="id6">
-<h1><span class="section-number">4. </span>实验环境与分组<a class="headerlink" href="#id6" title="永久链接至标题"></a></h1>
-<p>要求在 Linux 环境下编译，独自完成。</p>
-</section>
-<section id="id7">
-<h1><span class="section-number">5. </span>代码实现与检测<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">4. </span>代码实现与检测<a class="headerlink" href="#id6" title="永久链接至标题"></a></h1>
 <p>请同学们认真阅读本实验提供的代码框架，并补充完整src/udp.c文件中的udp_in()函数、udp_out()函数以及udp_checksum()函数。</p>
-<section id="id8">
-<h2><span class="section-number">5.1. </span>UDP数据报输出处理<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
+<section id="id7">
+<h2><span class="section-number">4.1. </span>UDP数据报输出处理<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现udp_out()函数，功能如下：</p>
 <p><strong>Step1</strong> ：首先调用buf_add_header()函数添加UDP报头。</p>
 <p><strong>Step2</strong> ：接着，填充UDP首部字段。</p>
 <p><strong>Step3</strong> ：先将校验和字段填充0，然后调用udp_checksum()函数计算出校验和，再将计算出来的校验和结果填入校验和字段。</p>
 <p><strong>Step4</strong> ：调用ip_out()函数发送UDP数据报。</p>
 </section>
-<section id="id9">
-<h2><span class="section-number">5.2. </span>UDP数据报输入处理<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<section id="id8">
+<h2><span class="section-number">4.2. </span>UDP数据报输入处理<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现udp_in()函数，功能如下：</p>
 <p><strong>Step1</strong> ：首先做包检查，检测该数据报的长度是否小于UDP首部长度，或者接收到的包长度小于UDP首部长度字段给出的长度，如果是，则丢弃不处理。</p>
 <p><strong>Step2</strong> ：接着重新计算校验和，先把首部的校验和字段保存起来，然后把该字段填充0，调用udp_checksum()函数计算出校验和，如果该值与接收到的UDP数据报的校验和不一致，则丢弃不处理。</p>
@@ -178,8 +173,8 @@
 <p><strong>Step4</strong> ：如果没有找到，则调用buf_add_header()函数增加IPv4数据报头部，再调用icmp_unreachable()函数发送一个端口不可达的ICMP差错报文。</p>
 <p><strong>Step5</strong> ：如果能找到，则去掉UDP报头，调用处理函数来做相应处理。</p>
 </section>
-<section id="id10">
-<h2><span class="section-number">5.3. </span>UDP校验和<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<section id="id9">
+<h2><span class="section-number">4.3. </span>UDP校验和<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现udp_checksum()函数，功能如下：</p>
 <p><strong>Step1</strong> ：首先调用buf_add_header()函数增加UDP伪头部。</p>
 <p><strong>Step2</strong> ：将IP头部拷贝出来，暂存IP头部，以免被覆盖。</p>
@@ -189,16 +184,16 @@
 <p><strong>Step6</strong> ：调用buf_remove_header()函数去掉UDP伪头部。</p>
 <p><strong>Step7</strong> ：返回计算出来的校验和值。</p>
 </section>
-<section id="id11">
-<h2><span class="section-number">5.4. </span>实验自测<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<section id="id10">
+<h2><span class="section-number">4.4. </span>实验自测<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>UDP自测需要通过main测试。</p>
 <a class="reference internal image-reference" href="../_images/cmake10.png"><img alt="../_images/cmake10.png" src="../_images/cmake10.png" style="width: 333.0px; height: 426.59999999999997px;" /></a>
 <p>接着，选择“在终端中运行”</p>
 <a class="reference internal image-reference" href="../_images/cmake15.png"><img alt="../_images/cmake15.png" src="../_images/cmake15.png" style="width: 372.59999999999997px; height: 427.8px;" /></a>
 <img alt="../_images/cmake22.png" src="../_images/cmake22.png" />
 <p>打开 wireshark，选择物理机的真实网卡作为抓包对象，并设置过滤条件为：</p>
-<p>ip.src == XX.XX.XX.XX || ip.dst == XX.XX.XX.XX</p>
-<p>XX.XX.XX.XX 是你自己的虚拟网卡IP地址</p>
+<p>eth.addr == XX.XX.XX.XX</p>
+<p>XX.XX.XX.XX 是你自己的虚拟网卡MAC地址</p>
 <img alt="../_images/cmake31.png" src="../_images/cmake31.png" />
 <p>打开TCP&amp;UDPDebug调试工具，点击“创建连接”，类型选择“UDP”，目标 IP：10.249.14.100，目标端口号：60000，本机端口号指定：60000。设置完成，点击创建。</p>
 <img alt="../_images/cmake41.png" src="../_images/cmake41.png" />
@@ -208,12 +203,16 @@
 <img alt="../_images/cmake61.png" src="../_images/cmake61.png" />
 <p>在终端上也能看见main的运行结构</p>
 <img alt="../_images/cmake71.png" src="../_images/cmake71.png" />
-<p>此时，Wireshark上也有两组数据包。</p>
+<p>此时，Wireshark上也有数据包的交互。</p>
 <img alt="../_images/cmake81.png" src="../_images/cmake81.png" />
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>请分析你自己用Wireshark抓包工具捕获到的相关报文（包含UDP和ARP报文），解析报文内容，并写到本次实验的实验报告中。</p>
+</div>
 </section>
 </section>
-<section id="id12">
-<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
+<section id="id11">
+<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id11" title="永久链接至标题"></a></h1>
 <p>请参考实验二的提交方式。</p>
 </section>
 
