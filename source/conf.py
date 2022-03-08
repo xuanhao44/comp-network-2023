@@ -70,3 +70,7 @@ html_css_files = [
     'my_style.css',
     #'dracula.css',
 ]
+
+html_js_files = [
+  'js/baidu-tongji.js'
+]
