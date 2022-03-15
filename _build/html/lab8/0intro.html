@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. 实验目的 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
+  <title>实验目的 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -20,9 +20,7 @@
         <script src="../_static/js/baidu-tongji.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Lab9：邮件客户端的设计与实现" href="../lab9/index.html" />
-    <link rel="prev" title="Lab8：RIP路由配置及协议分析" href="index.html" /> 
+    <link rel="search" title="搜索" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -41,7 +39,7 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">实验</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab1/index.html">Lab1：抓包程序</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
@@ -50,59 +48,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Lab8：RIP路由配置及协议分析</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 实验目的</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">2. 实验任务</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">3. 实验原理</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#rip">3.1. RIP概要</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">3.2. RIP协议特点</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">3.3. RIP报文格式</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">4. 实验环境与分组</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">5. 实验组网</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">6. 实验步骤</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id9">6.1. 登陆设备</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#step1">6.1.1. Step1：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#step2">6.1.2. Step2：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#step3">6.1.3. Step3：</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">6.2. 清空配置</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id11">6.2.1. Step1：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id12">6.2.2. Step2：</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">6.3. 导入初始配置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#pcip">6.4. 配置三台PC的IP地址</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">6.5. 配置路由器、交换机基本信息和计算机的网关</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id15">6.5.1. Step1：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id16">6.5.2. Step2：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id17">6.5.3. Step3：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#step4">6.5.4. Step4：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#step5">6.5.5. Step5：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#step6">6.5.6. Step6：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#step7">6.5.7. Step7：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#step8">6.5.8. Step8：</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id18">6.6. 配置RIP协议及查看路由表，并测试连通性</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id19">6.6.1. Step1：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id20">6.6.2. Step2:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id21">6.6.3. Step3:</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id22">6.6.4. Step4：</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id23">6.7. 触发更新和水平分割</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id24">6.7.1. Step1：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id25">6.7.2. Step2：</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id26">6.7.3. Step3：</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Lab8：RIP路由配置及协议分析</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab10：NAT组网</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
@@ -111,7 +57,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：网络实验室环境及设备简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：参考文献</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：致谢</a></li>
 </ul>
@@ -130,8 +76,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Lab8：RIP路由配置及协议分析</a> &raquo;</li>
-      <li><span class="section-number">1. </span>实验目的</li>
+      <li>实验目的</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/lab8/0intro.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -142,7 +87,7 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1><span class="section-number">1. </span>实验目的<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<h1>实验目的<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <ol class="arabic simple">
 <li><p>了解动态路由协议的原理与应用。</p></li>
 <li><p>熟悉RIP协议的特点，理解水平分割、触发更新和毒性逆转的作用。</p></li>
@@ -150,17 +95,17 @@
 </ol>
 </section>
 <section id="id2">
-<h1><span class="section-number">2. </span>实验任务<a class="headerlink" href="#id2" title="永久链接至标题"></a></h1>
+<h1>实验任务<a class="headerlink" href="#id2" title="永久链接至标题"></a></h1>
 <p>掌握RIP的配置方法，在计算机上用Wireshark截取RIP报文，理解触发更新和水平分割对RIP收敛速度和避免环路的作用。</p>
 </section>
 <section id="id3">
-<h1><span class="section-number">3. </span>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
+<h1>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
 <section id="rip">
-<h2><span class="section-number">3.1. </span>RIP概要<a class="headerlink" href="#rip" title="永久链接至标题"></a></h2>
+<h2>RIP概要<a class="headerlink" href="#rip" title="永久链接至标题"></a></h2>
 <p>RIP（Routing Information Protocol）是基于距离矢量算法的一种路由协议，它使用“跳数”，即指所经过的路由器的个数来衡量到达目标地址的路由距离，广泛应用于LAN。BSD UNIX系统的routed进程采用了RIP协议，由此RIP得到了迅速的普及。</p>
 </section>
 <section id="id4">
-<h2><span class="section-number">3.2. </span>RIP协议特点<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<h2>RIP协议特点<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <p>RIP协议特点可归纳如下：</p>
 <ol class="arabic simple">
 <li><p>30秒一次，将自己所知道的路由信息广播出去。如果一个路由在180秒内未被刷，就认为网络被断开。</p></li>
@@ -185,7 +130,7 @@
 </div>
 </section>
 <section id="id5">
-<h2><span class="section-number">3.3. </span>RIP报文格式<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
+<h2>RIP报文格式<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 <p>RIP协议使用UDP协议的520端口来发送和接收RIP报文。其报文格式如下图所示。</p>
 <img alt="../_images/RIP格式.png" src="../_images/RIP格式.png" />
 <ol class="arabic simple">
@@ -202,11 +147,11 @@
 </section>
 </section>
 <section id="id6">
-<h1><span class="section-number">4. </span>实验环境与分组<a class="headerlink" href="#id6" title="永久链接至标题"></a></h1>
+<h1>实验环境与分组<a class="headerlink" href="#id6" title="永久链接至标题"></a></h1>
 <p>路由器2台、二层交换机2台，三层交换机1台，计算机4台，4人一组。</p>
 </section>
 <section id="id7">
-<h1><span class="section-number">5. </span>实验组网<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
+<h1>实验组网<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
 <img alt="../_images/6-2.jpg" src="../_images/6-2.jpg" />
 <p>IP地址表：</p>
 <table class="docutils align-default">
@@ -239,16 +184,16 @@
 </table>
 </section>
 <section id="id8">
-<h1><span class="section-number">6. </span>实验步骤<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
+<h1>实验步骤<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
 <section id="id9">
-<h2><span class="section-number">6.1. </span>登陆设备<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<h2>登陆设备<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <section id="step1">
-<h3><span class="section-number">6.1.1. </span>Step1：<a class="headerlink" href="#step1" title="永久链接至标题"></a></h3>
+<h3>Step1：<a class="headerlink" href="#step1" title="永久链接至标题"></a></h3>
 <p>打开SecureCRT，点击窗口中的“快速连接”图标，如图所示：</p>
 <img alt="../_images/1-22.jpg" src="../_images/1-22.jpg" />
 </section>
 <section id="step2">
-<h3><span class="section-number">6.1.2. </span>Step2：<a class="headerlink" href="#step2" title="永久链接至标题"></a></h3>
+<h3>Step2：<a class="headerlink" href="#step2" title="永久链接至标题"></a></h3>
 <p>在弹出的窗口中，输入需通过telnet访问的设备IP（见表 <a class="reference internal" href="#atm"><span class="std std-ref">ATM管理机地址表</span></a> ）和端口号，然后点击“连接”即可。</p>
 <img alt="../_images/1-32.jpg" src="../_images/1-32.jpg" />
 <span id="atm"></span><table class="colwidths-given docutils align-center" id="id27">
@@ -303,16 +248,16 @@
 <img alt="../_images/2-32.jpg" src="../_images/2-32.jpg" />
 </section>
 <section id="step3">
-<h3><span class="section-number">6.1.3. </span>Step3：<a class="headerlink" href="#step3" title="永久链接至标题"></a></h3>
+<h3>Step3：<a class="headerlink" href="#step3" title="永久链接至标题"></a></h3>
 <p>登录成功后，即进入用户视图。在用户视图下，用户可以完成查看运行状态和统计信息等功能，此时屏幕上显示:</p>
 <img alt="../_images/1-52.jpg" src="../_images/1-52.jpg" />
 </section>
 </section>
 <section id="id10">
-<h2><span class="section-number">6.2. </span>清空配置<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<h2>清空配置<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>每次做实验前，先清空上一次的配置，本次实验需清空R1、R2、SW1、SW2、SW3的配置。</p>
 <section id="id11">
-<h3><span class="section-number">6.2.1. </span>Step1：<a class="headerlink" href="#id11" title="永久链接至标题"></a></h3>
+<h3>Step1：<a class="headerlink" href="#id11" title="永久链接至标题"></a></h3>
 <p>在用户视图下，使用如下命令进行配置的清空</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span>reset saved-configuration //清除配置
 </span><span class="hll"><span class="linenos">2</span>The device configurations will be erased to reconfigure. Are you sure?<span class="o">(</span>y/n<span class="o">)</span>:y //输入y继续删除
@@ -323,7 +268,7 @@
 <img alt="../_images/2-42.jpg" src="../_images/2-42.jpg" />
 </section>
 <section id="id12">
-<h3><span class="section-number">6.2.2. </span>Step2：<a class="headerlink" href="#id12" title="永久链接至标题"></a></h3>
+<h3>Step2：<a class="headerlink" href="#id12" title="永久链接至标题"></a></h3>
 <p>在用户视图下，使用如下命令进行重启</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span>reboot //重启
 </span><span class="hll"><span class="linenos">2</span>All the configuration will be saved to the next startup configuration. Continue? <span class="o">[</span>y/n<span class="o">]</span>:n //输入n不保存到启动配置
@@ -335,7 +280,7 @@
 </section>
 </section>
 <section id="id13">
-<h2><span class="section-number">6.3. </span>导入初始配置<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<h2>导入初始配置<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <p>R1导入下列配置</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span>system-view
 </span><span class="hll"><span class="linenos"> 2</span>sysname R1
@@ -408,7 +353,7 @@
 <img alt="../_images/2-72.jpg" src="../_images/2-72.jpg" />
 </section>
 <section id="pcip">
-<h2><span class="section-number">6.4. </span>配置三台PC的IP地址<a class="headerlink" href="#pcip" title="永久链接至标题"></a></h2>
+<h2>配置三台PC的IP地址<a class="headerlink" href="#pcip" title="永久链接至标题"></a></h2>
 <p>按照下表设置PCA、PCC和PCD这三台电脑的IP地址。</p>
 <table class="docutils align-default">
 <colgroup>
@@ -434,13 +379,13 @@
 </table>
 </section>
 <section id="id14">
-<h2><span class="section-number">6.5. </span>配置路由器、交换机基本信息和计算机的网关<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
+<h2>配置路由器、交换机基本信息和计算机的网关<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
 <section id="id15">
-<h3><span class="section-number">6.5.1. </span>Step1：<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
+<h3>Step1：<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
 <p>按照组网图正确组网，打开机柜，把 PCB 的网线接口接到 SW1 的 G0/0/12 上。</p>
 </section>
 <section id="id16">
-<h3><span class="section-number">6.5.2. </span>Step2：<a class="headerlink" href="#id16" title="永久链接至标题"></a></h3>
+<h3>Step2：<a class="headerlink" href="#id16" title="永久链接至标题"></a></h3>
 <p>配置R1的基本信息</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span>system-view //进入系统视图
 </span><span class="hll"><span class="linenos"> 2</span>interface G0/0/9 //进入G0/0/9接口模式
@@ -457,7 +402,7 @@
 </div>
 </section>
 <section id="id17">
-<h3><span class="section-number">6.5.3. </span>Step3：<a class="headerlink" href="#id17" title="永久链接至标题"></a></h3>
+<h3>Step3：<a class="headerlink" href="#id17" title="永久链接至标题"></a></h3>
 <p>配置R2的基本信息</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span>system-view //进入系统视图
 </span><span class="hll"><span class="linenos">2</span>interface G0/0/9 //进入G0/0/9接口模式
@@ -471,38 +416,38 @@
 </div>
 </section>
 <section id="step4">
-<h3><span class="section-number">6.5.4. </span>Step4：<a class="headerlink" href="#step4" title="永久链接至标题"></a></h3>
+<h3>Step4：<a class="headerlink" href="#step4" title="永久链接至标题"></a></h3>
 <p>配置三台计算机的网关</p>
 <p>在三台PC上配置网关。注意，一台电脑只能有一个默认网关，需要把“本地连接2”的默认网关删掉，才能配置“本地连接”的默认网关。</p>
 <p>PCA网关为192.168.2.1，PCC和PCD网关为192.168.3.1</p>
 <p>PCA通过默认网关将发往未知网络的数据交由R1处理。同理PCC和PCD通过默认网关将数据交给R2。</p>
 </section>
 <section id="step5">
-<h3><span class="section-number">6.5.5. </span>Step5：<a class="headerlink" href="#step5" title="永久链接至标题"></a></h3>
+<h3>Step5：<a class="headerlink" href="#step5" title="永久链接至标题"></a></h3>
 <p>在R1上ping R2验证连通性</p>
 <img alt="../_images/6-3.jpg" src="../_images/6-3.jpg" />
 </section>
 <section id="step6">
-<h3><span class="section-number">6.5.6. </span>Step6：<a class="headerlink" href="#step6" title="永久链接至标题"></a></h3>
+<h3>Step6：<a class="headerlink" href="#step6" title="永久链接至标题"></a></h3>
 <p>在PCA上ping R1验证连通性</p>
 <img alt="../_images/6-4.jpg" src="../_images/6-4.jpg" />
 </section>
 <section id="step7">
-<h3><span class="section-number">6.5.7. </span>Step7：<a class="headerlink" href="#step7" title="永久链接至标题"></a></h3>
+<h3>Step7：<a class="headerlink" href="#step7" title="永久链接至标题"></a></h3>
 <p>在PCC上ping R2验证连通性</p>
 <img alt="../_images/6-5.jpg" src="../_images/6-5.jpg" />
 </section>
 <section id="step8">
-<h3><span class="section-number">6.5.8. </span>Step8：<a class="headerlink" href="#step8" title="永久链接至标题"></a></h3>
+<h3>Step8：<a class="headerlink" href="#step8" title="永久链接至标题"></a></h3>
 <p>在PCA上ping PCC验证连通性</p>
 <img alt="../_images/6-6.jpg" src="../_images/6-6.jpg" />
 </section>
 </section>
 <section id="id18">
-<h2><span class="section-number">6.6. </span>配置RIP协议及查看路由表，并测试连通性<a class="headerlink" href="#id18" title="永久链接至标题"></a></h2>
+<h2>配置RIP协议及查看路由表，并测试连通性<a class="headerlink" href="#id18" title="永久链接至标题"></a></h2>
 <p>为两台路由器和三层交换配置RIP协议，并通告其网络。具体命令如下：</p>
 <section id="id19">
-<h3><span class="section-number">6.6.1. </span>Step1：<a class="headerlink" href="#id19" title="永久链接至标题"></a></h3>
+<h3>Step1：<a class="headerlink" href="#id19" title="永久链接至标题"></a></h3>
 <p>在R1的系统视图下：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span> system-view //进入系统视图
 </span><span class="hll"><span class="linenos">2</span> rip  //启用RIP协议
@@ -516,7 +461,7 @@
 </div>
 </section>
 <section id="id20">
-<h3><span class="section-number">6.6.2. </span>Step2:<a class="headerlink" href="#id20" title="永久链接至标题"></a></h3>
+<h3>Step2:<a class="headerlink" href="#id20" title="永久链接至标题"></a></h3>
 <p>R2-系统视图：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span> system-view //进入系统视图
 </span><span class="hll"><span class="linenos">2</span> rip  //启用RIP协议
@@ -529,7 +474,7 @@
 </div>
 </section>
 <section id="id21">
-<h3><span class="section-number">6.6.3. </span>Step3:<a class="headerlink" href="#id21" title="永久链接至标题"></a></h3>
+<h3>Step3:<a class="headerlink" href="#id21" title="永久链接至标题"></a></h3>
 <p>使用display ip routing-table命令在R1和R2上查看路由表信息</p>
 <p>R1路由表:</p>
 <img alt="../_images/6-7.jpg" src="../_images/6-7.jpg" />
@@ -537,15 +482,15 @@
 <img alt="../_images/6-8.jpg" src="../_images/6-8.jpg" />
 </section>
 <section id="id22">
-<h3><span class="section-number">6.6.4. </span>Step4：<a class="headerlink" href="#id22" title="永久链接至标题"></a></h3>
+<h3>Step4：<a class="headerlink" href="#id22" title="永久链接至标题"></a></h3>
 <p>使用ping命令测试PCA到PCC之间的连通性</p>
 <img alt="../_images/6-9.jpg" src="../_images/6-9.jpg" />
 </section>
 </section>
 <section id="id23">
-<h2><span class="section-number">6.7. </span>触发更新和水平分割<a class="headerlink" href="#id23" title="永久链接至标题"></a></h2>
+<h2>触发更新和水平分割<a class="headerlink" href="#id23" title="永久链接至标题"></a></h2>
 <section id="id24">
-<h3><span class="section-number">6.7.1. </span>Step1：<a class="headerlink" href="#id24" title="永久链接至标题"></a></h3>
+<h3>Step1：<a class="headerlink" href="#id24" title="永久链接至标题"></a></h3>
 <p>分别打开PCA 、PCB、PCC三台计算机的Wireshark抓取rip协议包，具体操作见三层交换中arp抓包实验。</p>
 <p>此时查看PCA的结果如下：</p>
 <img alt="../_images/6-10.jpg" src="../_images/6-10.jpg" />
@@ -556,7 +501,7 @@
 <p>此时抓的包是R1 g0/0/0组播发出的信息。</p>
 </section>
 <section id="id25">
-<h3><span class="section-number">6.7.2. </span>Step2：<a class="headerlink" href="#id25" title="永久链接至标题"></a></h3>
+<h3>Step2：<a class="headerlink" href="#id25" title="永久链接至标题"></a></h3>
 <p>然后在R1上使用命令 undo interface loopback1断开回环地址loopback1，四台PC都连接不到loopback1，PCA、PCB和PCC结果如下图所示。</p>
 <p>PCA截获到1.1.1.1网段不可达:</p>
 <img alt="../_images/6-13.jpg" src="../_images/6-13.jpg" />
@@ -567,7 +512,7 @@
 <p>由上图可知，到达1.1.1.1的跳数为16，因为rip协议的最大跳数为15，所以这条IP不可达。一条路有切断，全网通告。</p>
 </section>
 <section id="id26">
-<h3><span class="section-number">6.7.3. </span>Step3：<a class="headerlink" href="#id26" title="永久链接至标题"></a></h3>
+<h3>Step3：<a class="headerlink" href="#id26" title="永久链接至标题"></a></h3>
 <p>rip配置后，默认启动水平分割,水平分割就是此接口接收到的信息不从这个接口发回去，从上面PCB的图可以看出。重新配置好loopback1，使个路由器运行rip，正常工作。取消路由器R1和R2的水平分割功能，以R1的g0/0/9接口为例命令如下：</p>
 <p>R1基本配置</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span>interface g0/0/9
@@ -584,10 +529,7 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Lab8：RIP路由配置及协议分析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../lab9/index.html" class="btn btn-neutral float-right" title="Lab9：邮件客户端的设计与实现" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 

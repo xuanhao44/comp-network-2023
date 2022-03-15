@@ -7,7 +7,7 @@
    :titlesonly:
    :numbered:
 
-   0实验简介
-   1实验指南
+   0intro
+   1guide
 
 

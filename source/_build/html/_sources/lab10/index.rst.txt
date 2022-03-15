@@ -8,4 +8,5 @@ Lab10：NAT组网
    :titlesonly:
    :numbered:
 
-   0intro
+   1cisco-nat
+..   0intro

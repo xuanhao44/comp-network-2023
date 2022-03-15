@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>网络模拟器简介 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script src="../_static/js/baidu-tongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="附录 D：参考文献" href="../appendix-d/index.html" />
+    <link rel="prev" title="附录 C：Cisco Packet Tracer简介" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab1/index.html">Lab1：抓包程序</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab4：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab8：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab10：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">附录 C：Cisco Packet Tracer简介</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">网络模拟器简介</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cisco-packet-tracer-7-2">Cisco Packet Tracer 7.2模拟器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">网络设备</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">交换机</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">路由器</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">网络设备的配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cisco">Cisco网络设备的常用配置命令</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：致谢</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络实验指导书 - 2022春季 | 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">附录 C：Cisco Packet Tracer简介</a> &raquo;</li>
+      <li>网络模拟器简介</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/appendix-c/0cisco.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>网络模拟器简介<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<section id="cisco-packet-tracer-7-2">
+<h2>Cisco Packet Tracer 7.2模拟器<a class="headerlink" href="#cisco-packet-tracer-7-2" title="永久链接至标题"></a></h2>
+<p>Cisco Packet Tracer是由Cisco（思科）公司发布的一个仿真学习工具，它是运用软件模拟真实的网络设备和环境，利用软件中虚拟的网络设备及线缆完成网络的组网和配置，实现网络的互联。因此我们可以在没有网络设备的情况下，也能在软件的图形界面建立网络拓扑，并可追踪数据包在网络中详细的处理过程，学习搭建网络的要点和难点。</p>
+<p>本实验课程已经提供有Cisco Packet Tracer 7.2模拟器软件包，可直接打开“Cisco Packet Tracer 绿色版binPacketTracer7.exe”运行，无需安装，也无需注册。</p>
+<p>如果想要最新版本的模拟器，可以到思科官网下载：<a class="reference external" href="https://www.netacad.com/courses/packet-tracer">https://www.netacad.com/courses/packet-tracer</a>。注意：需要注册账号（免费）才可使用。</p>
+<p>打开PacketTracer7.exe后，进入其操作界面：</p>
+<img alt="../_images/cisco-1.png" src="../_images/cisco-1.png" />
+<p>在底部设备工具栏区域，提供常用的PC、服务器等终端设备和路由器、交换机、防火墙、无线设备等常用网络设备及线缆。</p>
+<p>各种型号路由器：</p>
+<img alt="../_images/cisco-2.png" src="../_images/cisco-2.png" />
+<p>各种型号交换机：</p>
+<img alt="../_images/cisco-3.png" src="../_images/cisco-3.png" />
+<p>常用设备及其他终端设备：</p>
+<img alt="../_images/cisco-4.png" src="../_images/cisco-4.png" />
+<p>各种连接线：</p>
+<img alt="../_images/cisco-5.png" src="../_images/cisco-5.png" />
+<p>连接线类型有：</p>
+<ol class="arabic simple">
+<li><p>自动选择连接类型的连接线</p></li>
+<li><p>Console配置线</p></li>
+<li><p>直通线</p></li>
+<li><p>交叉线</p></li>
+<li><p>光纤</p></li>
+<li><p>电话线</p></li>
+<li><p>同轴电缆</p></li>
+<li><p>DCE线</p></li>
+<li><p>DTE线</p></li>
+<li><p>八爪线</p></li>
+<li><p>自定义线缆</p></li>
+<li><p>USB线</p></li>
+</ol>
+<p>在实验中，我们只需用到直通线和交叉线。目前绝大部分网络设备支持MDI/MDIX功能，能够实现线缆的自适应 ，即连接时使用直通线或交叉线都可以。但在Cisco Packet Tracer中仍要研究遵守连线类型。</p>
+<p><strong>直通线</strong> ：用于连接不同类型的网络设备，如计算机与交换机、交换机与路由器。在制作时两端水晶头的制作标准相同。注意，路由器本质上是一台计算机，因此计算机与路由器之间的连接可看作是相同设备的连接，因此应使用交叉线。</p>
+<p><strong>交叉线</strong> ：用于连接相同类型的网络设备，如计算机和路由器、路由器和路由器、交换机和交换机、计算机和计算机，需要注意的是交叉线两端水晶头的制作标准不同。</p>
+</section>
+<section id="id2">
+<h2>网络设备<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<section id="id3">
+<h3>交换机<a class="headerlink" href="#id3" title="永久链接至标题"></a></h3>
+<p>交换机（Switch）意为“开关”是一种用于电（光）信号转发的网络设备。它可以为接入交换机的任意两个网络节点提供独享的电信号通路。最常见的交换机是以太网交换机。其他常见的还有电话语音交换机、光纤交换机等。（来源百度百科）</p>
+<img alt="../_images/交换机.png" src="../_images/交换机.png" />
+<p>本实验室配备有二层交换机和三层交换机。</p>
+<p>二层交换机工作于OSI模型的第2层（数据链路层），故而称为二层交换机。二层交换机能够基于数据链路层的MAC首部信息，进行数据帧或VLAN（Virtual LAN）的传输工作。</p>
+<p>三层交换机是一种在二层交换机的基础上增加了路由选择功能的网络硬件，它同时具有几乎二层交换的速度，也能够基于三层网络层的IP首部信息，实现路由选择以及分组过滤等功能。</p>
+<p>二层交换机可以通过VLAN分割广播域，但终端之间的数据帧交换必须位于同一VLAN范围内。如果不同VLAN的终端要进行通信时，则需要采用路由功能，这就需要额外添加路由器。但使用三层交换机则无需其他硬件设备，就能够完成VLAN配置和VLAN之间的通信过程。</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>三层交换机最重要的目的是加快大型局域网内部的数据交换，其路由功能也多是围绕这一目的而展开的，所以它的路由功能没有同一档次的专业路由器强，不能完全替代路由器。在企业网和教学网中，一般将三层交换机用在网络的核心层，以连接不同的子网或VLAN。</p>
+</div>
+<p>二层交换机：</p>
+<img alt="../_images/0-9.jpg" src="../_images/0-9.jpg" />
+<p>三层交换机：</p>
+<img alt="../_images/0-10.jpg" src="../_images/0-10.jpg" />
+<p>思科模拟器中的交换机：</p>
+<img alt="../_images/cisco-6.png" src="../_images/cisco-6.png" />
+</section>
+<section id="id4">
+<h3>路由器<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
+<p>路由器是工作在OSI参考模型第三层（网络层）的网络连接设备，它的基本功能是根据数据包的IP地址选择发送路径，转发数据包到相应网络。</p>
+<p>路由器的数据转发时基于路由表实现的，每个路由器都会维护一张路由器，根据路由表决定数据包的转发路径。</p>
+<img alt="../_images/路由器.png" src="../_images/路由器.png" />
+<p>当路由器接收到一个数据包后，首先对数据包进行校验，如果是发给路由器用于协议处理的数据包，路由器将交给相应模块去处理，而大多数是需要转发的数据包，路由器将查询路由表，然后根据查询结果转发数据包到相应的端口和网络。路由表由多个路由表表项构成，可以由管理者手动设置（即静态路由），也可以根据路由协议自动生成（即动态路由）。</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>在构建大型的LAN时，需要使用交换机或主机等设备来管理大量的MAC地址信息。当频繁进行广播通信时，设备的负担就会非常大。为减轻设备的负担，需要将LAN划分成一个个子网，而子网间的通信就需要依靠路由器进行了。另外，为了连接互联网，与互联网服务供应商建立连接时，也同样需要用到路由器设备。</p>
+</div>
+<p>路由器：</p>
+<img alt="../_images/0-11.jpg" src="../_images/0-11.jpg" />
+<p>思科模拟器中的路由器：</p>
+<img alt="../_images/cisco-7.png" src="../_images/cisco-7.png" />
+</section>
+<section id="id5">
+<h3>网络设备的配置<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>以路由器为例，我们下面介绍如何对网络设备进行配置。
+在底部工具栏上，将1841型号的路由器拖拽到工作区。单击该图标，弹出该设备的功能对话框，该对话框包括Physical（物理）、Config（配置）、CLI（命令）和Attributes（属性）选项卡。其中，我们最常用的是CLI选项卡，可以致谢设备所有配置的命令。</p>
+<img alt="../_images/cisco-8.png" src="../_images/cisco-8.png" />
+</section>
+<section id="cisco">
+<h3>Cisco网络设备的常用配置命令<a class="headerlink" href="#cisco" title="永久链接至标题"></a></h3>
+<p>以交换机设备为例：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>Switch&gt;  //用户模式的提示符是<span class="s2">&quot;&gt;&quot;&quot;</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="s2">Switch&gt;enable   //进入交换机特权模式</span>
+<span class="linenos"> 4</span><span class="s2">Switch#         //特权模式的提示符是“#”</span>
+<span class="linenos"> 5</span><span class="s2">Switch#exit     //特权模式输入exit退出到上一级模式</span>
+<span class="linenos"> 6</span><span class="s2">Switch&gt;</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="s2">Switch&gt;enable</span>
+<span class="linenos"> 9</span><span class="s2">Switch#configure terminal  //进入交换机全局模式（也称为config模式）</span>
+<span class="linenos">10</span><span class="s2">Switch(config)#  //全局模式的提示符是“(config)#”</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="s2">Switch(config)#interface f0/0  //进入接口模块</span>
+<span class="linenos">13</span><span class="s2">Switch(config-if)# //接口模式的提示符是“(config-if)#”</span>
+<span class="linenos">14</span><span class="s2">Switch(config-if)#exit //退回上一级（一级一级退回用exit）</span>
+<span class="linenos">15</span><span class="s2">Switch(config)#exit</span>
+<span class="linenos">16</span><span class="s2">Switch#</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="s2">Switch(config)#interface f0/0.1  //进入子接口模式</span>
+<span class="linenos">19</span><span class="s2">Switch(config-subif)#  //特权模式的提示符是“(config-subif)#”</span>
+<span class="linenos">20</span>
+<span class="linenos">21</span><span class="s2">Switch(config)#hostname SW1 //更改交换机的主机名</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="s2">Switch#show interfaces f0/1  //查看接口状态</span>
+<span class="linenos">24</span><span class="s2">Switch#show running-config   //查看配置文件</span>
+<span class="linenos">25</span><span class="s2">Switch#show ip int brief //查看端口信息</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="s2">Switch#write //保存配置文件</span>
+<span class="linenos">28</span><span class="s2">Switch#copy running-config startup-config  //保存配置文件名为startup-config</span>
+<span class="linenos">29</span><span class="s2">Switch#erase startup-config  //删除配置文件</span>
+<span class="linenos">30</span><span class="s2">Switch#reload  //重启交换机</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="附录 C：Cisco Packet Tracer简介" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../appendix-d/index.html" class="btn btn-neutral float-right" title="附录 D：参考文献" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
