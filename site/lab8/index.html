@@ -21,7 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="1. 实验目的" href="0intro.html" />
+    <link rel="next" title="1. 实验目的" href="1cisco-rip.html" />
     <link rel="prev" title="1. 实 验目的" href="../lab7/0intro.html" /> 
 </head>
 
@@ -51,12 +51,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Lab8：RIP路由配置及协议分析</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="0intro.html">1. 实验目的</a></li>
-<li class="toctree-l2"><a class="reference internal" href="0intro.html#id2">2. 实验任务</a></li>
-<li class="toctree-l2"><a class="reference internal" href="0intro.html#id3">3. 实验原理</a></li>
-<li class="toctree-l2"><a class="reference internal" href="0intro.html#id6">4. 实验环境与分组</a></li>
-<li class="toctree-l2"><a class="reference internal" href="0intro.html#id7">5. 实验组网</a></li>
-<li class="toctree-l2"><a class="reference internal" href="0intro.html#id8">6. 实验步骤</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html">1. 实验目的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html#id2">2. 实验任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html#id3">3. 实验原理</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html#id6">4. 实验环境与分组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html#id7">5. 实验组网</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html#id8">6. 实验步骤</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
@@ -67,7 +67,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：网络实验室环境及设备简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：参考文献</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：致谢</a></li>
 </ul>
@@ -100,12 +100,12 @@
 <h1>Lab8：RIP路由配置及协议分析<a class="headerlink" href="#lab8-rip" title="永久链接至标题"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="0intro.html">1. 实验目的</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0intro.html#id2">2. 实验任务</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0intro.html#id3">3. 实验原理</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0intro.html#id6">4. 实验环境与分组</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0intro.html#id7">5. 实验组网</a></li>
-<li class="toctree-l1"><a class="reference internal" href="0intro.html#id8">6. 实验步骤</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1cisco-rip.html">1. 实验目的</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1cisco-rip.html#id2">2. 实验任务</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1cisco-rip.html#id3">3. 实验原理</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1cisco-rip.html#id6">4. 实验环境与分组</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1cisco-rip.html#id7">5. 实验组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1cisco-rip.html#id8">6. 实验步骤</a></li>
 </ul>
 </div>
 </section>
@@ -115,7 +115,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="../lab7/0intro.html" class="btn btn-neutral float-left" title="1. 实 验目的" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="0intro.html" class="btn btn-neutral float-right" title="1. 实验目的" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="1cisco-rip.html" class="btn btn-neutral float-right" title="1. 实验目的" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -8,4 +8,6 @@ Lab4：VLAN 与接口模式配置
    :titlesonly:
    :numbered:
 
-   0intro
+   1cisco
+..   0intro
+   1cisco
