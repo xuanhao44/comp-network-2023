@@ -62,10 +62,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#id10">4.1. ARP初始化</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id11">4.2. ARP发送处理过程</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id12">4.3. ARP接收处理过程</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">4.4. 实验自测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.4. ARP响应包</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">4.5. 实验自测</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id14">5. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">5. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab3：VLAN 与接口模式配置</a></li>
@@ -247,7 +248,14 @@
 <p>如果该接收报文的IP地址没有对应的arp_buf缓存，还需要判断接收到的报文是否为ARP_REQUEST请求报文，并且该请求报文的target_ip是本机的IP，则认为是请求本主机MAC地址的ARP请求报文，则调用arp_resp()函数回应一个响应报文。</p>
 </section>
 <section id="id13">
-<h2><span class="section-number">4.4. </span>实验自测<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">4.4. </span>ARP响应包<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<p>同学们需要自行实现arp_resp()，功能如下：</p>
+<p><strong>Step1</strong> ：首先调用buf_init()来初始化txbuf。</p>
+<p><strong>Step2</strong> ：接着，填写ARP报头首部。</p>
+<p><strong>Step3</strong> ：调用ethernet_out()函数将填充好的ARP报文发送出去。</p>
+</section>
+<section id="id14">
+<h2><span class="section-number">4.5. </span>实验自测<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
 <p>ARP自测与eth自测的步骤类似。</p>
 <p>点击CMake工具栏，找到arp_test[arp_test.exe]，右键，选择“生成”进行编译。</p>
 <a class="reference internal image-reference" href="../_images/cmake7.png"><img alt="../_images/cmake7.png" src="../_images/cmake7.png" style="height: 500px;" /></a>
@@ -257,8 +265,8 @@
 <p>如果提示有错，请参照eth协议自测的排除方法来找bug。</p>
 </section>
 </section>
-<section id="id14">
-<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id14" title="永久链接至标题"></a></h1>
+<section id="id15">
+<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id15" title="永久链接至标题"></a></h1>
 <p>请参考实验一的提交方式。</p>
 </section>
 

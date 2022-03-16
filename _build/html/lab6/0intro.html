@@ -61,11 +61,12 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id7">4. 代码实现与检测</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id8">4.1. ICMP数据报输入处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">4.2. ICMP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">4.3. 实验自测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">4.2. 发送ICMP响应报文</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.3. ICMP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">4.4. 实验自测</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">5. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">5. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab6：协议栈之UDP协议实现</a></li>
@@ -200,12 +201,17 @@
 <p>同学们需要自行实现icmp_in()函数，功能如下：</p>
 <p><strong>Step1</strong> ：首先做报头检测，如果接收到的包长小于ICMP头部长度，则丢弃不处理。</p>
 <p><strong>Step2</strong> ：接着，查看该报文的ICMP类型是否为回显请求。</p>
-<p><strong>Step3</strong> ：如果是，则回送一个回显应答（ping 应答），需要自行封装应答包。注意要调用buf_init()来初始化txbuf，然后封装报头和数据，数据部分可以拷贝来自接收的回显请求报文中的数据。</p>
-<p><strong>Step4</strong> ：填写校验和，ICMP的校验和和IP协议校验和算法是一样的。</p>
-<p><strong>Step5</strong> ：调用ip_out()函数将数据报发送出去。</p>
+<p><strong>Step3</strong> ：如果是，则调用icmp_resp()函数回送一个回显应答（ping 应答）。</p>
 </section>
 <section id="id9">
-<h2><span class="section-number">4.2. </span>ICMP数据报输出处理<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">4.2. </span>发送ICMP响应报文<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<p>同学们需要自行实现icmp_resp()函数，功能如下：</p>
+<p><strong>Step1</strong> ：调用buf_init()来初始化txbuf，然后封装报头和数据，数据部分可以拷贝来自接收的回显请求报文中的数据。</p>
+<p><strong>Step2</strong> ：填写校验和，ICMP的校验和和IP协议校验和算法是一样的。</p>
+<p><strong>Step3</strong> ：调用ip_out()函数将数据报发送出去。</p>
+</section>
+<section id="id10">
+<h2><span class="section-number">4.3. </span>ICMP数据报输出处理<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>本实验中，只需要输出icmp unreachable的差错报文。仅支持如下差错代码：</p>
 <div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">icmp_code</span><span class="w"></span>
 <span class="p">{</span><span class="w"></span>
@@ -219,8 +225,8 @@
 <p><strong>Step2</strong> ：接着，填写ICMP数据部分，包括IP数据报首部和IP数据报的前8个字节的数据字段，填写校验和。</p>
 <p><strong>Step3</strong> ：调用ip_out()函数将数据报发送出去。</p>
 </section>
-<section id="id10">
-<h2><span class="section-number">4.3. </span>实验自测<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<section id="id11">
+<h2><span class="section-number">4.4. </span>实验自测<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <p>ICMP自测需要通过icmp_test测试。</p>
 <a class="reference internal image-reference" href="../_images/cmake9.png"><img alt="../_images/cmake9.png" src="../_images/cmake9.png" style="height: 500px;" /></a>
 <p>接着，打开VSCode的终端，到build目录下，输入ctest -R icmp_test进行自测。</p>
@@ -228,8 +234,8 @@
 <p>如果提示有错，请参照eth协议自测的排除方法来找bug。</p>
 </section>
 </section>
-<section id="id11">
-<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id11" title="永久链接至标题"></a></h1>
+<section id="id12">
+<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
 <p>请参考实验一的提交方式。</p>
 </section>
 
