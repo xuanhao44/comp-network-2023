@@ -43,16 +43,15 @@
               <p class="caption" role="heading"><span class="caption-text">实验</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab1/index.html">Lab1：抓包程序</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab4：VLAN 与接口模式配置</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab8：RIP路由配置及协议分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab10：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab1：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab2：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab3：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab4：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab5：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab6：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab7：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab8：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab9：NAT组网</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">附加题</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. 排除网络故障</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">1.1. 实验要求</a></li>
@@ -101,7 +100,7 @@
              
   <section id="id1">
 <h1><span class="section-number">1. </span>排除网络故障<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
-<p>下面的组网图中，PC0无法ping通网关（192.168.2.1），PC1和PC2可以ping通它们自己的网关，请分析以下组网配置，找出PC0不能ping通网关的原因，并参照下列组网图，在Cisco Packet Tracer模拟器上构建出来拓扑图，分别在SW0、SW1、R0上写入相关配置命令，使得PC0、PC1和PC2都能ping通它们自己的网关，也就是都能上网。实验分加0.5分（不会超过20分满分）。</p>
+<p>下面的组网图中，PC0无法ping通网关（192.168.2.1），PC1和PC2可以ping通它们自己的网关，请分析以下组网配置，找出PC0不能ping通网关的原因，并参照下列组网图，在Cisco Packet Tracer模拟器上构建出来拓扑图，分别在SW0、SW1、R0上写入相关配置命令，使得PC0、PC1和PC2都能ping通它们自己的网关，也就是都能上网。在完成本实验所有实验要求的情况下，实验分加0.5分（不会超过20分满分）。</p>
 <section id="id2">
 <h2><span class="section-number">1.1. </span>实验要求<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <ol class="arabic simple">
@@ -120,7 +119,7 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>路由器和交换机之间可以使用干道模式（Trunk模式），实现VLAN之间的通信。路由器可以从某一个VLAN接收数据包，并将这个数据包转发到另外一个VLAN。要实现VLAN间的路由，必须在一个路由器的物理接口上启用子接口，也就是将以太网口划分为多个VLAN间的连接，并配置成干道模式，这样每个VLAN对应一个子接口，也就能实现VLAN间路由了，这种方式也称为 <strong>单臂路由</strong> 。</p>
+<p>路由器和交换机之间可以使用干道模式（Trunk模式），实现VLAN之间的通信。路由器可以从某一个VLAN接收数据包，并将这个数据包转发到另外一个VLAN。要实现VLAN间的路由，必须在一个路由器的物理接口上启用子接口，也就是将以太网口划分为多个VLAN间的连接，并配置成干道模式，这样每个VLAN对应一个子接口，也就能实现VLAN间路由了， 这种方式也称为 <strong>单臂路由</strong> 。</p>
 </div>
 <p>单臂路由的配置方法可参照下列步骤。</p>
 <p>选定1841型号路由器。路由器在第一次配置时会启动配置向导界面，通常选择no，不进入对话模式，而是直接进入正常配置模式。</p>

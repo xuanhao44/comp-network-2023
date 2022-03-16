@@ -43,16 +43,15 @@
               <p class="caption" role="heading"><span class="caption-text">实验</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab1/index.html">Lab1：抓包程序</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab4：VLAN 与接口模式配置</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab8：RIP路由配置及协议分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab10：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab1：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab2：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab3：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab4：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab5：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab6：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab7：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab8：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab9：NAT组网</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">附录</span></p>
@@ -110,16 +109,16 @@
 <p>本实验课程已经提供有Cisco Packet Tracer 7.2模拟器软件包，可直接打开“Cisco Packet Tracer 绿色版binPacketTracer7.exe”运行，无需安装，也无需注册。</p>
 <p>如果想要最新版本的模拟器，可以到思科官网下载：<a class="reference external" href="https://www.netacad.com/courses/packet-tracer">https://www.netacad.com/courses/packet-tracer</a>。注意：需要注册账号（免费）才可使用。</p>
 <p>打开PacketTracer7.exe后，进入其操作界面：</p>
-<img alt="../_images/cisco-110.png" src="../_images/cisco-110.png" />
+<img alt="../_images/cisco-1.png" src="../_images/cisco-1.png" />
 <p>在底部设备工具栏区域，提供常用的PC、服务器等终端设备和路由器、交换机、防火墙、无线设备等常用网络设备及线缆。</p>
 <p>各种型号路由器：</p>
-<img alt="../_images/cisco-23.png" src="../_images/cisco-23.png" />
+<img alt="../_images/cisco-2.png" src="../_images/cisco-2.png" />
 <p>各种型号交换机：</p>
-<img alt="../_images/cisco-31.png" src="../_images/cisco-31.png" />
+<img alt="../_images/cisco-3.png" src="../_images/cisco-3.png" />
 <p>常用设备及其他终端设备：</p>
-<img alt="../_images/cisco-41.png" src="../_images/cisco-41.png" />
+<img alt="../_images/cisco-4.png" src="../_images/cisco-4.png" />
 <p>各种连接线：</p>
-<img alt="../_images/cisco-51.png" src="../_images/cisco-51.png" />
+<img alt="../_images/cisco-5.png" src="../_images/cisco-5.png" />
 <p>连接线类型有：</p>
 <ol class="arabic simple">
 <li><p>自动选择连接类型的连接线</p></li>
@@ -158,7 +157,7 @@
 <p>三层交换机：</p>
 <img alt="../_images/0-10.jpg" src="../_images/0-10.jpg" />
 <p>思科模拟器中的交换机：</p>
-<img alt="../_images/cisco-61.png" src="../_images/cisco-61.png" />
+<img alt="../_images/cisco-6.png" src="../_images/cisco-6.png" />
 </section>
 <section id="id4">
 <h3>路由器<a class="headerlink" href="#id4" title="永久链接至标题"></a></h3>
@@ -171,15 +170,15 @@
 <p>在构建大型的LAN时，需要使用交换机或主机等设备来管理大量的MAC地址信息。当频繁进行广播通信时，设备的负担就会非常大。为减轻设备的负担，需要将LAN划分成一个个子网，而子网间的通信就需要依靠路由器进行了。另外，为了连接互联网，与互联网服务供应商建立连接时，也同样需要用到路由器设备。</p>
 </div>
 <p>路由器：</p>
-<img alt="../_images/0-111.jpg" src="../_images/0-111.jpg" />
+<img alt="../_images/0-11.jpg" src="../_images/0-11.jpg" />
 <p>思科模拟器中的路由器：</p>
-<img alt="../_images/cisco-71.png" src="../_images/cisco-71.png" />
+<img alt="../_images/cisco-7.png" src="../_images/cisco-7.png" />
 </section>
 <section id="id5">
 <h3>网络设备的配置<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
 <p>以路由器为例，我们下面介绍如何对网络设备进行配置。
 在底部工具栏上，将1841型号的路由器拖拽到工作区。单击该图标，弹出该设备的功能对话框，该对话框包括Physical（物理）、Config（配置）、CLI（命令）和Attributes（属性）选项卡。其中，我们最常用的是CLI选项卡，可以致谢设备所有配置的命令。</p>
-<img alt="../_images/cisco-81.png" src="../_images/cisco-81.png" />
+<img alt="../_images/cisco-8.png" src="../_images/cisco-8.png" />
 </section>
 <section id="cisco">
 <h3>Cisco网络设备的常用配置命令<a class="headerlink" href="#cisco" title="永久链接至标题"></a></h3>

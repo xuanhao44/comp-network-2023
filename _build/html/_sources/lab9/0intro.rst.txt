@@ -308,7 +308,8 @@ multipart     mixed, alternative, parallel, digest      多种类型的消息
    
    --qwertyuiopasdfghjklzxcvbnm
 
-上述例子为Alice向Bob发送生日祝福邮件。邮件中，Alice给Bob发送了两个不同格式的信息，所以需要指定Content-Type为multipart/mixed类型。
+
+上述例子为Alice向Bob发送生日祝福邮件。邮件中，Alice给Bob发送了两个不同格式的信息，所以需要指定Content-Type为multipart/mixed类型。而后，boundary用来指定区分不同内容的边界字符串。后面，两种格式的信息被边界符分开，边界符由两个短横线和边界字符串组成。
 
 
 实验步骤

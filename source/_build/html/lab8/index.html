@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lab8：RIP路由配置及协议分析 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
+  <title>Lab7：RIP路由配置及协议分析 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -43,14 +43,13 @@
               <p class="caption" role="heading"><span class="caption-text">实验</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab1/index.html">Lab1：抓包程序</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab4：VLAN 与接口模式配置</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Lab8：RIP路由配置及协议分析</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab1：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab2：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab3：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab4：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab5：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab6：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Lab7：RIP路由配置及协议分析</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html">1. 实验目的</a></li>
 <li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html#id2">2. 实验任务</a></li>
 <li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html#id3">3. 实验原理</a></li>
@@ -59,15 +58,15 @@
 <li class="toctree-l2"><a class="reference internal" href="1cisco-rip.html#id8">6. 实验步骤</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab10：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab8：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab9：NAT组网</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">附录</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：网络实验室环境及设备简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：参考文献</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：致谢</a></li>
 </ul>
@@ -86,7 +85,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Lab8：RIP路由配置及协议分析</li>
+      <li>Lab7：RIP路由配置及协议分析</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/lab8/index.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -96,8 +95,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="lab8-rip">
-<h1>Lab8：RIP路由配置及协议分析<a class="headerlink" href="#lab8-rip" title="永久链接至标题"></a></h1>
+  <p>..Lab8：RIP路由配置及协议分析</p>
+<section id="lab7-rip">
+<h1>Lab7：RIP路由配置及协议分析<a class="headerlink" href="#lab7-rip" title="永久链接至标题"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="1cisco-rip.html">1. 实验目的</a></li>

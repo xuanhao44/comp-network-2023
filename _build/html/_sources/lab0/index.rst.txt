@@ -9,5 +9,6 @@
 
    0intro
    1guide
+   2labinfo
 
 

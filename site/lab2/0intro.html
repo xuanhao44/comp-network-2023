@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Lab3：协议栈之ARP协议实现" href="../lab3/index.html" />
-    <link rel="prev" title="Lab2：协议栈之Eth协议实现" href="index.html" /> 
+    <link rel="next" title="Lab2：协议栈之ARP协议实现" href="../lab3/index.html" />
+    <link rel="prev" title="Lab1：协议栈之Eth协议实现" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,8 +43,7 @@
               <p class="caption" role="heading"><span class="caption-text">实验</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab1/index.html">Lab1：抓包程序</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Lab2：协议栈之Eth协议实现</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Lab1：协议栈之Eth协议实现</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. 实验目的</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">2. 实验任务</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">3. 实验原理</a><ul>
@@ -72,14 +71,14 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab4：VLAN 与接口模式配置</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab8：RIP路由配置及协议分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab10：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab2：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab3：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab4：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab5：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab6：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab7：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab8：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab9：NAT组网</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">附录</span></p>
@@ -105,7 +104,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Lab2：协议栈之Eth协议实现</a> &raquo;</li>
+          <li><a href="index.html">Lab1：协议栈之Eth协议实现</a> &raquo;</li>
       <li><span class="section-number">1. </span>实验目的</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/lab2/0intro.rst.txt" rel="nofollow"> 查看页面源码</a>
@@ -276,7 +275,7 @@
 </section>
 <section id="id10">
 <h2><span class="section-number">3.2. </span>以太网数据包捕获机制<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
-<p>从上一个实验可知，以太网数据包常规的传输路径依次为网卡、设备驱动层、操作系统内置的网络协议栈，网络协议栈包含有数据链路层、IP 层、传输层、应用层。那么，在不修改设备驱动层和操作系统内置的协议栈的情况下，如何获取到来自设备驱动层的数据帧呢？</p>
+<p>以太网数据包常规的传输路径依次为网卡、设备驱动层、操作系统内置的网络协议栈，网络协议栈包含有数据链路层、IP 层、传输层、应用层。那么，在不修改设备驱动层和操作系统内置的协议栈的情况下，如何获取到来自设备驱动层的数据帧呢？</p>
 <p>值得庆幸的是，现代操作系统一般提供有用于捕获网络流程的pcap（packet capture）应用程序编程接口。类Unix的系统主要是在libpcap库中实现pcap，Linux下著名的tcpdump就是以它为基础，而Windows系统则是使用WinPcap的libpcap端口，其官方网站是https://www.winpcap.org/。Libpcap利用BSD Packet Filter(BPF)算法对网卡接收到的链路层数据包进行过滤。BPF算法的基本思想是在有BPF监听的网络中，网卡驱动将接收到的数据包复制一份交给BPF过滤器，过滤器根据用户定义的规则决定是否接收此数据包以及需要拷贝该数据包的那些内容，然后将过滤后的数据给与过滤器相关联的上层应用程序。数据包复制的过程类似于在数据链路层增加一个旁路处理，因此，包捕获机制并不影响操作系统对数据包的网络栈处理，用户只需要调用简单的若干函数就能获得所期望的数据包。</p>
 <img alt="../_images/包捕获.png" src="../_images/包捕获.png" />
 <p>常用到的抓包函数：</p>
@@ -329,14 +328,16 @@
 <p class="admonition-title">提示</p>
 <p>如上图所示，物理层用于完成二进制数列与信号的转换，转换方法取决于设备本身的配置，没有固定的协议。物理层因其与其他层的性质不同，有时被当作数据链路层的一部分看待，有时被认为不属于TCP/IP的层。在本实验中，不涉及到物理层的实现。</p>
 </div>
-<img alt="../_images/MAC帧.png" src="../_images/MAC帧.png" />
-<p>上图中每个字段的含义如下表所示：</p>
+<p>下图是在网线上传输的数据包。其中报头/起始帧分界符、FCS（Frame Check Sequence，帧校验序列）是由网卡设备负责的部分。我们只需要关注MAC头部、IP头部、TCP/UDP头部、数据即可。</p>
+<img alt="../_images/以太网数据帧1.png" src="../_images/以太网数据帧1.png" />
+<p>去除报头和FCS，剩余的部分是数据链路层的数据帧，其帧格式如下图所示。</p>
+<a class="reference internal image-reference" href="../_images/帧格式1.png"><img alt="../_images/帧格式1.png" src="../_images/帧格式1.png" style="width: 491.4px; height: 325.8px;" /></a>
 <ul class="simple">
-<li><p><strong>目的地址</strong> : 接收帧的网络适配器的物理地址（MAC 地址），为 6 个字节（48 比特）。作用是当网卡接收到一个数据帧时，首先会检查该帧的目的地址，是否与当前适配器的物理地址相同，如果相同，就会进一步处理；如果不同，则直接丢弃。</p></li>
-<li><p><strong>源地址</strong> : 发送帧的网络适配器的物理地址（MAC 地址），为 6 个字节（48 比特）。</p></li>
+<li><p><strong>MAC目标地址</strong> ：接收帧的网络适配器的物理地址（MAC地址），6个字节。当网卡接收到一个数据帧时，首先会检查该帧的目的地址，是否与当前适配器的物理地址相同，如果相同，就会进一步处理；如果不同，则直接丢弃。</p></li>
+<li><p><strong>MAC源地址</strong> ：发送帧的网络适配器的物理地址，6个字节。</p></li>
 <li><p><strong>长度/类型</strong> ：当该值在0x05DC（10进制数为1500）以下时，表示该以太网数据帧的长度；在0x0600以上时，则表示上层协议的类型，2个字节，标识数据交付哪个协议处理。例如，字段为0x0800时，表示将数据交付给IP协议。字段为0806时，表示该数据帧时ARP请求/应答报文。</p></li>
-<li><p><strong>数据</strong> : 也称为效载荷，表示交付给上层的数据。以太网帧数据长度最小为 46 字节，最大为 1500 字节。如果不足 46 字节时，会填充到最小长度。最大值也叫最大传输单元（MTU）。</p></li>
 </ul>
+<p>更多的以太网数据帧、IP协议报文格式和ARP报文格式的详细资料请参考Internet工程任务组（IETF）提供的官方标准文档 <a class="reference external" href="https://www.ietf.org/rfc/rfc0894.txt">RFC0894</a> 、 <a class="reference external" href="https://www.ietf.org/rfc/rfc0791.txt">RFC0791</a> 和 <a class="reference external" href="https://www.ietf.org/rfc/rfc0826.txt">RFC0826</a> 。</p>
 </section>
 </section>
 <section id="id12">
@@ -400,7 +401,7 @@
 </section>
 <section id="id14">
 <h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id14" title="永久链接至标题"></a></h1>
-<p>本实验提交 <strong>实验设计报告</strong> 和 <strong>实验代码</strong> 。提交方法请参考实验一。</p>
+<p>本实验提交 <strong>实验设计报告</strong> 和 <strong>实验代码</strong> 。提交方式请参考 <a class="reference internal" href="../lab0/2labinfo.html"><span class="doc">代码及报告提交方式</span></a></p>
 <section id="id15">
 <h2><span class="section-number">5.1. </span>实验设计报告<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
 <p>实验设计报告要求写出实验设计思路和运行结果 。</p>
@@ -416,8 +417,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Lab2：协议栈之Eth协议实现" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../lab3/index.html" class="btn btn-neutral float-right" title="Lab3：协议栈之ARP协议实现" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Lab1：协议栈之Eth协议实现" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../lab3/index.html" class="btn btn-neutral float-right" title="Lab2：协议栈之ARP协议实现" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

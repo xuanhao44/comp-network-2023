@@ -17,6 +17,18 @@
    :caption: 实验
 
    lab0/index
+   lab2/index
+   lab3/index
+   lab4/index
+   lab5/index
+   lab6/index
+   lab7/index
+   lab8/index
+   lab9/index
+   lab10/index
+   proplus/index
+..
+   lab0/index
    lab1/index
    lab2/index
    lab3/index
