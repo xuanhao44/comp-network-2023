@@ -12,6 +12,7 @@
    1ping
    2IP
    3TCP
+   4mail
 ..
    0vlan
    1ping

@@ -73,12 +73,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id10">5. 实验要求</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id11">6. 附加题</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#tls-ssl">6.1. 加入TLS/SSL</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">6.2. 邮件回复功能</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id13">7. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">6. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab9：NAT组网</a></li>
@@ -313,8 +308,8 @@
 <section id="internet">
 <h2><span class="section-number">3.4. </span>Internet消息格式<a class="headerlink" href="#internet" title="永久链接至标题"></a></h2>
 <p>当我们写信时，我们通常需要在信的顶部写下一些基本信息，如收件人地址、发件人地址、日期等，这些都是信的格式要求。电子邮件也有格式要求。与纸质信类似，在正文开始前，通常需要包含一些邮件头。电子邮件消息的格式在RFC 5322 Internet Message Format中有详细规定。一些常见的邮件头介绍如下。</p>
-<table class="colwidths-given docutils align-center" id="id14">
-<caption><span class="caption-text">邮件头含义1</span><a class="headerlink" href="#id14" title="永久链接至表格"></a></caption>
+<table class="colwidths-given docutils align-center" id="id12">
+<caption><span class="caption-text">邮件头含义1</span><a class="headerlink" href="#id12" title="永久链接至表格"></a></caption>
 <colgroup>
 <col style="width: 40%" />
 <col style="width: 60%" />
@@ -361,8 +356,8 @@
 <p>早期的电子邮件只能发送ASCII字符组成的纯文本。为了能够发送更多的字符及多媒体内容，MIME（Multipurpose Internet Message Extensions）被提出。MIME在RFC 2045-2049中规定。MIME被广泛用于电子邮件中，也用来描述其他应用的内容，如Web浏览。</p>
 <p>MIME的做法是在最基础的纯文本消息的格式上增加一些规则以及编码规则，以此传送非ASCII码消息。这样，MIME消息仍然能被旧的邮件协议识别、传送、接收，需要修改的只是邮件发送和接收客户端。</p>
 <p>MIME定义了五个相关的邮件头，如下表所示。</p>
-<table class="colwidths-given docutils align-center" id="id15">
-<caption><span class="caption-text">邮件头含义2</span><a class="headerlink" href="#id15" title="永久链接至表格"></a></caption>
+<table class="colwidths-given docutils align-center" id="id13">
+<caption><span class="caption-text">邮件头含义2</span><a class="headerlink" href="#id13" title="永久链接至表格"></a></caption>
 <colgroup>
 <col style="width: 40%" />
 <col style="width: 60%" />
@@ -599,18 +594,7 @@ ATTACHMENT: 邮件附件
 <p>完成send.c，使得它能发送带有附件的邮件；完成recv.c，与服务器进行交互，分别获取总邮件个数及大小、每封邮件的编号及大小、第一封邮件的内容。程序需要使用网络上知名的邮件提供商（QQ、网易、Outlook等）进行测试，且需要打印交互过程中服务器的回复信息。</p>
 </section>
 <section id="id11">
-<h1><span class="section-number">6. </span>附加题<a class="headerlink" href="#id11" title="永久链接至标题"></a></h1>
-<section id="tls-ssl">
-<h2><span class="section-number">6.1. </span>加入TLS/SSL<a class="headerlink" href="#tls-ssl" title="永久链接至标题"></a></h2>
-<p>由于历史原因，早期的应用层协议都是明文传输，这导致用户口令极易被窃取。作为补救，一系列安全的协议，如HTTPS、SFTP、SSH，被用来取代原来不安全的HTTP、FTP和TELNET协议。邮件相关的协议也不例外。SMTP和POP3都有对应的安全协议，称为SMTPS和POP3S。你的任务是编程实现一个简单的SMTPS或者POP3S协议会话，可以使用本地服务器进行，也可以用熟知的网络邮件提供商。</p>
-</section>
-<section id="id12">
-<h2><span class="section-number">6.2. </span>邮件回复功能<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
-<p>电子邮件中有相当一部分是回复其他邮件的邮件，这需要加入特殊的邮件头，并在邮件正文中引用回复的邮件。参照Internet消息格式相关的RFC规范，实现邮件回复功能。</p>
-</section>
-</section>
-<section id="id13">
-<h1><span class="section-number">7. </span>实验提交<a class="headerlink" href="#id13" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id11" title="永久链接至标题"></a></h1>
 <p>提交send.c、recv.c、程序输出信息的屏幕截图及实验报告。提交时，请注意保护个人隐私信息，不要在代码中展示用户名或密码，可以将用户名和密码用星号代替。</p>
 </section>
 

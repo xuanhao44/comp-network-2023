@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Windows开发环境搭建 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script src="../_static/js/baidu-tongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="2. Linux开发环境搭建" href="2linux.html" />
+    <link rel="prev" title="附录 B：网络编程实验环境" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab1：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab2：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab3：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab4：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab5：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab6：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab7：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab8：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab9：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">附录 B：网络编程实验环境</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Windows开发环境搭建</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1.1. 实验工具</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#vscode">1.1.1. VSCode</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#npcap">1.1.2. npcap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cmake">1.1.3. cmake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gcc">1.1.4. gcc</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.2. Windows下编译和调试</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="2linux.html">2. Linux开发环境搭建</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：致谢</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络实验指导书 - 2022春季 | 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">附录 B：网络编程实验环境</a> &raquo;</li>
+      <li><span class="section-number">1. </span>Windows开发环境搭建</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/appendix-b/1win.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="windows">
+<h1><span class="section-number">1. </span>Windows开发环境搭建<a class="headerlink" href="#windows" title="永久链接至标题"></a></h1>
+<section id="id1">
+<h2><span class="section-number">1.1. </span>实验工具<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<section id="vscode">
+<h3><span class="section-number">1.1.1. </span>VSCode<a class="headerlink" href="#vscode" title="永久链接至标题"></a></h3>
+<p>Visual Studio Code 是一款功能强大的代码编辑器, 适用于几乎任何语言并可在任何操作系统上运行。通过 VSCode 的强大扩展库，我们可以在 VSCode 上一站式创建，编辑，构建，运行和调试远程主机上的工程文件，就像使用 Code::Blocks 操作本地工程一样。</p>
+<p>在https://code.visualstudio.com/ 下载并在物理机上安装 VSCode 软件。</p>
+</section>
+<section id="npcap">
+<h3><span class="section-number">1.1.2. </span>npcap<a class="headerlink" href="#npcap" title="永久链接至标题"></a></h3>
+<p>npcap是一个网络数据包抓包工具，它是WinPcap的改进版，支持WIndows平台的回环数据包采集和发送。</p>
+<p>npcap下载地址：
+<a class="reference external" href="https://npcap.com/#download">https://npcap.com/#download</a></p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>npcap版本必须大于1.0</p>
+</div>
+</section>
+<section id="cmake">
+<h3><span class="section-number">1.1.3. </span>cmake<a class="headerlink" href="#cmake" title="永久链接至标题"></a></h3>
+<p>CMake是一个跨平台的编译工具。它可以跨平台生成对应平台能使用的Makefile，这样我们就不用再自己去修改Makefile了，非常地方便。那它又是根据什么生成的makefile呢？就是一个叫CMakeLists.txt文件去生成Makefile，当然，这个CMakefile.txt是要我们自己编写的。本实验已经提供好了CMakefile.txt文件，可大家学习参考：）</p>
+<p>CMake自带有ctest工具可以用于代码测试。再使用CMakefile.txt文件编译工程的时候，CTest会自动configure、build、test和展示测试结果。</p>
+<p>CMake的下载地址：
+<a class="reference external" href="https://cmake.org/download/">https://cmake.org/download/</a></p>
+<p>Windows 64位系统建议选择下面标红框框的版本：</p>
+<img alt="../_images/cmake.png" src="../_images/cmake.png" />
+<p>下载完成后，双击进行安装。在安装过程建议选择“Add CMake to the system PATH for all users”</p>
+<a class="reference internal image-reference" href="../_images/cmake1.png"><img alt="../_images/cmake1.png" src="../_images/cmake1.png" style="width: 543.1999999999999px; height: 421.4px;" /></a>
+</section>
+<section id="gcc">
+<h3><span class="section-number">1.1.4. </span>gcc<a class="headerlink" href="#gcc" title="永久链接至标题"></a></h3>
+<p>推荐大家安装tdm-gcc，tdm-gcc是一个Windows编译器套件，包括gcc、g++等，工具比较齐全。</p>
+<p>tdm64-gcc下载地址：
+<a class="reference external" href="https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm64-2/tdm64-gcc-10.3.0-2.exe">https://github.com/jmeubank/tdm-gcc/releases/download/v10.3.0-tdm64-2/tdm64-gcc-10.3.0-2.exe</a></p>
+</section>
+</section>
+<section id="id2">
+<h2><span class="section-number">1.2. </span>Windows下编译和调试<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>打开VSCode软件，在左侧边栏的扩展商店搜索并安装以下扩展：</p>
+<ol class="arabic simple">
+<li><p>Chinese (Simplified) Language Pack for Visual Studio Code</p></li>
+<li><p>C/C++</p></li>
+<li><p>CMake Tools</p></li>
+</ol>
+<p>安装完成后重启VSCode。</p>
+<p>点击打开文件夹打开工程目录后即可进行代码操作（ <strong>确保CMakeLists.txt处于当前根目录中</strong> ）。</p>
+<a class="reference internal image-reference" href="../_images/vscode2.png"><img alt="../_images/vscode2.png" src="../_images/vscode2.png" style="width: 311.5px; height: 385.0px;" /></a>
+<p>首次配置会弹出选择编译工具的提示，选择带有GCC的选项。需要在安装tdm-gcc后才能找到GCC的选项，如果安装tdm-gcc后没有显示该选项，点击[Scan for kits] Search for compilers on this computer，搜索gcc（如果还是没有找到，建议重启电脑）。</p>
+<img alt="../_images/vscode3.png" src="../_images/vscode3.png" />
+<p>在配置好VSCode环境之后，即可使用CMake工具栏完成编译和调试操作。如果想要对main进行编译和调试，可以在main[main.exe]这一项点击右键，再点击“生成”进行编译。</p>
+<a class="reference internal image-reference" href="../_images/vscode1.png"><img alt="../_images/vscode1.png" src="../_images/vscode1.png" style="width: 314.5px; height: 371.0px;" /></a>
+<p>编译完成后，可以在代码行前增加断点，然后选择“调试”，接下来，就可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。</p>
+<img alt="../_images/vscode4.png" src="../_images/vscode4.png" />
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>在调试之前，必须修改include/config.h头文件中的NET_IF_IP宏定义，即需要自定义网卡的IP地址。该IP地址的网络号必须与你自己电脑中真实网卡的网络号一致（也就是和真实网卡处于同一个网段内）。</p>
+<p>注意：此处是 <strong>网络号</strong> 要和真实网卡一致，以确保它们处在同一个网段内， <strong>不是将自定义网卡（虚拟网卡）的IP地址设置成真实网卡的IP地址</strong> 。</p>
+</div>
+<img alt="../_images/vscode5.png" src="../_images/vscode5.png" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="附录 B：网络编程实验环境" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="2linux.html" class="btn btn-neutral float-right" title="2. Linux开发环境搭建" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
