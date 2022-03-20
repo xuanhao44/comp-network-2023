@@ -92,7 +92,7 @@ cisco packet tracer模拟器，一人一组。
 搭建网络拓扑
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-打开Cisco Packet Tracer软件。在底部工具栏区域，选择“Network Devices”，点击“Swithes”，将二层交换机“2960-24TT”拖拽到空白工作区中（需要拖拽两台二层交换机）。
+打开Cisco Packet Tracer软件(Cisco Packet Tracer 绿色版\bin\PacketTracer7.exe)。在底部工具栏区域，选择“Network Devices”，点击“Swithes”，将二层交换机“2960-24TT”拖拽到空白工作区中（需要拖拽两台二层交换机）。
 
 .. image:: conf-1.png
   :scale: 80%
@@ -170,9 +170,10 @@ cisco packet tracer模拟器，一人一组。
 
    Switch>enable   //进入交换机特权模式
    Switch#configure terminal  // 进入交换机全局模式（也称为config模式）
-   Enter configuration commands, one per line.  End with CNTL/Z.
+
    Switch(config)#  // 全局模式的提示符是“(config)#”
    Switch(config)# hostname Switch0 // 更改交换机的主机名
+   Switch0(config)#no ip domain-lookup  // 用于防止DNS解析的命令。如果没有这条命令，当你输入错误的命令时，cisco会尝试连接DNS服务器进行域名解析，浪费时间。
 
    Switch0(config)#vlan 2  // 创建vlan 2
    Switch0(config-vlan)#exit 
@@ -203,9 +204,10 @@ cisco packet tracer模拟器，一人一组。
 
    Switch>enable   //进入系统视图
    Switch#configure terminal
-   Enter configuration commands, one per line.  End with CNTL/Z.
+
    Switch(config)#
    Switch(config)# hostname Switch1 // 更改交换机的主机名
+   Switch1(config)#no ip domain-lookup  // 用于防止DNS解析的命令。
 
    Switch1(config)#vlan 2  //创建vlan 2
    Switch1(config-vlan)#exit
@@ -242,9 +244,14 @@ PC2       192.168.2.13          255.255.255.0
 PC3       192.168.3.14          255.255.255.0
 ========= ====================  ===================
 
-单击PC0图标，在Config选项卡中，选择“FastEthernet0”，设置该端口的IP地址，如下图所示。
+单击PC0图标，在弹出的窗口中，选择Desktop选项卡，点击“IP Configuration”图标。
 
-.. image:: conf-15.png
+.. image:: conf-15-1.png
+  :scale: 80%
+
+在弹出的窗口中选择“Interface”栏，设置该端口的IP地址和子网掩码，如下图所示。
+
+.. image:: conf-15-2.png
   :scale: 80%
 
 可参照PC0的配置方式来配置PC1、PC2和PC3的IP地址。
@@ -257,7 +264,7 @@ PC3       192.168.3.14          255.255.255.0
 .. image:: conf-16.png
   :scale: 80%
 
-.. tip:: 
+.. important:: 
   **实验测试**
 
   PC0和PC2属于同一VLAN，用PC0 ping PC2的IP地址192.168.2.13，看看是否相通？
@@ -280,8 +287,7 @@ PC3       192.168.3.14          255.255.255.0
 
    Switch0>enable 
    Switch0#configure terminal  
-   Enter configuration commands, one per line.  End with CNTL/Z.
-   Switch0(config)#
+
    Switch0(config)#vlan 3  //创建vlan 3
    Switch0(config-vlan)#exit
    Switch0(config)#
@@ -309,8 +315,7 @@ PC3       192.168.3.14          255.255.255.0
 
    Switch1>enable 
    Switch1#configure terminal  
-   Enter configuration comm ands, one per line.  End with CNTL/Z.
-   Switch1(config)# 
+   
    Switch1(config)#vlan 3  //创建vlan 3
    Switch1(config-vlan)#exit
    Switch1(config)#
@@ -351,7 +356,9 @@ PC3       192.168.3.14          255.255.255.0
    :linenos:
 
    Switch0(config)#interface f0/4 //进入g0/0/4接口
+   Switch0(config-if)#no switchport access vlan // 删除端口下的vlan配置
    Switch0(config-if)#switchport mode trunk //把端口的连接类型设置为trunk模式
+   Switch0(config-if)#switchport trunk allowed vlan 2,3 // 允许Trunk接口模式下vlan2,3的数据通过
    Switch0(config-if)#exit
    Switch0(config)#exit
    Switch0#
@@ -367,7 +374,9 @@ PC3       192.168.3.14          255.255.255.0
    :linenos:
 
    Switch1(config)#interface f0/4 //进入g0/0/4接口
+   Switch1(config-if)#no switchport access vlan
    Switch1(config-if)#switchport mode trunk //把端口的连接类型设置为trunk模式
+   Switch1(config-if)#switchport trunk allowed vlan 2,3
    Switch1(config-if)#exit
    Switch1(config)#exit
    Switch1#
@@ -396,7 +405,7 @@ PC3       192.168.3.14          255.255.255.0
 
 
 .. hint:: 
-  **调试和排错**
+  如果实验结果不对，请参照下列方法来 **调试和排错**
 
   1. 检查交换机与交换机之间的端口是否配置为Trunk模式。
   2. 检查各端口华为的VLAN是否正确。
@@ -404,11 +413,11 @@ PC3       192.168.3.14          255.255.255.0
 
   
 
-.. important:: 
+..  attention:: 
   **思考题** 
 
 
-  下图中Switch0的Fa0/1和Fa0/4属于同一个VLAN 2，Switch1的Fa0/1和Fa0/4属于同一个VLAN 3，试验结果PC0和PC1能互通，在不同VLAN为什么也能通？把Switch0的Fa0/4和Switch1的Fa0/4改成trunk模式反而不通。请分析其原因。
+  下图中Switch0的Fa0/1和Fa0/4属于同一个VLAN 2，Switch1的Fa0/1和Fa0/4属于同一个VLAN 3，这四个端口都是access口，试验结果PC0和PC1能互通，请问属于不同VLAN中的PC0和PC1为什么也能通，当把Switch0的Fa0/4和Switch1的Fa0/4改成trunk模式反而不通？请分析其原因，并写入实验报告中。
 
   .. image:: conf-26.png
 

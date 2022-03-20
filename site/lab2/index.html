@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lab1：协议栈之Eth协议实现 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
+  <title>Lab2：协议栈之Eth协议实现 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -22,7 +22,7 @@
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
     <link rel="next" title="1. 实验目的" href="0intro.html" />
-    <link rel="prev" title="2. 实验探索指南" href="../lab0/1guide.html" /> 
+    <link rel="prev" title="1. 实验目的" href="../lab4/1cisco.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,7 +43,8 @@
               <p class="caption" role="heading"><span class="caption-text">实验</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Lab1：协议栈之Eth协议实现</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab1：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Lab2：协议栈之Eth协议实现</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="0intro.html">1. 实验目的</a></li>
 <li class="toctree-l2"><a class="reference internal" href="0intro.html#id2">2. 实验任务</a></li>
 <li class="toctree-l2"><a class="reference internal" href="0intro.html#id3">3. 实验原理</a></li>
@@ -51,14 +52,13 @@
 <li class="toctree-l2"><a class="reference internal" href="0intro.html#id14">5. 实验提交</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab2：协议栈之ARP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab3：VLAN 与接口模式配置</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab4：协议栈之IP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab5：协议栈之ICMP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab6：协议栈之UDP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab7：RIP路由配置及协议分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab8：邮件客户端的设计与实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab9：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab4：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab8：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">附录</span></p>
@@ -84,7 +84,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Lab1：协议栈之Eth协议实现</li>
+      <li>Lab2：协议栈之Eth协议实现</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/lab2/index.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -94,8 +94,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="lab1-eth">
-<h1>Lab1：协议栈之Eth协议实现<a class="headerlink" href="#lab1-eth" title="永久链接至标题"></a></h1>
+  <section id="lab2-eth">
+<h1>Lab2：协议栈之Eth协议实现<a class="headerlink" href="#lab2-eth" title="永久链接至标题"></a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="0intro.html">1. 实验目的</a></li>
@@ -111,7 +111,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../lab0/1guide.html" class="btn btn-neutral float-left" title="2. 实验探索指南" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../lab4/1cisco.html" class="btn btn-neutral float-left" title="1. 实验目的" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="0intro.html" class="btn btn-neutral float-right" title="1. 实验目的" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
