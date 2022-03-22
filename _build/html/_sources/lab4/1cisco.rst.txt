@@ -92,7 +92,7 @@ cisco packet tracer模拟器，一人一组。
 搭建网络拓扑
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-打开Cisco Packet Tracer软件(Cisco Packet Tracer 绿色版\bin\PacketTracer7.exe)。在底部工具栏区域，选择“Network Devices”，点击“Swithes”，将二层交换机“2960-24TT”拖拽到空白工作区中（需要拖拽两台二层交换机）。
+打开Cisco Packet Tracer软件(Cisco Packet Tracer 绿色版\\bin\\PacketTracer7.exe)。在底部工具栏区域，选择“Network Devices”，点击“Swithes”，将二层交换机“2960-24TT”拖拽到空白工作区中（需要拖拽两台二层交换机）。
 
 .. image:: conf-1.png
   :scale: 80%
