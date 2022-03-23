@@ -12,12 +12,12 @@
 .. important:: 
   请同学们遵守学术诚信，主动避免去阅读、使用任何人/互联网上的实验代码，也不要在互联网上公布你的代码，Coding的过程远比结果重要。
   
-  所以，请你自己动手实践，日拱一卒，功不唐捐，静心享受Coding带来的快乐吧！
+  所以，请你自己动手实践，日拱一卒，功不唐捐，静心享受Coding带来的快乐吧:)
    
 导读
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本实验文档为哈尔滨工业大学（深圳）《计算机网络》课程实验指导材料。请大家先阅读 :doc:`/lab0/index`，对于实验课程有一个整体的认识。在开始实验前，请先按照 :doc:`/appendix-b/index` 中的说明搭建实验环境，然后再从第一个实验做起。对于有兴趣有余力的同学，建议完成 :doc:`/proplus/index`，若能完成会有意想不到的惊喜！
+本实验文档为哈尔滨工业大学（深圳）《计算机网络》课程实验指导材料。请大家先阅读 :doc:`/lab0/index`，对实验课程有一个整体的认识。关于配置实验，请先阅读 :doc:`/appendix-c/index`，掌握Cisco Packet Tracer的基本使用。关于协议栈编程实验，请先按照 :doc:`/appendix-b/index` 中的说明搭建实验环境，然后再从Eth协议做起。对于有兴趣有余力的同学，建议完成 :doc:`/proplus/index`，若能完成会有意想不到的惊喜！
 
 如果同学们对本课程实验内容、实验安排、实验指导书或者代码框架等各方面有宝贵的意见或建议，请在本指导书的Gitee仓库中发Issue或私信老师或助教。
 
@@ -50,15 +50,15 @@
    :hidden:
 
    lab0/index
+   lab4/index
    lab2/index
    lab3/index
-   lab4/index
+   lab8/index
    lab5/index
    lab6/index
    lab7/index
-   lab8/index
-   lab9/index
    lab10/index
+   lab9/index   
    proplus/index
 ..
    lab0/index

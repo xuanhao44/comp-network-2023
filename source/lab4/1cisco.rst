@@ -51,9 +51,15 @@ Access 端口一般是指那些连接不支持 VLAN 技术的终端设备的端�
 
 **Access端口收报文** ：收到一个报文,判断是否有VLAN标签：如果没有则打上端口的PVID（默认VLAN），并进行交换转发,如果有则直接丢弃（缺省）；
 
+.. image:: access-2.png
+
 **Access端口发报文** ：将报文的VLAN信息剥离，直接发送出去。
 
+.. image:: access-3.png
+
 .. image:: access.png
+
+
 
 Trunk端口
 -------------------------------
@@ -61,8 +67,12 @@ Trunk端口
 Trunk 端口一般是指那些连接支持 VLAN 技术的网络设备（如交换机）的端口，这些端口接收到的数据帧一般都包含 VLAN 标签（数据帧 VLAN ID 和端口缺省 VLAN ID 相同除外），而向外发送数据帧时，必须保证接收端能够区分不同 VLAN 的数据帧，故常常需要添加 VLAN 标签（数据帧 VLAN ID 和端口缺省 VLAN ID 相同除外）。一般用于交换机之间的连接。
 
 **Trunk端口收报文** ：收到一个报文，判断是否有VLAN标签。如果没有则打上端口的PVID（默认VLAN），再进行交换转发；如果有判断该trunk端口是否允许该 VLAN的数据进入，如果可以则转发，否则丢弃；
- 
+
+.. image:: trunk-2.png
+
 **Trunk端口发报文** ：比较端口的PVID（默认VLAN）和将要发送报文的VLAN标签，如果两者相等则剥离VLAN标签，再发送，如果不相等则直接发送。
+
+.. image:: trunk-3.png
 
 .. image:: trunk.png
 

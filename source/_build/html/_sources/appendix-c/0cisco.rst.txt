@@ -3,9 +3,9 @@
 
 Cisco Packet Tracer 7.2模拟器
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Cisco Packet Tracer是由Cisco（思科）公司发布的一个仿真学习工具，它是运用软件模拟真实的网络设备和环境，利用软件中虚拟的网络设备及线缆完成网络的组网和配置，实现网络的互联。因此我们可以在没有网络设备的情况下，也能在软件的图形界面建立网络拓扑，并可追踪数据包在网络中详细的处理过程，学习搭建网络的要点和难点。
+Cisco Packet Tracer是由Cisco（思科）公司发布的一个仿真学习工具，它是运用软件模拟真实的网络设备和环境，利用软件中虚拟的网络设备及线缆完成网络的组网和配置，实现网络的互联。因此我们可以在没有网络设备的情况下，也能在软件的图形界面建立网络拓扑，并可追踪数据包在网络中详细的处理过程，学习搭建网络的要点和难点（更多关于Cisco Packet Tracer的介绍详见参考文献中的《网络设备管理与维护项目教程·Cisco Packet Tracer模拟器版》）。
 
-本实验课程已经提供有Cisco Packet Tracer 7.2模拟器软件包，可直接打开“Cisco Packet Tracer 绿色版\bin\PacketTracer7.exe”运行，无需安装，也无需注册。
+本实验课程已经提供有Cisco Packet Tracer 7.2模拟器软件包，可直接打开“Cisco Packet Tracer 绿色版\\bin\\PacketTracer7.exe”运行，无需安装，也无需注册。
 
 如果想要最新版本的模拟器，可以到思科官网下载：https://www.netacad.com/courses/packet-tracer。注意：需要注册账号（免费）才可使用。
 

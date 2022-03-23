@@ -21,8 +21,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Lab4：协议栈之IP协议实现" href="../lab5/index.html" />
-    <link rel="prev" title="Lab3：VLAN 与接口模式配置" href="index.html" /> 
+    <link rel="next" title="Lab2：协议栈之Eth协议实现" href="../lab2/index.html" />
+    <link rel="prev" title="Lab1：VLAN 与接口模式配置" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,9 +43,7 @@
               <p class="caption" role="heading"><span class="caption-text">实验</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab1：协议栈之Eth协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab2：协议栈之ARP协议实现</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">Lab3：VLAN 与接口模式配置</a><ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Lab1：VLAN 与接口模式配置</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. 实验目的</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">2. 实验任务</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">3. 实验原理</a><ul>
@@ -90,12 +88,14 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab4：协议栈之IP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab5：协议栈之ICMP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab6：协议栈之UDP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab7：RIP路由配置及协议分析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab8：邮件客户端的设计与实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab9：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab4：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab8：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">附录</span></p>
@@ -121,7 +121,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="index.html">Lab3：VLAN 与接口模式配置</a> &raquo;</li>
+          <li><a href="index.html">Lab1：VLAN 与接口模式配置</a> &raquo;</li>
       <li><span class="section-number">1. </span>实验目的</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/lab4/1cisco.rst.txt" rel="nofollow"> 查看页面源码</a>
@@ -177,14 +177,18 @@
 <h3><span class="section-number">3.3.1. </span>Access端口<a class="headerlink" href="#access" title="永久链接至标题"></a></h3>
 <p>Access 端口一般是指那些连接不支持 VLAN 技术的终端设备的端口，这些端口接收到的数据帧都不包含 VLAN 标签，而向外发送数据帧时，必须保证数据帧中也不包含 VLAN 标签。交换机的Access 端口一般接主机或路由器。</p>
 <p><strong>Access端口收报文</strong> ：收到一个报文,判断是否有VLAN标签：如果没有则打上端口的PVID（默认VLAN），并进行交换转发,如果有则直接丢弃（缺省）；</p>
+<img alt="../_images/access-2.png" src="../_images/access-2.png" />
 <p><strong>Access端口发报文</strong> ：将报文的VLAN信息剥离，直接发送出去。</p>
+<img alt="../_images/access-3.png" src="../_images/access-3.png" />
 <img alt="../_images/access.png" src="../_images/access.png" />
 </section>
 <section id="trunk">
 <h3><span class="section-number">3.3.2. </span>Trunk端口<a class="headerlink" href="#trunk" title="永久链接至标题"></a></h3>
 <p>Trunk 端口一般是指那些连接支持 VLAN 技术的网络设备（如交换机）的端口，这些端口接收到的数据帧一般都包含 VLAN 标签（数据帧 VLAN ID 和端口缺省 VLAN ID 相同除外），而向外发送数据帧时，必须保证接收端能够区分不同 VLAN 的数据帧，故常常需要添加 VLAN 标签（数据帧 VLAN ID 和端口缺省 VLAN ID 相同除外）。一般用于交换机之间的连接。</p>
 <p><strong>Trunk端口收报文</strong> ：收到一个报文，判断是否有VLAN标签。如果没有则打上端口的PVID（默认VLAN），再进行交换转发；如果有判断该trunk端口是否允许该 VLAN的数据进入，如果可以则转发，否则丢弃；</p>
+<img alt="../_images/trunk-2.png" src="../_images/trunk-2.png" />
 <p><strong>Trunk端口发报文</strong> ：比较端口的PVID（默认VLAN）和将要发送报文的VLAN标签，如果两者相等则剥离VLAN标签，再发送，如果不相等则直接发送。</p>
+<img alt="../_images/trunk-3.png" src="../_images/trunk-3.png" />
 <img alt="../_images/trunk.png" src="../_images/trunk.png" />
 <div class="admonition note">
 <p class="admonition-title">备注</p>
@@ -207,7 +211,7 @@
 <h1><span class="section-number">6. </span>实验步骤<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
 <section id="id9">
 <h2><span class="section-number">6.1. </span>搭建网络拓扑<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
-<p>打开Cisco Packet Tracer软件。在底部工具栏区域，选择“Network Devices”，点击“Swithes”，将二层交换机“2960-24TT”拖拽到空白工作区中（需要拖拽两台二层交换机）。</p>
+<p>打开Cisco Packet Tracer软件(Cisco Packet Tracer 绿色版\bin\PacketTracer7.exe)。在底部工具栏区域，选择“Network Devices”，点击“Swithes”，将二层交换机“2960-24TT”拖拽到空白工作区中（需要拖拽两台二层交换机）。</p>
 <a class="reference internal image-reference" href="../_images/conf-1.png"><img alt="../_images/conf-1.png" src="../_images/conf-1.png" style="width: 470.40000000000003px; height: 132.8px;" /></a>
 <p>接着，在底部工具栏区域，选择“End Devices”，点击最下一栏的“End Devices”，将计算机设备“PC”拖拽到空白工作区中（需要拖拽4台PC机）。</p>
 <a class="reference internal image-reference" href="../_images/conf-2.png"><img alt="../_images/conf-2.png" src="../_images/conf-2.png" style="width: 608.0px; height: 132.8px;" /></a>
@@ -249,22 +253,23 @@
 <p>在Switch0交换机上使用下列命令进行VLAN配置：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>Switch&gt;enable   //进入交换机特权模式
 <span class="linenos"> 2</span>Switch#configure terminal  // 进入交换机全局模式（也称为config模式）
-<span class="linenos"> 3</span>Enter configuration commands, one per line.  End with CNTL/Z.
+<span class="linenos"> 3</span>
 <span class="linenos"> 4</span>Switch<span class="o">(</span>config<span class="o">)</span><span class="c1">#  // 全局模式的提示符是“(config)#”</span>
 <span class="linenos"> 5</span>Switch<span class="o">(</span>config<span class="o">)</span><span class="c1"># hostname Switch0 // 更改交换机的主机名</span>
-<span class="linenos"> 6</span>
-<span class="linenos"> 7</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#vlan 2  // 创建vlan 2</span>
-<span class="linenos"> 8</span>Switch0<span class="o">(</span>config-vlan<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos"> 9</span>
-<span class="linenos">10</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/11 // 进入f0/11接口模式</span>
-<span class="linenos">11</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 2 //将f0/11端口划分给vlan 2</span>
-<span class="linenos">12</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">13</span>
-<span class="linenos">14</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/4  // 进入f0/4接口模式</span>
-<span class="linenos">15</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 2 //将f0/4端口划分给vlan 2</span>
-<span class="linenos">16</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">17</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">18</span>Switch0#
+<span class="linenos"> 6</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#no ip domain-lookup  // 用于防止DNS解析的命令。如果没有这条命令，当你输入错误的命令时，cisco会尝试连接DNS服务器进行域名解析，浪费时间。</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#vlan 2  // 创建vlan 2</span>
+<span class="linenos"> 9</span>Switch0<span class="o">(</span>config-vlan<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/11 // 进入f0/11接口模式</span>
+<span class="linenos">12</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 2 //将f0/11端口划分给vlan 2</span>
+<span class="linenos">13</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/4  // 进入f0/4接口模式</span>
+<span class="linenos">16</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 2 //将f0/4端口划分给vlan 2</span>
+<span class="linenos">17</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">18</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">19</span>Switch0#
 </pre></div>
 </div>
 </section>
@@ -278,22 +283,23 @@
 <p>在Switch1交换机上使用下列命令进行VLAN配置：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>Switch&gt;enable   //进入系统视图
 <span class="linenos"> 2</span>Switch#configure terminal
-<span class="linenos"> 3</span>Enter configuration commands, one per line.  End with CNTL/Z.
+<span class="linenos"> 3</span>
 <span class="linenos"> 4</span>Switch<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
 <span class="linenos"> 5</span>Switch<span class="o">(</span>config<span class="o">)</span><span class="c1"># hostname Switch1 // 更改交换机的主机名</span>
-<span class="linenos"> 6</span>
-<span class="linenos"> 7</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#vlan 2  //创建vlan 2</span>
-<span class="linenos"> 8</span>Switch1<span class="o">(</span>config-vlan<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos"> 9</span>
-<span class="linenos">10</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/13</span>
-<span class="linenos">11</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 2 //将f0/13端口划分给vlan 2</span>
-<span class="linenos">12</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">13</span>
-<span class="linenos">14</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/4</span>
-<span class="linenos">15</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 2 //将f0/4端口划分给vlan 2</span>
-<span class="linenos">16</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">17</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">18</span>Switch1#
+<span class="linenos"> 6</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#no ip domain-lookup  // 用于防止DNS解析的命令。</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#vlan 2  //创建vlan 2</span>
+<span class="linenos"> 9</span>Switch1<span class="o">(</span>config-vlan<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/13</span>
+<span class="linenos">12</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 2 //将f0/13端口划分给vlan 2</span>
+<span class="linenos">13</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/4</span>
+<span class="linenos">16</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 2 //将f0/4端口划分给vlan 2</span>
+<span class="linenos">17</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">18</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">19</span>Switch1#
 </pre></div>
 </div>
 </section>
@@ -336,16 +342,18 @@
 </tr>
 </tbody>
 </table>
-<p>单击PC0图标，在Config选项卡中，选择“FastEthernet0”，设置该端口的IP地址，如下图所示。</p>
-<a class="reference internal image-reference" href="../_images/conf-15.png"><img alt="../_images/conf-15.png" src="../_images/conf-15.png" style="width: 681.6px; height: 601.6px;" /></a>
+<p>单击PC0图标，在弹出的窗口中，选择Desktop选项卡，点击“IP Configuration”图标。</p>
+<a class="reference internal image-reference" href="../_images/conf-15-1.png"><img alt="../_images/conf-15-1.png" src="../_images/conf-15-1.png" style="width: 681.6px; height: 601.6px;" /></a>
+<p>在弹出的窗口中选择“Interface”栏，设置该端口的IP地址和子网掩码，如下图所示。</p>
+<a class="reference internal image-reference" href="../_images/conf-15-2.png"><img alt="../_images/conf-15-2.png" src="../_images/conf-15-2.png" style="width: 681.6px; height: 601.6px;" /></a>
 <p>可参照PC0的配置方式来配置PC1、PC2和PC3的IP地址。</p>
 </section>
 <section id="vlanvlan">
 <h3><span class="section-number">6.2.7. </span>观察同一VLAN和不同VLAN的连通情况<a class="headerlink" href="#vlanvlan" title="永久链接至标题"></a></h3>
 <p>单击PC0，在Desktop选项卡中，单击“Command Prompt”选项，则可进入命令行模式。</p>
 <a class="reference internal image-reference" href="../_images/conf-16.png"><img alt="../_images/conf-16.png" src="../_images/conf-16.png" style="width: 708.8000000000001px; height: 488.0px;" /></a>
-<div class="admonition tip">
-<p class="admonition-title">小技巧</p>
+<div class="admonition important">
+<p class="admonition-title">重要</p>
 <p><strong>实验测试</strong></p>
 <p>PC0和PC2属于同一VLAN，用PC0 ping PC2的IP地址192.168.2.13，看看是否相通？</p>
 <p>PC1和PC3没有配置VLAN，用PC1 ping PC3的IP地址192.168.3.14，看看是否相通？</p>
@@ -360,17 +368,16 @@
 <p>在Switch0交换机上的系统视图下使用下列命令进行配置：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>Switch0&gt;enable
 <span class="linenos"> 2</span>Switch0#configure terminal
-<span class="linenos"> 3</span>Enter configuration commands, one per line.  End with CNTL/Z.
-<span class="linenos"> 4</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
-<span class="linenos"> 5</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#vlan 3  //创建vlan 3</span>
-<span class="linenos"> 6</span>Switch0<span class="o">(</span>config-vlan<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos"> 7</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
-<span class="linenos"> 8</span>
-<span class="linenos"> 9</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/12</span>
-<span class="linenos">10</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 3 //将f0/12端口划分给vlan 3</span>
-<span class="linenos">11</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">12</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">13</span>Switch0#
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#vlan 3  //创建vlan 3</span>
+<span class="linenos"> 5</span>Switch0<span class="o">(</span>config-vlan<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 6</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/12</span>
+<span class="linenos"> 9</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 3 //将f0/12端口划分给vlan 3</span>
+<span class="linenos">10</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">11</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">12</span>Switch0#
 </pre></div>
 </div>
 </section>
@@ -384,17 +391,16 @@
 <p>在Switch1交换机上的系统视图下使用下列命令进行配置：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>Switch1&gt;enable
 <span class="linenos"> 2</span>Switch1#configure terminal
-<span class="linenos"> 3</span>Enter configuration comm ands, one per line.  End with CNTL/Z.
-<span class="linenos"> 4</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
-<span class="linenos"> 5</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#vlan 3  //创建vlan 3</span>
-<span class="linenos"> 6</span>Switch1<span class="o">(</span>config-vlan<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos"> 7</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
-<span class="linenos"> 8</span>
-<span class="linenos"> 9</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/14</span>
-<span class="linenos">10</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 3 //将f0/14端口划分给vlan 3</span>
-<span class="linenos">11</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">12</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">13</span>Switch1#
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#vlan 3  //创建vlan 3</span>
+<span class="linenos"> 5</span>Switch1<span class="o">(</span>config-vlan<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 6</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/14</span>
+<span class="linenos"> 9</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport access vlan 3 //将f0/14端口划分给vlan 3</span>
+<span class="linenos">10</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">11</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">12</span>Switch1#
 </pre></div>
 </div>
 </section>
@@ -420,24 +426,28 @@
 <p>将Switch0与Switch1的g0/0/4接口模式配置为trunk，使得所有VLAN都可以通过。
 在Switch0交换机下使用下列命令进行配置：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/4 //进入g0/0/4接口</span>
-<span class="linenos">2</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport mode trunk //把端口的连接类型设置为trunk模式</span>
-<span class="linenos">3</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">4</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">5</span>Switch0#
+<span class="linenos">2</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no switchport access vlan // 删除端口下的vlan配置</span>
+<span class="linenos">3</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport mode trunk //把端口的连接类型设置为trunk模式</span>
+<span class="linenos">4</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport trunk allowed vlan 2,3 // 允许Trunk接口模式下vlan2,3的数据通过</span>
+<span class="linenos">5</span>Switch0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">6</span>Switch0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">7</span>Switch0#
 </pre></div>
 </div>
 <p>使用show running-config命令查看配置命令</p>
-<a class="reference internal image-reference" href="../_images/conf-21.png"><img alt="../_images/conf-21.png" src="../_images/conf-21.png" style="width: 313.6px; height: 444.8px;" /></a>
+<a class="reference internal image-reference" href="../_images/conf-21.png"><img alt="../_images/conf-21.png" src="../_images/conf-21.png" style="width: 344.8px; height: 450.40000000000003px;" /></a>
 <p>在SW1交换机下使用下列命令进行配置：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/4 //进入g0/0/4接口</span>
-<span class="linenos">2</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport mode trunk //把端口的连接类型设置为trunk模式</span>
-<span class="linenos">3</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">4</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">5</span>Switch1#
+<span class="linenos">2</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no switchport access vlan</span>
+<span class="linenos">3</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport mode trunk //把端口的连接类型设置为trunk模式</span>
+<span class="linenos">4</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport trunk allowed vlan 2,3</span>
+<span class="linenos">5</span>Switch1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">6</span>Switch1<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">7</span>Switch1#
 </pre></div>
 </div>
 <p>使用show running-config命令查看配置命令</p>
-<a class="reference internal image-reference" href="../_images/conf-22.png"><img alt="../_images/conf-22.png" src="../_images/conf-22.png" style="width: 344.8px; height: 419.20000000000005px;" /></a>
+<a class="reference internal image-reference" href="../_images/conf-22.png"><img alt="../_images/conf-22.png" src="../_images/conf-22.png" style="width: 400.0px; height: 450.40000000000003px;" /></a>
 </section>
 <section id="id13">
 <h3><span class="section-number">6.4.2. </span>观察VLAN 3的连通情况<a class="headerlink" href="#id13" title="永久链接至标题"></a></h3>
@@ -451,17 +461,17 @@
 <p>完成trunk模式配置后，PC0和PC2互通，PC1和PC3互通，PC0和PC3不连通。</p>
 <div class="admonition hint">
 <p class="admonition-title">提示</p>
-<p><strong>调试和排错</strong></p>
+<p>如果实验结果不对，请参照下列方法来 <strong>调试和排错</strong></p>
 <ol class="arabic simple">
 <li><p>检查交换机与交换机之间的端口是否配置为Trunk模式。</p></li>
 <li><p>检查各端口华为的VLAN是否正确。</p></li>
 <li><p>一般来说，交换机等设备都具有自适应性，即支持直通线和交叉线混用，但在使用Cisco Packet Tracer模拟器软件时，要注意直通线和交叉线的区别，二者不能混用。</p></li>
 </ol>
 </div>
-<div class="admonition important">
-<p class="admonition-title">重要</p>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
 <p><strong>思考题</strong></p>
-<p>下图中Switch0的Fa0/1和Fa0/4属于同一个VLAN 2，Switch1的Fa0/1和Fa0/4属于同一个VLAN 3，试验结果PC0和PC1能互通，在不同VLAN为什么也能通？把Switch0的Fa0/4和Switch1的Fa0/4改成trunk模式反而不通。请分析其原因。</p>
+<p>下图中Switch0的Fa0/1和Fa0/4属于同一个VLAN 2，Switch1的Fa0/1和Fa0/4属于同一个VLAN 3，这四个端口都是access口，试验结果PC0和PC1能互通，请问属于不同VLAN中的PC0和PC1为什么也能通，当把Switch0的Fa0/4和Switch1的Fa0/4改成trunk模式反而不通？请分析其原因，并写入实验报告中。</p>
 <img alt="../_images/conf-26.png" src="../_images/conf-26.png" />
 </div>
 </section>
@@ -472,8 +482,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="Lab3：VLAN 与接口模式配置" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../lab5/index.html" class="btn btn-neutral float-right" title="Lab4：协议栈之IP协议实现" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Lab1：VLAN 与接口模式配置" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../lab2/index.html" class="btn btn-neutral float-right" title="Lab2：协议栈之Eth协议实现" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

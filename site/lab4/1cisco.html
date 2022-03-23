@@ -177,14 +177,18 @@
 <h3><span class="section-number">3.3.1. </span>Access端口<a class="headerlink" href="#access" title="永久链接至标题"></a></h3>
 <p>Access 端口一般是指那些连接不支持 VLAN 技术的终端设备的端口，这些端口接收到的数据帧都不包含 VLAN 标签，而向外发送数据帧时，必须保证数据帧中也不包含 VLAN 标签。交换机的Access 端口一般接主机或路由器。</p>
 <p><strong>Access端口收报文</strong> ：收到一个报文,判断是否有VLAN标签：如果没有则打上端口的PVID（默认VLAN），并进行交换转发,如果有则直接丢弃（缺省）；</p>
+<img alt="../_images/access-2.png" src="../_images/access-2.png" />
 <p><strong>Access端口发报文</strong> ：将报文的VLAN信息剥离，直接发送出去。</p>
+<img alt="../_images/access-3.png" src="../_images/access-3.png" />
 <img alt="../_images/access.png" src="../_images/access.png" />
 </section>
 <section id="trunk">
 <h3><span class="section-number">3.3.2. </span>Trunk端口<a class="headerlink" href="#trunk" title="永久链接至标题"></a></h3>
 <p>Trunk 端口一般是指那些连接支持 VLAN 技术的网络设备（如交换机）的端口，这些端口接收到的数据帧一般都包含 VLAN 标签（数据帧 VLAN ID 和端口缺省 VLAN ID 相同除外），而向外发送数据帧时，必须保证接收端能够区分不同 VLAN 的数据帧，故常常需要添加 VLAN 标签（数据帧 VLAN ID 和端口缺省 VLAN ID 相同除外）。一般用于交换机之间的连接。</p>
 <p><strong>Trunk端口收报文</strong> ：收到一个报文，判断是否有VLAN标签。如果没有则打上端口的PVID（默认VLAN），再进行交换转发；如果有判断该trunk端口是否允许该 VLAN的数据进入，如果可以则转发，否则丢弃；</p>
+<img alt="../_images/trunk-2.png" src="../_images/trunk-2.png" />
 <p><strong>Trunk端口发报文</strong> ：比较端口的PVID（默认VLAN）和将要发送报文的VLAN标签，如果两者相等则剥离VLAN标签，再发送，如果不相等则直接发送。</p>
+<img alt="../_images/trunk-3.png" src="../_images/trunk-3.png" />
 <img alt="../_images/trunk.png" src="../_images/trunk.png" />
 <div class="admonition note">
 <p class="admonition-title">备注</p>
