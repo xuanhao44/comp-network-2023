@@ -86,6 +86,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">7. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
@@ -172,11 +173,12 @@
 </section>
 <section id="id5">
 <h2><span class="section-number">3.3. </span>VLAN端口的分类<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
-<p>根据端口对 VLAN 数据帧的处理方式，cisco交换机的端口分为 Access port和Trunk port两类。</p>
+<p>根据端口对 VLAN 数据帧的处理方式，cisco交换机的端口分为 Access端口和Trunk端口两类。每一个交换机的端口（无论是Access端口还是Trunk端口）都配置有缺省VLAN ID（PVID，Port default VLAN ID）， 一般默认的PVID等于1，即属于VLAN 1。</p>
+<p>一个VLAN帧可能带有Tag（称为Tagged VLAN帧，或简称Tagged帧），也可能不带Tag（称为Untagged VLAN帧，或简称Untagged帧）。所有达到这个端口的Untagged帧将一律打上该端口PVID的tag，划分到PVID所指代的VLAN中。</p>
 <section id="access">
 <h3><span class="section-number">3.3.1. </span>Access端口<a class="headerlink" href="#access" title="永久链接至标题"></a></h3>
 <p>Access 端口一般是指那些连接不支持 VLAN 技术的终端设备的端口，这些端口接收到的数据帧都不包含 VLAN 标签，而向外发送数据帧时，必须保证数据帧中也不包含 VLAN 标签。交换机的Access 端口一般接主机或路由器。</p>
-<p><strong>Access端口收报文</strong> ：收到一个报文,判断是否有VLAN标签：如果没有则打上端口的PVID（默认VLAN），并进行交换转发,如果有则直接丢弃（缺省）；</p>
+<p><strong>Access端口收报文</strong> ：收到一个报文,判断是否有VLAN标签：如果没有则打上端口的PVID（默认VLAN ID），并进行交换转发；如果有，交换机会检查这个报文的tag中的VID是否与PVID相同，如果相同，则队这个Tagged帧进行转发，如果不同，则直接丢弃。</p>
 <img alt="../_images/access-2.png" src="../_images/access-2.png" />
 <p><strong>Access端口发报文</strong> ：将报文的VLAN信息剥离，直接发送出去。</p>
 <img alt="../_images/access-3.png" src="../_images/access-3.png" />
@@ -476,6 +478,10 @@
 </div>
 </section>
 </section>
+</section>
+<section id="id15">
+<h1><span class="section-number">7. </span>实验提交<a class="headerlink" href="#id15" title="永久链接至标题"></a></h1>
+<p>本实验提交 <strong>实验报告（详见课程群）</strong> 。提交方式请参考 <a class="reference download internal" download="" href="../_downloads/c02b6115bbc53bdfb2bf4644f546381f/HITsz%20Grader%E5%AD%A6%E7%94%9F%E7%AB%AF%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8CV1.0.pdf"><code class="xref download docutils literal notranslate"><span class="pre">HITsz</span> <span class="pre">Grader学生端使用手册V1.0</span></code></a></p>
 </section>
 
 

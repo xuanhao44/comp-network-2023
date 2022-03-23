@@ -42,14 +42,16 @@ TCI又分为PCP、CFI和VLAN ID三个域。
 
 VLAN端口的分类
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-根据端口对 VLAN 数据帧的处理方式，cisco交换机的端口分为 Access port和Trunk port两类。 
+根据端口对 VLAN 数据帧的处理方式，cisco交换机的端口分为 Access端口和Trunk端口两类。每一个交换机的端口（无论是Access端口还是Trunk端口）都配置有缺省VLAN ID（PVID，Port default VLAN ID）， 一般默认的PVID等于1，即属于VLAN 1。
+
+一个VLAN帧可能带有Tag（称为Tagged VLAN帧，或简称Tagged帧），也可能不带Tag（称为Untagged VLAN帧，或简称Untagged帧）。所有达到这个端口的Untagged帧将一律打上该端口PVID的tag，划分到PVID所指代的VLAN中。
 
 Access端口
 -------------------------------
 
 Access 端口一般是指那些连接不支持 VLAN 技术的终端设备的端口，这些端口接收到的数据帧都不包含 VLAN 标签，而向外发送数据帧时，必须保证数据帧中也不包含 VLAN 标签。交换机的Access 端口一般接主机或路由器。
 
-**Access端口收报文** ：收到一个报文,判断是否有VLAN标签：如果没有则打上端口的PVID（默认VLAN），并进行交换转发,如果有则直接丢弃（缺省）；
+**Access端口收报文** ：收到一个报文,判断是否有VLAN标签：如果没有则打上端口的PVID（默认VLAN ID），并进行交换转发；如果有，交换机会检查这个报文的tag中的VID是否与PVID相同，如果相同，则队这个Tagged帧进行转发，如果不同，则直接丢弃。
 
 .. image:: access-2.png
 
@@ -431,3 +433,7 @@ PC3       192.168.3.14          255.255.255.0
 
   .. image:: conf-26.png
 
+
+实验提交
+=====================
+本实验提交 **实验报告（详见课程群）** 。提交方式请参考 :download:`HITsz Grader学生端使用手册V1.0<../../stupkt/HITsz Grader学生端使用手册V1.0.pdf>` 
