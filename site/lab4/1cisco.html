@@ -173,7 +173,7 @@
 </section>
 <section id="id5">
 <h2><span class="section-number">3.3. </span>VLAN端口的分类<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
-<p>根据端口对 VLAN 数据帧的处理方式，cisco交换机的端口分为 Access端口和Trunk端口两类。每一个交换机的端口（无论是Access端口还是Trunk端口）都配置有缺省VLAN ID（PVID，Port default VLAN ID）， 一般默认的PVID等于1，即属于VLAN 1。</p>
+<p>根据端口对 VLAN 数据帧的处理方式，cisco交换机的端口分为 Access端口和Trunk端口两类。每一个交换机的端口（无论是Access端口还是Trunk端口）都配置有缺省VLAN ID（PVID，Port default VLAN ID）， 一般默认的PVID等于1，即属于VLAN 1，也可以人为设置PVID。</p>
 <p>一个VLAN帧可能带有Tag（称为Tagged VLAN帧，或简称Tagged帧），也可能不带Tag（称为Untagged VLAN帧，或简称Untagged帧）。所有达到这个端口的Untagged帧将一律打上该端口PVID的tag，划分到PVID所指代的VLAN中。</p>
 <section id="access">
 <h3><span class="section-number">3.3.1. </span>Access端口<a class="headerlink" href="#access" title="永久链接至标题"></a></h3>
@@ -460,7 +460,7 @@
 <h3><span class="section-number">6.4.3. </span>观察同一VLAN和不同VLAN的连通情况<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
 <p>在PC0上使用ping PC2命令测试连通性，在PC0上使用ping PC3命令测试连通性，如图:</p>
 <a class="reference internal image-reference" href="../_images/conf-24.png"><img alt="../_images/conf-24.png" src="../_images/conf-24.png" style="width: 681.6px; height: 601.6px;" /></a>
-<p>完成trunk模式配置后，PC0和PC2互通，PC1和PC3互通，PC0和PC3不连通。</p>
+<p>完成trunk模式配置后，PC0和PC2互通，PC1和PC3互通，PC0和PC3不连通。注意，保存好你的组网图，并填写实验报告。</p>
 <div class="admonition hint">
 <p class="admonition-title">提示</p>
 <p>如果实验结果不对，请参照下列方法来 <strong>调试和排错</strong></p>

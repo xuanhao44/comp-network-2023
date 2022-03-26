@@ -42,7 +42,7 @@ TCI又分为PCP、CFI和VLAN ID三个域。
 
 VLAN端口的分类
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-根据端口对 VLAN 数据帧的处理方式，cisco交换机的端口分为 Access端口和Trunk端口两类。每一个交换机的端口（无论是Access端口还是Trunk端口）都配置有缺省VLAN ID（PVID，Port default VLAN ID）， 一般默认的PVID等于1，即属于VLAN 1。
+根据端口对 VLAN 数据帧的处理方式，cisco交换机的端口分为 Access端口和Trunk端口两类。每一个交换机的端口（无论是Access端口还是Trunk端口）都配置有缺省VLAN ID（PVID，Port default VLAN ID）， 一般默认的PVID等于1，即属于VLAN 1，也可以人为设置PVID。
 
 一个VLAN帧可能带有Tag（称为Tagged VLAN帧，或简称Tagged帧），也可能不带Tag（称为Untagged VLAN帧，或简称Untagged帧）。所有达到这个端口的Untagged帧将一律打上该端口PVID的tag，划分到PVID所指代的VLAN中。
 
@@ -413,7 +413,7 @@ PC3       192.168.3.14          255.255.255.0
 .. image:: conf-24.png
   :scale: 80%
 
-完成trunk模式配置后，PC0和PC2互通，PC1和PC3互通，PC0和PC3不连通。
+完成trunk模式配置后，PC0和PC2互通，PC1和PC3互通，PC0和PC3不连通。注意，保存好你的组网图，并填写实验报告。
 
 
 .. hint:: 
