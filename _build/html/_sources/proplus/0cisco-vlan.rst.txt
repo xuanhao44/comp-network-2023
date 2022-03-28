@@ -11,11 +11,7 @@
 
 .. image:: cisco-vlan.png
 
-
-.. note:: 
-    **pvid** ：缺省的本地vlan（native），默认的pvid为1。
-
-    进入接口模式，设置vlan-id（即vlan ID编号）作为本地vlan。配置方法参考下列步骤：
+**pvid** ：缺省的本地vlan（native），默认的pvid为1，也可以人为设置。进入接口模式，设置vlan-id（即vlan ID编号）作为本地vlan。配置方法参考下列步骤：
 
 .. code-block:: sh
    :linenos:
