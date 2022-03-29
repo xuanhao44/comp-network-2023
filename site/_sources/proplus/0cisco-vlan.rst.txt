@@ -11,13 +11,25 @@
 
 .. image:: cisco-vlan.png
 
-**pvid** ：缺省的本地vlan（native），默认的pvid为1，也可以人为设置。进入接口模式，设置vlan-id（即vlan ID编号）作为本地vlan。配置方法参考下列步骤：
+**pvid** ：缺省的本地vlan（native VLAN），默认的pvid为1，也可以人为设置。进入接口模式，设置vlan-id（即vlan ID编号）作为本地vlan。配置方法参考下列步骤：
 
 .. code-block:: sh
    :linenos:
 
     Switch(config)#interface f0/1
     Switch(config-if)#switchport trunk native vlan vlan-id
+
+.. hint:: 
+    如果Trunk两侧的PVID不匹配，会产生inconsistent local vlan，STP（Spanning Tree Protocol，生成树协议）会让端口处于阻塞状态，导致链路上不会转发。因此在本实验中，为了能让两侧PVID不匹配的trunk链路能转发数据，可以关闭STP协议。
+
+    STP是将一个存在物理环路的交换网络变成一个没有环路的逻辑树形网络。根据IEEE802.1d协议（也叫做生成树协议）规定，接入网络的设备在与其他设备通信时，只有一条链路生效，其他冗余端口处于“阻断状态”。当且仅当这个链路除故障无法使用时，才会重新计算网络链路，让处于“阻断状态”的端口重新打开，这样即可保障了网络正常运转，又保证了冗余能力。
+
+关闭STP的方法：
+
+.. code-block:: sh
+   :linenos:
+
+    Switch(config)#no spanning-tree vlan vlan-id
 
 .. note:: 
     路由器和交换机之间可以使用干道模式（Trunk模式），实现VLAN之间的通信。路由器可以从某一个VLAN接收数据包，并将这个数据包转发到另外一个VLAN。要实现VLAN间的路由，必须在一个路由器的物理接口上启用子接口，也就是将以太网口划分为多个VLAN间的连接，并配置成干道模式，这样每个VLAN对应一个子接口，也就能实现VLAN间路由了， 这种方式也称为 **单臂路由** 。
@@ -49,6 +61,14 @@
      Router(config-subif)#exit
      Router(config)#
 
+
+常用的调试命令：
+
+.. code-block:: sh
+   :linenos:
+
+    Switch#show vlan // 可以查看VLAN的信息，以及每个VLAN上有什么端口。
+    Switch#show int trunk  // 可以查看trunk的端口信息。
 
 实验提交
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
