@@ -109,9 +109,18 @@
 <li><p>PC0、PC1和PC2都能ping通网关。</p></li>
 </ol>
 <img alt="../_images/cisco-vlan.png" src="../_images/cisco-vlan.png" />
-<p><strong>pvid</strong> ：缺省的本地vlan（native），默认的pvid为1，也可以人为设置。进入接口模式，设置vlan-id（即vlan ID编号）作为本地vlan。配置方法参考下列步骤：</p>
+<p><strong>pvid</strong> ：缺省的本地vlan（native VLAN），默认的pvid为1，也可以人为设置。进入接口模式，设置vlan-id（即vlan ID编号）作为本地vlan。配置方法参考下列步骤：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> Switch<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/1</span>
 <span class="linenos">2</span> Switch<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#switchport trunk native vlan vlan-id</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>如果Trunk两侧的PVID不匹配，会产生inconsistent local vlan，STP（Spanning Tree Protocol，生成树协议）会让端口处于阻塞状态，导致链路上不会转发。因此在本实验中，为了能让两侧PVID不匹配的trunk链路能转发数据，可以关闭STP协议。</p>
+<p>STP是将一个存在物理环路的交换网络变成一个没有环路的逻辑树形网络。根据IEEE802.1d协议（也叫做生成树协议）规定，接入网络的设备在与其他设备通信时，只有一条链路生效，其他冗余端口处于“阻断状态”。当且仅当这个链路除故障无法使用时，才会重新计算网络链路，让处于“阻断状态”的端口重新打开，这样即可保障了网络正常运转，又保证了冗余能力。</p>
+</div>
+<p>关闭STP的方法：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> Switch<span class="o">(</span>config<span class="o">)</span><span class="c1">#no spanning-tree vlan vlan-id</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -139,6 +148,11 @@
 <span class="linenos">17</span>  Router<span class="o">(</span>config-subif<span class="o">)</span><span class="c1">#ip address 192.168.4.1 255.255.255.0</span>
 <span class="linenos">18</span>  Router<span class="o">(</span>config-subif<span class="o">)</span><span class="c1">#exit</span>
 <span class="linenos">19</span>  Router<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
+</pre></div>
+</div>
+<p>常用的调试命令：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span> Switch#show vlan // 可以查看VLAN的信息，以及每个VLAN上有什么端口。
+<span class="linenos">2</span> Switch#show int trunk  // 可以查看trunk的端口信息。
 </pre></div>
 </div>
 </section>
