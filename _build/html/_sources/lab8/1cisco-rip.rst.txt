@@ -7,7 +7,7 @@
 
 实验任务
 =====================
-掌握RIP的配置方法，在计算机上用Wireshark截取RIP报文，理解触发更新和水平分割对RIP收敛速度和避免环路的作用。
+掌握RIP的配置方法，在cisc packet tracer上截取RIP报文，理解触发更新和水平分割对RIP收敛速度和避免环路的作用。
 
 实验原理
 =====================
@@ -154,15 +154,16 @@ PC2		      192.168.3.14/24
    Router>enable 
    Router#configure terminal 
    Router(config)#hostname R0 // 重命名为R0
+   Router(config)#no ip domain-lookup  // 用于防止DNS解析的命令。如果没有这条命令，当你输入错误的命令时，cisco会尝试连接DNS服务器进行域名解析，浪费时间。     
 
-   R0(config)#interface f0/0  // 进入f0/0接口模式
+   R0(config)#interface f0/0  // 打开f0/0接口（默认接口关闭）
    R0(config-if)#ip address 192.168.1.1 255.255.255.0 //配置f0/0接口ip地址
    R0(config-if)#no shutdown // 打开f0/0接口
    R0(config-if)#exit
 
    R0(config)#interface f0/1  // 进入f0/1接口模式
    R0(config-if)#ip address 192.168.2.1 255.255.255.0 //配置f0/1接口ip地址
-   R0(config-if)#no shutdown  // 打开f0/1接口
+   R0(config-if)#no shutdown  // 打开f0/1接口（默认接口关闭）
    R0(config-if)#exit
    
    R0(config)#interface loopback 1  //配置Loopback回环接口
@@ -186,6 +187,7 @@ PC2		      192.168.3.14/24
    Router>enable
    Router#configure terminal 
    Router(config)#hostname R1 // 重命名为R1
+   Router(config)#no ip domain-lookup  // 用于防止DNS解析的命令。
 
 
    R1(config)#interface f0/0  // 进入f0/0接口模式

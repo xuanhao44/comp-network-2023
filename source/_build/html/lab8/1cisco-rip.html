@@ -140,7 +140,7 @@
 </section>
 <section id="id2">
 <h1><span class="section-number">2. </span>实验任务<a class="headerlink" href="#id2" title="永久链接至标题"></a></h1>
-<p>掌握RIP的配置方法，在计算机上用Wireshark截取RIP报文，理解触发更新和水平分割对RIP收敛速度和避免环路的作用。</p>
+<p>掌握RIP的配置方法，在cisc packet tracer上截取RIP报文，理解触发更新和水平分割对RIP收敛速度和避免环路的作用。</p>
 </section>
 <section id="id3">
 <h1><span class="section-number">3. </span>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
@@ -196,7 +196,7 @@
 </section>
 <section id="id7">
 <h1><span class="section-number">5. </span>实验组网<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
-<img alt="../_images/cisco-11.png" src="../_images/cisco-11.png" />
+<img alt="../_images/cisco-110.png" src="../_images/cisco-110.png" />
 <div class="admonition note">
 <p class="admonition-title">备注</p>
 <p>上述组网图中存在四种类型局域网，分别是1.1.1.1/32、192.168.1.0/24、192.168.2.0/24、192.168.3.0/24。</p>
@@ -276,32 +276,33 @@
 <section id="r0ip">
 <span id="loopback"></span><h3><span class="section-number">6.3.1. </span>在路由器R0上配置端口的IP地址<a class="headerlink" href="#r0ip" title="永久链接至标题"></a></h3>
 <p>路由器在第一次配置时会启动配置向导界面，通常选择no，不进入对话模式，而是直接进入正常配置模式。</p>
-<a class="reference internal image-reference" href="../_images/cisco-21.png"><img alt="../_images/cisco-21.png" src="../_images/cisco-21.png" style="width: 525.6px; height: 504.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-24.png"><img alt="../_images/cisco-24.png" src="../_images/cisco-24.png" style="width: 525.6px; height: 504.0px;" /></a>
 <p>配置R0的基本信息。</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>Router&gt;enable
 <span class="linenos"> 2</span>Router#configure terminal
 <span class="linenos"> 3</span>Router<span class="o">(</span>config<span class="o">)</span><span class="c1">#hostname R0 // 重命名为R0</span>
-<span class="linenos"> 4</span>
-<span class="linenos"> 5</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/0  // 进入f0/0接口模式</span>
-<span class="linenos"> 6</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 192.168.1.1 255.255.255.0 //配置f0/0接口ip地址</span>
-<span class="linenos"> 7</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown // 打开f0/0接口</span>
-<span class="linenos"> 8</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos"> 9</span>
-<span class="linenos">10</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/1  // 进入f0/1接口模式</span>
-<span class="linenos">11</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 192.168.2.1 255.255.255.0 //配置f0/1接口ip地址</span>
-<span class="linenos">12</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown  // 打开f0/1接口</span>
-<span class="linenos">13</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">14</span>
-<span class="linenos">15</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface loopback 1  //配置Loopback回环接口</span>
-<span class="linenos">16</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 1.1.1.1 255.255.255.255 //配置回环地址</span>
-<span class="linenos">17</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">18</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 4</span>Router<span class="o">(</span>config<span class="o">)</span><span class="c1">#no ip domain-lookup  // 用于防止DNS解析的命令。如果没有这条命令，当你输入错误的命令时，cisco会尝试连接DNS服务器进行域名解析，浪费时间。</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/0  // 打开f0/0接口（默认接口关闭）</span>
+<span class="linenos"> 7</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 192.168.1.1 255.255.255.0 //配置f0/0接口ip地址</span>
+<span class="linenos"> 8</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown // 打开f0/0接口</span>
+<span class="linenos"> 9</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/1  // 进入f0/1接口模式</span>
+<span class="linenos">12</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 192.168.2.1 255.255.255.0 //配置f0/1接口ip地址</span>
+<span class="linenos">13</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown  // 打开f0/1接口（默认接口关闭）</span>
+<span class="linenos">14</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface loopback 1  //配置Loopback回环接口</span>
+<span class="linenos">17</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 1.1.1.1 255.255.255.255 //配置回环地址</span>
+<span class="linenos">18</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">19</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
 </pre></div>
 </div>
 </section>
 <section id="r0">
 <h3><span class="section-number">6.3.2. </span>查看R0路由表<a class="headerlink" href="#r0" title="永久链接至标题"></a></h3>
-<a class="reference internal image-reference" href="../_images/cisco-31.png"><img alt="../_images/cisco-31.png" src="../_images/cisco-31.png" style="width: 664.0px; height: 217.60000000000002px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-32.png"><img alt="../_images/cisco-32.png" src="../_images/cisco-32.png" style="width: 664.0px; height: 217.60000000000002px;" /></a>
 </section>
 <section id="r1ip">
 <h3><span class="section-number">6.3.3. </span>在路由器R1上配置端口的IP地址<a class="headerlink" href="#r1ip" title="永久链接至标题"></a></h3>
@@ -309,50 +310,51 @@
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>Router&gt;enable
 <span class="linenos"> 2</span>Router#configure terminal
 <span class="linenos"> 3</span>Router<span class="o">(</span>config<span class="o">)</span><span class="c1">#hostname R1 // 重命名为R1</span>
-<span class="linenos"> 4</span>
+<span class="linenos"> 4</span>Router<span class="o">(</span>config<span class="o">)</span><span class="c1">#no ip domain-lookup  // 用于防止DNS解析的命令。</span>
 <span class="linenos"> 5</span>
-<span class="linenos"> 6</span>R1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/0  // 进入f0/0接口模式</span>
-<span class="linenos"> 7</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 192.168.1.2 255.255.255.0 //配置f0/0接口ip地址</span>
-<span class="linenos"> 8</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown  // 打开f0/0接口</span>
-<span class="linenos"> 9</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">10</span>
-<span class="linenos">11</span>R1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/1  // 进入f0/1接口模式</span>
-<span class="linenos">12</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 192.168.3.1 255.255.255.0 //配置f0/1接口ip地址</span>
-<span class="linenos">13</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown  // 打开f0/1接口</span>
-<span class="linenos">14</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">15</span>R1<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
-<span class="linenos">16</span>R1#
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span>R1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/0  // 进入f0/0接口模式</span>
+<span class="linenos"> 8</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 192.168.1.2 255.255.255.0 //配置f0/0接口ip地址</span>
+<span class="linenos"> 9</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown  // 打开f0/0接口</span>
+<span class="linenos">10</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>R1<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/1  // 进入f0/1接口模式</span>
+<span class="linenos">13</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 192.168.3.1 255.255.255.0 //配置f0/1接口ip地址</span>
+<span class="linenos">14</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown  // 打开f0/1接口</span>
+<span class="linenos">15</span>R1<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">16</span>R1<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">17</span>R1#
 </pre></div>
 </div>
 </section>
 <section id="r1-r0r1">
 <h3><span class="section-number">6.3.4. </span>查看R1路由表，并观察R0和R1的连通性<a class="headerlink" href="#r1-r0r1" title="永久链接至标题"></a></h3>
-<a class="reference internal image-reference" href="../_images/cisco-41.png"><img alt="../_images/cisco-41.png" src="../_images/cisco-41.png" style="width: 659.2px; height: 220.8px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-42.png"><img alt="../_images/cisco-42.png" src="../_images/cisco-42.png" style="width: 659.2px; height: 220.8px;" /></a>
 <p>R1配置完成后，R0和R1已经连通。此时，再次查看R0路由表，已经可以看到有192.168.1.0/24网段了。</p>
-<a class="reference internal image-reference" href="../_images/cisco-51.png"><img alt="../_images/cisco-51.png" src="../_images/cisco-51.png" style="width: 654.4000000000001px; height: 242.4px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-52.png"><img alt="../_images/cisco-52.png" src="../_images/cisco-52.png" style="width: 654.4000000000001px; height: 242.4px;" /></a>
 </section>
 <section id="id11">
 <h3><span class="section-number">6.3.5. </span>配置三台计算机的网关<a class="headerlink" href="#id11" title="永久链接至标题"></a></h3>
 <p>PC0网关为192.168.2.1</p>
-<a class="reference internal image-reference" href="../_images/cisco-61.png"><img alt="../_images/cisco-61.png" src="../_images/cisco-61.png" style="width: 681.6px; height: 601.6px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-62.png"><img alt="../_images/cisco-62.png" src="../_images/cisco-62.png" style="width: 681.6px; height: 601.6px;" /></a>
 <p>PC1和PC2网关为192.168.3.1，配置方法和PC0一样。</p>
 <p>PC0通过默认网关将发往未知网络的数据交由R0处理。同理PC1和PC2通过默认网关将数据交给R1。</p>
 </section>
 <section id="r0ping-r1">
 <h3><span class="section-number">6.3.6. </span>在R0上ping R1验证连通性<a class="headerlink" href="#r0ping-r1" title="永久链接至标题"></a></h3>
-<a class="reference internal image-reference" href="../_images/cisco-71.png"><img alt="../_images/cisco-71.png" src="../_images/cisco-71.png" style="width: 582.4px; height: 107.2px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-72.png"><img alt="../_images/cisco-72.png" src="../_images/cisco-72.png" style="width: 582.4px; height: 107.2px;" /></a>
 </section>
 <section id="pc0ping-r0">
 <h3><span class="section-number">6.3.7. </span>在PC0上ping R0验证连通性<a class="headerlink" href="#pc0ping-r0" title="永久链接至标题"></a></h3>
-<a class="reference internal image-reference" href="../_images/cisco-81.png"><img alt="../_images/cisco-81.png" src="../_images/cisco-81.png" style="width: 681.6px; height: 601.6px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-82.png"><img alt="../_images/cisco-82.png" src="../_images/cisco-82.png" style="width: 681.6px; height: 601.6px;" /></a>
 </section>
 <section id="pc1ping-r1">
 <h3><span class="section-number">6.3.8. </span>在PC1上ping R1验证连通性<a class="headerlink" href="#pc1ping-r1" title="永久链接至标题"></a></h3>
-<a class="reference internal image-reference" href="../_images/cisco-9.png"><img alt="../_images/cisco-9.png" src="../_images/cisco-9.png" style="width: 681.6px; height: 601.6px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-91.png"><img alt="../_images/cisco-91.png" src="../_images/cisco-91.png" style="width: 681.6px; height: 601.6px;" /></a>
 </section>
 <section id="pc0ping-pc1">
 <h3><span class="section-number">6.3.9. </span>在PC0上ping PC1验证连通性<a class="headerlink" href="#pc0ping-pc1" title="永久链接至标题"></a></h3>
-<a class="reference internal image-reference" href="../_images/cisco-10.png"><img alt="../_images/cisco-10.png" src="../_images/cisco-10.png" style="width: 681.6px; height: 601.6px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-101.png"><img alt="../_images/cisco-101.png" src="../_images/cisco-101.png" style="width: 681.6px; height: 601.6px;" /></a>
 <p>此时，还没有设置RIP路由协议，PC0和PC1还不能相互连通。</p>
 </section>
 </section>
@@ -392,15 +394,15 @@
 <section id="r0r1">
 <h3><span class="section-number">6.4.3. </span>查看R0和R1的路由表<a class="headerlink" href="#r0r1" title="永久链接至标题"></a></h3>
 <p>R0路由表:</p>
-<a class="reference internal image-reference" href="../_images/cisco-12.png"><img alt="../_images/cisco-12.png" src="../_images/cisco-12.png" style="width: 652.8000000000001px; height: 251.20000000000002px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-121.png"><img alt="../_images/cisco-121.png" src="../_images/cisco-121.png" style="width: 652.8000000000001px; height: 251.20000000000002px;" /></a>
 <p>此时，R0上多了一条RIP路由信息，即要达到192.168.3.0/24网段，下一个转发端口是192.168.1.2。</p>
 <p>R1路由表:</p>
-<a class="reference internal image-reference" href="../_images/cisco-111.png"><img alt="../_images/cisco-111.png" src="../_images/cisco-111.png" style="width: 728.8000000000001px; height: 580.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-112.png"><img alt="../_images/cisco-112.png" src="../_images/cisco-112.png" style="width: 728.8000000000001px; height: 580.0px;" /></a>
 <p>此时，R1上多了两条RIP路由信息。</p>
 </section>
 <section id="pc0pc1">
 <h3><span class="section-number">6.4.4. </span>测试PC0到PC1之间的连通性<a class="headerlink" href="#pc0pc1" title="永久链接至标题"></a></h3>
-<a class="reference internal image-reference" href="../_images/cisco-13.png"><img alt="../_images/cisco-13.png" src="../_images/cisco-13.png" style="width: 681.6px; height: 601.6px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-131.png"><img alt="../_images/cisco-131.png" src="../_images/cisco-131.png" style="width: 681.6px; height: 601.6px;" /></a>
 <p>配置RIP路由协议后，PC0能访问到PC1了。</p>
 </section>
 </section>
@@ -409,12 +411,12 @@
 <section id="id14">
 <h3><span class="section-number">6.5.1. </span>进入仿真调试模式<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
 <p>在Cisco Packet Tracer软件菜单栏View -&gt; Simulation Mode，在工作区的右边出现一个“Simulation Panel”，此时就进入了仿真模式。</p>
-<a class="reference internal image-reference" href="../_images/cisco-14.png"><img alt="../_images/cisco-14.png" src="../_images/cisco-14.png" style="width: 559.2px; height: 264.8px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-141.png"><img alt="../_images/cisco-141.png" src="../_images/cisco-141.png" style="width: 559.2px; height: 264.8px;" /></a>
 <p>在“Event List Filters-Visible Events”窗口栏中显示捕获的协议，这里面有很多是我们不需要观察的协议。单击Show All/None，Event List Filters-Visible Events窗口栏中变成None。然后，再点击Edit Filters。在弹出的窗口里，选择IPv4选项卡，选择ARP、ICMP、RIP这三种协议，本实验只需观察这三种协议即可。</p>
-<a class="reference internal image-reference" href="../_images/cisco-15.png"><img alt="../_images/cisco-15.png" src="../_images/cisco-15.png" style="width: 395.20000000000005px; height: 160.8px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-151.png"><img alt="../_images/cisco-151.png" src="../_images/cisco-151.png" style="width: 395.20000000000005px; height: 160.8px;" /></a>
 <p>单击“Play”三角形按钮，让网络设备开始运行。此时，我们可以观察数据包的传输过程。包转发需要一些时间，请耐心等待。</p>
-<a class="reference internal image-reference" href="../_images/cisco-16.png"><img alt="../_images/cisco-16.png" src="../_images/cisco-16.png" style="width: 556.8000000000001px; height: 173.60000000000002px;" /></a>
-<img alt="../_images/cisco-17.png" src="../_images/cisco-17.png" />
+<a class="reference internal image-reference" href="../_images/cisco-161.png"><img alt="../_images/cisco-161.png" src="../_images/cisco-161.png" style="width: 556.8000000000001px; height: 173.60000000000002px;" /></a>
+<img alt="../_images/cisco-171.png" src="../_images/cisco-171.png" />
 <p>上图中，在17.482s时刻，从Router0发出来了两个RIP数据包。点击“forward”前向三角按钮，在17.483s，这两个数据包分别被传输到Switch0和Router1。再次点击“forward”前向三角按钮，数据包在17.484s到达PC0，而之前到达Router1的数据没有在此时转发出来。这是因为Router1收到RIP协议数据包后，需要更新自身的路由表，然后等到它的下一个发包时刻再转发出路由数据包。22.991s，此时轮到Router1对外转发它的路由信息。22.992s数据包分别到达Router0和Switch1。由此我们可以观察数据包的传输过程。</p>
 <p>在上图中，我们可以看到Router0第一次发出RIP数据包是在17.482s，第二次发送RIP数据包是在45.467s，第三次是在74.955s，相差间隔差不多是30s，这也验证了RIP是每30s将自己所知道的路由信息广播出去。</p>
 </section>
@@ -422,10 +424,10 @@
 <h3><span class="section-number">6.5.2. </span>观察触发更新报文<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
 <p>单击“Play”键停止抓包，然后单击“Reset Simulation”清空抓包信息。</p>
 <p>再按下“Play”键开始抓包。然后在R1上使用命令no interface loopback1断开回环地址loopback 1，此时Simultaion Panel面板上显示结果如下:</p>
-<img alt="../_images/cisco-18.png" src="../_images/cisco-18.png" />
+<img alt="../_images/cisco-181.png" src="../_images/cisco-181.png" />
 <p>图中，21.263s，Router0发出两个RIP数据包。当我们输入no interface loopback 1命令断开loopback 1时，在21.265s，Router0又发出两个RIP数据包。此时，距离上一个Router0发出数据的时间还没有到达30s。</p>
 <p>单击21.265s行的Router0，在弹出窗口的Outbound PDU Details选项卡中，可以看到这个RIP数据包携带有达到1.1.1.1网络的跳数为16，也就是不可达。21.266s，到达Router1后，Router1也立刻转发该路由信息。也就是，一条路有切断，全网通告。</p>
-<a class="reference internal image-reference" href="../_images/cisco-19.png"><img alt="../_images/cisco-19.png" src="../_images/cisco-19.png" style="width: 560.0px; height: 564.0px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-191.png"><img alt="../_images/cisco-191.png" src="../_images/cisco-191.png" style="width: 560.0px; height: 564.0px;" /></a>
 <p>由此可知，在网络发生改变时，RIP路由协议会及时触发更新，而不是等到下一个30s后才发出路由信息。</p>
 </section>
 <section id="id16">
@@ -433,15 +435,15 @@
 <p>参照上述配置方式 <a class="reference internal" href="#loopback"><span class="std std-ref">在路由器R0上配置端口的IP地址</span></a>，重新配置好loopback 1。</p>
 <p>单击“Play”键停止抓包，然后单击“Reset Simulation”清空抓包信息。再按下“Play”键开始抓包。接下来，我们观察打开/关闭水平分割的报文。</p>
 <p>我们找到从Router0发出到Switch0的RIP数据包。以下图为例，在8.120s，Switch0收到的RIP路由信息有两条，显示到达192.168.1.0网段需要1跳，到达192.168.3.0网段需要2跳。</p>
-<img alt="../_images/cisco-20.png" src="../_images/cisco-20.png" />
+<img alt="../_images/cisco-201.png" src="../_images/cisco-201.png" />
 <p>同样在8.120s，Router1也收到Router0的RIP数据包，在该数据包中，只有到达1.1.1.1网段和192.168.2.0的路由信息，没有192.168.1.0网段和192.168.3.0网段的路由信息。这是因为开启了水平分割（rip配置后默认启动水平分割），Router0是从F0/0端口接收学习到192.168.1.0网段和192.168.3.0网段的路由信息，就不会再从该接口发回去。</p>
-<img alt="../_images/cisco-211.png" src="../_images/cisco-211.png" />
+<img alt="../_images/cisco-212.png" src="../_images/cisco-212.png" />
 <p>接着，取消Router0的水平分割，我们继续观察RIP数据包。</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/0</span>
 <span class="linenos">2</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no ip split-horizon</span>
 </pre></div>
 </div>
-<img alt="../_images/cisco-22.png" src="../_images/cisco-22.png" />
+<img alt="../_images/cisco-221.png" src="../_images/cisco-221.png" />
 <p>如上图所示，在取消水平分割后，Router1收到Router0的4条路由协议，多了2条来自192.168.1.0和192.168.3.0的报文。</p>
 </section>
 </section>
