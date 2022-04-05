@@ -225,7 +225,7 @@
 <p><strong>Step1</strong> ：调用buf_init()对txbuf进行初始化。</p>
 <p><strong>Step2</strong> ：填写ARP报头。</p>
 <p><strong>Step3</strong> ：ARP操作类型为ARP_REQUEST，注意大小端转换。</p>
-<p><strong>Step4</strong> ：调用ethernet_out函数将ARP报文发送出去。注意：ARP请求报文是广播报文，其目标MAC地址应该是广播地址：FF-FF-FF-FF-FF-FF。</p>
+<p><strong>Step4</strong> ：调用ethernet_out函数将ARP报文发送出去。注意：ARP announcement或ARP请求报文都是广播报文，其目标MAC地址应该是广播地址：FF-FF-FF-FF-FF-FF。</p>
 <p>ARP announcement报文格式可参考如下：</p>
 <img alt="../_images/ARP-1.png" src="../_images/ARP-1.png" />
 </section>

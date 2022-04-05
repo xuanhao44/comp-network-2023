@@ -140,7 +140,7 @@ arp_init()函数实现ARP初始化功能，初始化流程如下：
 
 **Step3** ：ARP操作类型为ARP_REQUEST，注意大小端转换。
 
-**Step4** ：调用ethernet_out函数将ARP报文发送出去。注意：ARP请求报文是广播报文，其目标MAC地址应该是广播地址：FF-FF-FF-FF-FF-FF。
+**Step4** ：调用ethernet_out函数将ARP报文发送出去。注意：ARP announcement或ARP请求报文都是广播报文，其目标MAC地址应该是广播地址：FF-FF-FF-FF-FF-FF。
 
 ARP announcement报文格式可参考如下：
 
