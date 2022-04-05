@@ -226,16 +226,18 @@
 <p><strong>Step2</strong> ：填写ARP报头。</p>
 <p><strong>Step3</strong> ：ARP操作类型为ARP_REQUEST，注意大小端转换。</p>
 <p><strong>Step4</strong> ：调用ethernet_out函数将ARP报文发送出去。注意：ARP请求报文是广播报文，其目标MAC地址应该是广播地址：FF-FF-FF-FF-FF-FF。</p>
+<p>ARP announcement报文格式可参考如下：</p>
+<img alt="../_images/ARP-1.png" src="../_images/ARP-1.png" />
 </section>
 <section id="id11">
 <h2><span class="section-number">4.2. </span>ARP发送处理过程<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现arp_out()函数，功能如下：</p>
-<p><strong>Step1</strong> ：根据IP地址来查找ARP表(arp_table)。</p>
+<p><strong>Step1</strong> ：调用map_get()函数，根据IP地址来查找ARP表(arp_table)。</p>
 <p><strong>Step2</strong> ：如果能找到该IP地址对应的MAC地址，则将数据包直接发送给以太网层，即调用ethernet_out函数直接发出去。</p>
-<p><strong>Step3</strong> ：如果没有找到对应的MAC地址，进一步判断arp_buf是否已经有包了，如果有，则说明正在等待该ip回应ARP请求，此时不能再发送arp请求，否则会造成广播风暴；如果没有包，则调用map_set()函数将来自IP层的数据包缓存到arp_buf，然后，调用arp_req()函数，发一个请求目标IP地址对应的MAC地址的ARP request报文。</p>
+<p><strong>Step3</strong> ：如果没有找到对应的MAC地址，进一步判断arp_buf是否已经有包了，如果有，则说明正在等待该ip回应ARP请求，此时不能再发送arp请求；如果没有包，则调用map_set()函数将来自IP层的数据包缓存到arp_buf，然后，调用arp_req()函数，发一个请求目标IP地址对应的MAC地址的ARP request报文。</p>
 <div class="admonition attention">
 <p class="admonition-title">注意</p>
-<p>由于map数据结构的限制，相同ip的arp_buf长度仍为1，同学们可以自行设计数据结构实现不丢包。</p>
+<p>扩展功能：由于map数据结构的限制，相同ip的arp_buf长度仍为1，同学们可以自行设计数据结构实现不丢包。</p>
 </div>
 </section>
 <section id="id12">
