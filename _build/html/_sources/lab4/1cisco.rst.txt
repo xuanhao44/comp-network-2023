@@ -375,6 +375,11 @@ PC3       192.168.3.14          255.255.255.0
    Switch0(config)#exit
    Switch0#
 
+.. note:: 
+  Switch0(config-if)#switchport trunk allowed vlan 2,3
+
+  这条命令用于设置trunk端口的允许列表。如果没有设置允许列表，当只将端口设置成trunk模式（switchport mode trunk），即默认所有VLAN都能通过。
+  
 使用show running-config命令查看配置命令
 
 .. image:: conf-21.png

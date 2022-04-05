@@ -66,8 +66,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#trunk">1.1. 实验报告第2题是在配置trunk之前还是之后的结果？</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id1">1.2. 实验报告第3题填写的配置命令还是文字说明？</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">1.3. 实验报告第4题的端口指的是什么？</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">1.4. 实验思考题没有给出Trunk的允许列表</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">1.5. 第一道附加题没有给出Trunk的允许列表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pvid">1.4. 实验思考题没有给出PVID的值</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">1.5. 实验思考题没有给出Trunk的允许列表</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">1.6. 第一道附加题没有给出Trunk的允许列表</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lab2.html">2. Lab2 常见问题</a></li>
@@ -116,13 +117,17 @@
 <h2><span class="section-number">1.3. </span>实验报告第4题的端口指的是什么？<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
 <p>本题的端口指的是本实验中交换机使用到的端口，其他未使用的端口可以不写。</p>
 </section>
+<section id="pvid">
+<h2><span class="section-number">1.4. </span>实验思考题没有给出PVID的值<a class="headerlink" href="#pvid" title="永久链接至标题"></a></h2>
+<p>一般来说，如果没有明确给出PVID的值，那默认都属于VLAN1，即PVID=1。</p>
+</section>
 <section id="id3">
-<h2><span class="section-number">1.4. </span>实验思考题没有给出Trunk的允许列表<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
-<p>一般来说，trunk的本意是承载多个VLAN的数据帧，如果没有指出允许列表，那么在交换机上的画出的所有VLAN都能通过。比如，在本思考题中，trunk链路中，应该默认是VLAN2和VLAN3都能通过。</p>
+<h2><span class="section-number">1.5. </span>实验思考题没有给出Trunk的允许列表<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>一般来说，trunk的本意是承载多个VLAN的数据帧。在Cisco的设备中，如果没有指出允许列表，那么默认所有VLAN都能通过。</p>
 </section>
 <section id="id4">
-<h2><span class="section-number">1.5. </span>第一道附加题没有给出Trunk的允许列表<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
-<p>和上一道题是一样的，交换机图上画出有多少个vlan，trunk就默认能让多少个vlan通过。比如，在本题中，trunk端口应该默认VLAN2、VLAN3和VLAN4都能通过。</p>
+<h2><span class="section-number">1.6. </span>第一道附加题没有给出Trunk的允许列表<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<p>和上一道题是一样的。</p>
 </section>
 </section>
 

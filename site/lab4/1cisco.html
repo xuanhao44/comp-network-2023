@@ -437,6 +437,11 @@
 <span class="linenos">7</span>Switch0#
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>Switch0(config-if)#switchport trunk allowed vlan 2,3</p>
+<p>这条命令用于设置trunk端口的允许列表。如果没有设置允许列表，当只将端口设置成trunk模式（switchport mode trunk），即默认所有VLAN都能通过。</p>
+</div>
 <p>使用show running-config命令查看配置命令</p>
 <a class="reference internal image-reference" href="../_images/conf-21.png"><img alt="../_images/conf-21.png" src="../_images/conf-21.png" style="width: 344.8px; height: 450.40000000000003px;" /></a>
 <p>在SW1交换机下使用下列命令进行配置：</p>
