@@ -159,10 +159,10 @@
 <img alt="../_images/vscode4.png" src="../_images/vscode4.png" />
 <div class="admonition hint">
 <p class="admonition-title">提示</p>
-<p>在调试之前，必须修改include/config.h头文件中的NET_IF_IP宏定义，即需要自定义网卡的IP地址。该IP地址的网络号必须与你自己电脑中真实网卡的网络号一致（也就是和真实网卡处于同一个网段内）。</p>
-<p>注意：此处是 <strong>网络号</strong> 要和真实网卡一致，以确保它们处在同一个网段内， <strong>不是将自定义网卡（虚拟网卡）的IP地址设置成真实网卡的IP地址</strong> 。</p>
-</div>
+<p>协议栈的Eth、ARP、IP、ICMP协议实验提供了自测环境，该自测环境是自构建了一套读写离线数据包的驱动层，然后通过对比log和pcap文件来分析这些协议是否能收发。因此， <strong>在Eth、ARP、IP、ICMP协议实验中，不要修改config.h头文件中的NET_IF_IP和NET_IF_MAC</strong> 。</p>
+<p>但当我们做到UDP实验时，需要用到网络上真实的UDP调试工具与我们自构建的协议栈进行点对点通信，以此来测试整个网络协议栈是否能正常收发。我们的协议栈通过虚构了一张虚拟网卡，由虚拟网卡和真实网卡进行通信，这两张网卡的IP地址必须要不一样，但是要保证它们处于同一个网段内。因此， <strong>在UDP实验调试之前，必须修改include/config.h头文件中的NET_IF_IP宏定义</strong> ，即需要自定义网卡的IP地址。该IP地址的网络号必须与你自己电脑中真实网卡的网络号一致（也就是和真实网卡处于同一个网段内）。注意：此处是 <strong>网络号</strong> 要和真实网卡一致，以确保它们处在同一个网段内， <strong>不是将自定义网卡（虚拟网卡）的IP地址设置成真实网卡的IP地址</strong> 。</p>
 <img alt="../_images/vscode5.png" src="../_images/vscode5.png" />
+</div>
 </section>
 </section>
 
