@@ -64,7 +64,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#id8">4.1. ICMP数据报输入处理</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id9">4.2. 发送ICMP响应报文</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id10">4.3. ICMP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">4.4. 实验自测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">4.4. 实验自测</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gdb">4.4.1. GDB调试</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#id12">5. 实验提交</a></li>
@@ -233,6 +236,10 @@
 <p>接着，打开VSCode的终端，到build目录下，输入ctest -R icmp_test进行自测。</p>
 <img alt="../_images/cmake14.png" src="../_images/cmake14.png" />
 <p>如果提示有错，请参照eth协议自测的排除方法来找bug。</p>
+<section id="gdb">
+<h3><span class="section-number">4.4.1. </span>GDB调试<a class="headerlink" href="#gdb" title="永久链接至标题"></a></h3>
+<p>本实验支持使用GDB调试，请参考 <a class="reference internal" href="../appendix-b/1win.html"><span class="doc">Windows开发环境搭建</span></a> 中的“Windows下编译和调试”</p>
+</section>
 </section>
 </section>
 <section id="id12">

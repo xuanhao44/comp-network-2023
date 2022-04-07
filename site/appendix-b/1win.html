@@ -66,7 +66,11 @@
 <li class="toctree-l4"><a class="reference internal" href="#gcc">1.1.4. gcc</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">1.2. Windows下编译和调试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.2. Windows下编译和调试</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#etharpipicmp">1.2.1. Eth、ARP、IP或ICMP调试</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#main">1.2.2. main调试</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="2linux.html">2. Linux开发环境搭建</a></li>
@@ -153,28 +157,113 @@
 <a class="reference internal image-reference" href="../_images/vscode2.png"><img alt="../_images/vscode2.png" src="../_images/vscode2.png" style="width: 311.5px; height: 385.0px;" /></a>
 <p>首次配置会弹出选择编译工具的提示，选择带有GCC的选项。需要在安装tdm-gcc后才能找到GCC的选项，如果安装tdm-gcc后没有显示该选项，点击[Scan for kits] Search for compilers on this computer，搜索gcc（如果还是没有找到，建议重启电脑）。</p>
 <img alt="../_images/vscode3.png" src="../_images/vscode3.png" />
-<p>在配置好VSCode环境之后，即可使用CMake工具栏完成编译和调试操作。如果想要对main进行编译和调试，可以在main[main.exe]这一项点击右键，再点击“生成”进行编译。</p>
-<a class="reference internal image-reference" href="../_images/vscode1.png"><img alt="../_images/vscode1.png" src="../_images/vscode1.png" style="width: 314.5px; height: 371.0px;" /></a>
-<div class="admonition hint">
-<p class="admonition-title">提示</p>
-<p>不同的协议要运行相应的测试程序：</p>
-<ol class="arabic simple">
-<li><p>Eth协议：eth_in.exe和eth_out.exe</p></li>
-<li><p>ARP协议栈：arp_test.exe</p></li>
-<li><p>IP协议：ip_test.exe和ip_frag_test.exe</p></li>
-<li><p>ICMP协议：icmp_test.exe</p></li>
-<li><p>UDP协议：main.exe</p></li>
-</ol>
-<p>如果想要运行main.exe，那你必须先要完成UDP实验才能生成、调试。</p>
+<p>在配置好VSCode环境之后，即可使用CMake工具栏完成编译和调试操作。</p>
+<section id="etharpipicmp">
+<h3><span class="section-number">1.2.1. </span>Eth、ARP、IP或ICMP调试<a class="headerlink" href="#etharpipicmp" title="永久链接至标题"></a></h3>
+<p>协议栈的Eth、ARP、IP、ICMP协议实验支持使用GDB调试，调试步骤参考如下：</p>
+<p><strong>Step1：</strong> 点击VSCode左侧的“运行和调试（run）”工具栏，单击“运行和调试”按钮，选择“C++（Windows）”。</p>
+<img alt="../_images/gdb-1.png" src="../_images/gdb-1.png" />
+<p><strong>Step2：</strong> 在弹出的对话框选择“C/C++:cl.exe 生成和调试活动文件”。</p>
+<img alt="../_images/gdb-2.png" src="../_images/gdb-2.png" />
+<p>提示找不到**.exe文件，继续打开“launch.json”文件。</p>
+<img alt="../_images/gdb-3.png" src="../_images/gdb-3.png" />
+<p id="launch-json"><strong>Step3：</strong> 修改“launch.json”文件。注意，你需要修改“program”、“args”和“miDebuggerPath”这三项。</p>
+<img alt="../_images/gdb-4.png" src="../_images/gdb-4.png" />
+<p>其中，“miDebuggerPath”是你安装TDM-GCC的路径，请填写你自己的安装路径。</p>
+<p>“program”和“args”则要根据你当前需要调试的实验进行修改。</p>
+<p><strong>eth_in</strong> ：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">         </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}\\build\\eth_in.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">2</span><span class="w">         </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;testing\\data\\eth_in&quot;</span><span class="p">],</span><span class="w"></span>
+</pre></div>
 </div>
-<p>编译完成后，可以在代码行前增加断点，然后选择“调试”，接下来，就可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。</p>
+<p><strong>eth_out</strong> ：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">         </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}\\build\\eth_out.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">2</span><span class="w">         </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;testing\\data\\eth_out&quot;</span><span class="p">],</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>arp_test</strong> ：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">         </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}\\build\\arp_test.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">2</span><span class="w">         </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;testing\\data\\arp_test&quot;</span><span class="p">],</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>ip_test</strong> ：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">         </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}\\build\\ip_test.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">2</span><span class="w">         </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;testing\\data\\ip_test&quot;</span><span class="p">],</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>ip_frag_test</strong> ：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">         </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}\\build\\ip_frag_test.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">2</span><span class="w">         </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;testing\\data\\ip_frag_test&quot;</span><span class="p">],</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>icmp_test</strong> ：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">         </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}\\build\\icmp_test.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">2</span><span class="w">         </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;testing\\data\\icmp_test&quot;</span><span class="p">],</span><span class="w"></span>
+</pre></div>
+</div>
+<p>以下是 <strong>eth_in</strong> 调试的完整的launch.json，大家可以参考下面的来修改：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gcc.exe build and debug active file&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cppdbg&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">            </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">            </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}\\build\\eth_in.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">            </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;testing\\data\\eth_in&quot;</span><span class="p">],</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">            </span><span class="nt">&quot;stopAtEntry&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">            </span><span class="nt">&quot;cwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">            </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">            </span><span class="nt">&quot;externalConsole&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">            </span><span class="nt">&quot;MIMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gdb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">            </span><span class="nt">&quot;miDebuggerPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\TDM-GCC-64\\bin\\gdb.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">            </span><span class="nt">&quot;setupCommands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">            </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Enable pretty-printing for gdb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">                    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-enable-pretty-printing&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">                    </span><span class="nt">&quot;ignoreFailures&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">            </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">            </span><span class="p">],</span><span class="w"></span>
+<span class="linenos">23</span><span class="w">            </span><span class="nt">&quot;preLaunchTask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build&quot;</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="linenos">26</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Step4：</strong> 修改.\vscode\tasks.json文件，使得调试前能自动编译。</p>
+<img alt="../_images/gdb-5.png" src="../_images/gdb-5.png" />
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">     </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">     </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">             </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">                     </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">                     </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">                     </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cd ${workspaceFolder}\\build; cmake --build .&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">             </span><span class="p">}</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">     </span><span class="p">]</span><span class="w"></span>
+<span class="linenos">10</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Step4：</strong> 再次VSCode左侧的“运行和调试（run）”工具栏，单击“运行和调试”按钮，在代码中打上断点。比如我们想要调试ethernet_in函数，可以在该函数中打上断点，然后选择“调试”，接下来，就可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。</p>
+<img alt="../_images/gdb-6.png" src="../_images/gdb-6.png" />
+<div class="admonition important">
+<p class="admonition-title">重要</p>
+<p>当你切换成其他测试程序进行调试， <strong>请务必记得要修改“launch.json”文件的“program”和“args”这两项参数</strong> ，修改方法参考上述步骤：<a class="reference internal" href="#launch-json">launch.json说明</a></p>
+</div>
+</section>
+<section id="main">
+<h3><span class="section-number">1.2.2. </span>main调试<a class="headerlink" href="#main" title="永久链接至标题"></a></h3>
+<p>当我们做到UDP实验时，需要使用main程序进行调试。main程序的调试方法和上述的Eth、ARP、IP或ICMP程序的调试方法是不一样的。如果想要对main进行编译和调试，可以在main[main.exe]这一项点击右键，再点击“生成”进行编译。</p>
+<a class="reference internal image-reference" href="../_images/vscode1.png"><img alt="../_images/vscode1.png" src="../_images/vscode1.png" style="width: 314.5px; height: 371.0px;" /></a>
+<p>编译完成后，可以在代码行前增加断点，然后选择“调试”，接下来，也可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。</p>
 <img alt="../_images/vscode4.png" src="../_images/vscode4.png" />
 <div class="admonition hint">
 <p class="admonition-title">提示</p>
 <p>协议栈的Eth、ARP、IP、ICMP协议实验提供了自测环境，该自测环境是自构建了一套读写离线数据包的驱动层，然后通过对比log和pcap文件来分析这些协议是否能收发。因此， <strong>在Eth、ARP、IP、ICMP协议实验中，不要修改config.h头文件中的NET_IF_IP和NET_IF_MAC</strong> 。</p>
-<p>但当我们做到UDP实验时，要用到网络上真实的UDP调试工具与我们自构建的协议栈进行点对点通信，以此来测试整个网络协议栈是否能正常收发。我们的协议栈通过虚构了一张虚拟网卡，由虚拟网卡和真实网卡进行通信，这两张网卡的IP地址必须要不一样，但是要保证它们处于同一个网段内。因此， <strong>在UDP实验调试之前，必须修改include/config.h头文件中的NET_IF_IP宏定义</strong> ，即需要自定义网卡的IP地址。该IP地址的网络号必须与你自己电脑中真实网卡的网络号一致（也就是和真实网卡处于同一个网段内）。注意：此处是 <strong>网络号</strong> 要和真实网卡一致，以确保它们处在同一个网段内， <strong>不是将自定义网卡（虚拟网卡）的IP地址设置成真实网卡的IP地址</strong> 。</p>
+<p>但当我们做到UDP实验时，需要用到网络上真实的UDP调试工具与我们自构建的协议栈进行点对点通信，以此来测试整个网络协议栈是否能正常收发。我们的协议栈通过虚构了一张虚拟网卡，由虚拟网卡和真实网卡进行通信，这两张网卡的IP地址必须要不一样，但是要保证它们处于同一个网段内。因此， <strong>在UDP实验调试之前，必须修改include/config.h头文件中的NET_IF_IP宏定义</strong> ，即需要自定义网卡的IP地址。该IP地址的网络号必须与你自己电脑中真实网卡的网络号一致（也就是和真实网卡处于同一个网段内）。注意：此处是 <strong>网络号</strong> 要和真实网卡一致，以确保它们处在同一个网段内， <strong>不是将自定义网卡（虚拟网卡）的IP地址设置成真实网卡的IP地址</strong> 。</p>
 <img alt="../_images/vscode5.png" src="../_images/vscode5.png" />
 </div>
+</section>
 </section>
 </section>
 

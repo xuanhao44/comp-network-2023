@@ -67,12 +67,150 @@ Windows下编译和调试
 
 .. image:: vscode3.png
 
-在配置好VSCode环境之后，即可使用CMake工具栏完成编译和调试操作。如果想要对main进行编译和调试，可以在main[main.exe]这一项点击右键，再点击“生成”进行编译。
+在配置好VSCode环境之后，即可使用CMake工具栏完成编译和调试操作。
+
+Eth、ARP、IP或ICMP调试
+------------------------------ 
+协议栈的Eth、ARP、IP、ICMP协议实验支持使用GDB调试，调试步骤参考如下：
+
+**Step1：** 点击VSCode左侧的“运行和调试（run）”工具栏，单击“运行和调试”按钮，选择“C++（Windows）”。
+
+.. image:: gdb-1.png
+
+**Step2：** 在弹出的对话框选择“C/C++:cl.exe 生成和调试活动文件”。
+
+.. image:: gdb-2.png
+
+提示找不到**.exe文件，继续打开“launch.json”文件。
+
+.. image:: gdb-3.png
+
+.. _launch.json说明:
+
+**Step3：** 修改“launch.json”文件。注意，你需要修改“program”、“args”和“miDebuggerPath”这三项。
+
+.. image:: gdb-4.png
+
+其中，“miDebuggerPath”是你安装TDM-GCC的路径，请填写你自己的安装路径。
+
+“program”和“args”则要根据你当前需要调试的实验进行修改。
+
+**eth_in** ：
+
+.. code-block:: json
+   :linenos:
+
+            "program": "${workspaceFolder}\\build\\eth_in.exe",
+            "args": ["testing\\data\\eth_in"],
+
+**eth_out** ：
+
+.. code-block:: json
+   :linenos:
+
+            "program": "${workspaceFolder}\\build\\eth_out.exe",
+            "args": ["testing\\data\\eth_out"],
+
+**arp_test** ：
+
+.. code-block:: json
+   :linenos:
+
+            "program": "${workspaceFolder}\\build\\arp_test.exe",
+            "args": ["testing\\data\\arp_test"],
+
+**ip_test** ：
+
+.. code-block:: json
+   :linenos:
+
+            "program": "${workspaceFolder}\\build\\ip_test.exe",
+            "args": ["testing\\data\\ip_test"],
+
+**ip_frag_test** ：
+
+.. code-block:: json
+   :linenos:
+
+            "program": "${workspaceFolder}\\build\\ip_frag_test.exe",
+            "args": ["testing\\data\\ip_frag_test"],
+
+**icmp_test** ：
+
+.. code-block:: json
+   :linenos:
+
+            "program": "${workspaceFolder}\\build\\icmp_test.exe",
+            "args": ["testing\\data\\icmp_test"],
+
+以下是 **eth_in** 调试的完整的launch.json，大家可以参考下面的来修改：
+
+
+.. code-block:: json
+   :linenos:
+
+   {
+       "version": "0.2.0",
+       "configurations": [
+           {
+               "name": "gcc.exe build and debug active file",
+               "type": "cppdbg",
+               "request": "launch",
+               "program": "${workspaceFolder}\\build\\eth_in.exe",
+               "args": ["testing\\data\\eth_in"],
+               "stopAtEntry": false,
+               "cwd": "${workspaceFolder}",
+               "environment": [],
+               "externalConsole": false,
+               "MIMode": "gdb",
+               "miDebuggerPath": "C:\\TDM-GCC-64\\bin\\gdb.exe",
+               "setupCommands": [
+               {
+                       "description": "Enable pretty-printing for gdb",
+                       "text": "-enable-pretty-printing",
+                       "ignoreFailures": true
+               }
+               ],
+               "preLaunchTask": "build"
+           }
+       ]
+   }
+    
+**Step4：** 修改.\\vscode\\tasks.json文件，使得调试前能自动编译。
+
+.. image:: gdb-5.png
+
+.. code-block:: json
+   :linenos:
+
+    {
+        "version": "2.0.0",
+        "tasks": [
+                {
+                        "label": "build",
+                        "type": "shell",
+                        "command": "cd ${workspaceFolder}\\build; cmake --build .",
+                }
+        ]
+    }
+
+**Step4：** 再次VSCode左侧的“运行和调试（run）”工具栏，单击“运行和调试”按钮，在代码中打上断点。比如我们想要调试ethernet_in函数，可以在该函数中打上断点，然后选择“调试”，接下来，就可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。
+
+.. image:: gdb-6.png
+
+.. important:: 
+   当你切换成其他测试程序进行调试， **请务必记得要修改“launch.json”文件的“program”和“args”这两项参数** ，修改方法参考上述步骤：launch.json说明_
+
+
+main调试
+------------------------------ 
+
+当我们做到UDP实验时，需要使用main程序进行调试。main程序的调试方法和上述的Eth、ARP、IP或ICMP程序的调试方法是不一样的。如果想要对main进行编译和调试，可以在main[main.exe]这一项点击右键，再点击“生成”进行编译。
 
 .. image:: vscode1.png
    :scale: 50 %
 
-编译完成后，可以在代码行前增加断点，然后选择“调试”，接下来，就可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。
+编译完成后，可以在代码行前增加断点，然后选择“调试”，接下来，也可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。
 
 .. image:: vscode4.png
 
