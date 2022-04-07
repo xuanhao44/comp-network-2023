@@ -163,11 +163,11 @@
 <p>协议栈的Eth、ARP、IP、ICMP协议实验支持使用GDB调试，调试步骤参考如下：</p>
 <p><strong>Step1：</strong> 点击VSCode左侧的“运行和调试（run）”工具栏，单击“运行和调试”按钮，选择“C++（Windows）”。</p>
 <img alt="../_images/gdb-1.png" src="../_images/gdb-1.png" />
-<p><strong>Step2：</strong> 在弹出的对话框选择“C/C++:cl.exe 生成和调试活动文件”。</p>
+<p><strong>Step2：</strong> 在弹出的对话框选择“C/C++:cl.exe 生成和调试活动文件”。（如果没有弹出该对话框，可以忽略这一步骤）</p>
 <img alt="../_images/gdb-2.png" src="../_images/gdb-2.png" />
 <p>提示找不到**.exe文件，继续打开“launch.json”文件。</p>
 <img alt="../_images/gdb-3.png" src="../_images/gdb-3.png" />
-<p id="launch-json"><strong>Step3：</strong> 修改“launch.json”文件。注意，你需要修改“program”、“args”和“miDebuggerPath”这三项。</p>
+<p id="launch-json"><strong>Step3：</strong> 修改“launch.json”文件。注意，你需要修改“program”、“args”和“miDebuggerPath”这三项。（如果.vscode目录下没有生成“launch.json”文件，你也可以自行在.vscode目录下新建“launch.json”文件）</p>
 <img alt="../_images/gdb-4.png" src="../_images/gdb-4.png" />
 <p>其中，“miDebuggerPath”是你安装TDM-GCC的路径，请填写你自己的安装路径。</p>
 <p>“program”和“args”则要根据你当前需要调试的实验进行修改。</p>
@@ -230,7 +230,7 @@
 <span class="linenos">26</span><span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
-<p><strong>Step4：</strong> 修改.\vscode\tasks.json文件，使得调试前能自动编译。</p>
+<p><strong>Step4：</strong> 修改.vscode\tasks.json文件，使得调试前能自动编译。（如果.vscode目录下没有生成“tasks.json”文件，你也可以自行在.vscode目录下新建“tasks.json”文件）</p>
 <img alt="../_images/gdb-5.png" src="../_images/gdb-5.png" />
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="linenos"> 2</span><span class="w">     </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span><span class="w"></span>

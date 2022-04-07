@@ -77,7 +77,7 @@ Eth、ARP、IP或ICMP调试
 
 .. image:: gdb-1.png
 
-**Step2：** 在弹出的对话框选择“C/C++:cl.exe 生成和调试活动文件”。
+**Step2：** 在弹出的对话框选择“C/C++:cl.exe 生成和调试活动文件”。（如果没有弹出该对话框，可以忽略这一步骤）
 
 .. image:: gdb-2.png
 
@@ -87,7 +87,7 @@ Eth、ARP、IP或ICMP调试
 
 .. _launch.json说明:
 
-**Step3：** 修改“launch.json”文件。注意，你需要修改“program”、“args”和“miDebuggerPath”这三项。
+**Step3：** 修改“launch.json”文件。注意，你需要修改“program”、“args”和“miDebuggerPath”这三项。（如果.vscode目录下没有生成“launch.json”文件，你也可以自行在.vscode目录下新建“launch.json”文件）
 
 .. image:: gdb-4.png
 
@@ -176,7 +176,7 @@ Eth、ARP、IP或ICMP调试
        ]
    }
     
-**Step4：** 修改.\\vscode\\tasks.json文件，使得调试前能自动编译。
+**Step4：** 修改.vscode\\tasks.json文件，使得调试前能自动编译。（如果.vscode目录下没有生成“tasks.json”文件，你也可以自行在.vscode目录下新建“tasks.json”文件）
 
 .. image:: gdb-5.png
 
