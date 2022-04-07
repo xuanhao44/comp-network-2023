@@ -207,7 +207,9 @@ ARP协议自测，处理正确的结果显示如下图：
 
 如果提示有错，请参照eth协议自测的排除方法来找bug。
 
-
+.. note:: 
+  如果提示.pcap文件不一致，可以用wireshark软件打开查看.pcap文件。wireshark用法可参考  :doc:`/appendix-a/index` 。
+  
 GDB调试
 -------------------------------
 

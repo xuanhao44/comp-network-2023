@@ -348,6 +348,9 @@ ethernet_in()函数测试
 
 .. image:: cmake5.png
 
+.. note:: 
+  如果提示.pcap文件不一致，可以用wireshark软件打开查看.pcap文件。wireshark用法可参考  :doc:`/appendix-a/index` 。
+
 ethernet_out()函数测试
 -------------------------------
 点击CMake工具栏，找到eth_out[eth_out.exe]，右键，选择“生成”进行编译。
