@@ -73,7 +73,7 @@ Eth、ARP、IP或ICMP调试
 ------------------------------ 
 协议栈的Eth、ARP、IP、ICMP协议实验支持使用GDB调试，调试步骤参考如下：
 
-**Step1：** 点击VSCode左侧的“运行和调试（run）”工具栏，单击“运行和调试”按钮，选择“C++（Windows）”。
+**Step1：** 首先在VSCode工程目录下打开某一个.c文件，然后点击VSCode左侧的“运行和调试（run）”工具栏，单击“运行和调试”按钮，选择“C++（Windows）”。
 
 .. image:: gdb-1.png
 
