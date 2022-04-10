@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Debian搭建邮件服务器 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script src="../_static/js/baidu-tongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="3. socket编程简介" href="3socket.html" />
+    <link rel="prev" title="1. Ubuntu搭建邮件服务器" href="1ubuntu.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab1：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab4：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab8：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">附录 D：邮件客户端环境搭建</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1ubuntu.html">1. Ubuntu搭建邮件服务器</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Debian搭建邮件服务器</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.1. 准备工作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#postfixsasl">2.2. 配置postfix和sasl认证</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dovecot">2.3. 安装dovecot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#thunderbird">2.4. Thunderbird与用户配置</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3socket.html">3. socket编程简介</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-g/index.html">常见问题</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络实验指导书 - 2022春季 | 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">附录 D：邮件客户端环境搭建</a> &raquo;</li>
+      <li><span class="section-number">2. </span>Debian搭建邮件服务器</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/appendix-d/2debian.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="debian">
+<h1><span class="section-number">2. </span>Debian搭建邮件服务器<a class="headerlink" href="#debian" title="永久链接至标题"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="id1">
+<h2><span class="section-number">2.1. </span>准备工作<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>你需要提前安装好Debian。下面将列出配置过程。（注：以下$开头的shell命令表示在一般用户下运行，而#开头的则表示要在root用户下运行）</p>
+</section>
+<section id="postfixsasl">
+<h2><span class="section-number">2.2. </span>配置postfix和sasl认证<a class="headerlink" href="#postfixsasl" title="永久链接至标题"></a></h2>
+<p>参考 <a class="reference external" href="https://blog.csdn.net/zubin006/article/details/2311619">https://blog.csdn.net/zubin006/article/details/2311619</a></p>
+<p>安装postfix和cyrus-sasl软件包</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp"># </span>apt install sasl2-bin libsasl2-modules postfix
+</pre></div>
+</div>
+<p>安装postfix时会出现向导，只需将所有选项设置为默认即可。
+安装后，修改/etc/default/saslauthd，设定START=yes：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">This needs to be uncommented before saslauthd will be run automatically</span>
+<span class="linenos">2</span><span class="go">START=yes</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="gp"># </span>You must specify the authentication mechanisms you wish to use.
+<span class="linenos">5</span><span class="go">…</span>
+</pre></div>
+</div>
+<p>修改/etc/postfix/sasl/smtpd.conf，设定postfix使用saslauthd：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># mkdir -p /etc/postfix/sasl</span>
+<span class="linenos">2</span><span class="c1"># echo &quot;pwcheck_method: saslauthd&quot; &gt; /etc/postfix/sasl/smtpd.conf</span>
+</pre></div>
+</div>
+<p>将postfix加入sasl群组中：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># /usr/sbin/addgroup postfix sasl</span>
+</pre></div>
+</div>
+<p>在/etc/postfix/main.cf末尾添加这些配置（直接用vi或者nano修改文件），使其使用 SMTP AUTH 及 SASL Authenticate：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nv">smtpd_sasl_auth_enable</span> <span class="o">=</span> yes
+<span class="linenos">2</span><span class="nv">broken_sasl_auth_clients</span> <span class="o">=</span> yes
+<span class="linenos">3</span><span class="nv">smtpd_sasl_security_options</span> <span class="o">=</span> noanonymous
+<span class="linenos">4</span><span class="nv">smtpd_recipient_restrictions</span> <span class="o">=</span> permit_sasl_authenticated, permit_mynetworks, check_relay_domains,    reject_unauth_destination
+<span class="linenos">5</span><span class="nv">smtpd_client_restrictions</span> <span class="o">=</span> permit_sasl_authenticated
+</pre></div>
+</div>
+<p>打开/etc/postfix/master.cf，让postfix不要以chroot启动：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># service type  private unpriv  chroot  wakeup  maxproc command + args</span>
+<span class="linenos">2</span><span class="c1">#               (yes)   (yes)   (yes)   (never) (100)</span>
+<span class="linenos">3</span><span class="c1"># ==========================================================================</span>
+<span class="linenos">4</span>smtp      inet  n       -       n       -       -       smtpd -v
+</pre></div>
+</div>
+<p>重启SASL Daemon：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">$ </span>/etc/init.d/saslauthd restart
+</pre></div>
+</div>
+<p>跑起来后，可以用</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp"># </span>/usr/sbin/testsaslauthd -u username -p password
+</pre></div>
+</div>
+<p>来测试saslauthd是否正常运作。参数输入的是登录所用的用户名和密码。
+重新启动postfix：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">$ </span>/etc/init.d/postfix restart
+</pre></div>
+</div>
+</section>
+<section id="dovecot">
+<h2><span class="section-number">2.3. </span>安装dovecot<a class="headerlink" href="#dovecot" title="永久链接至标题"></a></h2>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">apt install dovecot-core dovecot-pop3d</span>
+</pre></div>
+</div>
+</section>
+<section id="thunderbird">
+<h2><span class="section-number">2.4. </span>Thunderbird与用户配置<a class="headerlink" href="#thunderbird" title="永久链接至标题"></a></h2>
+<p>Thunderbird是一个流行的开源邮件客户端。本实验中，我们可以用它来查看或收发邮件。
+首先，安装Thunderbird：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp"># </span>apt install thunderbird
+</pre></div>
+</div>
+<p>安装好后，启动Thunderbird。输入你的名字、邮箱地址和口令。名字可以随便取，邮箱地址的格式是：系统用户名&#64;主机名。口令是登录口令。</p>
+<img alt="../_images/mail1.png" src="../_images/mail1.png" />
+<p>输入完成后，不要着急点Continue，而是点击Configure manually，需要按如图所示修改一些信息。这里的用户名即你的登录用户名，千万不要用邮箱地址，否则是无法正常收发邮件的。</p>
+<img alt="../_images/mail2.png" src="../_images/mail2.png" />
+<p>输入完成后，点击Re-test，如果信息无误，则会在上方现实绿色的框。</p>
+<img alt="../_images/mail3.png" src="../_images/mail3.png" />
+<p>点击Done，之后Thunderbird会出现一个警告对话框，提醒你邮件服务器没有使用加密，会不安全。本次实验的交互都是明文传输，自然是不加密的，所以选中下面的“I understand the risks“后点击Confirm即可。</p>
+<img alt="../_images/mail4.png" src="../_images/mail4.png" />
+<p>至此，Thunderbird配置大功告成。</p>
+<p>配置Thunderbird后，使用它进行收发邮件。发件人和收件人均设置为当前账户邮箱地址即可，或者也可以新建系统用户，发件人和收件人使用不同的用户的邮箱地址。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1ubuntu.html" class="btn btn-neutral float-left" title="1. Ubuntu搭建邮件服务器" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="3socket.html" class="btn btn-neutral float-right" title="3. socket编程简介" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

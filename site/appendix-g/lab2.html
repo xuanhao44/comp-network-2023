@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Lab2 常见问题 &mdash; 计算机网络实验指导书 - 2022春季 | 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script src="../_static/js/baidu-tongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="1. Lab1 常见问题" href="lab1.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab1：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab4：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab8：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：邮件客户端环境搭建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：致谢</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">常见问题</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="lab1.html">1. Lab1 常见问题</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Lab2 常见问题</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cmaketdm-gcc-vscodecmake">2.1. 安装完CMAKE和TDM GCC后，VSCode的CMAKE上找不到项目的可执行程序？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake">2.2. CMake报错</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ctest">2.3. ctest运行报错</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络实验指导书 - 2022春季 | 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">常见问题</a> &raquo;</li>
+      <li><span class="section-number">2. </span>Lab2 常见问题</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/appendix-g/lab2.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="lab2">
+<h1><span class="section-number">2. </span>Lab2 常见问题<a class="headerlink" href="#lab2" title="永久链接至标题"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<section id="cmaketdm-gcc-vscodecmake">
+<h2><span class="section-number">2.1. </span>安装完CMAKE和TDM GCC后，VSCode的CMAKE上找不到项目的可执行程序？<a class="headerlink" href="#cmaketdm-gcc-vscodecmake" title="永久链接至标题"></a></h2>
+<p>如下图所示，找不到项目的可执行程序。</p>
+<a class="reference internal image-reference" href="../_images/lab2.png"><img alt="../_images/lab2.png" src="../_images/lab2.png" style="width: 235.0px; height: 291.0px;" /></a>
+<p>首先，你需要先查询 “C:\Users\你自己电脑的用户名\AppData\Local\CMakeTools\CMakeTools-tools-kits.json”文件，该文件正常的配置应该如下图所示。</p>
+<img alt="../_images/lab2-2.png" src="../_images/lab2-2.png" />
+<p>如果你电脑中该文件的gcc不一样，比如是C:\TDM-GCC-64\bin\gcc.exe。你可以参考以下步骤来修改：</p>
+<p>单击VSCode的左下角齿轮图标，选择“设置”。</p>
+<img alt="../_images/lab2-6.png" src="../_images/lab2-6.png" />
+<p>在弹出的窗口中输入“cmake generator”，然后在“Cmake: Generator 要使用的CMake生成器”中输入“MinGW Makefiles”，将Cmake生成器强制指定为MinGW Makefiles。</p>
+<img alt="../_images/lab2-7.png" src="../_images/lab2-7.png" />
+<p>点击VSCode最下方的“GCC图标”，重新扫描[Scan for kits]，重新选择GCC，应该选择的是C:\TDM-GCC-64\bin\x86_64-w64-mingw32-gcc.exe。</p>
+<img alt="../_images/lab2-4.png" src="../_images/lab2-4.png" />
+<img alt="../_images/lab2-3.png" src="../_images/lab2-3.png" />
+<p>如果还不行，删掉本工程目录下的.vscode\settings.json文件，再重新扫描[Scan for kits]。</p>
+</section>
+<section id="cmake">
+<h2><span class="section-number">2.2. </span>CMake报错<a class="headerlink" href="#cmake" title="永久链接至标题"></a></h2>
+<p>CMake报错的情况以下几种情况：</p>
+<p>1、首先参考上一题的解决方案，先确保GCC是选对了。</p>
+<p>2、检测一下你的工程目录是不是实验包的根目录。</p>
+<p>正常的VSCode工程目录应该是这样的：</p>
+<a class="reference internal image-reference" href="../_images/vscode21.png"><img alt="../_images/vscode21.png" src="../_images/vscode21.png" style="width: 311.5px; height: 385.0px;" /></a>
+<p>下图的工程目录是不对的：</p>
+<img alt="../_images/lab2-8.png" src="../_images/lab2-8.png" />
+<p>同学们可以自行检查。</p>
+</section>
+<section id="ctest">
+<h2><span class="section-number">2.3. </span>ctest运行报错<a class="headerlink" href="#ctest" title="永久链接至标题"></a></h2>
+<p>如果出现下图的情况，一般是代码有段错误了，可以用GDB跟踪调试。</p>
+<img alt="../_images/lab2-9.png" src="../_images/lab2-9.png" />
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lab1.html" class="btn btn-neutral float-left" title="1. Lab1 常见问题" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2022, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

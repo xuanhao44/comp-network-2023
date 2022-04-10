@@ -85,4 +85,5 @@
    appendix-d/index
    appendix-e/index
    appendix-f/index
+   appendix-g/index
    

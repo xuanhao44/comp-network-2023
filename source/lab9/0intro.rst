@@ -8,9 +8,9 @@
 =====================
 本实验中有两个任务。
 
-第一个任务是编写一个简单的邮件发送客户端，将邮件发送给任意收件人。客户端需要连接到邮件发送服务器，使用SMTP协议进行交互。发送邮件已有许多现成库，但本次实验中不允许使用第三方库直接发送邮件，因为它隐藏了邮件发送客户端与邮件发送服务器的交互细节。
+第一个任务是编写一个简单的邮件发送客户端，将邮件发送给任意收件人。客户端需要连接到邮件发送服务器，使用SMTP协议进行交互。发送邮件已有许多现成库，但 **本次实验中不允许使用第三方库直接发送邮件** ，因为它隐藏了邮件发送客户端与邮件发送服务器的交互细节。
 
-第二个任务是编写一个简单的邮件接收客户端，获取你接收到的邮件。客户端需要连接到邮件接收服务器，使用POP3协议进行交互。同样，交互细节需自行编程处理，不可直接调用第三方库接收邮件。
+第二个任务是编写一个简单的邮件接收客户端，获取你接收到的邮件。客户端需要连接到邮件接收服务器，使用POP3协议进行交互。同样，交互细节需自行编程处理， **不可直接调用第三方库接收邮件** 。
 
 
 实验原理
@@ -179,6 +179,7 @@ QUIT<CR><LF>	                       结束与POP3服务器的通信。
    S: +OK Logging out
 
 可以看出，会话步骤如下：
+
 1) 服务器发送欢迎消息。
 2) 客户端输入用户名和密码进行认证，如果正确，服务器会返回成功信息。
 3) 认证成功后，客户端可以输入一系列命令获取信息，如STAT、LIST、RETR、DELE等。
@@ -317,178 +318,183 @@ multipart     mixed, alternative, parallel, digest      多种类型的消息
 
 本地环境搭建
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-为了防止频繁使用网络邮件提供商而被封号，可以搭建本地服务器，在上面测试无误后再用网络邮件提供商。现今有许多流行的开源邮件服务器软件，本次实验中用到的是Postfix和Dovecot。实验已经提供好了配置好的虚拟机文件，地址：xxx，用户名：debian，密码：haha；root用户密码：hitsz。
+.. important:: 
+  **为了防止频繁使用网络邮件提供商而被封号，可以搭建本地服务器，在上面测试无误后再用网络邮件提供商。** 
 
-动手能力强的同学也可以尝试自己配置，下面将列出配置过程，所使用的系统为Debian。（注：以下$开头的shell命令表示在一般用户下运行，而#开头的则表示要在root用户下运行）
+本实验可参考 :doc:`/appendix-d/index` 来搭建本地邮件服务器。由于本地邮件服务器只用于测试本实验的实验代码，可通过自己给自己发送邮件的方式来测试邮件客户端是否能正常运行，因此，本地邮件服务器可以不设置DNS。当你编写的邮件客户端能够给本地邮件服务器发送/获取邮件，你就可以尝试给Gmail、QQ、163等网络邮箱发送或获取邮件了。
 
-配置postfix和sasl认证
------------------------------- 
+telnet命令自测
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+可以使用telnet与SMTP和POP3服务器连接，手动输入命令与服务器交互，掌握SMTP和POP协议的交互过程。
 
-参考https://blog.csdn.net/zubin006/article/details/2311619
+telnet命令测试准备工作
+---------------------------------
+在测试之前，请先登录网络邮箱，开启POP3/SMTP服务。
 
-安装postfix和cyrus-sasl软件包
+.. image:: lab-1.png
 
-.. code-block:: console
-   :emphasize-lines: 1
-   :linenos:
-
-   # apt install sasl2-bin libsasl2-modules postfix
-
-安装postfix时会出现向导，只需将所有选项设置为默认即可。
-安装后，修改/etc/default/saslauthd，设定START=yes：
+在telnet与SMTP交互过程中，你需要提前准备好 **base64编码的邮件用户名和邮件授权码** 。获取一个字符串的base64编码的方法为：
 
 .. code-block:: console
-   :emphasize-lines: 1-4
-   :linenos:
-
-   This needs to be uncommented before saslauthd will be run automatically
-   START=yes
-   
-   # You must specify the authentication mechanisms you wish to use.
-   …
-
-修改/etc/postfix/sasl/smtpd.conf，设定postfix使用saslauthd：
-
-.. code-block:: sh
-   :emphasize-lines: 1-2
-   :linenos:
-
-   # mkdir -p /etc/postfix/sasl
-   # echo "pwcheck_method: saslauthd" > /etc/postfix/sasl/smtpd.conf
-
-将postfix加入sasl群组中：
-
-.. code-block:: sh
-   :emphasize-lines: 1
-   :linenos:
-
-   # /usr/sbin/addgroup postfix sasl
-
-在/etc/postfix/main.cf末尾添加这些配置（直接用vi或者nano修改文件），使其使用 SMTP AUTH 及 SASL Authenticate：
-
-.. code-block:: sh
-   :emphasize-lines: 1-5
-   :linenos:
-
-   smtpd_sasl_auth_enable = yes
-   broken_sasl_auth_clients = yes
-   smtpd_sasl_security_options = noanonymous
-   smtpd_recipient_restrictions = permit_sasl_authenticated, permit_mynetworks, check_relay_domains,    reject_unauth_destination
-   smtpd_client_restrictions = permit_sasl_authenticated
-
-打开/etc/postfix/master.cf，让postfix不要以chroot启动：
-
-.. code-block:: sh
-   :linenos:
-   :emphasize-lines: 1-4
-
-   # service type  private unpriv  chroot  wakeup  maxproc command + args 
-   #               (yes)   (yes)   (yes)   (never) (100) 
-   # ========================================================================== 
-   smtp      inet  n       -       n       -       -       smtpd -v
-
-重启SASL Daemon：
-
-.. code-block:: console
-   :emphasize-lines: 1
-   :linenos:
-
-   $ /etc/init.d/saslauthd restart
-
-跑起来后，可以用
-
-.. code-block:: console
-   :emphasize-lines: 1
-   :linenos:
-
-   # /usr/sbin/testsaslauthd -u username -p password
-
-来测试saslauthd是否正常运作。参数输入的是登录所用的用户名和密码。
-重新启动postfix：
-
-.. code-block:: console
-   :emphasize-lines: 1
-   :linenos:
-
-   $ /etc/init.d/postfix restart
-
-安装dovecot
------------------------------- 
-
-.. code-block:: console
-   :emphasize-lines: 1
-   :linenos:
-
-   apt install dovecot-core dovecot-pop3d
-
-Thunderbird与用户配置
------------------------------- 
-
-Thunderbird是一个流行的开源邮件客户端。本实验中，我们可以用它来查看或收发邮件。
-首先，安装Thunderbird：
-
-.. code-block:: console
-   :emphasize-lines: 1
-   :linenos:
-
-   # apt install thunderbird
-
-安装好后，启动Thunderbird。输入你的名字、邮箱地址和口令。名字可以随便取，邮箱地址的格式是：系统用户名@主机名。口令是登录口令。
-
-.. image:: mail1.png
-
-输入完成后，不要着急点Continue，而是点击Configure manually，需要按如图所示修改一些信息。这里的用户名即你的登录用户名，千万不要用邮箱地址，否则是无法正常收发邮件的。
-
-.. image:: mail2.png
-
-输入完成后，点击Re-test，如果信息无误，则会在上方现实绿色的框。
-
-.. image:: mail3.png
-
-点击Done，之后Thunderbird会出现一个警告对话框，提醒你邮件服务器没有使用加密，会不安全。本次实验的交互都是明文传输，自然是不加密的，所以选中下面的“I understand the risks“后点击Confirm即可。
-
-.. image:: mail4.png
-
-至此，Thunderbird配置大功告成。
-
-环境测试
------------------------------- 
-可以使用telnet与SMTP和POP3服务器连接，手动输入命令与服务器交互，测试其正确性。使用的命令可参考指导书实验原理部分。或者，配置Thunderbird后，使用它进行收发邮件。发件人和收件人均设置为当前账户邮箱地址即可，或者也可以新建系统用户，发件人和收件人使用不同的用户的邮箱地址。
-
-在telnet与SMTP交互过程中，你需要输入base64编码的用户名和密码。获取一个字符串的base64编码的方法为：
-
-.. code-block:: console
-   :emphasize-lines: 1
    :linenos:
 
    $ printf "username" | openssl base64
 
+wireshark捕获smtp报文
+---------------------------------
+打开wireshark，捕获smtp报文。在包过滤窗口输入smtp，本次测试只关注smtp报文。
+
+telnet命令发邮件
+---------------------------------
+
+.. code-block:: console
+   :linenos:
+
+   //在cmd中输入
+   telnet smtp.qq.com 25
+
+   Trying 58.251.106.181...
+   Connected to smtp.qq.com.
+   Escape character is '^]'.
+   220 newxmesmtplogicsvrsza8.qq.com XMail Esmtp QQ Mail Server.
+   
+   //在cmd中输入
+   HELO qq.com
+
+   250-newxmesmtplogicsvrsza8.qq.com-9.21.160.46-157486960
+   250-SIZE 73400320
+   250 OK
+
+   //紧接着输入
+   AUTH login
+
+   334 VXNlcm5hbWU6
+
+   //输入qq邮箱名，qq邮箱名需base64编码，可参考上述“printf "username" | openssl base64”命令来编码
+   XXXXXXXXXXXX
+
+   334 UGFzc3dvcmQ6
+
+   //输入qq邮箱授权码，需base64编码，可参考上述“printf "username" | openssl base64”命令来编码
+   XXXXXXXXXXXXXXXXXXXXXXXX
+
+   235 Authentication successful
+   
+   //输入指定邮件发送者的邮箱地址 
+   MAIL FROM:<XXXXXXXXXX@qq.com>
+
+   250 OK
+
+   //输入邮件接收者的邮箱地址
+   RCPT TO:<XXXXXXXXXX@qq.com>
+
+   250 OK
+   
+   //输入邮件内容
+   data
+
+   354 End data with <CR><LF>.<CR><LF>.
+   
+   //设置邮件主题和邮件内容，最后输入.表示邮件
+   subject:I love computer networks!
+   from:XXXXXXXXXX@qq.com
+   
+   I love computer networks!
+   .
+
+   250 OK: queued as.
+
+   //结束与SMTP服务器的通信
+   quit
+
+   221 Bye.
+   Connection closed by foreign host.
+
+telnet测试完成后，保存好wireshark捕获到的报文。
+
+.. image:: lab-2.png
+
+telnet命令获取邮件
+---------------------------------
+先打开wireshark，在包过滤窗口输入pop，捕获pop3协议报文。
+
+接着输入如下命令：
+
+.. code-block:: console
+   :linenos:
+
+   //输入邮件服务器为pop.qq.com，连接端口为110
+   telnet pop.qq.com 110
+
+   Trying 157.148.54.34...
+   Connected to pop.qq.com.
+   Escape character is '^]'.
+   +OK XMail POP3 Server v1.0 Service Ready(XMail v1.0)
+
+   //输入qq邮箱，此处不需要加密
+   user XXXXXXXXXX@qq.com
+   +OK
+
+   //输入qq邮箱的授权码，此处不需要加密
+   pass XXXXXXXXXXXXXXXX
+
+   +OK
+
+   //查看邮件列表
+   list
+
+   +OK
+
+   1 ****
+   2 ****
+   3 ****
+   .
+
+   //返回参数1 邮件的全部内容
+   retr 1
+   
+   +OK 14712
+   ……
+
+   //断开连接
+   quit
+
+   +OK Bye
+   Connection closed by foreign host.
+ 
+
+telnet测试完成后，保存好wireshark捕获到的报文。
+
+.. important:: 
+  上述是用telnet命令给网络邮箱发送或获取邮件，并使用wireshark工具捕获smtp或pop报文。当你调试你自己写的邮件客户端时，你也可以用wireshark捕获SMTP或POP报文。如果你的代码有问题，就可以通过对比查看wireshark文件，分析报文并查找bug。
 
 代码框架说明
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本实验准备了一个代码框架，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。请按要求补充上述文件。执行make编译后，会生成send和recv两个程序。send程序需要接受命令行参数，它的使用方法为：
+本实验准备了一个代码框架，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。关于socket套接字接口函数的用法可参考  :doc:`/appendix-d/3socket` 。
+
+请按要求补充这两个文件。执行make编译后，会生成send和recv两个程序。send程序需要接受命令行参数，它的使用方法为：
 
 .. code-block:: console
-   :emphasize-lines: 1
    :linenos:
 
    ./send RECIPIENT [-s SUBJECT] [-m MESSAGE] [-a ATTACHMENT]
 
-RECIPIENT: 收件人地址
-SUBJECT: 邮件主题
-MESSAGE: 邮件正文或含有邮件正文的文件路径
-ATTACHMENT: 邮件附件
-而recv不需要任何参数，直接执行即可。
+1. RECIPIENT: 收件人地址
+2. SUBJECT: 邮件主题
+3. MESSAGE: 邮件正文或含有邮件正文的文件路径
+4. ATTACHMENT: 邮件附件
 
-实验中可能需要使用到base64编码，为方便代码编写，实验框架使用了libb64库，封装了两个函数encode_str和encode_file，前者将一段字符串转换为base64编码的字符串，后者将ASCII编码的文件转化为base64编码的文件。使用时应注意，encode_str返回的字符串是在堆空间动态分配的，这意味着你在使用完后应当调用free函数释放空间，否则会导致内存泄漏。
+recv不需要任何参数，直接执行即可。
+
+.. hint:: 
+  实验中可能需要使用到base64编码，为方便代码编写，实验框架使用了libb64库，封装了两个函数encode_str和encode_file，前者将一段字符串转换为base64编码的字符串，后者将ASCII编码的文件转化为base64编码的文件。使用时应注意，encode_str返回的字符串是在堆空间动态分配的，这意味着你在使用完后应当调用free函数释放空间，否则会导致内存泄漏。
 
 程序测试
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 当你代码编写就绪后，使用下述命令编译程序：
 
 .. code-block:: console
-   :emphasize-lines: 1
    :linenos:
 
    make
@@ -496,7 +502,6 @@ ATTACHMENT: 邮件附件
 运行下述命令发送一封邮件（各项参数请自行替换为有意义的字符串）：
 
 .. code-block:: console
-   :emphasize-lines: 1
    :linenos:
 
    ./send example@example.org -s "Mail subject" -m message.txt -a "attachment.zip"
@@ -504,8 +509,7 @@ ATTACHMENT: 邮件附件
 运行下述命令与POP3服务器进行交互：
 
 .. code-block:: console
-   :emphasize-lines: 1
-   :linenos:
+   :linenos:   
 
    ./recv
 
@@ -513,9 +517,14 @@ ATTACHMENT: 邮件附件
 
 实验要求
 =====================
-完成send.c，使得它能发送带有附件的邮件；完成recv.c，与服务器进行交互，分别获取总邮件个数及大小、每封邮件的编号及大小、第一封邮件的内容。程序需要使用网络上知名的邮件提供商（QQ、网易、Outlook等）进行测试，且需要打印交互过程中服务器的回复信息。
+1. 完成send.c，使得它能发送带有附件的邮件；
+2. 完成recv.c，与服务器进行交互，分别获取总邮件个数及大小、每封邮件的编号及大小、第一封邮件的内容。
+3. 程序需要使用网络上知名的邮件提供商（QQ、网易、Outlook等）进行测试，且需要打印交互过程中服务器的回复信息。
 
 
 实验提交
 =====================
-提交send.c、recv.c及实验报告。提交时，请注意保护个人隐私信息，不要在代码中展示用户名或密码，可以将用户名和密码用星号代替。 
+提交send.c、recv.c及实验报告。
+
+.. note:: 
+  提交时，请注意保护个人隐私信息，不要在代码中展示用户名或密码，可以将用户名和密码用星号代替。 
