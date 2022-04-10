@@ -5,7 +5,7 @@ socket编程简介
    :hidden:
    :maxdepth: 5
 
-
+关于socket的扩展阅读：https://mp.weixin.qq.com/s/Syee1T7JcnqACs5TJf-cLA
 
 socket概述
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
