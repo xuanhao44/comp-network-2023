@@ -100,7 +100,7 @@ IP数据报输入处理
 
 **Step6** ：调用buf_remove_header()函数去掉IP报头。
 
-**Step7** ：调用net_ip()函数向上层传递数据包。如果是不能识别的协议类型，即调用icmp_unreachable()返回ICMP协议不可达信息。
+**Step7** ：调用net_in()函数向上层传递数据包。如果是不能识别的协议类型，即调用icmp_unreachable()返回ICMP协议不可达信息。
 
 
 校验和算法

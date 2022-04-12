@@ -190,7 +190,7 @@
 <p><strong>Step4</strong> ：对比目的IP地址是否为本机的IP地址，如果不是，则丢弃不处理。</p>
 <p><strong>Step5</strong> ：如果接收到的数据包的长度大于IP头部的总长度字段，则说明该数据包有填充字段，可调用buf_remove_padding()函数去除填充字段。</p>
 <p><strong>Step6</strong> ：调用buf_remove_header()函数去掉IP报头。</p>
-<p><strong>Step7</strong> ：调用net_ip()函数向上层传递数据包。如果是不能识别的协议类型，即调用icmp_unreachable()返回ICMP协议不可达信息。</p>
+<p><strong>Step7</strong> ：调用net_in()函数向上层传递数据包。如果是不能识别的协议类型，即调用icmp_unreachable()返回ICMP协议不可达信息。</p>
 </section>
 <section id="id10">
 <h2><span class="section-number">4.2. </span>校验和算法<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
