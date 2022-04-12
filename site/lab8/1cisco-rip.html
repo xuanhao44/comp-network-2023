@@ -436,7 +436,7 @@
 <section id="id15">
 <h3><span class="section-number">6.5.2. </span>观察触发更新报文<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
 <p>单击“Play”键停止抓包，然后单击“Reset Simulation”清空抓包信息。</p>
-<p>再按下“Play”键开始抓包。然后在R1上使用命令no interface loopback1断开回环地址loopback 1，此时Simultaion Panel面板上显示结果如下:</p>
+<p>再按下“Play”键开始抓包。然后在Router0上使用命令no interface loopback1断开回环地址loopback 1，此时Simultaion Panel面板上显示结果如下:</p>
 <img alt="../_images/cisco-181.png" src="../_images/cisco-181.png" />
 <p>图中，21.263s，Router0发出两个RIP数据包。当我们输入no interface loopback 1命令断开loopback 1时，在21.265s，Router0又发出两个RIP数据包。此时，距离上一个Router0发出数据的时间还没有到达30s。</p>
 <p>单击21.265s行的Router0，在弹出窗口的Outbound PDU Details选项卡中，可以看到这个RIP数据包携带有达到1.1.1.1网络的跳数为16，也就是不可达。21.266s，到达Router1后，Router1也立刻转发该路由信息。也就是，一条路有切断，全网通告。</p>

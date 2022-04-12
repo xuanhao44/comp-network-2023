@@ -359,7 +359,7 @@ R1路由表:
 
 单击“Play”键停止抓包，然后单击“Reset Simulation”清空抓包信息。
 
-再按下“Play”键开始抓包。然后在R1上使用命令no interface loopback1断开回环地址loopback 1，此时Simultaion Panel面板上显示结果如下:
+再按下“Play”键开始抓包。然后在Router0上使用命令no interface loopback1断开回环地址loopback 1，此时Simultaion Panel面板上显示结果如下:
 
 .. image:: cisco-18.png
 
