@@ -54,24 +54,29 @@
 <li class="toctree-l3"><a class="reference internal" href="#ip">3.1. IP协议概要</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id4">3.1.1. IP地址</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id5">3.1.2. IP协议</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">3.1.3. IP数据包格式</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">3.1.4. IP分片</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.2. IP数据包格式</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3.3. IP分片</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">3.4. 校验和计算</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">3.4.1. IP头部校验和</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">3.4.2. 反码求和</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">4. 代码实现与检测</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id9">4.1. IP数据报输入处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">4.2. 校验和算法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">4.3. IP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id12">4.4. IP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">4.5. 实验自测</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id12">4. 代码实现与检测</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.1. IP数据报输入处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">4.2. 校验和算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">4.3. IP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">4.4. IP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">4.5. 实验自测</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#gdb">4.5.1. GDB调试</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id14">5. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id18">5. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
@@ -147,8 +152,9 @@
 <p>主要有两点原因：一是为了简化，二是为了提速。面向连接每次通信之前都要事先建立连接，又会降低处理速度。IP需要有连接时，可以委托上一层提供此服务。</p>
 </div>
 </section>
+</section>
 <section id="id6">
-<h3><span class="section-number">3.1.3. </span>IP数据包格式<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<h2><span class="section-number">3.2. </span>IP数据包格式<a class="headerlink" href="#id6" title="永久链接至标题"></a></h2>
 <p>网络层是在数据链路层之上，其数据包结构如下：</p>
 <img alt="../_images/IP协议.png" src="../_images/IP协议.png" />
 <p>本实验是基于IPv4协议上完成的，以下主要介绍IPv4版本的IP协议。IPv4的头部结构长度为20字节，若含有可变长的选项部分，最多60字节。</p>
@@ -172,17 +178,35 @@
 </ol>
 </section>
 <section id="id7">
-<h3><span class="section-number">3.1.4. </span>IP分片<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
+<h2><span class="section-number">3.3. </span>IP分片<a class="headerlink" href="#id7" title="永久链接至标题"></a></h2>
 <p>从上节的介绍可知，通过IP数据报头部中的标识、标志、位偏移这三个字段，可以稳定的完成数据报的分片与重组操作。下图描述了一个UDP包长度为3000字节的UDP数据报（该报文头部为8字节，负载为2992字节）被分片成三个IPv4分组（没有选项），UDP头部只出现在第一个分片里。</p>
 <img alt="../_images/IP分片.png" src="../_images/IP分片.png" />
 </section>
-</section>
-</section>
 <section id="id8">
-<h1><span class="section-number">4. </span>代码实现与检测<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
+<span id="id9"></span><h2><span class="section-number">3.4. </span>校验和计算<a class="headerlink" href="#id8" title="永久链接至标题"></a></h2>
+<section id="id10">
+<h3><span class="section-number">3.4.1. </span>IP头部校验和<a class="headerlink" href="#id10" title="永久链接至标题"></a></h3>
+<p>IP头部校验和只针对IP首部做校验，对其负载数据的校验是上层协议负责的，它不需要关心其内部数据在传输过程中出错与否。IP数据报在转发的过程中，其头部字段就会被改变一次（比如修改TTL等），但IP数据报中的负载数据字段是不会改变的，因此，通过只校验IP头部的方式，也可以提高路由器处理分组的效率。</p>
+</section>
+<section id="id11">
+<h3><span class="section-number">3.4.2. </span>反码求和<a class="headerlink" href="#id11" title="永久链接至标题"></a></h3>
+<p>IP头部校验和采用 <strong>反码求和</strong> 方式来校验。不光在IP层的校验中，在ICMP、UDP、TCP等协议中都是使用反码求和来计算它们头部以及整个数据区的校验和。那么反码求和是怎么样计算的？顾名思义，它就是将二进制数据的各位依次取反，然后再求和运算。尽管这种算法很简单，但因为对每个二进制数都取反码会造成一定的内存和时间开销，所以再反码求和函数中，我们一般采用以下做法：</p>
+<ol class="arabic simple">
+<li><p>对两个二进制数直接进行加法运算；</p></li>
+<li><p>如有进位，则加到下一列；</p></li>
+<li><p>若最高位相加仍产生进位，则要在最后的结果中加1；</p></li>
+<li><p>对最后结果取反码。</p></li>
+</ol>
+<p>在发送端发送前，首先把校验和字段置为0，然后把校验和要计算的数据看成由一串16bit的半字组成，并对每个16bit依次进行反码求和运算，并将最终结果保存在校验和字段中。</p>
+<p>接收端收到后，首先备份校验和字段，接着把接收报文中的校验和字段置为0，然后把校验和要计算的数据看出是一串16bit的半字组成，并对每个16bit依次进行反码求和，最后比较备份的校验和与计算出来的校验和是否一致，如果一致，则说明传输没有任何差错，反之则认为接收到的报文有错，丢弃不处理。</p>
+</section>
+</section>
+</section>
+<section id="id12">
+<h1><span class="section-number">4. </span>代码实现与检测<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
 <p>请同学们认真阅读本实验提供的代码框架，并补充完整src/ip.c文件中的ip_in()函数、ip_out()函数和ip_fragment_out()函数，以及src/utils.c文件中的checksum16() 函数。</p>
-<section id="id9">
-<h2><span class="section-number">4.1. </span>IP数据报输入处理<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<section id="id13">
+<h2><span class="section-number">4.1. </span>IP数据报输入处理<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现ip_in()函数，功能如下：</p>
 <p><strong>Step1</strong> ：如果数据包的长度小于IP头部长度，丢弃不处理。</p>
 <p><strong>Step2</strong> ：接下来做报头检测，检查内容至少包括：IP头部的版本号是否是IPv4，总长度字段是否小于接收到的数据包的长度等，如果不符合这些要求，则丢弃不处理。</p>
@@ -192,9 +216,9 @@
 <p><strong>Step6</strong> ：调用buf_remove_header()函数去掉IP报头。</p>
 <p><strong>Step7</strong> ：调用net_in()函数向上层传递数据包。如果是不能识别的协议类型，即调用icmp_unreachable()返回ICMP协议不可达信息。</p>
 </section>
-<section id="id10">
-<h2><span class="section-number">4.2. </span>校验和算法<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
-<p>同学们需要自行实现checksum16()函数，功能如下：</p>
+<section id="id14">
+<h2><span class="section-number">4.2. </span>校验和算法<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
+<p>同学们需要自行实现checksum16()函数，可参考上述实验原理中的 <a class="reference internal" href="#id8">校验和计算说明</a> ：</p>
 <div class="admonition attention">
 <p class="admonition-title">注意</p>
 <p>checksum16()函数在src/utils.文件。</p>
@@ -210,23 +234,23 @@
 <p><strong>Step3</strong> ：判断相加后32bit结果值的高16位是否为0，如果不为0，则将高16位和低16位相加，依次循环，直至高16位为0为止。</p>
 <p><strong>Step4</strong> ：将上述的和（低16位）取反，即得到校验和。</p>
 </section>
-<section id="id11">
-<h2><span class="section-number">4.3. </span>IP数据报输出处理<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<section id="id15">
+<h2><span class="section-number">4.3. </span>IP数据报输出处理<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现ip_out()函数，功能如下：</p>
 <p><strong>Step1</strong> ：首先检查从上层传递下来的数据报包长是否大于IP协议最大负载包长（1500字节（MTU） 减去IP首部长度）。</p>
 <p><strong>Step2</strong> ：如果超过IP协议最大负载包长，则需要分片发送。首先调用buf_init()初始化一个ip_buf,将数据报包长截断，每个截断后的包长 = IP协议最大负载包长（1500字节 - IP首部长度），调用ip_fragment_out()函数发送出去。如果截断后最后的一个分片小于或等于IP协议最大负载包长，调用buf_init()初始化一个ip_buf，大小等于该分片大小，再调用ip_fragment_out()函数发送出去。注意，最后一个分片的MF = 0。</p>
 <p><strong>Step3</strong> ：如果没有超过IP协议最大负载包长，则直接调用ip_fragment_out()函数发送出去。</p>
 </section>
-<section id="id12">
-<h2><span class="section-number">4.4. </span>IP数据报输出处理<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
+<section id="id16">
+<h2><span class="section-number">4.4. </span>IP数据报输出处理<a class="headerlink" href="#id16" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现ip_fragment_out()函数，功能如下：</p>
 <p><strong>Step1</strong> ：调用buf_add_header()增加IP数据报头部缓存空间。</p>
 <p><strong>Step2</strong> ：填写IP数据报头部字段。</p>
 <p><strong>Step3</strong> ：先把IP头部的首部校验和字段填0，再调用checksum16函数计算校验和，然后把计算出来的校验和填入首部校验和字段。</p>
 <p><strong>Step4</strong> ：调用arp_out函数()将封装后的IP头部和数据发送出去。</p>
 </section>
-<section id="id13">
-<h2><span class="section-number">4.5. </span>实验自测<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<section id="id17">
+<h2><span class="section-number">4.5. </span>实验自测<a class="headerlink" href="#id17" title="永久链接至标题"></a></h2>
 <p>IP自测需要通过ip_test和ip_frag_test测试。</p>
 <a class="reference internal image-reference" href="../_images/cmake8.png"><img alt="../_images/cmake8.png" src="../_images/cmake8.png" style="height: 500px;" /></a>
 <p>接着，打开VSCode的终端，到build目录下，输入ctest -R ip_test和ctest -R ip_frag_test进行自测。</p>
@@ -238,8 +262,8 @@
 </section>
 </section>
 </section>
-<section id="id14">
-<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id14" title="永久链接至标题"></a></h1>
+<section id="id18">
+<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id18" title="永久链接至标题"></a></h1>
 <p>请参考实验二的提交方式。</p>
 </section>
 
