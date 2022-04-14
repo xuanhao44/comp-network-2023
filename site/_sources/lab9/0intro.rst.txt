@@ -394,11 +394,16 @@ telnet命令发邮件
    220 newxmesmtplogicsvrsza8.qq.com XMail Esmtp QQ Mail Server.
    
    //在cmd中输入
-   HELO qq.com
+   EHLO qq.com
 
-   250-newxmesmtplogicsvrsza8.qq.com-9.21.160.46-157486960
+   250-newxmesmtplogicsvrszc10.qq.com
+   250-PIPELINING
    250-SIZE 73400320
-   250 OK
+   250-STARTTLS
+   250-AUTH LOGIN PLAIN XOAUTH XOAUTH2
+   250-AUTH=LOGIN
+   250-MAILCOMPRESS
+   250 8BITMIME
 
    //紧接着输入
    AUTH login
@@ -506,7 +511,9 @@ telnet测试完成后，保存好wireshark捕获到的报文。
 代码框架说明
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-本实验准备了一个代码框架，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。关于socket套接字接口函数的用法可参考  :doc:`/appendix-d/3socket` 。
+本实验准备了一个代码框架 `实验相关链接`_ ，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。关于socket套接字接口函数的用法可参考  :doc:`/appendix-d/3socket` 。
+
+.. _实验相关链接: ../index.html#id3
 
 请按要求补充这两个文件。执行make编译后，会生成send和recv两个程序。send程序需要接受命令行参数，它的使用方法为：
 

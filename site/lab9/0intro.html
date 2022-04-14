@@ -71,11 +71,11 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id10">4.3. 代码框架说明</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">4.4. 程序测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">4.4. 程序测试</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id12">5. 实验要求</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id13">6. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">5. 实验要求</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">6. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
@@ -275,8 +275,8 @@
 <section id="internet">
 <h2><span class="section-number">3.4. </span>Internet消息格式<a class="headerlink" href="#internet" title="永久链接至标题"></a></h2>
 <p>当我们写信时，我们通常需要在信的顶部写下一些基本信息，如收件人地址、发件人地址、日期等，这些都是信的格式要求。电子邮件也有格式要求。与纸质信类似，在正文开始前，通常需要包含一些邮件头。电子邮件消息的格式在RFC 5322 Internet Message Format中有详细规定。一些常见的邮件头介绍如下。</p>
-<table class="colwidths-given docutils align-center" id="id14">
-<caption><span class="caption-text">邮件头含义1</span><a class="headerlink" href="#id14" title="永久链接至表格"></a></caption>
+<table class="colwidths-given docutils align-center" id="id15">
+<caption><span class="caption-text">邮件头含义1</span><a class="headerlink" href="#id15" title="永久链接至表格"></a></caption>
 <colgroup>
 <col style="width: 40%" />
 <col style="width: 60%" />
@@ -323,8 +323,8 @@
 <p>早期的电子邮件只能发送ASCII字符组成的纯文本。为了能够发送更多的字符及多媒体内容，MIME（Multipurpose Internet Message Extensions）被提出。MIME在RFC 2045-2049中规定。MIME被广泛用于电子邮件中，也用来描述其他应用的内容，如Web浏览。</p>
 <p>MIME的做法是在最基础的纯文本消息的格式上增加一些规则以及编码规则，以此传送非ASCII码消息。这样，MIME消息仍然能被旧的邮件协议识别、传送、接收，需要修改的只是邮件发送和接收客户端。</p>
 <p>MIME定义了五个相关的邮件头，如下表所示。</p>
-<table class="colwidths-given docutils align-center" id="id15">
-<caption><span class="caption-text">邮件头含义2</span><a class="headerlink" href="#id15" title="永久链接至表格"></a></caption>
+<table class="colwidths-given docutils align-center" id="id16">
+<caption><span class="caption-text">邮件头含义2</span><a class="headerlink" href="#id16" title="永久链接至表格"></a></caption>
 <colgroup>
 <col style="width: 40%" />
 <col style="width: 60%" />
@@ -471,56 +471,61 @@
 <span class="linenos"> 7</span><span class="go">220 newxmesmtplogicsvrsza8.qq.com XMail Esmtp QQ Mail Server.</span>
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span><span class="go">//在cmd中输入</span>
-<span class="linenos">10</span><span class="go">HELO qq.com</span>
+<span class="linenos">10</span><span class="go">EHLO qq.com</span>
 <span class="linenos">11</span>
-<span class="linenos">12</span><span class="go">250-newxmesmtplogicsvrsza8.qq.com-9.21.160.46-157486960</span>
-<span class="linenos">13</span><span class="go">250-SIZE 73400320</span>
-<span class="linenos">14</span><span class="go">250 OK</span>
-<span class="linenos">15</span>
-<span class="linenos">16</span><span class="go">//紧接着输入</span>
-<span class="linenos">17</span><span class="go">AUTH login</span>
-<span class="linenos">18</span>
-<span class="linenos">19</span><span class="go">334 VXNlcm5hbWU6</span>
+<span class="linenos">12</span><span class="go">250-newxmesmtplogicsvrszc10.qq.com</span>
+<span class="linenos">13</span><span class="go">250-PIPELINING</span>
+<span class="linenos">14</span><span class="go">250-SIZE 73400320</span>
+<span class="linenos">15</span><span class="go">250-STARTTLS</span>
+<span class="linenos">16</span><span class="go">250-AUTH LOGIN PLAIN XOAUTH XOAUTH2</span>
+<span class="linenos">17</span><span class="go">250-AUTH=LOGIN</span>
+<span class="linenos">18</span><span class="go">250-MAILCOMPRESS</span>
+<span class="linenos">19</span><span class="go">250 8BITMIME</span>
 <span class="linenos">20</span>
-<span class="linenos">21</span><span class="go">//输入qq邮箱名，qq邮箱名需base64编码，可参考上述“printf &quot;username&quot; | openssl base64”命令来编码</span>
-<span class="linenos">22</span><span class="go">XXXXXXXXXXXX</span>
+<span class="linenos">21</span><span class="go">//紧接着输入</span>
+<span class="linenos">22</span><span class="go">AUTH login</span>
 <span class="linenos">23</span>
-<span class="linenos">24</span><span class="go">334 UGFzc3dvcmQ6</span>
+<span class="linenos">24</span><span class="go">334 VXNlcm5hbWU6</span>
 <span class="linenos">25</span>
-<span class="linenos">26</span><span class="go">//输入qq邮箱授权码，需base64编码，可参考上述“printf &quot;username&quot; | openssl base64”命令来编码</span>
-<span class="linenos">27</span><span class="go">XXXXXXXXXXXXXXXXXXXXXXXX</span>
+<span class="linenos">26</span><span class="go">//输入qq邮箱名，qq邮箱名需base64编码，可参考上述“printf &quot;username&quot; | openssl base64”命令来编码</span>
+<span class="linenos">27</span><span class="go">XXXXXXXXXXXX</span>
 <span class="linenos">28</span>
-<span class="linenos">29</span><span class="go">235 Authentication successful</span>
+<span class="linenos">29</span><span class="go">334 UGFzc3dvcmQ6</span>
 <span class="linenos">30</span>
-<span class="linenos">31</span><span class="go">//输入指定邮件发送者的邮箱地址</span>
-<span class="linenos">32</span><span class="go">MAIL FROM:&lt;XXXXXXXXXX@qq.com&gt;</span>
+<span class="linenos">31</span><span class="go">//输入qq邮箱授权码，需base64编码，可参考上述“printf &quot;username&quot; | openssl base64”命令来编码</span>
+<span class="linenos">32</span><span class="go">XXXXXXXXXXXXXXXXXXXXXXXX</span>
 <span class="linenos">33</span>
-<span class="linenos">34</span><span class="go">250 OK</span>
+<span class="linenos">34</span><span class="go">235 Authentication successful</span>
 <span class="linenos">35</span>
-<span class="linenos">36</span><span class="go">//输入邮件接收者的邮箱地址</span>
-<span class="linenos">37</span><span class="go">RCPT TO:&lt;XXXXXXXXXX@qq.com&gt;</span>
+<span class="linenos">36</span><span class="go">//输入指定邮件发送者的邮箱地址</span>
+<span class="linenos">37</span><span class="go">MAIL FROM:&lt;XXXXXXXXXX@qq.com&gt;</span>
 <span class="linenos">38</span>
 <span class="linenos">39</span><span class="go">250 OK</span>
 <span class="linenos">40</span>
-<span class="linenos">41</span><span class="go">//输入邮件内容</span>
-<span class="linenos">42</span><span class="go">data</span>
+<span class="linenos">41</span><span class="go">//输入邮件接收者的邮箱地址</span>
+<span class="linenos">42</span><span class="go">RCPT TO:&lt;XXXXXXXXXX@qq.com&gt;</span>
 <span class="linenos">43</span>
-<span class="linenos">44</span><span class="go">354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;.</span>
+<span class="linenos">44</span><span class="go">250 OK</span>
 <span class="linenos">45</span>
-<span class="linenos">46</span><span class="go">//设置邮件主题和邮件内容，最后输入.表示邮件</span>
-<span class="linenos">47</span><span class="go">subject:I love computer networks!</span>
-<span class="linenos">48</span><span class="go">from:XXXXXXXXXX@qq.com</span>
-<span class="linenos">49</span>
-<span class="linenos">50</span><span class="go">I love computer networks!</span>
-<span class="linenos">51</span><span class="go">.</span>
-<span class="linenos">52</span>
-<span class="linenos">53</span><span class="go">250 OK: queued as.</span>
+<span class="linenos">46</span><span class="go">//输入邮件内容</span>
+<span class="linenos">47</span><span class="go">data</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="go">354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;.</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span><span class="go">//设置邮件主题和邮件内容，最后输入.表示邮件</span>
+<span class="linenos">52</span><span class="go">subject:I love computer networks!</span>
+<span class="linenos">53</span><span class="go">from:XXXXXXXXXX@qq.com</span>
 <span class="linenos">54</span>
-<span class="linenos">55</span><span class="go">//结束与SMTP服务器的通信</span>
-<span class="linenos">56</span><span class="go">quit</span>
+<span class="linenos">55</span><span class="go">I love computer networks!</span>
+<span class="linenos">56</span><span class="go">.</span>
 <span class="linenos">57</span>
-<span class="linenos">58</span><span class="go">221 Bye.</span>
-<span class="linenos">59</span><span class="go">Connection closed by foreign host.</span>
+<span class="linenos">58</span><span class="go">250 OK: queued as.</span>
+<span class="linenos">59</span>
+<span class="linenos">60</span><span class="go">//结束与SMTP服务器的通信</span>
+<span class="linenos">61</span><span class="go">quit</span>
+<span class="linenos">62</span>
+<span class="linenos">63</span><span class="go">221 Bye.</span>
+<span class="linenos">64</span><span class="go">Connection closed by foreign host.</span>
 </pre></div>
 </div>
 <p>telnet测试完成后，保存好wireshark捕获到的报文。</p>
@@ -579,7 +584,7 @@
 </section>
 <section id="id10">
 <h2><span class="section-number">4.3. </span>代码框架说明<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
-<p>本实验准备了一个代码框架，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。关于socket套接字接口函数的用法可参考  <a class="reference internal" href="../appendix-d/3socket.html"><span class="doc">socket编程简介</span></a> 。</p>
+<p>本实验准备了一个代码框架 <a class="reference external" href="../index.html#id3">实验相关链接</a> ，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。关于socket套接字接口函数的用法可参考  <a class="reference internal" href="../appendix-d/3socket.html"><span class="doc">socket编程简介</span></a> 。</p>
 <p>请按要求补充这两个文件。执行make编译后，会生成send和recv两个程序。send程序需要接受命令行参数，它的使用方法为：</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">./send RECIPIENT [-s SUBJECT] [-m MESSAGE] [-a ATTACHMENT]</span>
 </pre></div>
@@ -596,8 +601,8 @@
 <p>实验中可能需要使用到base64编码，为方便代码编写，实验框架使用了libb64库，封装了两个函数encode_str和encode_file，前者将一段字符串转换为base64编码的字符串，后者将ASCII编码的文件转化为base64编码的文件。使用时应注意，encode_str返回的字符串是在堆空间动态分配的，这意味着你在使用完后应当调用free函数释放空间，否则会导致内存泄漏。</p>
 </div>
 </section>
-<section id="id11">
-<h2><span class="section-number">4.4. </span>程序测试<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<section id="id12">
+<h2><span class="section-number">4.4. </span>程序测试<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>当你代码编写就绪后，使用下述命令编译程序：</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">make</span>
 </pre></div>
@@ -617,16 +622,16 @@
 </div>
 </section>
 </section>
-<section id="id12">
-<h1><span class="section-number">5. </span>实验要求<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
+<section id="id13">
+<h1><span class="section-number">5. </span>实验要求<a class="headerlink" href="#id13" title="永久链接至标题"></a></h1>
 <ol class="arabic simple">
 <li><p>完成send.c，使得它能发送带有附件的邮件；</p></li>
 <li><p>完成recv.c，与服务器进行交互，分别获取总邮件个数及大小、每封邮件的编号及大小、第一封邮件的内容。</p></li>
 <li><p>程序需要使用网络上知名的邮件提供商（QQ、网易、Outlook等）进行测试，且需要打印交互过程中服务器的回复信息。</p></li>
 </ol>
 </section>
-<section id="id13">
-<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id13" title="永久链接至标题"></a></h1>
+<section id="id14">
+<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id14" title="永久链接至标题"></a></h1>
 <p>提交send.c、recv.c及实验报告。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
