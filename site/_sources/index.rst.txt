@@ -44,6 +44,19 @@
 获取框架代码，将克隆net-lab-2022到当前目录。如遇问题请联系老师或助教。
 
 
+获取邮件客户端编程实验框架代码
+-----------------------------------
+关于邮件客户端实验的实验环境，请参考 :doc:`/appendix-d/index` 
+
+在命令中执行：
+
+.. code-block:: sh
+   :linenos:
+
+   $ git clone https://gitee.com/hitsz-lab/maillab.git
+
+获取框架代码，将克隆maillab到当前目录。如遇问题请联系老师或助教。
+
 .. toctree::
    :maxdepth: 1
    :caption: 实验
