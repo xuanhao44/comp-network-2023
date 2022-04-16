@@ -13,7 +13,7 @@ Lab2 常见问题
 .. image:: lab2.png
    :scale: 50 %
 
-首先，你需要先查询 "C:\\Users\\你自己电脑的用户名\\AppData\\Local\\CMakeTools\\CMakeTools-tools-kits.json"文件，该文件正常的配置应该如下图所示。
+首先，你需要先检查 "C:\\Users\\你自己电脑的用户名\\AppData\\Local\\CMakeTools\\CMakeTools-tools-kits.json"文件，该文件正常的配置应该如下图所示。
 
 .. image:: lab2-2.png
 

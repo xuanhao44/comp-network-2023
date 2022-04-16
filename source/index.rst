@@ -27,6 +27,7 @@
 
 1. 实验指导书仓库：https://gitee.com/hitsz-cslab/comp-network.git
 #. 协议栈编程实验仓库：https://gitee.com/hitsz-lab/net-lab-2022.git
+#. 邮件客户端实验仓库：https://gitee.com/hitsz-lab/maillab.git
 
 
 获取协议栈编程实验框架代码
@@ -43,6 +44,20 @@
 
 获取框架代码，将克隆net-lab-2022到当前目录。如遇问题请联系老师或助教。
 
+.. _邮件客户端代码仓库:
+
+获取邮件客户端编程实验框架代码
+-----------------------------------
+关于邮件客户端实验的实验环境，请参考 :doc:`/appendix-d/index` 
+
+在命令中执行：
+
+.. code-block:: sh
+   :linenos:
+
+   $ git clone https://gitee.com/hitsz-lab/maillab.git
+
+获取框架代码，将克隆maillab到当前目录。如遇问题请联系老师或助教。
 
 .. toctree::
    :maxdepth: 1

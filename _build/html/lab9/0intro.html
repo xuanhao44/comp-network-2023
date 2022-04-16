@@ -71,11 +71,11 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id10">4.3. 代码框架说明</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">4.4. 程序测试</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">4.4. 程序测试</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id12">5. 实验要求</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id13">6. 实验提交</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id13">5. 实验要求</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">6. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
@@ -127,7 +127,7 @@
 <h1><span class="section-number">2. </span>实验任务<a class="headerlink" href="#id2" title="永久链接至标题"></a></h1>
 <p>本实验中有两个任务。</p>
 <p>第一个任务是编写一个简单的邮件发送客户端，将邮件发送给任意收件人。客户端需要连接到邮件发送服务器，使用SMTP协议进行交互。发送邮件已有许多现成库，但 <strong>本次实验中不允许使用第三方库直接发送邮件</strong> ，因为它隐藏了邮件发送客户端与邮件发送服务器的交互细节。</p>
-<p>第二个任务是编写一个简单的邮件接收客户端，获取你接收到的邮件。客户端需要连接到邮件接收服务器，使用POP3协议进行交互。同样，交互细节需自行编程处理， <strong>不可直接调用第三方库接收邮件</strong> 。</p>
+<p>第二个任务是编写一个简单的邮件接收客户端，获取你接收到的邮件。客户端需要连接到邮件接收服务器，使用POP3协议进行交互。同样， <strong>交互细节需自行编程处理，不可直接调用第三方库接收邮件</strong> 。</p>
 </section>
 <section id="id3">
 <h1><span class="section-number">3. </span>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
@@ -151,38 +151,22 @@
 <p>SMTP协议分为标准SMTP协议和扩展SMTP 协议，标准SMTP协议是1982年在RFC 821文档中定义的，而扩展SMTP协议是1995年在RFC 1869文档中定义的。扩展SMTP协议在标准SMTP协议基础上的改动非常小，主要增加了邮件安全方面的认证功能，现在我们说的SMTP 协议基本上都是扩展SMTP协议。</p>
 <p>RFC 1869文档链接：<a class="reference external" href="https://www.rfc-editor.org/rfc/rfc1869.html">https://www.rfc-editor.org/rfc/rfc1869.html</a>。</p>
 <p>SMTP 协议中一共定义了18条命令，但是发送一封电子邮件的过程通常只需要6条命令，这6条命令/响应的语法格式总结如下：</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 12%" />
-<col style="width: 88%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>SMTP命令格式</p></th>
-<th class="head"><p>说明</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>EHLO &lt;domain&gt;&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>EHLO命令是SMTP邮件发送程序与SMTP邮件接收程序建立连接后必须发送的第一条SMTP命令，参数&lt;domain&gt;表示 SMTP邮件发送者的主机名。EHLO命令用于替代传统SMTP协议中的HELO命令。</p></td>
-</tr>
-<tr class="row-odd"><td><p>AUTH &lt;para&gt;&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>如果SMTP邮件接收程序需要SMTP邮件发送程序进行认证时，它会向SMTP邮件发送程序提示它所采用的认证方式，SMTP邮件发送程序接着应该使用这个命令回应SMTP邮件接收程序，参数&lt;para&gt;表示回应的认证方式，通常是SMTP邮件接收程序先前提示的认证方式。</p></td>
-</tr>
-<tr class="row-even"><td><p>MAIL FROM: &lt;reverse-path&gt;&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>用于指定邮件发送者的邮箱地址，参数&lt;reverse-path&gt;表示发件人的邮箱地址。</p></td>
-</tr>
-<tr class="row-odd"><td><p>RCPT TO: &lt;forward-path&gt;&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>用于指定邮件接收者的邮箱地址。参数&lt;forward-path&gt;表示接收者的邮箱地址。如果邮件要发送给多个接收者，那么应使用多条RCPT TO命令来分别指定每一个接收者的邮箱地址。</p></td>
-</tr>
-<tr class="row-even"><td><p>DATA&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>用于输入邮件内容。该命令后面发送的所有数据都将被当做邮件内容，直至遇到结束标志字符串“&lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;” 。之后，邮件内容结束。</p></td>
-</tr>
-<tr class="row-odd"><td><p>QUIT&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>结束与SMTP服务器的通信。</p></td>
-</tr>
-</tbody>
-</table>
-<p>注：上表中，命令名称不区分大小写；&lt;CR&gt;和&lt;LF&gt;分别指回车符（Carriage Return）和换行符（Line Feed），即C语言里面的’r’和’n’。</p>
+<p>1） <strong>EHLO &lt;domain&gt;&lt;CR&gt;&lt;LF&gt;</strong> ：</p>
+<p>EHLO命令是SMTP邮件发送程序与SMTP邮件接收程序建立连接后必须发送的第一条SMTP命令，参数&lt;domain&gt;表示 SMTP邮件发送者的主机名。EHLO命令用于替代传统SMTP协议中的HELO命令。</p>
+<p>2） <strong>AUTH &lt;para&gt;&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>如果SMTP邮件接收程序需要SMTP邮件发送程序进行认证时，它会向SMTP邮件发送程序提示它所采用的认证方式，SMTP邮件发送程序接着应该使用这个命令回应SMTP邮件接收程序，参数&lt;para&gt;表示回应的认证方式，通常是SMTP邮件接收程序先前提示的认证方式。</p>
+<p>3） <strong>MAIL FROM: &lt;reverse-path&gt;&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>用于指定邮件发送者的邮箱地址，参数&lt;reverse-path&gt;表示发件人的邮箱地址。</p>
+<p>4） <strong>RCPT TO: &lt;forward-path&gt;&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>用于指定邮件接收者的邮箱地址。参数&lt;forward-path&gt;表示接收者的邮箱地址。如果邮件要发送给多个接收者，那么应使用多条RCPT TO命令来分别指定每一个接收者的邮箱地址。</p>
+<p>5） <strong>DATA&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>用于输入邮件内容。该命令后面发送的所有数据都将被当做邮件内容，直至遇到结束标志字符串“&lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;” 。之后，邮件内容结束。</p>
+<p>6） <strong>QUIT&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>结束与SMTP服务器的通信。</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>上述命令中，命令名称不区分大小写；&lt;CR&gt;和&lt;LF&gt;分别指回车符（Carriage Return）和换行符（Line Feed），即C语言里面的’r’和’n’。</p>
+</div>
 <p>在用telnet与SMTP服务器（通常是25端口）建立连接后，即可进行会话。以下为一个典型的SMTP会话场景（S代表SMTP服务器，C代表邮件客户端）：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>S: <span class="m">220</span> newxmesmtplogicsvrszc9.qq.com XMail Esmtp QQ Mail Server.
 <span class="linenos"> 2</span>C: EHLO debian
@@ -235,46 +219,24 @@
 <p>POP3是POP（Post Office Protocol）中最为广泛流传的版本，它最初在RFC 1081中定义。最近的版本是RFC 1939，带有扩展机制（在RFC 2449中定义）。认证机制则在RFC 1734中详细说明。</p>
 <p>RFC 1939文档链接：<a class="reference external" href="https://www.rfc-editor.org/rfc/rfc1939.html">https://www.rfc-editor.org/rfc/rfc1939.html</a>。</p>
 <p>这里总结了POP3协议常用的9条命令如下：</p>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 20%" />
-<col style="width: 80%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>POP3命令格式</p></th>
-<th class="head"><p>说明</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>USER &lt;name&gt;&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>用于输入认证用户名。</p></td>
-</tr>
-<tr class="row-odd"><td><p>PASS &lt;name&gt;&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>用于输入认证口令。</p></td>
-</tr>
-<tr class="row-even"><td><p>STAT&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>返回邮箱统计信息，包括邮箱邮件数和邮件占用的大小。</p></td>
-</tr>
-<tr class="row-odd"><td><p>LIST [&lt;msg&gt;]&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>返回邮件信息。参数可选。若指定参数，则返回的是编号为msg的邮件编号及大小（以字节为单位）；若不指定参数，则返回所有邮件的编号及大小。</p></td>
-</tr>
-<tr class="row-even"><td><p>RETR msg&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>获取编号为msg的邮件正文。服务器返回的内容里第一行是邮件大小（以字节为单位），之后是邮件内容，最后一行是“.”，表示结束。</p></td>
-</tr>
-<tr class="row-odd"><td><p>DELE msg&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>删除编号为msg的邮件。此命令会对邮件做上标记，但不会立即删除，而是在POP3通信结束后才会删除有标记的邮件。</p></td>
-</tr>
-<tr class="row-even"><td><p>RSET&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>撤销所有的DELE操作。</p></td>
-</tr>
-<tr class="row-odd"><td><p>NOOP&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>空操作，什么也不做。</p></td>
-</tr>
-<tr class="row-even"><td><p>QUIT&lt;CR&gt;&lt;LF&gt;</p></td>
-<td><p>结束与POP3服务器的通信。</p></td>
-</tr>
-</tbody>
-</table>
+<p>1） <strong>USER &lt;name&gt;&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>用于输入认证用户名。</p>
+<p>2） <strong>PASS &lt;name&gt;&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>用于输入认证口令。</p>
+<p>3） <strong>STAT&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>返回邮箱统计信息，包括邮箱邮件数和邮件占用的大小。</p>
+<p>4） <strong>LIST [&lt;msg&gt;]&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>返回邮件信息。参数可选。若指定参数，则返回的是编号为msg的邮件编号及大小（以字节为单位）；若不指定参数，则返回所有邮件的编号及大小。</p>
+<p>5） <strong>RETR msg&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>获取编号为msg的邮件正文。服务器返回的内容里第一行是邮件大小（以字节为单位），之后是邮件内容，最后一行是“.”，表示结束。</p>
+<p>6） <strong>DELE msg&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>删除编号为msg的邮件。此命令会对邮件做上标记，但不会立即删除，而是在POP3通信结束后才会删除有标记的邮件。</p>
+<p>7） <strong>RSET&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>撤销所有的DELE操作。</p>
+<p>8） <strong>NOOP&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>空操作，什么也不做。</p>
+<p>9） <strong>QUIT&lt;CR&gt;&lt;LF&gt;</strong></p>
+<p>结束与POP3服务器的通信。</p>
 <p>同样，我们可以用telnet与POP3服务器（通常是110端口）进行会话。以下为一个典型的POP3会话场景（S代表POP3服务器，C代表邮件客户端）：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>S: +OK Ready.
 <span class="linenos"> 2</span>C: USER alice
@@ -313,8 +275,8 @@
 <section id="internet">
 <h2><span class="section-number">3.4. </span>Internet消息格式<a class="headerlink" href="#internet" title="永久链接至标题"></a></h2>
 <p>当我们写信时，我们通常需要在信的顶部写下一些基本信息，如收件人地址、发件人地址、日期等，这些都是信的格式要求。电子邮件也有格式要求。与纸质信类似，在正文开始前，通常需要包含一些邮件头。电子邮件消息的格式在RFC 5322 Internet Message Format中有详细规定。一些常见的邮件头介绍如下。</p>
-<table class="colwidths-given docutils align-center" id="id14">
-<caption><span class="caption-text">邮件头含义1</span><a class="headerlink" href="#id14" title="永久链接至表格"></a></caption>
+<table class="colwidths-given docutils align-center" id="id15">
+<caption><span class="caption-text">邮件头含义1</span><a class="headerlink" href="#id15" title="永久链接至表格"></a></caption>
 <colgroup>
 <col style="width: 40%" />
 <col style="width: 60%" />
@@ -361,8 +323,8 @@
 <p>早期的电子邮件只能发送ASCII字符组成的纯文本。为了能够发送更多的字符及多媒体内容，MIME（Multipurpose Internet Message Extensions）被提出。MIME在RFC 2045-2049中规定。MIME被广泛用于电子邮件中，也用来描述其他应用的内容，如Web浏览。</p>
 <p>MIME的做法是在最基础的纯文本消息的格式上增加一些规则以及编码规则，以此传送非ASCII码消息。这样，MIME消息仍然能被旧的邮件协议识别、传送、接收，需要修改的只是邮件发送和接收客户端。</p>
 <p>MIME定义了五个相关的邮件头，如下表所示。</p>
-<table class="colwidths-given docutils align-center" id="id15">
-<caption><span class="caption-text">邮件头含义2</span><a class="headerlink" href="#id15" title="永久链接至表格"></a></caption>
+<table class="colwidths-given docutils align-center" id="id16">
+<caption><span class="caption-text">邮件头含义2</span><a class="headerlink" href="#id16" title="永久链接至表格"></a></caption>
 <colgroup>
 <col style="width: 40%" />
 <col style="width: 60%" />
@@ -392,7 +354,7 @@
 </table>
 <p>Content-Description是必要的，这样接收人就能判断是否值得解码这段内容。比如，对方给你发送一个“XX大学成绩单”，但对方的邮件地址并非学校官方地址，那么你判断这大概率是诈骗邮件，所以你不会去解码这段内容。</p>
 <p>对于非ASCII码内容，通常会使用Base64编码，这个需在Content-Transfer-Encoding中指出。除了Base64编码，MIME还规定了许多可用的编码选项，有兴趣的同学可以阅读MIME规范文档。</p>
-<p>Content-Type规定了消息体的属性。最初，RFC 1521定义了七种MIME类型。每种类型都有几个子类型。类型和子类型之间用斜杠隔开，如“Content-Type: video/mpeg”。之后，许多新的MIME类型和子类型进入了规范。当前支持的类型和子类型可在IANA网站上查询，网址：www.iana.org/assignments/media-types。</p>
+<p>Content-Type规定了消息体的属性。最初，RFC 1521定义了七种MIME类型。每种类型都有几个子类型。类型和子类型之间用斜杠隔开，如“Content-Type: video/mpeg”。之后，许多新的MIME类型和子类型进入了规范。当前支持的类型和子类型可在IANA网站上查询，网址： <a class="reference external" href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a></p>
 <p>下表列出了几种常见的MIME类型和子类型。</p>
 <table class="docutils align-default">
 <colgroup>
@@ -484,7 +446,7 @@
 </section>
 <section id="telnet">
 <h2><span class="section-number">4.2. </span>telnet命令自测<a class="headerlink" href="#telnet" title="永久链接至标题"></a></h2>
-<p>可以使用telnet与SMTP和POP3服务器连接，手动输入命令与服务器交互，掌握SMTP和POP协议的交互过程。</p>
+<p>在编写实验代码前，可以先使用telnet与SMTP和POP3服务器连接，手动输入命令与服务器交互，掌握SMTP和POP协议的交互过程。</p>
 <section id="id7">
 <h3><span class="section-number">4.2.1. </span>telnet命令测试准备工作<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
 <p>在测试之前，请先登录网络邮箱，开启POP3/SMTP服务。</p>
@@ -509,56 +471,61 @@
 <span class="linenos"> 7</span><span class="go">220 newxmesmtplogicsvrsza8.qq.com XMail Esmtp QQ Mail Server.</span>
 <span class="linenos"> 8</span>
 <span class="linenos"> 9</span><span class="go">//在cmd中输入</span>
-<span class="linenos">10</span><span class="go">HELO qq.com</span>
+<span class="linenos">10</span><span class="go">EHLO qq.com</span>
 <span class="linenos">11</span>
-<span class="linenos">12</span><span class="go">250-newxmesmtplogicsvrsza8.qq.com-9.21.160.46-157486960</span>
-<span class="linenos">13</span><span class="go">250-SIZE 73400320</span>
-<span class="linenos">14</span><span class="go">250 OK</span>
-<span class="linenos">15</span>
-<span class="linenos">16</span><span class="go">//紧接着输入</span>
-<span class="linenos">17</span><span class="go">AUTH login</span>
-<span class="linenos">18</span>
-<span class="linenos">19</span><span class="go">334 VXNlcm5hbWU6</span>
+<span class="linenos">12</span><span class="go">250-newxmesmtplogicsvrszc10.qq.com</span>
+<span class="linenos">13</span><span class="go">250-PIPELINING</span>
+<span class="linenos">14</span><span class="go">250-SIZE 73400320</span>
+<span class="linenos">15</span><span class="go">250-STARTTLS</span>
+<span class="linenos">16</span><span class="go">250-AUTH LOGIN PLAIN XOAUTH XOAUTH2</span>
+<span class="linenos">17</span><span class="go">250-AUTH=LOGIN</span>
+<span class="linenos">18</span><span class="go">250-MAILCOMPRESS</span>
+<span class="linenos">19</span><span class="go">250 8BITMIME</span>
 <span class="linenos">20</span>
-<span class="linenos">21</span><span class="go">//输入qq邮箱名，qq邮箱名需base64编码，可参考上述“printf &quot;username&quot; | openssl base64”命令来编码</span>
-<span class="linenos">22</span><span class="go">XXXXXXXXXXXX</span>
+<span class="linenos">21</span><span class="go">//紧接着输入</span>
+<span class="linenos">22</span><span class="go">AUTH login</span>
 <span class="linenos">23</span>
-<span class="linenos">24</span><span class="go">334 UGFzc3dvcmQ6</span>
+<span class="linenos">24</span><span class="go">334 VXNlcm5hbWU6</span>
 <span class="linenos">25</span>
-<span class="linenos">26</span><span class="go">//输入qq邮箱授权码，需base64编码，可参考上述“printf &quot;username&quot; | openssl base64”命令来编码</span>
-<span class="linenos">27</span><span class="go">XXXXXXXXXXXXXXXXXXXXXXXX</span>
+<span class="linenos">26</span><span class="go">//输入qq邮箱名，qq邮箱名需base64编码，可参考上述“printf &quot;username&quot; | openssl base64”命令来编码</span>
+<span class="linenos">27</span><span class="go">XXXXXXXXXXXX</span>
 <span class="linenos">28</span>
-<span class="linenos">29</span><span class="go">235 Authentication successful</span>
+<span class="linenos">29</span><span class="go">334 UGFzc3dvcmQ6</span>
 <span class="linenos">30</span>
-<span class="linenos">31</span><span class="go">//输入指定邮件发送者的邮箱地址</span>
-<span class="linenos">32</span><span class="go">MAIL FROM:&lt;XXXXXXXXXX@qq.com&gt;</span>
+<span class="linenos">31</span><span class="go">//输入qq邮箱授权码，需base64编码，可参考上述“printf &quot;username&quot; | openssl base64”命令来编码</span>
+<span class="linenos">32</span><span class="go">XXXXXXXXXXXXXXXXXXXXXXXX</span>
 <span class="linenos">33</span>
-<span class="linenos">34</span><span class="go">250 OK</span>
+<span class="linenos">34</span><span class="go">235 Authentication successful</span>
 <span class="linenos">35</span>
-<span class="linenos">36</span><span class="go">//输入邮件接收者的邮箱地址</span>
-<span class="linenos">37</span><span class="go">RCPT TO:&lt;XXXXXXXXXX@qq.com&gt;</span>
+<span class="linenos">36</span><span class="go">//输入指定邮件发送者的邮箱地址</span>
+<span class="linenos">37</span><span class="go">MAIL FROM:&lt;XXXXXXXXXX@qq.com&gt;</span>
 <span class="linenos">38</span>
 <span class="linenos">39</span><span class="go">250 OK</span>
 <span class="linenos">40</span>
-<span class="linenos">41</span><span class="go">//输入邮件内容</span>
-<span class="linenos">42</span><span class="go">data</span>
+<span class="linenos">41</span><span class="go">//输入邮件接收者的邮箱地址</span>
+<span class="linenos">42</span><span class="go">RCPT TO:&lt;XXXXXXXXXX@qq.com&gt;</span>
 <span class="linenos">43</span>
-<span class="linenos">44</span><span class="go">354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;.</span>
+<span class="linenos">44</span><span class="go">250 OK</span>
 <span class="linenos">45</span>
-<span class="linenos">46</span><span class="go">//设置邮件主题和邮件内容，最后输入.表示邮件</span>
-<span class="linenos">47</span><span class="go">subject:I love computer networks!</span>
-<span class="linenos">48</span><span class="go">from:XXXXXXXXXX@qq.com</span>
-<span class="linenos">49</span>
-<span class="linenos">50</span><span class="go">I love computer networks!</span>
-<span class="linenos">51</span><span class="go">.</span>
-<span class="linenos">52</span>
-<span class="linenos">53</span><span class="go">250 OK: queued as.</span>
+<span class="linenos">46</span><span class="go">//输入邮件内容</span>
+<span class="linenos">47</span><span class="go">data</span>
+<span class="linenos">48</span>
+<span class="linenos">49</span><span class="go">354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;.</span>
+<span class="linenos">50</span>
+<span class="linenos">51</span><span class="go">//设置邮件主题和邮件内容，最后输入.表示邮件</span>
+<span class="linenos">52</span><span class="go">subject:I love computer networks!</span>
+<span class="linenos">53</span><span class="go">from:XXXXXXXXXX@qq.com</span>
 <span class="linenos">54</span>
-<span class="linenos">55</span><span class="go">//结束与SMTP服务器的通信</span>
-<span class="linenos">56</span><span class="go">quit</span>
+<span class="linenos">55</span><span class="go">I love computer networks!</span>
+<span class="linenos">56</span><span class="go">.</span>
 <span class="linenos">57</span>
-<span class="linenos">58</span><span class="go">221 Bye.</span>
-<span class="linenos">59</span><span class="go">Connection closed by foreign host.</span>
+<span class="linenos">58</span><span class="go">250 OK: queued as.</span>
+<span class="linenos">59</span>
+<span class="linenos">60</span><span class="go">//结束与SMTP服务器的通信</span>
+<span class="linenos">61</span><span class="go">quit</span>
+<span class="linenos">62</span>
+<span class="linenos">63</span><span class="go">221 Bye.</span>
+<span class="linenos">64</span><span class="go">Connection closed by foreign host.</span>
 </pre></div>
 </div>
 <p>telnet测试完成后，保存好wireshark捕获到的报文。</p>
@@ -617,7 +584,7 @@
 </section>
 <section id="id10">
 <h2><span class="section-number">4.3. </span>代码框架说明<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
-<p>本实验准备了一个代码框架，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。关于socket套接字接口函数的用法可参考  <a class="reference internal" href="../appendix-d/3socket.html"><span class="doc">socket编程简介</span></a> 。</p>
+<p>本实验准备了一个代码框架 <a class="reference external" href="../index.html#id3">实验相关链接</a> ，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。关于socket套接字接口函数的用法可参考  <a class="reference internal" href="../appendix-d/3socket.html"><span class="doc">socket编程简介</span></a> 。</p>
 <p>请按要求补充这两个文件。执行make编译后，会生成send和recv两个程序。send程序需要接受命令行参数，它的使用方法为：</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">./send RECIPIENT [-s SUBJECT] [-m MESSAGE] [-a ATTACHMENT]</span>
 </pre></div>
@@ -634,8 +601,8 @@
 <p>实验中可能需要使用到base64编码，为方便代码编写，实验框架使用了libb64库，封装了两个函数encode_str和encode_file，前者将一段字符串转换为base64编码的字符串，后者将ASCII编码的文件转化为base64编码的文件。使用时应注意，encode_str返回的字符串是在堆空间动态分配的，这意味着你在使用完后应当调用free函数释放空间，否则会导致内存泄漏。</p>
 </div>
 </section>
-<section id="id11">
-<h2><span class="section-number">4.4. </span>程序测试<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<section id="id12">
+<h2><span class="section-number">4.4. </span>程序测试<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>当你代码编写就绪后，使用下述命令编译程序：</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">make</span>
 </pre></div>
@@ -649,18 +616,22 @@
 </pre></div>
 </div>
 <p>登录你的邮箱，检查程序运行结果是否符合预期，包括接收者是否收到邮件、获取到的邮件是否和原邮件一致等。</p>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>在某些情况下，接收邮件服务器可能会将你的电子邮件分类为垃圾邮件。当你查找从客户端发送的电子邮件时，请检查垃圾邮件文件夹。</p>
+</div>
 </section>
 </section>
-<section id="id12">
-<h1><span class="section-number">5. </span>实验要求<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
+<section id="id13">
+<h1><span class="section-number">5. </span>实验要求<a class="headerlink" href="#id13" title="永久链接至标题"></a></h1>
 <ol class="arabic simple">
 <li><p>完成send.c，使得它能发送带有附件的邮件；</p></li>
 <li><p>完成recv.c，与服务器进行交互，分别获取总邮件个数及大小、每封邮件的编号及大小、第一封邮件的内容。</p></li>
 <li><p>程序需要使用网络上知名的邮件提供商（QQ、网易、Outlook等）进行测试，且需要打印交互过程中服务器的回复信息。</p></li>
 </ol>
 </section>
-<section id="id13">
-<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id13" title="永久链接至标题"></a></h1>
+<section id="id14">
+<h1><span class="section-number">6. </span>实验提交<a class="headerlink" href="#id14" title="永久链接至标题"></a></h1>
 <p>提交send.c、recv.c及实验报告。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
