@@ -142,7 +142,7 @@
 </section>
 <section id="id5">
 <h2><span class="section-number">3.3. </span>UDP校验和计算方法<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
-<p>UDP校验和的覆盖范围与IP首部校验和的覆盖范围是不一样的。UDP校验和需要覆盖UDP头部、UDP数据和一个伪头部。伪头部是在UDP头部之前添加了12字节的头部信息，其中，源IP地址、目的IP地址和协议号来源于IPv4的头部，UDP长度是UDP包的总长度。此外，如果“数据”字段不是偶数个字长时，它会被填充一个值为0的字节以计算校验和。当然，伪头部和任何填充的数据不会与UDP数据报一起被传送出去。</p>
+<p>UDP校验和的覆盖范围与IP首部校验和的覆盖范围是不一样的。UDP校验和需要覆盖UDP头部、UDP数据和一个伪头部。伪头部是在UDP头部之前添加了12字节的头部信息，其中，源IP地址、目的IP地址和协议号来源于IPv4的头部，UDP长度是UDP包的总长度（不包含伪头部和任何填充的数据）。此外，如果“数据”字段不是偶数个字长时，它会被填充一个值为0的字节以计算校验和。当然，伪头部和任何填充的数据不会与UDP数据报一起被传送出去。</p>
 <img alt="../_images/UDP伪头部.png" src="../_images/UDP伪头部.png" />
 <div class="admonition note">
 <p class="admonition-title">备注</p>
@@ -197,13 +197,13 @@
 <p>eth.addr == XX.XX.XX.XX</p>
 <p>XX.XX.XX.XX 是你自己的虚拟网卡MAC地址</p>
 <img alt="../_images/cmake31.png" src="../_images/cmake31.png" />
-<p>打开TCP&amp;UDPDebug调试工具，点击“创建连接”，类型选择“UDP”，目标 IP：10.249.14.100，目标端口号：60000，本机端口号指定：60000。设置完成，点击创建。</p>
+<p>打开TCP&amp;UDPDebug调试工具，点击“创建连接”，类型选择“UDP”，目标 IP：10.249.14.100（ <strong>该目标IP地址需要改成你自己代码中config.h中定义的IP地址</strong> ，关于目标IP地址的定义可参考 <a class="reference internal" href="../appendix-b/1win.html"><span class="doc">Windows开发环境搭建</span></a>），目标端口号：60000，本机端口号指定：60000。设置完成，点击创建。</p>
 <img alt="../_images/cmake41.png" src="../_images/cmake41.png" />
 <p>点击连接</p>
 <img alt="../_images/cmake51.png" src="../_images/cmake51.png" />
 <p>在TCP&amp;UDPDebug调试工具的发送窗口输入“abc”测试字符串，点击发送。此时UDP调试工具能够接收到虚拟网卡回送的数据包。如下图所示。</p>
 <img alt="../_images/cmake61.png" src="../_images/cmake61.png" />
-<p>在终端上也能看见main的运行结构</p>
+<p>在终端上也能看见main的运行结果。</p>
 <img alt="../_images/cmake71.png" src="../_images/cmake71.png" />
 <p>此时，Wireshark上也有数据包的交互。</p>
 <img alt="../_images/cmake81.png" src="../_images/cmake81.png" />
