@@ -68,6 +68,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#cmaketdm-gcc-vscodecmake">2.1. 安装完CMAKE和TDM GCC后，VSCode的CMAKE上找不到项目的可执行程序？</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cmake">2.2. CMake报错</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ctest">2.3. ctest运行报错</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-gdb">2.4. 能用CMAKE编译，不能用GDB调试？</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lab3.html">3. Lab3 常见问题</a></li>
@@ -135,6 +136,17 @@
 <h2><span class="section-number">2.3. </span>ctest运行报错<a class="headerlink" href="#ctest" title="永久链接至标题"></a></h2>
 <p>如果出现下图的情况，一般是代码有段错误了，可以用GDB跟踪调试。</p>
 <img alt="../_images/lab2-9.png" src="../_images/lab2-9.png" />
+</section>
+<section id="cmake-gdb">
+<h2><span class="section-number">2.4. </span>能用CMAKE编译，不能用GDB调试？<a class="headerlink" href="#cmake-gdb" title="永久链接至标题"></a></h2>
+<p>本题的解决方法来源于某位同学的分享，非常感谢这位乐于分享的同学！</p>
+<p>如下图，能编译，但GDB调试不了。</p>
+<img alt="../_images/lab2-10.png" src="../_images/lab2-10.png" />
+<p>该同学的GCC安装在D:/program Files (x86)/TDM-GCC-64/目录下。</p>
+<img alt="../_images/lab2-11.png" src="../_images/lab2-11.png" />
+<p>解决方法：</p>
+<p>将TDM-GCC-64卸载后，重新安装到C盘默认目录下，然后重新clone代码，再按照指导书给出的步骤来配置，整个环境就没有问题了。</p>
+<p>如果你也是碰到能编译，不能GDB调试的问题，你不妨尝试一下该方法。</p>
 </section>
 </section>
 

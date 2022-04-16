@@ -60,10 +60,42 @@ VScode的安装和配置
 
 在配置好 VSCode 环境之后，即可使用 CMake 工具栏完成编译和调试操作。
 
-每次打开工程后首先需要配置 CMake，点击工具栏中的 Configure All Projects 按钮对当前工程进行配置，首次配置会弹出选择编译工具的提示，选择带有 linux 的一项。配置完成后，在工具栏中出现了本次实验的工程 net，在工程 net 中右键点击想要编译
-的程序 main，即可编译、调试、运行该程序。
+每次打开工程后首先需要配置 CMake，点击工具栏中的 Configure All Projects 按钮对当前工程进行配置，首次配置会弹出选择编译工具的提示，选择带有 linux 的一项。配置完成后，在工具栏中出现了本次实验的工程 net，在工程 net 中右键点击想要编译的程序（其中，main是UDP实验中使用的测试程序），即可编译、调试、运行该程序。
 
 .. image:: vscode6.png 
 
 .. note:: 
-   如果出现调试无法启动的情况，删除./vscode/lauch.json 即可。或将lauch.json 的 program 项改为 ${workspaceFolder}/build/main。
+   如果出现调试无法启动的情况，将lauch.json 的 program 项改为 ${workspaceFolder}/build/ **你要编译的程序名** ，args 项也需要改成testing/data/ **你要编译的程序名** 。
+
+以下是 **eth_in** 调试的完整的launch.json，大家可以参考下面的来修改：
+
+.. code-block:: json
+   :linenos:
+
+    {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "(gdb) Launch",
+                "type": "cppdbg",
+                "request": "launch",
+                "program": "${workspaceFolder}/build/eth_in",
+                "args": ["testing/data/eth_in"],
+                "stopAtEntry": false,
+                "cwd": "${workspaceFolder}",
+                "environment": [],
+                "externalConsole": false,
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    }
+                ],
+                "preLaunchTask": "build"
+            }
+        ]
+    }
+
+

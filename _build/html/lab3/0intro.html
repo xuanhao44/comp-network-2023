@@ -248,7 +248,7 @@
 <h2><span class="section-number">4.3. </span>ARP接收处理过程<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现arp_in()函数，功能如下：</p>
 <p><strong>Step1</strong> ：首先判断数据长度，如果数据长度小于ARP头部长度，则认为数据包不完整，丢弃不处理。</p>
-<p><strong>Step2</strong> ：接着，做报头检查，查看报文是否完整，检测内容包括：ARP报头的硬件类型、上层协议类型、MAC硬件地址长度、IP协议地址长度、操作类型，检测这些内存是否符合协议规定。</p>
+<p><strong>Step2</strong> ：接着，做报头检查，查看报文是否完整，检测内容包括：ARP报头的硬件类型、上层协议类型、MAC硬件地址长度、IP协议地址长度、操作类型，检测该报头是否符合协议规定。</p>
 <p><strong>Step3</strong> ：调用map_set()函数更新ARP表项。</p>
 <p><strong>Step4</strong> ：调用map_get()函数查看该接收报文的IP地址是否有对应的arp_buf缓存。</p>
 <p>如果有，则说明ARP分组队列里面有待发送的数据包。也就是上一次调用arp_out()函数发送来自IP层的数据包时，由于没有找到对应的MAC地址进而先发送的ARP request报文，此时收到了该request的应答报文。然后，将缓存的数据包arp_buf再发送给以太网层，即调用ethernet_out()函数直接发出去，接着调用map_delete()函数将这个缓存的数据包删除掉。</p>
