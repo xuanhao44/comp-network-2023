@@ -455,7 +455,7 @@ Server-PT默认开启HTTP服务。单击Server1图标，在弹出的窗口中选
 
 接着，点击“Show All/None”按钮，去掉所有协议，然后再点击“Edit Filters”，在弹出的窗口中，选择“Misc”选项卡，在该选项卡中选择“FTP”协议即可。最后，再单击“Play”三角形图标，开始抓包。   
 
-在PC1上Command Prompt命令框中，输入ftp 192.168.3.14（Server0地址），输入账号密码，查看数据包走向。
+在PC1上Command Prompt命令框中，输入ftp 202.169.10.2（Server0外网地址），输入账号密码，查看数据包走向。
 
 
 .. image:: cisco-24.png 
