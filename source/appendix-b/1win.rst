@@ -204,6 +204,9 @@ Eth、ARP、IP或ICMP调试
 
 main调试
 ------------------------------ 
+main调试有两种方法，如果第一种方法不能调试，则可以尝试使用第二种方法。
+
+**1. CMAKE调试法：** 
 
 当我们做到UDP实验时，需要使用main程序进行调试。main程序的调试方法和上述的Eth、ARP、IP或ICMP程序的调试方法是不一样的。如果想要对main进行编译和调试，可以在main[main.exe]这一项点击右键，再点击“生成”进行编译。
 
@@ -213,6 +216,49 @@ main调试
 编译完成后，可以在代码行前增加断点，然后选择“调试”，接下来，也可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。
 
 .. image:: vscode4.png
+
+**2. Run and test调试法：** 
+
+如果上述方式调试不了，也可以手动改一下launch.json文件。
+
+以下是 **main** 调试的完整的launch.json，大家可以参考下面的来修改：
+
+
+.. code-block:: json
+   :linenos:
+
+   {
+       "version": "0.2.0",
+       "configurations": [
+           {
+               "name": "gcc.exe build and debug active file",
+               "type": "cppdbg",
+               "request": "launch",
+               "program": "${workspaceFolder}\\build\\main.exe",
+               "args": [],
+               "stopAtEntry": false,
+               "cwd": "${workspaceFolder}",
+               "environment": [],
+               "externalConsole": false,
+               "MIMode": "gdb",
+               "miDebuggerPath": "C:\\TDM-GCC-64\\bin\\gdb.exe",
+               "setupCommands": [
+                  {
+                       "description": "Enable pretty-printing for gdb",
+                       "text": "-enable-pretty-printing",
+                       "ignoreFailures": true
+                  }
+               ],
+               "preLaunchTask": "build"
+           }
+       ]
+   }
+
+注意，"args"不需要填参数。
+
+单击VSCode左侧的“运行和调试（run）”工具栏，单击“gcc.exe”按钮，在代码中打上断点。比如我们想要调试ethernet_in函数，可以在该函数中打上断点，然后选择“调试”，接下来，也可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。
+
+.. image:: gdb-6.png
 
 .. hint:: 
    协议栈的Eth、ARP、IP、ICMP协议实验提供了自测环境，该自测环境是自构建了一套读写离线数据包的驱动层，然后通过对比log和pcap文件来分析这些协议是否能收发。因此， **在Eth、ARP、IP、ICMP协议实验中，不要修改config.h头文件中的NET_IF_IP和NET_IF_MAC** 。

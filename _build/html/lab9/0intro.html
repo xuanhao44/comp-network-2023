@@ -450,6 +450,8 @@
 <section id="id7">
 <h3><span class="section-number">4.2.1. </span>telnet命令测试准备工作<a class="headerlink" href="#id7" title="永久链接至标题"></a></h3>
 <p>在测试之前，请先登录网络邮箱，开启POP3/SMTP服务。</p>
+<p>以下是QQ邮箱的POP3/SMTP服务开启方法，你也可以使用其他网络邮箱。</p>
+<img alt="../_images/lab-3.png" src="../_images/lab-3.png" />
 <img alt="../_images/lab-1.png" src="../_images/lab-1.png" />
 <p>在telnet与SMTP交互过程中，你需要提前准备好 <strong>base64编码的邮件用户名和邮件授权码</strong> 。获取一个字符串的base64编码的方法为：</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">$ </span><span class="nb">printf</span> <span class="s2">&quot;username&quot;</span> <span class="p">|</span> openssl base64

@@ -254,10 +254,46 @@
 </section>
 <section id="main">
 <h3><span class="section-number">1.2.2. </span>main调试<a class="headerlink" href="#main" title="永久链接至标题"></a></h3>
+<p>main调试有两种方法，如果第一种方法不能调试，则可以尝试使用第二种方法。</p>
+<p><strong>1. CMAKE调试法：</strong></p>
 <p>当我们做到UDP实验时，需要使用main程序进行调试。main程序的调试方法和上述的Eth、ARP、IP或ICMP程序的调试方法是不一样的。如果想要对main进行编译和调试，可以在main[main.exe]这一项点击右键，再点击“生成”进行编译。</p>
 <a class="reference internal image-reference" href="../_images/vscode1.png"><img alt="../_images/vscode1.png" src="../_images/vscode1.png" style="width: 314.5px; height: 371.0px;" /></a>
 <p>编译完成后，可以在代码行前增加断点，然后选择“调试”，接下来，也可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。</p>
 <img alt="../_images/vscode4.png" src="../_images/vscode4.png" />
+<p><strong>2. Run and test调试法：</strong></p>
+<p>如果上述方式调试不了，也可以手动改一下launch.json文件。</p>
+<p>以下是 <strong>main</strong> 调试的完整的launch.json，大家可以参考下面的来修改：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="nt">&quot;configurations&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gcc.exe build and debug active file&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cppdbg&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">            </span><span class="nt">&quot;request&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;launch&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">            </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}\\build\\main.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">            </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">            </span><span class="nt">&quot;stopAtEntry&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">            </span><span class="nt">&quot;cwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">            </span><span class="nt">&quot;environment&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">            </span><span class="nt">&quot;externalConsole&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">            </span><span class="nt">&quot;MIMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;gdb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">15</span><span class="w">            </span><span class="nt">&quot;miDebuggerPath&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\TDM-GCC-64\\bin\\gdb.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">16</span><span class="w">            </span><span class="nt">&quot;setupCommands&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="linenos">17</span><span class="w">               </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">18</span><span class="w">                    </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Enable pretty-printing for gdb&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">19</span><span class="w">                    </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-enable-pretty-printing&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos">20</span><span class="w">                    </span><span class="nt">&quot;ignoreFailures&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w"></span>
+<span class="linenos">21</span><span class="w">               </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">22</span><span class="w">            </span><span class="p">],</span><span class="w"></span>
+<span class="linenos">23</span><span class="w">            </span><span class="nt">&quot;preLaunchTask&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build&quot;</span><span class="w"></span>
+<span class="linenos">24</span><span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">25</span><span class="w">    </span><span class="p">]</span><span class="w"></span>
+<span class="linenos">26</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>注意，”args”不需要填参数。</p>
+<p>单击VSCode左侧的“运行和调试（run）”工具栏，单击“gcc.exe”按钮，在代码中打上断点。比如我们想要调试ethernet_in函数，可以在该函数中打上断点，然后选择“调试”，接下来，也可以愉快地进行暂停、单步跳过、单步调试、单步跳出、重启、停止等这些调试操作了。</p>
+<img alt="../_images/gdb-6.png" src="../_images/gdb-6.png" />
 <div class="admonition hint">
 <p class="admonition-title">提示</p>
 <p>协议栈的Eth、ARP、IP、ICMP协议实验提供了自测环境，该自测环境是自构建了一套读写离线数据包的驱动层，然后通过对比log和pcap文件来分析这些协议是否能收发。因此， <strong>在Eth、ARP、IP、ICMP协议实验中，不要修改config.h头文件中的NET_IF_IP和NET_IF_MAC</strong> 。</p>

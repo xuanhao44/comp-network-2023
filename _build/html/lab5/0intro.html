@@ -209,7 +209,7 @@
 <h2><span class="section-number">4.1. </span>IP数据报输入处理<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <p>同学们需要自行实现ip_in()函数，功能如下：</p>
 <p><strong>Step1</strong> ：如果数据包的长度小于IP头部长度，丢弃不处理。</p>
-<p><strong>Step2</strong> ：接下来做报头检测，检查内容至少包括：IP头部的版本号是否是IPv4，总长度字段是否小于接收到的数据包的长度等，如果不符合这些要求，则丢弃不处理。</p>
+<p><strong>Step2</strong> ：接下来做报头检测，检查内容至少包括：IP头部的版本号是否为IPv4，总长度字段小于或等于收到的包的长度等，如果不符合这些要求，则丢弃不处理。</p>
 <p><strong>Step3</strong> ：先把IP头部的头部校验和字段用其他变量保存起来，接着将该头部校验和字段置0，然后调用checksum16函数来计算头部校验和，如果与IP头部的首部校验和字段不一致，丢弃不处理，如果一致，则再将该头部校验和字段恢复成原来的值。</p>
 <p><strong>Step4</strong> ：对比目的IP地址是否为本机的IP地址，如果不是，则丢弃不处理。</p>
 <p><strong>Step5</strong> ：如果接收到的数据包的长度大于IP头部的总长度字段，则说明该数据包有填充字段，可调用buf_remove_padding()函数去除填充字段。</p>
