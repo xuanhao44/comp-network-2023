@@ -359,6 +359,7 @@
 <img alt="../_images/cisco-71.png" src="../_images/cisco-71.png" />
 <p>在Server0上验证Server1的连通性，如图：</p>
 <img alt="../_images/cisco-81.png" src="../_images/cisco-81.png" />
+<p>此时，在R0上再使用命令“show ip nat translations”查看nat地址转换表，应该会多了ICMP协议类型数据包，但因为没有配置外部网络的本地地址和全局地址，所以显示的外部本地地址和外部全局地址都是一样的。</p>
 <div class="admonition attention">
 <p class="admonition-title">注意</p>
 <p>请思考，此时为什么在PC0上能ping通Server1，但是Server0却ping不通Server1？</p>
@@ -471,7 +472,7 @@
 <img alt="../_images/cisco-18.png" src="../_images/cisco-18.png" />
 <p>在R0上使用命令“show ip nat translations”查看nat地址转换表：</p>
 <img alt="../_images/cisco-19.png" src="../_images/cisco-19.png" />
-<p>每刷新一次浏览器页面，查看一次，IP地址也不会改变，但是端口号会编号。</p>
+<p>每刷新一次浏览器页面，查看一次，IP地址也不会改变，但是端口号会变化。</p>
 <div class="admonition attention">
 <p class="admonition-title">注意</p>
 <p>请思考，Router0如何区分Server1返回给不同主机的报文？</p>

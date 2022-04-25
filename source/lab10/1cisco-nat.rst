@@ -236,6 +236,8 @@ Server1       202.169.10.1/24           （可以不用设置网关）
 
 .. image:: cisco-8.png 	
 
+此时，在R0上再使用命令“show ip nat translations”查看nat地址转换表，应该会多了ICMP协议类型数据包，但因为没有配置外部网络的本地地址和全局地址，所以显示的外部本地地址和外部全局地址都是一样的。
+
 .. attention:: 请思考，此时为什么在PC0上能ping通Server1，但是Server0却ping不通Server1？
 
    *（请把答案写到实验报告中）*
@@ -384,7 +386,7 @@ Server-PT默认开启HTTP服务。单击Server1图标，在弹出的窗口中选
 
 .. image:: cisco-19.png 
 
-每刷新一次浏览器页面，查看一次，IP地址也不会改变，但是端口号会编号。
+每刷新一次浏览器页面，查看一次，IP地址也不会改变，但是端口号会变化。
 
 .. attention:: 请思考，Router0如何区分Server1返回给不同主机的报文？
 

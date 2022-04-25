@@ -17,7 +17,7 @@ wireshark有时候不校验IPv4首部校验和及UDP校验和，你需要在wire
 
 .. image:: lab7-2.png
 
-找到“IP”，选择“Validate the IPv4 checksum if possible”。
+找到“IPv4”，选择“Validate the IPv4 checksum if possible”。
 
 .. image:: lab7-4.png
 
