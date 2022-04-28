@@ -38,10 +38,24 @@ wireshark有时候不校验IPv4首部校验和及UDP校验和，你需要在wire
 .. image:: lab7-6.png
 
 .. image:: lab7-7.png
+
+有些同学在使用无线网卡时，在网卡高级属性里没有上述对应的选项，那就无法打开校验和检测功能，建议最好能用有线网卡来测试实验。
+
+详见Wireshark的官方说明：https://wiki.wireshark.org/CaptureSetup/Offloading
+
    
 UDP实验不能GDB调试吗？
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 UDP实验也能用GDB调试，调试方法和Eth、ARP、IP、ICMP实验不一样，可参考 `main调试`_ 方法。
 
 .. _main调试: ../appendix-b/1win.html#main
+
+
+UDP调试工具每点击一次发送，Wireshark能捕获到两个包？
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+如下图所示：
+
+.. image:: lab7-8.png
+
+这种情况也算是对的，只要你的协议栈能回复一个包就行。UDP调试工具同时发送两个包估计是npcap的bug，详见：https://github.com/nmap/npcap/issues/58
 

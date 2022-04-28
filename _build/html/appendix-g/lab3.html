@@ -68,6 +68,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">3. Lab3 常见问题（ARP）</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#out-pcapdemo-pcap">3.1. out.pcap和demo.pcap文件对不上？</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arp-insrc-macbufarpsender-mac">3.2. arp_in函数这第二个参数src_mac和buf里面arp报文的sender_mac有什么区别？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gdbarp-map-setkey-value-map-get">3.3. GDB单步调试ARP，使用map_set设置一个键值对key-value，紧着使用map_get无法读出来？</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lab7.html">4. Lab7 常见问题（UDP）</a></li>
@@ -119,6 +120,26 @@
 <p>如下图：</p>
 <img alt="../_images/lab3-2.png" src="../_images/lab3-2.png" />
 <p>这两个参数应该是一样的。</p>
+</section>
+<section id="gdbarp-map-setkey-value-map-get">
+<h2><span class="section-number">3.3. </span>GDB单步调试ARP，使用map_set设置一个键值对key-value，紧着使用map_get无法读出来？<a class="headerlink" href="#gdbarp-map-setkey-value-map-get" title="永久链接至标题"></a></h2>
+<p>代码如下：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w"> </span><span class="n">map_set</span><span class="p">(</span><span class="o">&amp;</span><span class="n">arp_buf</span><span class="p">,</span><span class="w"> </span><span class="n">ip</span><span class="p">,</span><span class="w"> </span><span class="n">buf</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">2</span><span class="w"> </span><span class="n">buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">old_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map_get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">arp_buf</span><span class="p">,</span><span class="w"> </span><span class="n">ip</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
+<p>使用GDB调试时，发现读出的old_buf为空，找不到刚刚写入的arp_buf。</p>
+<p>原因是map键值对容器里，给每个key-value键值对都设置了timeout超时时间。</p>
+<p>如下所示，arp_buf里的timeout为ARP_MIN_INTERVAL时间。使用GDB单步调试，应该是当你单步到map_get时，已经超时了。如果你确实想用GDB来调试，建议你把改一下超时时间，调试完成后，再将其改为ARP_MIN_INTERVAL。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">arp_init</span><span class="p">()</span><span class="w"></span>
+<span class="linenos">2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">3</span><span class="w">     </span><span class="n">map_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">arp_table</span><span class="p">,</span><span class="w"> </span><span class="n">NET_IP_LEN</span><span class="p">,</span><span class="w"> </span><span class="n">NET_MAC_LEN</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ARP_TIMEOUT_SEC</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">4</span><span class="w">     </span><span class="n">map_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">arp_buf</span><span class="p">,</span><span class="w"> </span><span class="n">NET_IP_LEN</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buf_t</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">ARP_MIN_INTERVAL</span><span class="p">,</span><span class="w"> </span><span class="n">buf_copy</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">5</span><span class="w">     </span><span class="n">net_add_protocol</span><span class="p">(</span><span class="n">NET_PROTOCOL_ARP</span><span class="p">,</span><span class="w"> </span><span class="n">arp_in</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">6</span><span class="w">     </span><span class="n">arp_req</span><span class="p">(</span><span class="n">net_if_ip</span><span class="p">);</span><span class="w"></span>
+<span class="linenos">7</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
 </section>
 </section>
 

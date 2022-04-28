@@ -28,3 +28,31 @@ arp_in函数这第二个参数src_mac和buf里面arp报文的sender_mac有什么
 .. image:: lab3-2.png
 
 这两个参数应该是一样的。
+
+GDB单步调试ARP，使用map_set设置一个键值对key-value，紧着使用map_get无法读出来？
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+代码如下：
+
+.. code-block:: c
+   :linenos:
+
+    map_set(&arp_buf, ip, buf);
+    buf_t *old_buf = map_get(&arp_buf, ip);
+
+使用GDB调试时，发现读出的old_buf为空，找不到刚刚写入的arp_buf。
+
+原因是map键值对容器里，给每个key-value键值对都设置了timeout超时时间。
+
+如下所示，arp_buf里的timeout为ARP_MIN_INTERVAL时间。使用GDB单步调试，应该是当你单步到map_get时，已经超时了。如果你确实想用GDB来调试，建议你把改一下超时时间，调试完成后，再将其改为ARP_MIN_INTERVAL。
+
+.. code-block:: c
+   :linenos:
+
+    void arp_init()
+    {
+        map_init(&arp_table, NET_IP_LEN, NET_MAC_LEN, 0, ARP_TIMEOUT_SEC, NULL);
+        map_init(&arp_buf, NET_IP_LEN, sizeof(buf_t), 0, ARP_MIN_INTERVAL, buf_copy);
+        net_add_protocol(NET_PROTOCOL_ARP, arp_in);
+        arp_req(net_if_ip);
+    }

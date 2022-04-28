@@ -69,6 +69,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#wiresharkudp-udp">4.1. wireshark能捕获到UDP的收发包，但是UDP调试工具没有接收到？</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#wiresharkipchecksum0">4.2. 使用wireshark捕获的IP报文的checksum为什么是0？</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#udpgdb">4.3. UDP实验不能GDB调试吗？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#udp-wireshark">4.4. UDP调试工具每点击一次发送，Wireshark能捕获到两个包？</a></li>
 </ul>
 </li>
 </ul>
@@ -123,10 +124,18 @@
 <p>出现这种问题的原因，一般是开启电脑网卡的“硬件校验和”功能。只要开启该功能就不会进行校验和的计算，降低协议处理开销，从而提高数据转发的速度。然而，如果IP首部的IP地址遇到损坏，可能会对其他通信造成不好的影响。为了通过实验测试，还是建议同学们打开校验和检测功能。</p>
 <img alt="../_images/lab7-6.png" src="../_images/lab7-6.png" />
 <img alt="../_images/lab7-7.png" src="../_images/lab7-7.png" />
+<p>有些同学在使用无线网卡时，在网卡高级属性里没有上述对应的选项，那就无法打开校验和检测功能，建议最好能用有线网卡来测试实验。</p>
+<p>详见Wireshark的官方说明：<a class="reference external" href="https://wiki.wireshark.org/CaptureSetup/Offloading">https://wiki.wireshark.org/CaptureSetup/Offloading</a></p>
 </section>
 <section id="udpgdb">
 <h2><span class="section-number">4.3. </span>UDP实验不能GDB调试吗？<a class="headerlink" href="#udpgdb" title="永久链接至标题"></a></h2>
 <p>UDP实验也能用GDB调试，调试方法和Eth、ARP、IP、ICMP实验不一样，可参考 <a class="reference external" href="../appendix-b/1win.html#main">main调试</a> 方法。</p>
+</section>
+<section id="udp-wireshark">
+<h2><span class="section-number">4.4. </span>UDP调试工具每点击一次发送，Wireshark能捕获到两个包？<a class="headerlink" href="#udp-wireshark" title="永久链接至标题"></a></h2>
+<p>如下图所示：</p>
+<img alt="../_images/lab7-8.png" src="../_images/lab7-8.png" />
+<p>这种情况也算是对的，只要你的协议栈能回复一个包就行。UDP调试工具同时发送两个包估计是npcap的bug，详见：<a class="reference external" href="https://github.com/nmap/npcap/issues/58">https://github.com/nmap/npcap/issues/58</a></p>
 </section>
 </section>
 
