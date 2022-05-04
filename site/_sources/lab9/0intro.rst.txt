@@ -16,7 +16,7 @@
 实验原理
 =====================
 
-电子邮件的发送和接受过程
+电子邮件的发送和接收过程
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 这里先给出用户A从QQ邮箱发送邮件到用户B 163邮箱的图示，然后对图示的过程进行详细的介绍：
@@ -519,7 +519,7 @@ telnet测试完成后，保存好wireshark捕获到的报文。
 
 .. _实验相关链接: ../index.html#id3
 
-请按要求补充这两个文件。执行make编译后，会生成send和recv两个程序。send程序需要接受命令行参数，它的使用方法为：
+请按要求补充这两个文件。执行make编译后，会生成send和recv两个程序。send程序需要接收命令行参数，它的使用方法为：
 
 .. code-block:: console
    :linenos:
@@ -551,6 +551,8 @@ recv不需要任何参数，直接执行即可。
    :linenos:
 
    ./send example@example.org -s "Mail subject" -m message.txt -a "attachment.zip"
+
+"attachment.zip"可以自己生成或指定。
 
 运行下述命令与POP3服务器进行交互：
 

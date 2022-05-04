@@ -55,7 +55,7 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">1. 实验目的</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">2. 实验任务</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">3. 实验原理</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">3.1. 电子邮件的发送和接受过程</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.1. 电子邮件的发送和接收过程</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#smtp">3.2. SMTP协议工作机制</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pop3">3.3. POP3协议工作机制</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#internet">3.4. Internet消息格式</a></li>
@@ -132,7 +132,7 @@
 <section id="id3">
 <h1><span class="section-number">3. </span>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
 <section id="id4">
-<h2><span class="section-number">3.1. </span>电子邮件的发送和接受过程<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">3.1. </span>电子邮件的发送和接收过程<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <p>这里先给出用户A从QQ邮箱发送邮件到用户B 163邮箱的图示，然后对图示的过程进行详细的介绍：</p>
 <img alt="../_images/邮件.png" src="../_images/邮件.png" />
 <p>图示的六个步骤分别进行如下的说明：</p>
@@ -587,7 +587,7 @@
 <section id="id10">
 <h2><span class="section-number">4.3. </span>代码框架说明<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>本实验准备了一个代码框架 <a class="reference external" href="../index.html#id3">实验相关链接</a> ，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。关于socket套接字接口函数的用法可参考  <a class="reference internal" href="../appendix-d/3socket.html"><span class="doc">socket编程简介</span></a> 。</p>
-<p>请按要求补充这两个文件。执行make编译后，会生成send和recv两个程序。send程序需要接受命令行参数，它的使用方法为：</p>
+<p>请按要求补充这两个文件。执行make编译后，会生成send和recv两个程序。send程序需要接收命令行参数，它的使用方法为：</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">./send RECIPIENT [-s SUBJECT] [-m MESSAGE] [-a ATTACHMENT]</span>
 </pre></div>
 </div>
@@ -613,6 +613,7 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">./send example@example.org -s &quot;Mail subject&quot; -m message.txt -a &quot;attachment.zip&quot;</span>
 </pre></div>
 </div>
+<p>“attachment.zip”可以自己生成或指定。</p>
 <p>运行下述命令与POP3服务器进行交互：</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">./recv</span>
 </pre></div>
