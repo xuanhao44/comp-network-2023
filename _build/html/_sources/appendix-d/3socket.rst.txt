@@ -88,7 +88,7 @@ connect函数用于向指定的服务器和端口发送连接请求。
    }
 
 1. sin_family表示协议的地址族，IP协议必须为AF_INET；
-2. sin_port表示TCP/UDP的端口号；
+2. sin_port表示TCP/UDP的端口号，可别忘记大小端转换了：）
 3. sin_zero用于使各种协议族保持结构大小一致的填充字段，IP协议中，此字段填充为8位的零（建议使用bzero函数）；
 4. sin_addr表示IP地址，它也是一个结构体。
    

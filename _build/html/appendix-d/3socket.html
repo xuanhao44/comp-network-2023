@@ -178,7 +178,7 @@
 </div>
 <ol class="arabic simple">
 <li><p>sin_family表示协议的地址族，IP协议必须为AF_INET；</p></li>
-<li><p>sin_port表示TCP/UDP的端口号；</p></li>
+<li><p>sin_port表示TCP/UDP的端口号，可别忘记大小端转换了：）</p></li>
 <li><p>sin_zero用于使各种协议族保持结构大小一致的填充字段，IP协议中，此字段填充为8位的零（建议使用bzero函数）；</p></li>
 <li><p>sin_addr表示IP地址，它也是一个结构体。</p></li>
 </ol>
