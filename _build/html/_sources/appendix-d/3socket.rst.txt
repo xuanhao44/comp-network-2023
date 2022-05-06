@@ -90,7 +90,23 @@ connect函数用于向指定的服务器和端口发送连接请求。
 1. sin_family表示协议的地址族，IP协议必须为AF_INET；
 2. sin_port表示TCP/UDP的端口号；
 3. sin_zero用于使各种协议族保持结构大小一致的填充字段，IP协议中，此字段填充为8位的零（建议使用bzero函数）；
-4. sin_addr表示IP地址，它也是一个结构体。在邮件客户端代码框架中，我们调用gethostbyname函数根据DNS域名获取到了char类型的dest_ip，接着可以使用inet_addr函数把它转换成32位二进制网络字节序的IPv4地址。
+4. sin_addr表示IP地址，它也是一个结构体。
+   
+.. code-block:: c
+   :linenos:
+
+   struct in_addr{
+      unsigned long s_addr; 
+   }
+
+与常见的IP地址（如“192.168.1.0”）不同，struct in_addr结构体定义的IP地址是一个无符号长整形的数，所以在填充地址时，需要将字符串表示的IP地址与32位二进制形式的IP地址进行转换。在邮件客户端代码框架中，我们调用gethostbyname函数根据DNS域名获取到了char类型的dest_ip，接着可以使用inet_addr函数把它转换成32位二进制网络字节序的IPv4地址。
+
+.. code-block:: c
+   :linenos:
+
+    #include <arpa/inet.h>
+    
+    unsigned long inet_addr(const char* strptr);
 
 3） addrlen参数是套接字地址结构（sockaddr）的长度。
 

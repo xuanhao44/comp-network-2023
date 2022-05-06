@@ -180,8 +180,19 @@
 <li><p>sin_family表示协议的地址族，IP协议必须为AF_INET；</p></li>
 <li><p>sin_port表示TCP/UDP的端口号；</p></li>
 <li><p>sin_zero用于使各种协议族保持结构大小一致的填充字段，IP协议中，此字段填充为8位的零（建议使用bzero函数）；</p></li>
-<li><p>sin_addr表示IP地址，它也是一个结构体。在邮件客户端代码框架中，我们调用gethostbyname函数根据DNS域名获取到了char类型的dest_ip，接着可以使用inet_addr函数把它转换成32位二进制网络字节序的IPv4地址。</p></li>
+<li><p>sin_addr表示IP地址，它也是一个结构体。</p></li>
 </ol>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">struct</span><span class="w"> </span><span class="nc">in_addr</span><span class="p">{</span><span class="w"></span>
+<span class="linenos">2</span><span class="w">   </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">s_addr</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">3</span><span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>与常见的IP地址（如“192.168.1.0”）不同，struct in_addr结构体定义的IP地址是一个无符号长整形的数，所以在填充地址时，需要将字符串表示的IP地址与32位二进制形式的IP地址进行转换。在邮件客户端代码框架中，我们调用gethostbyname函数根据DNS域名获取到了char类型的dest_ip，接着可以使用inet_addr函数把它转换成32位二进制网络字节序的IPv4地址。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w"> </span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;arpa/inet.h&gt;</span><span class="cp"></span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="nf">inet_addr</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">strptr</span><span class="p">);</span><span class="w"></span>
+</pre></div>
+</div>
 <p>3） addrlen参数是套接字地址结构（sockaddr）的长度。</p>
 </section>
 <section id="send">

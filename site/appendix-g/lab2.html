@@ -65,10 +65,11 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">常见问题</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="lab1.html">1. Lab1 常见问题（VLAN）</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">2. Lab2 常见问题（Eth）</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#cmaketdm-gcc-vscodecmake">2.1. 安装完CMAKE和TDM GCC后，VSCode的CMAKE上找不到项目的可执行程序？</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cmake">2.2. CMake报错</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ctest">2.3. ctest运行报错</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cmake-gdb">2.4. 能用CMAKE编译，不能用GDB调试？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.1. 进行环境配置时，选择编译器后报错？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmaketdm-gcc-vscodecmake">2.2. 安装完CMAKE和TDM GCC后，VSCode的CMAKE上找不到项目的可执行程序？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake">2.3. CMake报错</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ctest">2.4. ctest运行报错</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cmake-gdb">2.5. 能用CMAKE编译，不能用GDB调试？</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lab3.html">3. Lab3 常见问题（ARP）</a></li>
@@ -106,8 +107,21 @@
 <h1><span class="section-number">2. </span>Lab2 常见问题（Eth）<a class="headerlink" href="#lab2-eth" title="永久链接至标题"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<section id="id1">
+<h2><span class="section-number">2.1. </span>进行环境配置时，选择编译器后报错？<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>如下图所示</p>
+<img alt="../_images/lab2-12.png" src="../_images/lab2-12.png" />
+<p>解决方案：
+当前根目录下（即你通过VSCode的打开文件夹功能打开的文件夹）缺少“.code-workspace”文件，需要点击“文件”-&gt;“将工作区另存为”，见下图.</p>
+<a class="reference internal image-reference" href="../_images/lab2-13.png"><img alt="../_images/lab2-13.png" src="../_images/lab2-13.png" style="width: 510.40000000000003px; height: 499.20000000000005px;" /></a>
+<p>然后工作区就会出现“.code-workspace”文件，见下图</p>
+<img alt="../_images/lab2-14.png" src="../_images/lab2-14.png" />
+<p>打开“.code-workspace”文件，然后在settings中添加配置：
+“cmake.generator”: “MinGW Makefiles”</p>
+<img alt="../_images/lab2-15.png" src="../_images/lab2-15.png" />
+</section>
 <section id="cmaketdm-gcc-vscodecmake">
-<h2><span class="section-number">2.1. </span>安装完CMAKE和TDM GCC后，VSCode的CMAKE上找不到项目的可执行程序？<a class="headerlink" href="#cmaketdm-gcc-vscodecmake" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">2.2. </span>安装完CMAKE和TDM GCC后，VSCode的CMAKE上找不到项目的可执行程序？<a class="headerlink" href="#cmaketdm-gcc-vscodecmake" title="永久链接至标题"></a></h2>
 <p>如下图所示，找不到项目的可执行程序。</p>
 <a class="reference internal image-reference" href="../_images/lab2.png"><img alt="../_images/lab2.png" src="../_images/lab2.png" style="width: 235.0px; height: 291.0px;" /></a>
 <p>首先，你需要先检查 “C:\Users\你自己电脑的用户名\AppData\Local\CMakeTools\CMakeTools-tools-kits.json”文件，该文件正常的配置应该如下图所示。</p>
@@ -123,7 +137,7 @@
 <p>如果还不行，删掉本工程目录下的.vscode\settings.json文件，再重新扫描[Scan for kits]。</p>
 </section>
 <section id="cmake">
-<h2><span class="section-number">2.2. </span>CMake报错<a class="headerlink" href="#cmake" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">2.3. </span>CMake报错<a class="headerlink" href="#cmake" title="永久链接至标题"></a></h2>
 <p>CMake报错的情况以下几种情况：</p>
 <p>1、首先参考上一题的解决方案，先确保GCC是选对了。</p>
 <p>2、检测一下你的工程目录是不是实验包的根目录。</p>
@@ -134,12 +148,12 @@
 <p>同学们可以自行检查。</p>
 </section>
 <section id="ctest">
-<h2><span class="section-number">2.3. </span>ctest运行报错<a class="headerlink" href="#ctest" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">2.4. </span>ctest运行报错<a class="headerlink" href="#ctest" title="永久链接至标题"></a></h2>
 <p>如果出现下图的情况，一般是代码有段错误了，可以用GDB跟踪调试。</p>
 <img alt="../_images/lab2-9.png" src="../_images/lab2-9.png" />
 </section>
 <section id="cmake-gdb">
-<h2><span class="section-number">2.4. </span>能用CMAKE编译，不能用GDB调试？<a class="headerlink" href="#cmake-gdb" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">2.5. </span>能用CMAKE编译，不能用GDB调试？<a class="headerlink" href="#cmake-gdb" title="永久链接至标题"></a></h2>
 <p>本题的解决方法来源于某位同学的分享，非常感谢这位乐于分享的同学！</p>
 <p>如下图，能编译，但GDB调试不了。</p>
 <img alt="../_images/lab2-10.png" src="../_images/lab2-10.png" />
