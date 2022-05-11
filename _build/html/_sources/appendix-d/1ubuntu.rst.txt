@@ -38,7 +38,7 @@ Ubuntu搭建邮件服务器
 
 **Root and postmaster mail recipient:**  比如你的ubuntu用户名是cs，那就填 cs，这样根用户等的邮箱都是cs接收。
 
-**Other destinations to accept mail for:** 选择缺省就好
+**Other destinations to accept mail for:** 新增hitsz-lab.com。
 
 **Force synchronous updates on mail queue?:** 选择 No
 
