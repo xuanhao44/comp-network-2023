@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-计算机网络实验指导书 - 2022春季 | 哈工大（深圳）
+计算机网络实验指导书 - 2023春季 | 哈工大（深圳）
 ==================================================================
 
 ..  attention:: 

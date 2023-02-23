@@ -17,8 +17,8 @@
 
 # -- Project information -----------------------------------------------------
 
-project = '计算机网络实验指导书 - 2022春季 | 哈工大（深圳）'
-copyright = '2022, qiu'
+project = '计算机网络实验指导书 - 2023春季 | 哈工大（深圳）'
+copyright = '2023, qiu'
 author = 'qiu'
 
 # The full version, including alpha/beta/rc tags
