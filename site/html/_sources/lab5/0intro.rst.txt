@@ -191,4 +191,4 @@ IP自测需要通过ip_test和ip_frag_test测试。
 GDB调试
 -------------------------------
 
-本实验支持使用GDB调试，请参考 :doc:`/appendix-b/1win` 中的“Windows下编译和调试”
+本实验可以使用GDB调试，请参考 :doc:`/appendix-b/1win` 中的“Windows下编译和调试”
