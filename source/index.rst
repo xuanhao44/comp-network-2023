@@ -41,7 +41,7 @@
 .. code-block:: sh
    :linenos:
 
-   $ git clone https://gitee.com/hitsz-lab/net-lab.git
+   $ git clone https://gitee.com/hitsz-cslab/net-lab.git
 
 获取框架代码，将克隆net-lab到当前目录。如遇问题请联系老师或助教。
 
