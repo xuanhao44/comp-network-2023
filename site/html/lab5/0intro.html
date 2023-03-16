@@ -70,6 +70,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id14">4.2. 校验和算法</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id15">4.3. IP数据报输出处理</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id16">4.4. IP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">4.5. 实验自测</a></li>
 </ul>
 </li>
 </ul>
@@ -243,6 +244,14 @@
 <p><strong>Step2</strong> ：填写IP数据报头部字段。</p>
 <p><strong>Step3</strong> ：先把IP头部的首部校验和字段填0，再调用checksum16函数计算校验和，然后把计算出来的校验和填入首部校验和字段。</p>
 <p><strong>Step4</strong> ：调用arp_out函数()将封装后的IP头部和数据发送出去。</p>
+</section>
+<section id="id17">
+<h2><span class="section-number">4.5. </span>实验自测<a class="headerlink" href="#id17" title="永久链接至标题"></a></h2>
+<p>IP自测需要通过ip_test和ip_frag_test测试。</p>
+<a class="reference internal image-reference" href="../_images/cmake8.png"><img alt="../_images/cmake8.png" src="../_images/cmake8.png" style="height: 500px;" /></a>
+<p>接着，打开VSCode的终端，到build目录下，输入ctest -R ip_test和ctest -R ip_frag_test进行自测。</p>
+<a class="reference internal image-reference" href="../_images/cmake13.png"><img alt="../_images/cmake13.png" src="../_images/cmake13.png" style="width: 574.6999999999999px; height: 303.79999999999995px;" /></a>
+<p>如果提示有错，请参照eth协议自测的排除方法来找bug。</p>
 </section>
 </section>
 

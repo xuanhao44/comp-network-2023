@@ -171,3 +171,20 @@ IP数据报输出处理
 **Step3** ：先把IP头部的首部校验和字段填0，再调用checksum16函数计算校验和，然后把计算出来的校验和填入首部校验和字段。
 
 **Step4** ：调用arp_out函数()将封装后的IP头部和数据发送出去。
+
+实验自测
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+IP自测需要通过ip_test和ip_frag_test测试。
+
+.. image:: cmake.png
+    :height: 500
+
+接着，打开VSCode的终端，到build目录下，输入ctest -R ip_test和ctest -R ip_frag_test进行自测。
+
+.. image:: cmake1.png
+    :scale: 70%
+
+如果提示有错，请参照eth协议自测的排除方法来找bug。
+
+
