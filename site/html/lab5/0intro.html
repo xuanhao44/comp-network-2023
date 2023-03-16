@@ -65,18 +65,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#id12">4. 代码实现与检测</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id13">4.1. IP数据报输入处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id14">4.2. 校验和算法</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">4.3. IP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id16">4.4. IP数据报输出处理</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id17">4.5. 实验自测</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#gdb">4.5.1. GDB调试</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id18">5. 实验提交</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
@@ -170,7 +158,7 @@
 <li><p><strong>标识</strong> ：唯一地标识主机发送的每一个数据报，其初始值是随机的，每发送一个数据报其值就加1。同一个数据报的所有分片都具有相同的标识值。本实验中，标识字段可从0开始计数，然后往上自增。</p></li>
 <li><p><strong>标志</strong> : 位1保留，位2表禁止分片(DF)，若设置了此位，IP模块将不对数据报进行分片，在此情况下若IP数据报超过MTU，IP模块将丢弃数据报并返回一个ICMP差错报文；位3标识更多分片(MF)，除了数据报的最后一个分片，其他分片都要把它设置为1。</p></li>
 <li><p><strong>位偏移</strong> ：分片相对原始IP数据报数据部分的偏移。实际的偏移值为该值左移3位后得到的，所以除了最后一个IP数据报分片外，每个IP分片的数据部分的长度都必须是8的整数倍。</p></li>
-<li><p><strong>生存时间</strong> :：数据报到达目的地之前允许经过的路由器跳数。TTL值被发送端设置，常设置为64。数据报在转发过程中每经过一个路由该值就被路由器减1.当TTL值为0时，路由器就将该数据包丢弃，并向源端发送一个ICMP差错报文。TTL可以防止数据报陷入路由循环。</p></li>
+<li><p><strong>生存时间</strong> ：数据报到达目的地之前允许经过的路由器跳数。TTL值被发送端设置，常设置为64。数据报在转发过程中每经过一个路由该值就被路由器减1.当TTL值为0时，路由器就将该数据包丢弃，并向源端发送一个ICMP差错报文。TTL可以防止数据报陷入路由循环。</p></li>
 <li><p><strong>协议</strong> : 区分IP协议上的上层协议。在Linux系统的/etc/protocols文件中定义了所有上层协议对应的协议字段，ICMP为1，TCP为6，UDP为17。</p></li>
 <li><p><strong>头部校验和</strong> ： 由发送端填充接收端对其使用CRC算法校验，检查IP数据报头部在传输过程中是否损坏。</p></li>
 <li><p><strong>源IP地址和目的IP地址</strong> : 表示数据报的发送端和接收端。一般情况下这两个地址在整个数据报传递过程中保持不变，不论中间经过多少个路由器。</p></li>
@@ -201,70 +189,6 @@
 <p>接收端收到后，首先备份校验和字段，接着把接收报文中的校验和字段置为0，然后把校验和要计算的数据看出是一串16bit的半字组成，并对每个16bit依次进行反码求和，最后比较备份的校验和与计算出来的校验和是否一致，如果一致，则说明传输没有任何差错，反之则认为接收到的报文有错，丢弃不处理。</p>
 </section>
 </section>
-</section>
-<section id="id12">
-<h1><span class="section-number">4. </span>代码实现与检测<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
-<p>请同学们认真阅读本实验提供的代码框架，并补充完整src/ip.c文件中的ip_in()函数、ip_out()函数和ip_fragment_out()函数，以及src/utils.c文件中的checksum16() 函数。</p>
-<section id="id13">
-<h2><span class="section-number">4.1. </span>IP数据报输入处理<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
-<p>同学们需要自行实现ip_in()函数，功能如下：</p>
-<p><strong>Step1</strong> ：如果数据包的长度小于IP头部长度，丢弃不处理。</p>
-<p><strong>Step2</strong> ：接下来做报头检测，检查内容至少包括：IP头部的版本号是否为IPv4，总长度字段小于或等于收到的包的长度等，如果不符合这些要求，则丢弃不处理。</p>
-<p><strong>Step3</strong> ：先把IP头部的头部校验和字段用其他变量保存起来，接着将该头部校验和字段置0，然后调用checksum16函数来计算头部校验和，如果与IP头部的首部校验和字段不一致，丢弃不处理，如果一致，则再将该头部校验和字段恢复成原来的值。</p>
-<p><strong>Step4</strong> ：对比目的IP地址是否为本机的IP地址，如果不是，则丢弃不处理。</p>
-<p><strong>Step5</strong> ：如果接收到的数据包的长度大于IP头部的总长度字段，则说明该数据包有填充字段，可调用buf_remove_padding()函数去除填充字段。</p>
-<p><strong>Step6</strong> ：调用buf_remove_header()函数去掉IP报头。</p>
-<p><strong>Step7</strong> ：调用net_in()函数向上层传递数据包。如果是不能识别的协议类型，即调用icmp_unreachable()返回ICMP协议不可达信息。</p>
-</section>
-<section id="id14">
-<h2><span class="section-number">4.2. </span>校验和算法<a class="headerlink" href="#id14" title="永久链接至标题"></a></h2>
-<p>同学们需要自行实现checksum16()函数，可参考上述实验原理中的 <a class="reference internal" href="#id8">校验和计算说明</a> ：</p>
-<div class="admonition attention">
-<p class="admonition-title">注意</p>
-<p>checksum16()函数在src/utils.文件。</p>
-</div>
-<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">checksum16</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">)</span><span class="w"></span>
-<span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="c1">// TODO</span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-<p><strong>Step1</strong> ：把data看成是每16个bit（即2个字节）组成一个数，相加（注意，16位加法的结果可能会超过16位，因此加法结果需要用32位数来保存）。</p>
-<p><strong>Step2</strong> ：如果最后还剩8个bit值，也要相加这个8bit值。</p>
-<p><strong>Step3</strong> ：判断相加后32bit结果值的高16位是否为0，如果不为0，则将高16位和低16位相加，依次循环，直至高16位为0为止。</p>
-<p><strong>Step4</strong> ：将上述的和（低16位）取反，即得到校验和。</p>
-</section>
-<section id="id15">
-<h2><span class="section-number">4.3. </span>IP数据报输出处理<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
-<p>同学们需要自行实现ip_out()函数，功能如下：</p>
-<p><strong>Step1</strong> ：首先检查从上层传递下来的数据报包长是否大于IP协议最大负载包长（1500字节（MTU） 减去IP首部长度）。</p>
-<p><strong>Step2</strong> ：如果超过IP协议最大负载包长，则需要分片发送。首先调用buf_init()初始化一个ip_buf,将数据报包长截断，每个截断后的包长 = IP协议最大负载包长（1500字节 - IP首部长度），调用ip_fragment_out()函数发送出去。如果截断后最后的一个分片小于或等于IP协议最大负载包长，调用buf_init()初始化一个ip_buf，大小等于该分片大小，再调用ip_fragment_out()函数发送出去。注意，最后一个分片的MF = 0。</p>
-<p><strong>Step3</strong> ：如果没有超过IP协议最大负载包长，则直接调用ip_fragment_out()函数发送出去。</p>
-</section>
-<section id="id16">
-<h2><span class="section-number">4.4. </span>IP数据报输出处理<a class="headerlink" href="#id16" title="永久链接至标题"></a></h2>
-<p>同学们需要自行实现ip_fragment_out()函数，功能如下：</p>
-<p><strong>Step1</strong> ：调用buf_add_header()增加IP数据报头部缓存空间。</p>
-<p><strong>Step2</strong> ：填写IP数据报头部字段。</p>
-<p><strong>Step3</strong> ：先把IP头部的首部校验和字段填0，再调用checksum16函数计算校验和，然后把计算出来的校验和填入首部校验和字段。</p>
-<p><strong>Step4</strong> ：调用arp_out函数()将封装后的IP头部和数据发送出去。</p>
-</section>
-<section id="id17">
-<h2><span class="section-number">4.5. </span>实验自测<a class="headerlink" href="#id17" title="永久链接至标题"></a></h2>
-<p>IP自测需要通过ip_test和ip_frag_test测试。</p>
-<a class="reference internal image-reference" href="../_images/cmake8.png"><img alt="../_images/cmake8.png" src="../_images/cmake8.png" style="height: 500px;" /></a>
-<p>接着，打开VSCode的终端，到build目录下，输入ctest -R ip_test和ctest -R ip_frag_test进行自测。</p>
-<a class="reference internal image-reference" href="../_images/cmake13.png"><img alt="../_images/cmake13.png" src="../_images/cmake13.png" style="width: 574.6999999999999px; height: 303.79999999999995px;" /></a>
-<p>如果提示有错，请参照eth协议自测的排除方法来找bug。</p>
-<section id="gdb">
-<h3><span class="section-number">4.5.1. </span>GDB调试<a class="headerlink" href="#gdb" title="永久链接至标题"></a></h3>
-<p>本实验支持使用GDB调试，请参考 <a class="reference internal" href="../appendix-b/1win.html"><span class="doc">Windows开发环境搭建</span></a> 中的“Windows下编译和调试”</p>
-</section>
-</section>
-</section>
-<section id="id18">
-<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id18" title="永久链接至标题"></a></h1>
-<p>请参考实验二的提交方式。</p>
 </section>
 
 
