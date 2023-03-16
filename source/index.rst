@@ -29,6 +29,7 @@
 #. 协议栈编程实验仓库：https://gitee.com/hitsz-cslab/net-lab.git
 #. 邮件客户端实验仓库：https://gitee.com/hitsz-lab/maillab.git
 
+.. _协议栈编程实验代码仓库:
 
 获取协议栈编程实验框架代码
 --------------------------

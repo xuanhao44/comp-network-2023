@@ -147,6 +147,7 @@
 </section>
 <section id="id2">
 <h2><span class="section-number">1.2. </span>Windows下编译和调试<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>首先下载net-lab实验包：  <a class="reference internal" href="../index.html#id4"><span class="std std-ref">获取协议栈编程实验框架代码</span></a></p>
 <p>打开VSCode软件，在左侧边栏的扩展商店搜索并安装以下扩展：</p>
 <ol class="arabic simple">
 <li><p>Chinese (Simplified) Language Pack for Visual Studio Code</p></li>
@@ -154,13 +155,17 @@
 <li><p>CMake Tools</p></li>
 </ol>
 <p>安装完成后重启VSCode。</p>
-<p>点击打开文件夹打开工程目录后即可进行代码操作（ <strong>确保CMakeLists.txt处于当前根目录中</strong> ）。</p>
+<p>点击打开文件夹打开工程目录后即可进行代码操作。</p>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>确保CMakeLists.txt处于当前根目录中，也就是用VSCode软件直接打开net-lab实验包，net-lab必须是工程的根目录，否则编译不了。</p>
+</div>
 <a class="reference internal image-reference" href="../_images/vscode2.png"><img alt="../_images/vscode2.png" src="../_images/vscode2.png" style="width: 311.5px; height: 385.0px;" /></a>
 <p>首次配置会弹出选择编译工具的提示，选择带有GCC的选项。需要在安装tdm-gcc后才能找到GCC的选项，如果安装tdm-gcc后没有显示该选项，点击[Scan for kits] Search for compilers on this computer，搜索gcc（如果还是没有找到，建议重启电脑）。</p>
 <img alt="../_images/vscode3.png" src="../_images/vscode3.png" />
 <p>在配置好VSCode环境之后，即可使用CMake工具栏完成编译和调试操作。</p>
 <section id="etharpipicmp">
-<h3><span class="section-number">1.2.1. </span>Eth、ARP、IP或ICMP调试<a class="headerlink" href="#etharpipicmp" title="永久链接至标题"></a></h3>
+<span id="id3"></span><h3><span class="section-number">1.2.1. </span>Eth、ARP、IP或ICMP调试<a class="headerlink" href="#etharpipicmp" title="永久链接至标题"></a></h3>
 <p>协议栈的Eth、ARP、IP、ICMP协议实验支持使用GDB调试，调试步骤参考如下：</p>
 <p><strong>Step1：</strong> 首先在VSCode工程目录下打开某一个.c文件，然后点击VSCode左侧的“运行和调试（run）”工具栏，单击“运行和调试”按钮，选择“C++（Windows）”。</p>
 <img alt="../_images/gdb-1.png" src="../_images/gdb-1.png" />
@@ -297,8 +302,12 @@
 <div class="admonition hint">
 <p class="admonition-title">提示</p>
 <p>协议栈的Eth、ARP、IP、ICMP协议实验提供了自测环境，该自测环境是自构建了一套读写离线数据包的驱动层，然后通过对比log和pcap文件来分析这些协议是否能收发。因此， <strong>在Eth、ARP、IP、ICMP协议实验中，不要修改config.h头文件中的NET_IF_IP和NET_IF_MAC</strong> 。</p>
-<p>但当我们做到UDP实验时，需要用到网络上真实的UDP调试工具与我们自构建的协议栈进行点对点通信，以此来测试整个网络协议栈是否能正常收发。我们的协议栈通过虚构了一张虚拟网卡，由虚拟网卡和真实网卡进行通信，这两张网卡的IP地址必须不一样（举个栗子，如果一个班级内有两位同学同名同姓，很难通过名字来区分你到底想要找谁），同时也要确保它们处于同一个网段内（不同网段的两台设备要相互通信，需要三层网络设备）。</p>
-<p>因此， <strong>在UDP实验调试之前，必须修改include/config.h头文件中的NET_IF_IP宏定义</strong> ，即需要自定义网卡的IP地址。该IP地址的网络号必须与你自己电脑中真实网卡的网络号一致（也就是和真实网卡处于同一个网段内）。注意：此处是 <strong>网络号</strong> 要和真实网卡一致，以确保它们处在同一个网段内， <strong>不是将自定义网卡（虚拟网卡）的IP地址设置成真实网卡的IP地址</strong> 。关于网络地址（网络号）可参考 <a class="reference internal" href="../lab5/index.html"><span class="doc">Lab5：协议栈之IP协议实现</span></a> 的实验原理部分。</p>
+<p>但当我们做到UDP/TCP/HTTP实验时，需要用到网络上真实的UDP/TCP调试工具（或浏览器）与我们自构建的协议栈进行点对点通信，以此来测试整个网络协议栈是否能正常收发。我们的协议栈通过虚构了一张虚拟网卡，由虚拟网卡和真实网卡进行通信，这两张网卡的IP地址必须不一样（举个栗子，如果一个班级内有两位同学同名同姓，很难通过名字来区分你到底想要找谁），同时也要确保它们处于同一个网段内（不同网段的两台设备要相互通信，需要三层网络设备）。因此， <strong>在UDP实验调试之前，必须修改include/config.h头文件中的NET_IF_IP宏定义</strong> ，即需要自定义网卡的IP地址。</p>
+<p>自定义网卡的IP地址要求：</p>
+<ul class="simple">
+<li><p>该IP地址的网络号必须与你自己电脑中真实网卡的网络号一致（也就是和真实网卡处于同一个网段内）。注意：此处是 <strong>网络号</strong> 要和真实网卡一致，以确保它们处在同一个网段内， <strong>不是将自定义网卡（虚拟网卡）的IP地址设置成真实网卡的IP地址</strong> 。关于网络地址（网络号）说明可参考 <a class="reference internal" href="../lab5/index.html"><span class="doc">Lab5：协议栈之IP协议实现</span></a> 的实验原理部分。</p></li>
+<li><p>该IP地址的主机号必须与真实网卡的主机号不一样，以确保两张网卡的IP地址不一样。</p></li>
+</ul>
 <img alt="../_images/vscode5.png" src="../_images/vscode5.png" />
 </div>
 </section>
