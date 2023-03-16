@@ -68,6 +68,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#id12">4. 代码实现与检测</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id13">4.1. IP数据报输入处理</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id14">4.2. 校验和算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">4.3. IP数据报输出处理</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">4.4. IP数据报输出处理</a></li>
 </ul>
 </li>
 </ul>
@@ -226,6 +228,21 @@
 <p><strong>Step2</strong> ：如果最后还剩8个bit值，也要相加这个8bit值。</p>
 <p><strong>Step3</strong> ：判断相加后32bit结果值的高16位是否为0，如果不为0，则将高16位和低16位相加，依次循环，直至高16位为0为止。</p>
 <p><strong>Step4</strong> ：将上述的和（低16位）取反，即得到校验和。</p>
+</section>
+<section id="id15">
+<h2><span class="section-number">4.3. </span>IP数据报输出处理<a class="headerlink" href="#id15" title="永久链接至标题"></a></h2>
+<p>同学们需要自行实现ip_out()函数，功能如下：</p>
+<p><strong>Step1</strong> ：首先检查从上层传递下来的数据报包长是否大于IP协议最大负载包长（1500字节（MTU） 减去IP首部长度）。</p>
+<p><strong>Step2</strong> ：如果超过IP协议最大负载包长，则需要分片发送。首先调用buf_init()初始化一个ip_buf,将数据报包长截断，每个截断后的包长 = IP协议最大负载包长（1500字节 - IP首部长度），调用ip_fragment_out()函数发送出去。如果截断后最后的一个分片小于或等于IP协议最大负载包长，调用buf_init()初始化一个ip_buf，大小等于该分片大小，再调用ip_fragment_out()函数发送出去。注意，最后一个分片的MF = 0。</p>
+<p><strong>Step3</strong> ：如果没有超过IP协议最大负载包长，则直接调用ip_fragment_out()函数发送出去。</p>
+</section>
+<section id="id16">
+<h2><span class="section-number">4.4. </span>IP数据报输出处理<a class="headerlink" href="#id16" title="永久链接至标题"></a></h2>
+<p>同学们需要自行实现ip_fragment_out()函数，功能如下：</p>
+<p><strong>Step1</strong> ：调用buf_add_header()增加IP数据报头部缓存空间。</p>
+<p><strong>Step2</strong> ：填写IP数据报头部字段。</p>
+<p><strong>Step3</strong> ：先把IP头部的首部校验和字段填0，再调用checksum16函数计算校验和，然后把计算出来的校验和填入首部校验和字段。</p>
+<p><strong>Step4</strong> ：调用arp_out函数()将封装后的IP头部和数据发送出去。</p>
 </section>
 </section>
 
