@@ -1,0 +1,13 @@
+#在文档的makefile目录下执行
+
+#Windows指令
+.\make.bat  html
+#Ubuntu指令
+make html
+
+#在生成的html目录执行如下指令
+#Windows
+py -3 -m http.server  8000
+
+#Ubuntu
+python3 -m http.server 8000

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. IP重组 &mdash; 计算机网络实验指导书 - 2023春季 | 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script src="../_static/js/baidu-tongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="4. 简易TCP协议" href="3TCP.html" />
+    <link rel="prev" title="2. ping实现" href="1ping.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2023春季 | 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab1：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab4：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab8：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">附加题</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0cisco-vlan.html">1. 排除网络故障</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1ping.html">2. ping实现</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. IP重组</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3.1. 实验提交</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="3TCP.html">4. 简易TCP协议</a></li>
+<li class="toctree-l2"><a class="reference internal" href="4http.html">5. 搭建Web服务器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5mail.html">6. 邮件客户端的进阶任务</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：邮件客户端实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-g/index.html">常见问题（2022）</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络实验指导书 - 2023春季 | 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">附加题</a> &raquo;</li>
+      <li><span class="section-number">3. </span>IP重组</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/proplus/2IP.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ip">
+<h1><span class="section-number">3. </span>IP重组<a class="headerlink" href="#ip" title="永久链接至标题"></a></h1>
+<p>在完成本实验所有实验要求的情况下，实验分加1分（不会超过20分满分）。</p>
+<p>在基础实验的网络层，我们实现了IP大包的分片，这是很容易的事情。 但是由于网络环境的复杂性，不同IP包的不同分片可能以乱序到达，同一个IP包的分片可能不等长，部分分片可能丢包。 所以，IP重组是一个复杂的工作，具体的实验要求为：</p>
+<ol class="arabic simple">
+<li><p>你可以直接在ip.c的ip_in函数中修改代码，并添加你认为需要添加的其他函数，就像ip_out和ip_fragment_out的关系一样</p></li>
+<li><p>你需要设计一个数据结构，其可以快速定位并乱序插入单个IP包的不同分片，也能够判断是否已经重组完成</p></li>
+<li><p>你需要为每个IP包维护一个生存时间（仿照ARP协议），在每次分片到达时更新该时间，在超过生存时间后丢弃整个未完成的IP包，以避免丢包导致的内存泄露</p></li>
+<li><p>你需要处理多个IP包的分片乱序到达的情况，如A,B两个IP包，各分为两片，到达顺序为A1-&gt;B2-&gt;B1-&gt;A2</p></li>
+<li><p>你需要处理同一个IP包的分片不等长的情况，这在链路聚合等复杂网络情况下是可能的</p></li>
+</ol>
+<section id="id1">
+<h2><span class="section-number">3.1. </span>实验提交<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>请提交实验报告和代码。</p>
+<p>实验报告需要给出设计方案、实验结果及分析。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="1ping.html" class="btn btn-neutral float-left" title="2. ping实现" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="3TCP.html" class="btn btn-neutral float-right" title="4. 简易TCP协议" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

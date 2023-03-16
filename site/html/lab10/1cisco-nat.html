@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. 实验目的 &mdash; 计算机网络实验指导书 - 2023春季 | 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script src="../_static/js/baidu-tongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Lab9：邮件客户端的设计与实现" href="../lab9/index.html" />
+    <link rel="prev" title="Lab8：NAT组网" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2023春季 | 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab1：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab4：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Lab8：NAT组网</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 实验目的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2. 实验任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3. 实验原理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#nat">3.1. NAT概要</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.2. 静态NAT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.3. 动态NAT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#napt">3.4. NAPT网络地址端口转换</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nat-server-nat">3.5. NAT Server-NAT 服务器技术</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">4. 实验环境与分组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">5. 实验组网</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">6. 实验步骤</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">6.1. 搭建网络拓扑</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcip">6.2. 配置PC和服务器的IP地址</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">6.3. 配置路由器基本信息</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">6.4. 配置静态NAT映射</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#r0nat">6.4.1. 配置R0的静态NAT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">6.4.2. 测试内外网的连通性</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">6.5. 配置动态NAT</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#r0">6.5.1. 清除R0之前的配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">6.5.2. 配置R0的动态NAT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">6.5.3. 测试内外网的连通性</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nat-pat">6.6. 配置NAT端口复用（PAT）</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id16">6.6.1. 清除R0之前的配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">6.6.2. 配置R0的NAT端口复用</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">6.6.3. 测试内外网的连通性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">6.6.4. 内网主机访问外网服务器</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#nat-server">6.7. 配置NAT Server</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id20">6.7.1. 清除R0之前的配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r0nat-server">6.7.2. 配置R0的NAT Server</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server0ftp">6.7.3. 在Server0上开启FTP协议</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ftp-ftp">6.7.4. 抓取ftp传输包，并找出FTP的账号密码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id21">7. 实验提交</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：邮件客户端实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-g/index.html">常见问题（2022）</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络实验指导书 - 2023春季 | 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Lab8：NAT组网</a> &raquo;</li>
+      <li><span class="section-number">1. </span>实验目的</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/lab10/1cisco-nat.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">1. </span>实验目的<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<ol class="arabic simple">
+<li><p>了解网络地址转换的工作原理，掌握网络地址转换的配置方法。</p></li>
+</ol>
+</section>
+<section id="id2">
+<h1><span class="section-number">2. </span>实验任务<a class="headerlink" href="#id2" title="永久链接至标题"></a></h1>
+<p>掌握静态NAT、动态NAT、NAPT、NAT Server-NAT的配置方法，在cisc packet tracer上截取ftp报文，理解NAT地址转换技术的原理。</p>
+</section>
+<section id="id3">
+<h1><span class="section-number">3. </span>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
+<section id="nat">
+<h2><span class="section-number">3.1. </span>NAT概要<a class="headerlink" href="#nat" title="永久链接至标题"></a></h2>
+<p>网络地址转换NAT（Network Address Translator）技术是在1994年提出的，主要是为了解决全球 IPv4地址短缺的问题，它将多个内部私有地址映射为少数几个甚至一个公网IP地址，以减少公网IP地址的使用。同时，NAT还起到了隐藏内部网络结构的作用，对内网主机而言具有一定的安全性。</p>
+<p>本实验需要完成4种NAT技术的配置：静态NAT（Static NAT）、动态地址NAT（Pooled NAT）、网络地址与端口转换NAPT（Network Address and Port Translation）、NAT Server-NAT 服务器技术。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.2. </span>静态NAT<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<p>静态NAT实现了私有地址和共有地址的一对一映射，其设置最简单、最容易实现的。如果希望一台主机优先使用某个关联地址，或者想要外部网络使用一个指定的公网地址访问内部服务器时，可以使用静态NAT。然而，一个公网IP只会分配给唯一且固定的内网主机，不节省IP地址。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">3.3. </span>动态NAT<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
+<p>动态NAT是基于地址池来实现私有地址和公有地址的转换。</p>
+<img alt="../_images/NAT动态.png" src="../_images/NAT动态.png" />
+<p>当内部主机A和主机B需要与公网种的目标地址通信时，网关RTA会从公网地址池种选择一个未使用的公网地址与之做映射。当网关收到回复报文后，会根据之前的映射再次进行转换之后发给对应主机。当不需要此连接时，对应的地址映射将会删除，公网地址也会被恢复到地址池中待用。</p>
+<p>缺点：动态NAT地址池中的地址用尽以后，只能等待被占用的公用IP释放后，其他主机才能使用它来访问公网。</p>
+<p>静态NAT和动态NAT合成基本NAT，要求同一时刻被映射的内部主机数小于或等于所拥有的外网IP地址数。</p>
+</section>
+<section id="napt">
+<h2><span class="section-number">3.4. </span>NAPT网络地址端口转换<a class="headerlink" href="#napt" title="永久链接至标题"></a></h2>
+<p>NAPT允许多个内部地址映射到同一个公有地址的不同端口。它主要利用TCP/UDP的端口实现多个私网地址到1个公网IP地址的映射，其映射形式如下：</p>
+<p>（私网IP，TCP/UDP端口号） &lt;–&gt;（公网IP，TCP/UDP端口号）</p>
+<p id="icmp">网络层的ICMP没有端口号，NAPT设备需要对带标记ID字段的ICMP报文单独建立地址映射，其形式为：</p>
+<p>（私网IP，ICMP ID号） &lt;–&gt;（公网IP，ICMP ID号）</p>
+<img alt="../_images/NAPT1.png" src="../_images/NAPT1.png" />
+<img alt="../_images/NAPT2.png" src="../_images/NAPT2.png" />
+<p>上图描述了内部主机PCA与外网主机PCB应用地址转换NAPT技术进行通信的过程。其中，内部网络是10.0.1.0/24网段，出口NAT路由器的公网地址只有202.0.0.1一个地址，并且其地址池也只有这唯一的IPv4地址。</p>
+<p>（1）当内部主机PCA向外网主机PCB发送一个FTP连接请求，这时从PCA发出的报文的源IP地址是10.0.1.10，源端口号是1001，目的地址是PCB的IP地址6.1.128.10，目的端口号是21。</p>
+<p>（2）当这个报文被转发到出口NAT路由器时，NAT路由器就会先查看公网地址池，然后再地址转换表中插入一条记录，分别是转换前的源地址、源端口号和转换后的源地址、源端口号。</p>
+<p>（3）NAT路由器按照转换后的源地址和源端口号来重新封装报文，目的地址和端口号不变，并将新报文从出接口发送出去。</p>
+<p>（4）当报文被转发到PCB时，PCB收到报文后，会针对该FTP请求报文，发送应答报文，此时PCB应答报文的源地址是PCB的IP地址6.1.128.10，源端口号是21；目的地址和源端口号是转换后的IP地址202.0.0.1和端口号1044。</p>
+<p>（5）当这个报文被转发到出口NAT路由器时，路由器根据报文的目的地址和端口号，在将报文转发到内网之前，要先查找地址转换表进行地址转换。将目的地址和端口号转换成内网本地地址10.0.1.10和内网端口号1001，才能保证PCA能够收到应答报文。</p>
+<p>（6）路由器将报文重新封装后，将应答报文发送到内部网络，直至报文被转发到PCA。</p>
+<p>这就是内网、外网主机之间通过地址转换技术进行通信的基本过程。</p>
+</section>
+<section id="nat-server-nat">
+<h2><span class="section-number">3.5. </span>NAT Server-NAT 服务器技术<a class="headerlink" href="#nat-server-nat" title="永久链接至标题"></a></h2>
+<p>NAT在使内网用户访问公网的同时，也屏蔽了公网用户访问私网主机的需求。当一个私网需要向公网用户提供Web和SFTP等服务时，私网中的服务器必须随时可供公网用户访问。</p>
+<p>通过配置NAT服务器可以使外网用户访问内网服务器。需要配置服务器私网IP地址和端口号转换为公网IP地址和端口号并发布出去。路由器在收到一个公网主机的请求报文后，根据报文的目的IP地址和端口号查询地址转换表项。路由器根据匹配的地址转换表项，将报文的目的IP地址和端口号转换成私网IP地址和端口号，并转发报文到私网中的服务器。</p>
+<img alt="../_images/NAT服务器.png" src="../_images/NAT服务器.png" />
+<p>过程分析：主机C需要访问私网服务器，发送报文的目的IP地址是200.10.10.1，目的端口号是80。RTA收到此报文后会查找地址转换表项，并将目的IP地址转换成192.168.1.1，目的端口号保持不变。服务器收到报文后会进行响应，RTA收到私网服务器发来的响应报文后，根据报文的源IP地址192.168.1.1和端口号80查询地址转换表项。然后，路由器根据匹配的地址转换表项，将报文的源IP地址和端口号转换成公网IP地址200.10.10.1和端口号80，并转发报文到目的公网主机。</p>
+</section>
+</section>
+<section id="id6">
+<h1><span class="section-number">4. </span>实验环境与分组<a class="headerlink" href="#id6" title="永久链接至标题"></a></h1>
+<p>路由器1台，二层交换机2台，计算机2台，服务器2台。</p>
+</section>
+<section id="id7">
+<h1><span class="section-number">5. </span>实验组网<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
+<img alt="../_images/cisco-11.png" src="../_images/cisco-11.png" />
+<p>IP地址表：</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 32%" />
+<col style="width: 68%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>设备名称</p></th>
+<th class="head"><p>IP地址</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Router0-G0/0/0</p></td>
+<td><p>192.168.3.1/24</p></td>
+</tr>
+<tr class="row-odd"><td><p>Router0-G0/0/1</p></td>
+<td><p>202.169.10.2/24</p></td>
+</tr>
+<tr class="row-even"><td><p>PC0</p></td>
+<td><p>192.168.3.13/24</p></td>
+</tr>
+<tr class="row-odd"><td><p>PC1</p></td>
+<td><p>202.169.10.100/24</p></td>
+</tr>
+<tr class="row-even"><td><p>Server0</p></td>
+<td><p>192.168.3.14/24</p></td>
+</tr>
+<tr class="row-odd"><td><p>Server1</p></td>
+<td><p>202.169.10.1/24</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id8">
+<h1><span class="section-number">6. </span>实验步骤<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
+<section id="id9">
+<h2><span class="section-number">6.1. </span>搭建网络拓扑<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<p>打开Cisco Packet Tracer软件绘制出组网图。</p>
+<p>Router0路由器型号：ISR4321</p>
+<p>Switch0和Switch1交换机型号：2960-24TT</p>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>路由器和路由器之间的连接线需要使用Copper Cross Over(交叉线)。交换机和路由器、交换机和计算机使用Copper Straight-Through(直通线)</p>
+<p>搭建完网络拓扑图后，记得保存好！</p>
+</div>
+</section>
+<section id="pcip">
+<h2><span class="section-number">6.2. </span>配置PC和服务器的IP地址<a class="headerlink" href="#pcip" title="永久链接至标题"></a></h2>
+<p>按照下表设置PC0、PC1和PC2这三台电脑的IP地址。</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 40%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>计算机</p></th>
+<th class="head"><p>IP地址</p></th>
+<th class="head"><p>网关</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PC0</p></td>
+<td><p>192.168.3.13/24</p></td>
+<td><p>192.168.3.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Server0</p></td>
+<td><p>192.168.3.14/24</p></td>
+<td><p>192.168.3.1</p></td>
+</tr>
+<tr class="row-even"><td><p>PC1</p></td>
+<td><p>202.169.10.100/24</p></td>
+<td><p>（可以不用设置网关）</p></td>
+</tr>
+<tr class="row-odd"><td><p>Server1</p></td>
+<td><p>202.169.10.1/24</p></td>
+<td><p>（可以不用设置网关）</p></td>
+</tr>
+</tbody>
+</table>
+<p>注：本实验中的外网IP同属一个网段内，可以不用设置网关。</p>
+<p>以设置Server0的IP为例，单击Server0图标，在弹出的窗口里点击“Desktop”选项卡，点击“IP Configuration”图标，然后在出现的窗口界面里填写IP address和Subnet Mask。</p>
+<img alt="../_images/cisco-21.png" src="../_images/cisco-21.png" />
+<img alt="../_images/cisco-31.png" src="../_images/cisco-31.png" />
+</section>
+<section id="id10">
+<h2><span class="section-number">6.3. </span>配置路由器基本信息<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<p>登录Router0使用下列命令进行基本信息配置：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>Router&gt;enable
+<span class="linenos"> 2</span>Router#configure terminal
+<span class="linenos"> 3</span>Router<span class="o">(</span>config<span class="o">)</span><span class="c1">#hostname R0 // 重命名为R0</span>
+<span class="linenos"> 4</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#no ip domain-lookup  // 用于防止DNS解析的命令。如果没有这条命令，当你输入错误的命令时，cisco会尝试连接DNS服务器进行域名解析，浪费时间。</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/0   // 进入g0/0/0接口模式</span>
+<span class="linenos"> 7</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 192.168.3.1 255.255.255.0 //配置g0/0/0接口ip地址</span>
+<span class="linenos"> 8</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown // 打开g0/0/0接口（默认接口关闭）</span>
+<span class="linenos"> 9</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/1  // 进入g0/0/1接口模式</span>
+<span class="linenos">12</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 202.169.10.2 255.255.255.0  //配置g0/0/1接口ip地址</span>
+<span class="linenos">13</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown  // 打开g0/0/1接口（默认接口关闭）</span>
+<span class="linenos">14</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos">15</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#</span>
+</pre></div>
+</div>
+<p>配置完成后，可以查看一下R0路由表:</p>
+<img alt="../_images/cisco-51.png" src="../_images/cisco-51.png" />
+<p>路由表上有两条直连路由，分别是192.168.3.0/24网段和202.169.10.0/24网段。</p>
+<p>此时，在R0上验证PC0的连通性，在R0上验证Server1的连通性，如图：</p>
+<img alt="../_images/cisco-41.png" src="../_images/cisco-41.png" />
+<p>在PC0上验证Server1的连通性，如图：</p>
+<img alt="../_images/cisco-61.png" src="../_images/cisco-61.png" />
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>请思考，此时为什么在R0上能ping通PC0和Server1，但是PC0却ping不通Server1？</p>
+<p><em>（请把答案写到实验报告中）</em></p>
+</div>
+</section>
+<section id="id11">
+<h2><span class="section-number">6.4. </span>配置静态NAT映射<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<section id="r0nat">
+<h3><span class="section-number">6.4.1. </span>配置R0的静态NAT<a class="headerlink" href="#r0nat" title="永久链接至标题"></a></h3>
+<p>登录R0使用下列命令进行基本信息配置：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/1  // 进入G0/0/1接口</span>
+<span class="linenos"> 2</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip nat outside  // 将端口G0/0/1设置为外网出口模式</span>
+<span class="linenos"> 3</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/0  // 进入G0/0/0接口</span>
+<span class="linenos"> 6</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip nat inside // 将端口G0/0/0设置为内网入口模式</span>
+<span class="linenos"> 7</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#ip nat inside source static 192.168.3.13 202.169.10.2 // 将PC0映射到公网地址202.169.10.2上</span>
+<span class="linenos">10</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit  // 退出配置模式</span>
+<span class="linenos">11</span>R0#
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>在内部本地地址与内部全局地址之间建立静态地址转换的格式：</p>
+<p>ip nat inside source static 内部全局地址　内部本地地址</p>
+</div>
+<p>在R0上使用命令“show ip nat translations”查看nat地址转换表</p>
+<img alt="../_images/cisco-9.png" src="../_images/cisco-9.png" />
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p><strong>NAT地址表解释</strong></p>
+<p>NAT转换表内容依次为：Pro（协议类型）、Inside global（内部全局地址及端口）、Inside local（内部本地地址及端口）、Outside local（外部本地地址及端口）、Outside global（外部全局地址及端口）。</p>
+<p>通常来说，内部是机构网络（如校园网、私人企业等），外部是公共互联网。本地地址是内部设备可以看到的地址，全局地址是外部设备可以看到的地址。</p>
+<ol class="arabic simple">
+<li><p><strong>Inside global（内部全局地址）</strong> 是外部已知内部设备的一个合法的IP地址，它对外代表一个或多个内部本地IP地址。</p></li>
+<li><p><strong>Inside local（内部本地地址）</strong> 分配给内部网络中的计算机的内部私有IP地址。</p></li>
+<li><p><strong>Outside local（外部本地地址）</strong> 是内部已知外部设备的地址，即外部主机在内部网络中表现出来的IP地址。</p></li>
+<li><p><strong>Outside global（外部全局地址）</strong> 分配给外部网络上的主机分配的IP地址。</p></li>
+</ol>
+</div>
+</section>
+<section id="id12">
+<h3><span class="section-number">6.4.2. </span>测试内外网的连通性<a class="headerlink" href="#id12" title="永久链接至标题"></a></h3>
+<p>在PC0上验证Server1的连通性，如图：</p>
+<img alt="../_images/cisco-71.png" src="../_images/cisco-71.png" />
+<p>在Server0上验证Server1的连通性，如图：</p>
+<img alt="../_images/cisco-81.png" src="../_images/cisco-81.png" />
+<p>此时，在R0上再使用命令“show ip nat translations”查看nat地址转换表，应该会多了ICMP协议类型数据包，但因为没有配置外部网络的本地地址和全局地址，所以显示的外部本地地址和外部全局地址都是一样的。</p>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>请思考，此时为什么在PC0上能ping通Server1，但是Server0却ping不通Server1？</p>
+<p><em>（请把答案写到实验报告中）</em></p>
+</div>
+</section>
+</section>
+<section id="id13">
+<h2><span class="section-number">6.5. </span>配置动态NAT<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<section id="r0">
+<h3><span class="section-number">6.5.1. </span>清除R0之前的配置<a class="headerlink" href="#r0" title="永久链接至标题"></a></h3>
+<p>在进行新的nat配置之前，先清除R0之前的配置</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>R0&gt;enable
+<span class="linenos">2</span>R0#configure terminal
+<span class="linenos">3</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#no ip nat inside source static 192.168.3.13 202.169.10.2 // 以no开头的命令是取消设置</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h3><span class="section-number">6.5.2. </span>配置R0的动态NAT<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
+<p>在R0的系统视图下使用下列命令进行基本信息配置：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/1  // 进入G0/0/1接口</span>
+<span class="linenos"> 2</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip nat outside // 将端口G0/0/1设置为外网出口模式</span>
+<span class="linenos"> 3</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/0</span>
+<span class="linenos"> 6</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip nat inside // 将端口G0/0/0设置为内网入口模式</span>
+<span class="linenos"> 7</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#access-list 1 permit 192.168.3.0 0.0.0.255 // 创建访问控制列表1，允许来自192.168.3.0网段的数据访问</span>
+<span class="linenos">10</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#ip nat pool aaa 202.169.10.5 202.169.10.10 netmask 255.255.255.0 // 配置nat地址池为202.169.10.5 到202.169.10.10</span>
+<span class="linenos">11</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#ip nat inside source list 1 pool aaa // 在接口内应用nat转换</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>建立IP地址池：</p>
+<p>ip nat pool <em>地址池名字</em> <em>起始IP</em> <em>结束IP</em> netmask <em>子网掩码</em></p>
+<p>设定被转换的地址范围：</p>
+<p>access-list <em>表号</em> permit <em>内部地址</em> <em>反向子网掩码</em></p>
+<p>建立被转换的地址和地址池间的关系：</p>
+<p>ip nat inside source list <em>ACL表号</em> pool <em>地址池名字</em></p>
+</div>
+</section>
+<section id="id15">
+<h3><span class="section-number">6.5.3. </span>测试内外网的连通性<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
+<p>分别在PC0和Server0上使用ping Server1，如图：</p>
+<img alt="../_images/cisco-10.png" src="../_images/cisco-10.png" />
+<img alt="../_images/cisco-111.png" src="../_images/cisco-111.png" />
+<p>在R0上使用命令“show ip nat translations”查看nat地址转换表</p>
+<img alt="../_images/cisco-12.png" src="../_images/cisco-12.png" />
+<p>注：每次查看之前需要ping一次。</p>
+<p>更多关于ICMP端口信息参考：<a class="reference internal" href="#icmp">ICMP端口说明</a></p>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>请思考，此时为什么PC0和Server0都能ping通Server1？</p>
+<p><em>（请把答案写到实验报告中）</em></p>
+</div>
+</section>
+</section>
+<section id="nat-pat">
+<h2><span class="section-number">6.6. </span>配置NAT端口复用（PAT）<a class="headerlink" href="#nat-pat" title="永久链接至标题"></a></h2>
+<section id="id16">
+<h3><span class="section-number">6.6.1. </span>清除R0之前的配置<a class="headerlink" href="#id16" title="永久链接至标题"></a></h3>
+<p>在进行新的nat配置之前，先清除R0之前的配置</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#no access-list 1 permit 192.168.3.0 0.0.0.255 // 以no开头的命令是取消设置</span>
+<span class="linenos">2</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#no ip nat inside source list 1 pool aaa</span>
+<span class="linenos">3</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#no ip nat pool aaa 202.169.10.5 202.169.10.10 netmask 255.255.255.0</span>
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h3><span class="section-number">6.6.2. </span>配置R0的NAT端口复用<a class="headerlink" href="#id17" title="永久链接至标题"></a></h3>
+<p>使用下列命令进行基本信息配置：</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/1</span>
+<span class="linenos"> 2</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip nat outside // 将端口G0/0/1设置为外网出口模式</span>
+<span class="linenos"> 3</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/0</span>
+<span class="linenos"> 6</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip nat inside  // 将端口G0/0/0设置为内网入口模式</span>
+<span class="linenos"> 7</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#access-list 1 permit 192.168.3.0 0.0.0.255  // 创建访问控制列表1，允许来自192.168.3.0网段的数据访问</span>
+<span class="linenos">10</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#ip nat inside source list 1 interface g0/0/1 overload // 将access-list 1映射到公网地址g0/0/1网卡上</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>端口复用配置命令：</p>
+<p>ip nat inside source list <em>ACL表号</em> interface <em>出接口</em> overload</p>
+</div>
+</section>
+<section id="id18">
+<h3><span class="section-number">6.6.3. </span>测试内外网的连通性<a class="headerlink" href="#id18" title="永久链接至标题"></a></h3>
+<p>分别在PC0和Server0上使用ping Server1，并在R0上使用命令“show ip nat translations”查看nat地址转换表：</p>
+<img alt="../_images/cisco-13.png" src="../_images/cisco-13.png" />
+<p>每ping一次，查看一次，IP地址都不会改变，但是icmpid会变化。</p>
+</section>
+<section id="id19">
+<h3><span class="section-number">6.6.4. </span>内网主机访问外网服务器<a class="headerlink" href="#id19" title="永久链接至标题"></a></h3>
+<p>Server-PT默认开启HTTP服务。单击Server1图标，在弹出的窗口中选择“Services”选项卡，然后再单击“HTTP”，选择“index.html”一栏的“（edit）”。</p>
+<img alt="../_images/cisco-14.png" src="../_images/cisco-14.png" />
+<p>修改index.html页面的标题，并保存。</p>
+<img alt="../_images/cisco-15.png" src="../_images/cisco-15.png" />
+<p>到“Desktop”选项卡，输入127.0.0.1，则显示服务器的页面。</p>
+<img alt="../_images/cisco-16.png" src="../_images/cisco-16.png" />
+<p>在PC0上访问外网服务器Server1的网站，在PC0的“Desktop”选项卡，选择“Web Browser”</p>
+<img alt="../_images/cisco-17.png" src="../_images/cisco-17.png" />
+<p>在浏览器中输入http://202.169.10.1，如图所示。</p>
+<img alt="../_images/cisco-18.png" src="../_images/cisco-18.png" />
+<p>在R0上使用命令“show ip nat translations”查看nat地址转换表：</p>
+<img alt="../_images/cisco-19.png" src="../_images/cisco-19.png" />
+<p>每刷新一次浏览器页面，查看一次，IP地址也不会改变，但是端口号会变化。</p>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>请思考，Router0如何区分Server1返回给不同主机的报文？</p>
+<p><em>（请把答案写到实验报告中）</em></p>
+</div>
+</section>
+</section>
+<section id="nat-server">
+<h2><span class="section-number">6.7. </span>配置NAT Server<a class="headerlink" href="#nat-server" title="永久链接至标题"></a></h2>
+<section id="id20">
+<h3><span class="section-number">6.7.1. </span>清除R0之前的配置<a class="headerlink" href="#id20" title="永久链接至标题"></a></h3>
+<p>在进行新的nat配置之前，先清除R0之前的配置</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#no access-list 1 permit 192.168.3.0 0.0.0.255 // 取消访问控制列表1</span>
+<span class="linenos">2</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#no ip nat inside source list 1 interface g0/0/1 overload // // 取消access-list 1映射</span>
+</pre></div>
+</div>
+</section>
+<section id="r0nat-server">
+<h3><span class="section-number">6.7.2. </span>配置R0的NAT Server<a class="headerlink" href="#r0nat-server" title="永久链接至标题"></a></h3>
+<p>登录R0使用下列命令进行基本信息配置：</p>
+<p>使用NAT Server命令定义内部服务器映射表，指定服务器通信协议为TCP类型，端口号为21</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/1</span>
+<span class="linenos"> 2</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip nat outside</span>
+<span class="linenos"> 3</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/0</span>
+<span class="linenos"> 6</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip nat inside</span>
+<span class="linenos"> 7</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#ip nat inside source static tcp 192.168.3.14 21 202.169.10.2 21 // 将公网地址202.169.10.2的21端口映射到Server0上</span>
+<span class="linenos">10</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#exit</span>
+</pre></div>
+</div>
+<p>在R0上使用命令“show ip nat translations”查看nat地址转换表</p>
+<img alt="../_images/cisco-20.png" src="../_images/cisco-20.png" />
+</section>
+<section id="server0ftp">
+<h3><span class="section-number">6.7.3. </span>在Server0上开启FTP协议<a class="headerlink" href="#server0ftp" title="永久链接至标题"></a></h3>
+<p>单击Server0，在弹出的新窗口中按下图所示，新建cs用户,密码为123，最后单击Add按钮。</p>
+<img alt="../_images/cisco-211.png" src="../_images/cisco-211.png" />
+<p>单击Server0,打开“Desktop”，选择“Command Prompt”，测试ftp是否可用。</p>
+<p>在命令提示框中输入；ftp 127.0.01</p>
+<p>输入账号：cs</p>
+<p>输入密码：123</p>
+<p>显示ftp目录文件：dir</p>
+<img alt="../_images/cisco-22.png" src="../_images/cisco-22.png" />
+</section>
+<section id="ftp-ftp">
+<h3><span class="section-number">6.7.4. </span>抓取ftp传输包，并找出FTP的账号密码<a class="headerlink" href="#ftp-ftp" title="永久链接至标题"></a></h3>
+<p>点击右下角Simulation按钮，打开抓包界面，如下图</p>
+<img alt="../_images/cisco-23.png" src="../_images/cisco-23.png" />
+<p>接着，点击“Show All/None”按钮，去掉所有协议，然后再点击“Edit Filters”，在弹出的窗口中，选择“Misc”选项卡，在该选项卡中选择“FTP”协议即可。最后，再单击“Play”三角形图标，开始抓包。</p>
+<p>在PC1上Command Prompt命令框中，输入ftp 202.169.10.2（Server0外网地址），输入账号密码，查看数据包走向。</p>
+<img alt="../_images/cisco-24.png" src="../_images/cisco-24.png" />
+<p>请分析PC1和Server0的报文体会NAT Server地址转换技术的原理，并填写实验报告。</p>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>请思考，NAT Server和静态NAT这两种技术的区别是什么？</p>
+<p><em>（请把答案写到实验报告中）</em></p>
+</div>
+</section>
+</section>
+</section>
+<section id="id21">
+<h1><span class="section-number">7. </span>实验提交<a class="headerlink" href="#id21" title="永久链接至标题"></a></h1>
+<p>请参考实验一的提交方式。</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Lab8：NAT组网" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../lab9/index.html" class="btn btn-neutral float-right" title="Lab9：邮件客户端的设计与实现" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

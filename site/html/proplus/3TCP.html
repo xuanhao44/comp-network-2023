@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. 简易TCP协议 &mdash; 计算机网络实验指导书 - 2023春季 | 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script src="../_static/js/baidu-tongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="5. 搭建Web服务器" href="4http.html" />
+    <link rel="prev" title="3. IP重组" href="2IP.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2023春季 | 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab1：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab4：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab8：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">附加题</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="0cisco-vlan.html">1. 排除网络故障</a></li>
+<li class="toctree-l2"><a class="reference internal" href="1ping.html">2. ping实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2IP.html">3. IP重组</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">4. 简易TCP协议</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.1. 实验自测</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.2. 实验提交</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="4http.html">5. 搭建Web服务器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="5mail.html">6. 邮件客户端的进阶任务</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：邮件客户端实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-g/index.html">常见问题（2022）</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络实验指导书 - 2023春季 | 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">附加题</a> &raquo;</li>
+      <li><span class="section-number">4. </span>简易TCP协议</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/proplus/3TCP.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tcp">
+<h1><span class="section-number">4. </span>简易TCP协议<a class="headerlink" href="#tcp" title="永久链接至标题"></a></h1>
+<p>在完成本实验所有实验要求，并且此前完成了所有基础实验的情况下，实验分给予20分满分。</p>
+<p>在基础实验的传输层，我们实现了完整的UDP协议，这并不困难。而另一个在传输层被广泛使用的TCP协议，其完整实现的难度不亚于目前基础实验的整个协议栈。为了降低难度，我们在net-lab工程上添加了TCP协议框架，你只需要补充完整tcp.c文件中的tcp_in函数，并通过实验自测。</p>
+<section id="id1">
+<h2><span class="section-number">4.1. </span>实验自测<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<p>TCP自测需要通过main测试。</p>
+<a class="reference internal image-reference" href="../_images/tcp-1.jpg"><img alt="../_images/tcp-1.jpg" src="../_images/tcp-1.jpg" style="width: 259.7px; height: 336.0px;" /></a>
+<p>接着，选择“在终端中运行”</p>
+<a class="reference internal image-reference" href="../_images/tcp-2.jpg"><img alt="../_images/tcp-2.jpg" src="../_images/tcp-2.jpg" style="width: 286.29999999999995px; height: 302.4px;" /></a>
+<a class="reference internal image-reference" href="../_images/tcp-3.jpg"><img alt="../_images/tcp-3.jpg" src="../_images/tcp-3.jpg" style="width: 457.79999999999995px; height: 112.69999999999999px;" /></a>
+<p>打开 wireshark，选择物理机的真实网卡作为抓包对象，并设置过滤条件为：tcp</p>
+<p>打开TCP&amp;UDPDebug调试工具，点击“创建连接”，类型选择“TCP”，目标 IP：192.168.254.13（ 该目标IP地址需要改成你自己代码中config.h中定义的IP地址 ，关于目标IP地址的定义可参考 Windows开发环境搭建），目标端口号：61000，本机端口号随机。设置完成，点击创建。</p>
+<a class="reference internal image-reference" href="../_images/tcp-4.jpg"><img alt="../_images/tcp-4.jpg" src="../_images/tcp-4.jpg" style="width: 257.59999999999997px; height: 193.89999999999998px;" /></a>
+<p>点击连接</p>
+<p>在TCP&amp;UDPDebug调试工具的发送窗口输入“abc”测试字符串，点击发送。此时UDP调试工具能够接收到虚拟网卡回送的数据包。如下图所示。</p>
+<a class="reference internal image-reference" href="../_images/tcp-5.jpg"><img alt="../_images/tcp-5.jpg" src="../_images/tcp-5.jpg" style="width: 585.1999999999999px; height: 452.2px;" /></a>
+<p>此时，Wireshark上也有数据包的交互。</p>
+<img alt="../_images/tcp-6.jpg" src="../_images/tcp-6.jpg" />
+</section>
+<section id="id2">
+<h2><span class="section-number">4.2. </span>实验提交<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>请提交实验报告和代码。</p>
+<p>实验报告需要给出设计方案、实验结果及分析。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2IP.html" class="btn btn-neutral float-left" title="3. IP重组" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="4http.html" class="btn btn-neutral float-right" title="5. 搭建Web服务器" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

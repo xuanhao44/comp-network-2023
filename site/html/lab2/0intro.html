@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. 实验目的 &mdash; 计算机网络实验指导书 - 2023春季 | 哈工大（深圳） v1.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/translations.js"></script>
+        <script src="../_static/js/baidu-tongji.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Lab3：协议栈之ARP协议实现" href="../lab3/index.html" />
+    <link rel="prev" title="Lab2：协议栈之Eth协议实现" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> 计算机网络实验指导书 - 2023春季 | 哈工大（深圳）
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="在文档中搜索" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">实验</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab1：VLAN 与接口模式配置</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Lab2：协议栈之Eth协议实现</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 实验目的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2. 实验任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3. 实验原理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.1. 协议栈框架简介</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">3.1.1. 协议栈结构</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">3.1.2. 网络数据包大端与小端</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">3.1.3. 结构体内部字段对齐问题</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#map">3.1.4. Map的使用</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">3.2. 以太网数据包捕获机制</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">3.3. 以太网数据帧格式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">4. 代码实现与检测</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ethernet-out">4.1. 以太网数据帧发送处理流程（ethernet_out()函数）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ethernet-in">4.2. 以太网数据帧接收处理流程（ethernet_in()函数）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.3. 实验自测</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">4.3.1. ethernet_in()函数测试</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">4.3.2. ethernet_out()函数测试</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gdb">4.3.3. GDB调试</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">5. 实验提交</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id17">5.1. 实验设计报告</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">5.2. 实验代码</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab8/index.html">Lab4：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab10/index.html">Lab8：NAT组网</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../lab9/index.html">Lab9：邮件客户端的设计与实现</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">附录</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-c/index.html">附录 C：Cisco Packet Tracer简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：邮件客户端实验环境</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：参考文献</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：致谢</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix-g/index.html">常见问题（2022）</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">计算机网络实验指导书 - 2023春季 | 哈工大（深圳）</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Lab2：协议栈之Eth协议实现</a> &raquo;</li>
+      <li><span class="section-number">1. </span>实验目的</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/lab2/0intro.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">1. </span>实验目的<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<ol class="arabic simple">
+<li><p>熟悉网络协议栈的分层结构，掌握协议栈的数据结构定义；</p></li>
+<li><p>了解以太网数据包捕获机制，熟悉数据包的收发过程；</p></li>
+<li><p>熟悉数据链路层数据帧格式，掌握以太网数据帧的发送和接收处理过程。</p></li>
+</ol>
+</section>
+<section id="id2">
+<h1><span class="section-number">2. </span>实验任务<a class="headerlink" href="#id2" title="永久链接至标题"></a></h1>
+<p>在给定的协议栈代码框架上，编写以太网数据链路层数据帧的发送和接收函数，使其能够发送和接收数据帧，并且能通过实验评测系统的测试。</p>
+</section>
+<section id="id3">
+<h1><span class="section-number">3. </span>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
+<section id="id4">
+<h2><span class="section-number">3.1. </span>协议栈框架简介<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<section id="id5">
+<h3><span class="section-number">3.1.1. </span>协议栈结构<a class="headerlink" href="#id5" title="永久链接至标题"></a></h3>
+<p>从本实验开始，我们就要自己动手构建一套自底向上包含但不限于以太网协议、ARP、IP、ICMP、UDP五种协议的网络协议栈。该协议栈基于TCP/IP协议模型，分为数据链路层、网络层、传输层和应用层四层结构，由上到下层层层包装，上层数据包会被下层的包头封装在里面，而下层的包头会在它的一个字段里面说明它上一层封装的是什么协议，封装在里面的原始文件数据是不会改变的。封装发生在发送方，拆封（还原操作）发生在接收方。</p>
+<img alt="../_images/协议栈分层结构.png" src="../_images/协议栈分层结构.png" />
+<p>由于每一层协议所加入的包头不一样，使得每一层的数据包结构也不一样，那么如何表示能够支持不同协议层的头部添加和移除的数据包结构呢？在实验中，我们提供了如下结构体定义数据包结构，主要代码见inculde/buf.h。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">buf</span><span class="w"> </span><span class="c1">//协议栈的通用数据包buffer, 可以在头部装卸数据，以供协议头的添加和去除</span>
+<span class="linenos"> 2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">     </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">;</span><span class="w">                   </span><span class="c1">// 包中有效数据大小</span>
+<span class="linenos"> 4</span><span class="w">     </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">data</span><span class="p">;</span><span class="w">                </span><span class="c1">// 包的数据起始地址</span>
+<span class="linenos"> 5</span><span class="w">     </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">payload</span><span class="p">[</span><span class="n">BUF_MAX_LEN</span><span class="p">];</span><span class="w"> </span><span class="c1">// 最大负载数据量</span>
+<span class="linenos"> 6</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">buf_t</span><span class="p">;</span><span class="w"></span>
+<span class="linenos"> 7</span>
+<span class="linenos"> 8</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">buf_init</span><span class="p">(</span><span class="n">buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span><span class="w"> </span><span class="c1">//初始化buffer为给定的长度，用于装载数据包</span>
+<span class="linenos"> 9</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">buf_add_header</span><span class="p">(</span><span class="n">buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span><span class="w"> </span><span class="c1">//为buffer在头部增加一段长度，用于添加协议头</span>
+<span class="linenos">10</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">buf_remove_header</span><span class="p">(</span><span class="n">buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span><span class="w"> </span><span class="c1">//为buffer在头部减少一段长度，去除协议头</span>
+<span class="linenos">11</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">buf_add_padding</span><span class="p">(</span><span class="n">buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span><span class="w"> </span><span class="c1">//为buffer在尾部添加一段长度，填充0</span>
+<span class="linenos">12</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">buf_remove_padding</span><span class="p">(</span><span class="n">buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span><span class="w"> </span><span class="c1">//为buffer在尾部减少一段长度，去除填充</span>
+</pre></div>
+</div>
+<p>为简化协议栈的实现，我们只要求能够满足单线程使用即可，故只需为本协议栈创建一个接收和一个发送的缓冲区就行，主要代码见inculde/net.c。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cm">/**</span>
+<span class="linenos">2</span><span class="cm"> * @brief 网卡接收和发送缓冲区</span>
+<span class="linenos">3</span><span class="cm"> *</span>
+<span class="linenos">4</span><span class="cm"> */</span><span class="w"></span>
+<span class="linenos">5</span><span class="n">buf_t</span><span class="w"> </span><span class="n">rxbuf</span><span class="p">,</span><span class="w"> </span><span class="n">txbuf</span><span class="p">;</span><span class="w"> </span><span class="c1">//一个buf足够单线程使用</span>
+</pre></div>
+</div>
+<p>在buf_init()函数中，将buf-&gt;len设置为初始长度，buf-&gt;data指向payload空间长度为BUF_MAX_LEN的一半的地址。因此，将在这一空间的上半地址用于添加有效数据，下半地址用于添加填充pad。</p>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p>请思考，什么情况下需要在数据data后面填充0？</p>
+</div>
+<img alt="../_images/buf.png" src="../_images/buf.png" />
+<p>定义好的数据结构后，添加TCP/IP协议栈各层包头的过程只需要前移data指针，而移除包头的过程只需要后移data指针即可。</p>
+</section>
+<section id="id6">
+<h3><span class="section-number">3.1.2. </span>网络数据包大端与小端<a class="headerlink" href="#id6" title="永久链接至标题"></a></h3>
+<p>通过大学前两年的学习，相信同学们对大端小端的名词由来，已经有了一定的认识。大小端字节序在表示存储的字节顺序是有区别的。小端字节序：低字节存储于内存低地址，高字节存储于内存高地址。大端字节序：高字节存储于内存低地址，低字节存储于内存高地址。long 型数据 0x12345678，在小端字节序和大端字节序的存储方式：</p>
+<span id="id7"></span><table class="colwidths-given docutils align-center" id="id19">
+<caption><span class="caption-text">小端字节序</span><a class="headerlink" href="#id19" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>地址</p></th>
+<th class="head"><p>数据</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0000 0100</p></td>
+<td><p>0x78</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000 0101</p></td>
+<td><p>0x56</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000 0102</p></td>
+<td><p>0x34</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000 0103</p></td>
+<td><p>0x12</p></td>
+</tr>
+</tbody>
+</table>
+<span id="id8"></span><table class="colwidths-given docutils align-center" id="id20">
+<caption><span class="caption-text">大端字节序</span><a class="headerlink" href="#id20" title="永久链接至表格"></a></caption>
+<colgroup>
+<col style="width: 40%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>地址</p></th>
+<th class="head"><p>数据</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0x0000 0100</p></td>
+<td><p>0x12</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000 0101</p></td>
+<td><p>0x34</p></td>
+</tr>
+<tr class="row-even"><td><p>0x0000 0102</p></td>
+<td><p>0x56</p></td>
+</tr>
+<tr class="row-odd"><td><p>0x0000 0103</p></td>
+<td><p>0x78</p></td>
+</tr>
+</tbody>
+</table>
+<p>网络上传输的数据都是字节流，对于一个多字节数值，在进行网络传输的时候，先传递哪个字节？按照TCP/IP协议规定：网络字节序是大端字节序。但是，X86平台上是以小端字节序存储，也就是，在发送之前我们需要将小端存储的字节序转换成大端法存储的数值，而在接收时，也需要将大端序转成小端序存放的数值。</p>
+<p>在实验代码中，我们提供了16bit（2个字节）的大小端转换宏定义：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cp">#define swap16(x) ((((x)&amp;0xFF) &lt;&lt; 8) | (((x) &gt;&gt; 8) &amp; 0xFF)) </span><span class="c1">//为16位数据交换大小端</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h3><span class="section-number">3.1.3. </span>结构体内部字段对齐问题<a class="headerlink" href="#id9" title="永久链接至标题"></a></h3>
+<p>结构体对齐问题也是老生常谈的话题，那么，为什么要对齐？主要是时间和空间上的一个权衡。大多数体系结构都是按照字长来对齐访问数据的。struct是一种复合数据类型，其构成元素既可以是基本数据类型（如int、long、float等）的变量，也可以是一些复合数据类型（如array、struct、union等）的数据单元。缺省情况下，编译器为结构体的每个成员按其自然对界（natural alignment）条件分配空间以提高运算效率。各个成员按照他们被声明的顺序在内存中顺序存储，第一个成员的地址和整个结构的地址相同。自然对界（natural alignment）即默认对齐方式，是按结构体的成员中size最大的成员对齐。</p>
+<img alt="../_images/编译填充.png" src="../_images/编译填充.png" />
+<p>网络传输是字节流传输，但是当发生结构体对齐时，编译器会自动加入填充字节，这样发送出去的字节流某些字段会指向错误的地方，因此，在实验中，我们需要禁用结构体内部字段的对齐。</p>
+<p>在实验代码中，可以使用伪指令pack(n)，编译器将按照n个字节对齐。注意：如果指定的n大于结构体最大成员的size，则其不起作用，结构体仍然按照size最大的成员进行对齐。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="cp">#pragma pack(1) </span><span class="c1">// 编译器将按照1个字节对齐</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">ether_hdr</span><span class="w"></span>
+<span class="linenos">4</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">5</span><span class="w">     </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">dst</span><span class="p">[</span><span class="n">NET_MAC_LEN</span><span class="p">];</span><span class="w"> </span><span class="c1">// 目标mac地址</span>
+<span class="linenos">6</span><span class="w">     </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">src</span><span class="p">[</span><span class="n">NET_MAC_LEN</span><span class="p">];</span><span class="w"> </span><span class="c1">// 源mac地址</span>
+<span class="linenos">7</span><span class="w">     </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">protocol16</span><span class="p">;</span><span class="w">      </span><span class="c1">// 协议/长度</span>
+<span class="linenos">8</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">ether_hdr_t</span><span class="p">;</span><span class="w"></span>
+<span class="linenos">9</span><span class="w"> </span><span class="cp">#pragma pack() </span><span class="c1">// 取消自定义字节对齐方式</span>
+</pre></div>
+</div>
+</section>
+<section id="map">
+<h3><span class="section-number">3.1.4. </span>Map的使用<a class="headerlink" href="#map" title="永久链接至标题"></a></h3>
+<p>本实验框架使用万能的指针操作编写了支持泛型的键值对容器，支持超时时间与非平凡值类型，另外也提供了简单的get、set、delete、foreach原语，同时，利用map实现协议动态注册机制，使得上下层协议解耦，编写底层协议时上层协议可以不存在，希望能简化大家的编码。主要代码见inculde/map.h、src/map.c。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">map_constuctor_t</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">dst</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">len</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">(</span><span class="o">*</span><span class="n">map_entry_handler_t</span><span class="p">)(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kt">time_t</span><span class="w"> </span><span class="o">*</span><span class="n">timestamp</span><span class="p">);</span><span class="w"></span>
+<span class="linenos"> 3</span>
+<span class="linenos"> 4</span><span class="w"> </span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">map</span><span class="w"> </span><span class="c1">//协议栈的通用泛型map，即键值对的容器，支持超时时间与非平凡值类型</span>
+<span class="linenos"> 5</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">     </span><span class="kt">size_t</span><span class="w"> </span><span class="n">key_len</span><span class="p">;</span><span class="w">                    </span><span class="c1">//键的长度</span>
+<span class="linenos"> 7</span><span class="w">     </span><span class="kt">size_t</span><span class="w"> </span><span class="n">value_len</span><span class="p">;</span><span class="w">                  </span><span class="c1">//值的长度</span>
+<span class="linenos"> 8</span><span class="w">     </span><span class="kt">size_t</span><span class="w"> </span><span class="n">size</span><span class="p">;</span><span class="w">                       </span><span class="c1">//当前大小</span>
+<span class="linenos"> 9</span><span class="w">     </span><span class="kt">size_t</span><span class="w"> </span><span class="n">max_size</span><span class="p">;</span><span class="w">                   </span><span class="c1">//最大容量</span>
+<span class="linenos">10</span><span class="w">     </span><span class="kt">time_t</span><span class="w"> </span><span class="n">timeout</span><span class="p">;</span><span class="w">                    </span><span class="c1">//超时时间，0为永不超时</span>
+<span class="linenos">11</span><span class="w">     </span><span class="n">map_constuctor_t</span><span class="w"> </span><span class="n">value_constuctor</span><span class="p">;</span><span class="w"> </span><span class="c1">//形如memcpy的值构造函数，用于拷贝非平凡数据结构到容器中，如buf_copy</span>
+<span class="linenos">12</span><span class="w">     </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data</span><span class="p">[</span><span class="n">MAP_MAX_LEN</span><span class="p">];</span><span class="w">         </span><span class="c1">//数据</span>
+<span class="linenos">13</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="n">map_t</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>其中，data用于存储key、value和time。time是插入key-value键值对的时间值，用于判断是否该键值对是否超时。</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/map.png"><img alt="../_images/map.png" src="../_images/map.png" style="width: 382.84999999999997px; height: 462.65px;" /></a>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>本协议栈中需要处理的协议或数据不算多，map可以采用遍历方式查找。需要注意的是，如果是要实现大数据量的快速检索，可以采用平衡二叉树数据结构或是hash map，具体实现方式可查阅STL标准模板库。</p>
+</div>
+</section>
+</section>
+<section id="id10">
+<h2><span class="section-number">3.2. </span>以太网数据包捕获机制<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<p>以太网数据包常规的传输路径依次为网卡、设备驱动层、操作系统内置的网络协议栈，网络协议栈包含有数据链路层、IP 层、传输层、应用层。那么，在不修改设备驱动层和操作系统内置的协议栈的情况下，如何获取到来自设备驱动层的数据帧呢？</p>
+<p>值得庆幸的是，现代操作系统一般提供有用于捕获网络流程的pcap（packet capture）应用程序编程接口。类Unix的系统主要是在libpcap库中实现pcap，Linux下著名的tcpdump就是以它为基础，而Windows系统则是使用WinPcap的libpcap端口，其官方网站是https://www.winpcap.org/。Libpcap利用BSD Packet Filter(BPF)算法对网卡接收到的链路层数据包进行过滤。BPF算法的基本思想是在有BPF监听的网络中，网卡驱动将接收到的数据包复制一份交给BPF过滤器，过滤器根据用户定义的规则决定是否接收此数据包以及需要拷贝该数据包的那些内容，然后将过滤后的数据给与过滤器相关联的上层应用程序。数据包复制的过程类似于在数据链路层增加一个旁路处理，因此，包捕获机制并不影响操作系统对数据包的网络栈处理，用户只需要调用简单的若干函数就能获得所期望的数据包。</p>
+<img alt="../_images/包捕获.png" src="../_images/包捕获.png" />
+<p>常用到的抓包函数：</p>
+<ul class="simple">
+<li><p>pcap_open_live()：用于打开网络设备，并且返回用于捕获网络数据包的数据包捕获描述字。对于此网络设备的操作都要基于此网络设备描述字。</p></li>
+<li><p>pcap_lookupnet()：获得指定网络设备的网络号和掩码。</p></li>
+<li><p>pcap_compile()：用于将用户制定的过滤策略编译到过滤程序中。</p></li>
+<li><p>pcap_setfilter()：用于设置过滤器。</p></li>
+<li><p>pcap_next_ex()：用来捕获数据包。</p></li>
+<li><p>pcap_close()：用于关闭网络设备，释放资源。</p></li>
+</ul>
+<p>在本实验中，我们已经对pcap库函数进行底层封装，我们直接使用以下几个函数即可实现从网卡接收或发送数据包，详见include/dirver.h、src/dirver.c。</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * @brief 打开网卡</span>
+<span class="cm"> *</span>
+<span class="cm"> * @return int 成功为0，失败为-1</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">driver_open</span><span class="p">();</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @brief 试图从网卡接收数据包</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param buf 收到的数据包</span>
+<span class="cm"> * @return int 数据包的长度，未收到为0，错误为-1</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">driver_recv</span><span class="p">(</span><span class="n">buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">);</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @brief 使用网卡发送一个数据包</span>
+<span class="cm"> *</span>
+<span class="cm"> * @param buf 要发送的数据包</span>
+<span class="cm"> * @return int 成功为0，失败为-1</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">driver_send</span><span class="p">(</span><span class="n">buf_t</span><span class="w"> </span><span class="o">*</span><span class="n">buf</span><span class="p">);</span><span class="w"></span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @brief 关闭网卡</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span><span class="w"></span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">driver_close</span><span class="p">();</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h2><span class="section-number">3.3. </span>以太网数据帧格式<a class="headerlink" href="#id11" title="永久链接至标题"></a></h2>
+<p>从上一节的介绍中，我们可知利用driver_recv()函数可以接收到以太网数据链路层的数据帧，那么数据帧的格式是什么样的？</p>
+<p>来自物理线路的二进制数据包称作一个帧。以太网链路传输的数据帧称为以太帧，或者以太网数据帧。</p>
+<img alt="../_images/物理层.png" src="../_images/物理层.png" />
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>如上图所示，物理层用于完成二进制数列与信号的转换，转换方法取决于设备本身的配置，没有固定的协议。物理层因其与其他层的性质不同，有时被当作数据链路层的一部分看待，有时被认为不属于TCP/IP的层。在本实验中，不涉及到物理层的实现。</p>
+</div>
+<p>下图是在网线上传输的数据包。其中报头/起始帧分界符、FCS（Frame Check Sequence，帧校验序列）是由网卡设备负责的部分。我们只需要关注MAC头部、IP头部、TCP/UDP头部、数据即可。</p>
+<img alt="../_images/以太网数据帧1.png" src="../_images/以太网数据帧1.png" />
+<p>去除报头和FCS，剩余的部分是数据链路层的数据帧，其帧格式如下图所示。</p>
+<a class="reference internal image-reference" href="../_images/帧格式1.png"><img alt="../_images/帧格式1.png" src="../_images/帧格式1.png" style="width: 491.4px; height: 325.8px;" /></a>
+<ul class="simple">
+<li><p><strong>MAC目标地址</strong> ：接收帧的网络适配器的物理地址（MAC地址），6个字节。当网卡接收到一个数据帧时，首先会检查该帧的目的地址，如果与当前适配器的物理地址相同，或者帧的目的地址为广播地址（FF-FF-FF-FF-FF-FF），就会进一步处理；否，则直接丢弃。</p></li>
+<li><p><strong>MAC源地址</strong> ：发送帧的网络适配器的物理地址，6个字节。</p></li>
+<li><p><strong>长度/类型</strong> ：当该值在0x05DC（10进制数为1500）以下时，表示该以太网数据帧的长度；在0x0600以上时，则表示上层协议的类型，2个字节，标识数据交付哪个协议处理。例如，字段为0x0800时，表示将数据交付给IP协议。字段为0806时，表示该数据帧时ARP请求/应答报文。</p></li>
+</ul>
+<p>更多的以太网数据帧、IP协议报文格式和ARP报文格式的详细资料请参考Internet工程任务组（IETF）提供的官方标准文档 <a class="reference external" href="https://www.ietf.org/rfc/rfc0894.txt">RFC0894</a> 、 <a class="reference external" href="https://www.ietf.org/rfc/rfc0791.txt">RFC0791</a> 和 <a class="reference external" href="https://www.ietf.org/rfc/rfc0826.txt">RFC0826</a> 。</p>
+</section>
+</section>
+<section id="id12">
+<h1><span class="section-number">4. </span>代码实现与检测<a class="headerlink" href="#id12" title="永久链接至标题"></a></h1>
+<p>请同学们认真阅读本实验提供的代码框架，并补充完整 src/ethernet.c 文件中的 ethernet_out()函数和ethernet_in()函数。</p>
+<section id="ethernet-out">
+<h2><span class="section-number">4.1. </span>以太网数据帧发送处理流程（ethernet_out()函数）<a class="headerlink" href="#ethernet-out" title="永久链接至标题"></a></h2>
+<p><strong>Step1</strong> ：首先判断数据长度，如果不足46则显式填充0，填充可以调用buf_add_padding()函数来实现。</p>
+<p><strong>Step2</strong> ：调用buf_add_header()函数添加以太网包头。</p>
+<p>可参考以下写法：</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">buf_add_header</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">ether_hdr_t</span><span class="p">));</span><span class="w"></span>
+<span class="n">ether_hdr_t</span><span class="w"> </span><span class="o">*</span><span class="n">hdr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">ether_hdr_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">buf</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<p><strong>Step3</strong> ：填写目的MAC地址。</p>
+<p><strong>Step4</strong> ：填写源MAC地址，即本机的MAC地址。</p>
+<p><strong>Step5</strong> ：填写协议类型 protocol。</p>
+<p><strong>Step6</strong> ：调用驱动层封装好的driver_send()发送函数，将添加了以太网包头的数据帧发送到驱动层。</p>
+</section>
+<section id="ethernet-in">
+<h2><span class="section-number">4.2. </span>以太网数据帧接收处理流程（ethernet_in()函数）<a class="headerlink" href="#ethernet-in" title="永久链接至标题"></a></h2>
+<p><strong>Step1</strong> ：首先判断数据长度，如果数据长度小于以太网头部长度，则认为数据包不完整，丢弃不处理。</p>
+<p><strong>Step2</strong> ：调用buf_remove_header()函数移除加以太网包头。</p>
+<p><strong>Step3</strong> ：调用net_in()函数向上层传递数据包。</p>
+</section>
+<section id="id13">
+<h2><span class="section-number">4.3. </span>实验自测<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<p>我们实验提供了自测程序，方便同学们对每一层的协议进行自测。</p>
+<p>首先请参考附录B <a class="reference internal" href="../appendix-b/1win.html"><span class="doc">Windows开发环境搭建</span></a> 搭建Windows的开发环境，或者，也可以参考附录B <a class="reference internal" href="../appendix-b/2linux.html"><span class="doc">Linux开发环境搭建</span></a> 搭建Linux的开发环境。</p>
+<p>下面以Windows开发环境为例，介绍如何进行实验自测。Linux开发环境下也可以用VSCode远程调试，完成实验自测，其操作步骤是类似的，在此就不一一赘述了。</p>
+<section id="id14">
+<h3><span class="section-number">4.3.1. </span>ethernet_in()函数测试<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
+<p>点击CMake工具栏，找到eth_in[eth_in.exe]，右键，选择“生成”进行编译。</p>
+<a class="reference internal image-reference" href="../_images/cmake2.png"><img alt="../_images/cmake2.png" src="../_images/cmake2.png" style="width: 422.79999999999995px; height: 494.9px;" /></a>
+<p>接着，打开VSCode的终端，到build目录下，输入ctest -R eth_in</p>
+<img alt="../_images/cmake11.png" src="../_images/cmake11.png" />
+<p>如果显示100% test passed（如上图所示），则说明ethernet_in()函数的接收处理流程是正确的。否则，说明接收处理失败。</p>
+<img alt="../_images/cmake21.png" src="../_images/cmake21.png" />
+<p>如上图所示，提示测试有错误。</p>
+<p>此时，可以输入ctest –output-on-failure显示未通过测试的控制台输出，该命令会运行所有测试。</p>
+<a class="reference internal image-reference" href="../_images/cmake3.png"><img alt="../_images/cmake3.png" src="../_images/cmake3.png" style="width: 653.0999999999999px; height: 515.9px;" /></a>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p><strong>ctest用法</strong></p>
+<p>ctest                             ： 运行所有测试</p>
+<p>ctest -N                          ： 列出所有测试</p>
+<p>ctest -R 测试名                    ： 运行指定测试</p>
+<p>ctest -R 测试名 -V                 ： 运行指定程序，并显示测试控制台输出</p>
+<p>ctest –output-on-failure         ： 运行所有测试，仅显示未通过测试的控制台输出</p>
+<p>ctest -N -V                       ： 列出测试及其运行命令（用于gdb）</p>
+</div>
+<p>从上图可以看到在eth_in测试中，提示”Some log rounds are different to the demo“。</p>
+<p>接着，我们可以查看一下是哪些log不一样。在VSCode工程目录下，将testing/eth_in目录下的demo_log和log这两个文件进行比对。</p>
+<p>按下Ctrl键，选择demo_log和log这两个文件，再点击右键，选择“将已选项进行比较”</p>
+<a class="reference internal image-reference" href="../_images/cmake4.png"><img alt="../_images/cmake4.png" src="../_images/cmake4.png" style="width: 465.0px; height: 670.1999999999999px;" /></a>
+<p>如下图所示，通过对比查看 log 和 demo_log 文件，可以看到 log 文件中数据报头部多出了一些数据（用此方法可以看出 ethernet_in()函数处理错误）</p>
+<img alt="../_images/cmake5.png" src="../_images/cmake5.png" />
+<div class="admonition note">
+<p class="admonition-title">备注</p>
+<p>如果提示.pcap文件不一致，可以用wireshark软件打开查看.pcap文件。wireshark用法可参考  <a class="reference internal" href="../appendix-a/index.html"><span class="doc">附录 A：Wireshark 入门</span></a> 。</p>
+</div>
+</section>
+<section id="id15">
+<h3><span class="section-number">4.3.2. </span>ethernet_out()函数测试<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
+<p>点击CMake工具栏，找到eth_out[eth_out.exe]，右键，选择“生成”进行编译。</p>
+<a class="reference internal image-reference" href="../_images/cmake6.png"><img alt="../_images/cmake6.png" src="../_images/cmake6.png" style="width: 369.59999999999997px; height: 459.2px;" /></a>
+<p>与上述eth_in的测试一样，打开VSCode的终端，到build目录下，输入ctest -R eth_out即可进行测试。</p>
+<p>如果提示失败，也可以参考上述排错方法来找bug。</p>
+</section>
+<section id="gdb">
+<h3><span class="section-number">4.3.3. </span>GDB调试<a class="headerlink" href="#gdb" title="永久链接至标题"></a></h3>
+<p>本实验支持使用GDB调试，请参考 <a class="reference internal" href="../appendix-b/1win.html"><span class="doc">Windows开发环境搭建</span></a> 中的“Windows下编译和调试”</p>
+</section>
+</section>
+</section>
+<section id="id16">
+<h1><span class="section-number">5. </span>实验提交<a class="headerlink" href="#id16" title="永久链接至标题"></a></h1>
+<p>本实验提交 <strong>实验设计报告</strong> 和 <strong>实验代码</strong> 。</p>
+<section id="id17">
+<h2><span class="section-number">5.1. </span>实验设计报告<a class="headerlink" href="#id17" title="永久链接至标题"></a></h2>
+<p>实验设计报告要求写出实验设计思路和运行结果 。</p>
+<p>实验设计报告会纳入评分（虽然不多），有分数追求的大佬（juanwang）们不要只放代码和指导书的截图。</p>
+</section>
+<section id="id18">
+<h2><span class="section-number">5.2. </span>实验代码<a class="headerlink" href="#id18" title="永久链接至标题"></a></h2>
+<p>不需要提交整个实验代码包，只需 <strong>提交你所修改过的代码</strong> 即可。</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Lab2：协议栈之Eth协议实现" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../lab3/index.html" class="btn btn-neutral float-right" title="Lab3：协议栈之ARP协议实现" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, qiu.</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用了 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a>开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
