@@ -20,7 +20,9 @@
         <script src="../_static/js/baidu-tongji.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" /> 
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="附录 D：邮件客户端实验环境" href="../appendix-d/index.html" />
+    <link rel="prev" title="附录 C：Cisco Packet Tracer简介" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,10 +55,23 @@
 <li class="toctree-l1"><a class="reference internal" href="../proplus/index.html">附加题</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">附录</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../appendix-a/index.html">附录 A：Wireshark 入门</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-b/index.html">附录 B：网络编程实验环境</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">附录 C：Cisco Packet Tracer简介</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">附录 C：Cisco Packet Tracer简介</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">网络模拟器简介</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cisco-packet-tracer">Cisco Packet Tracer 模拟器</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">网络设备</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">交换机</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">路由器</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">网络设备的配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cisco">Cisco网络设备的常用配置命令</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：邮件客户端实验环境</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：参考文献</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：致谢</a></li>
@@ -77,6 +92,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">附录 C：Cisco Packet Tracer简介</a> &raquo;</li>
       <li>网络模拟器简介</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/appendix-c/0cisco-stu.rst.txt" rel="nofollow"> 查看页面源码</a>
@@ -93,11 +109,11 @@
 <h2>Cisco Packet Tracer 模拟器<a class="headerlink" href="#cisco-packet-tracer" title="永久链接至标题"></a></h2>
 <p>Cisco Packet Tracer是由Cisco（思科）公司发布的一个仿真学习工具，它是运用软件模拟真实的网络设备和环境，利用软件中虚拟的网络设备及线缆完成网络的组网和配置，实现网络的互联。因此我们可以在没有网络设备的情况下，也能在软件的图形界面建立网络拓扑，并可追踪数据包在网络中详细的处理过程，学习搭建网络的要点和难点（更多关于Cisco Packet Tracer的介绍详见参考文献中的《网络设备管理与维护项目教程·Cisco Packet Tracer模拟器版》）。</p>
 <p>本实验课程已经提供有Cisco Packet Tracer 模拟器软件包，可在实验室电脑里直接打开“Cisco Packet Tracer Student”运行。</p>
-<p>安装方法：</p>
+<p>如果想要在你自己的电脑上使用，请到课程群下载安装包，安装方法如下：</p>
 <ol class="arabic simple">
 <li><p>从课程群里下载Cisco Packet Tracer安装包，点击安装</p></li>
 <li><p>安装完成后，把Chinese.ptl汉化文件复制到安装目录的languages文件夹下（默认安装目录：C:Porgram Files(X86)Cisco Packet Tracer ）</p></li>
-<li><p>运行模拟器，选择 Edit -&gt; 首选项 -&gt; Language -&gt; Chinese.ptl</p></li>
+<li><p>运行模拟器，选择 Options -&gt; 首选项 -&gt; Language -&gt; Chinese.ptl</p></li>
 <li><p>保存，重新启动软件即可。</p></li>
 </ol>
 <p>如果想要最新版本的模拟器，可以到思科官网下载：<a class="reference external" href="https://www.netacad.com/courses/packet-tracer">https://www.netacad.com/courses/packet-tracer</a>。注意：需要注册账号（免费）才可使用。</p>
@@ -215,7 +231,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="附录 C：Cisco Packet Tracer简介" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../appendix-d/index.html" class="btn btn-neutral float-right" title="附录 D：邮件客户端实验环境" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

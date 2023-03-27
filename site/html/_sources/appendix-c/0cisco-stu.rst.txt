@@ -7,11 +7,11 @@ Cisco Packet Tracer是由Cisco（思科）公司发布的一个仿真学习工�
 
 本实验课程已经提供有Cisco Packet Tracer 模拟器软件包，可在实验室电脑里直接打开“Cisco Packet Tracer Student”运行。
 
-安装方法：
+如果想要在你自己的电脑上使用，请到课程群下载安装包，安装方法如下：
 
 1. 从课程群里下载Cisco Packet Tracer安装包，点击安装
 2. 安装完成后，把Chinese.ptl汉化文件复制到安装目录的languages文件夹下（默认安装目录：C:\Porgram Files(X86)\Cisco Packet Tracer ）
-3. 运行模拟器，选择 Edit -> 首选项 -> Language -> Chinese.ptl
+3. 运行模拟器，选择 Options -> 首选项 -> Language -> Chinese.ptl
 4. 保存，重新启动软件即可。
 
 如果想要最新版本的模拟器，可以到思科官网下载：https://www.netacad.com/courses/packet-tracer。注意：需要注册账号（免费）才可使用。
