@@ -7,7 +7,7 @@
    :titlesonly:
    :numbered:
 
-  0cisco
+  0cisco-stu
 ..  1labintro
   2dev
 
