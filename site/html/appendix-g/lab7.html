@@ -131,11 +131,13 @@
 <p>详见Wireshark的官方说明：<a class="reference external" href="https://wiki.wireshark.org/CaptureSetup/Offloading">https://wiki.wireshark.org/CaptureSetup/Offloading</a></p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>如果你也是需要无线网卡，有线网卡又无法使用，可以参考来自某同学提供的解决方案：</p>
-<p>如果你电脑里安装有虚拟机，假设你电脑中虚拟机生成的虚拟网卡的IP地址如下图所示：</p>
+<p>如果你的电脑只有无线网卡，无法使用有线网卡，可以参考来自某位大佬提供的解决方案：</p>
+<p>当在你的电脑里安装有虚拟机，假设你电脑中虚拟机生成的虚拟网卡的IP地址如下图所示：</p>
 <img alt="../_images/lab7-13.png" src="../_images/lab7-13.png" />
-<p>注意：此方案必须要安装有虚拟机，这样才会生成虚拟机的虚拟网卡。</p>
-<p>将config.h中的IP地址改成192.168.56.XX，确保和虚拟机的虚拟网卡处在同一个网段内，即可用虚拟机的虚拟网卡与协议栈中的虚拟网卡进行点对点互通。</p>
+<p>也可以从“控制面板\网络和 Internet\网络连接”查看是否有“VirtualBox Host-Only Network”网卡，如果有，双击其图标，查看“详细信息”：</p>
+<img alt="../_images/lab7-14.jpg" src="../_images/lab7-14.jpg" />
+<p>注意：此方案必须要安装有虚拟机，这样才会生成虚拟网卡。</p>
+<p>将config.h中的IP地址改成192.168.56.XX，确保和虚拟网卡处在同一个网段内，即可用虚拟机的虚拟网卡与协议栈中的虚拟网卡进行点对点互通。</p>
 </div>
 </section>
 <section id="udpgdb">

@@ -22,6 +22,11 @@ https://npcap.com/#download
 .. note:: 
    npcap版本必须大于1.0
 
+在安装过程选择“Install Npcap in WinPcap API-compatible Mode”
+
+.. image:: npcap.png
+
+
 cmake
 ------------------------------ 
 CMake是一个跨平台的编译工具。它可以跨平台生成对应平台能使用的Makefile，这样我们就不用再自己去修改Makefile了，非常地方便。那它又是根据什么生成的makefile呢？就是一个叫CMakeLists.txt文件去生成Makefile，当然，这个CMakefile.txt是要我们自己编写的。本实验已经提供好了CMakefile.txt文件，可大家学习参考：）
