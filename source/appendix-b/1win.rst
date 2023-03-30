@@ -2,6 +2,12 @@
 Windows开发环境搭建
 ==================================================
 
+.. important:: 
+   为了给同学们演示如何下载、编译、调试net-lab，我们录制了演示视频，请到bilibili上观看。
+   
+   【网络协议栈编译调试】 https://www.bilibili.com/video/BV1kT411q7aB/?share_source=copy_web
+
+
 
 实验工具
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
