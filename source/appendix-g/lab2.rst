@@ -39,6 +39,25 @@ Lab2 常见问题（Eth）
 
 .. image:: lab2-2.png
 
+.. code-block:: json
+   :linenos:
+
+   [
+     {
+       "name": "GCC 10.3.0 x86_64-w64-mingw32",
+       "compilers": {
+         "C": "C:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-gcc.exe",
+         "CXX": "C:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-g++.exe"
+       },
+       "preferredGenerator": {
+         "name": "MinGW Makefiles"
+       },
+       "environmentVariables": {
+         "CMT_MINGW_PATH": "C:\\TDM-GCC-64\\bin"
+       }
+     }
+   ]
+   
 如果你电脑中该文件的gcc不一样，比如是C:\\\TDM-GCC-64\\\bin\\\gcc.exe。你可以参考以下步骤来修改：
 
 单击VSCode的左下角齿轮图标，选择“设置”。

@@ -361,13 +361,13 @@ PC3       192.168.3.14          255.255.255.0
 
 配置Switch0和Switch1的trunk端口
 ----------------------------------------
-将Switch0与Switch1的g0/0/4接口模式配置为trunk，使得所有VLAN都可以通过。
+将Switch0与Switch1的f0/4接口模式配置为trunk，使得所有VLAN都可以通过。
 在Switch0交换机下使用下列命令进行配置：
 
 .. code-block:: sh
    :linenos:
 
-   Switch0(config)#interface f0/4 //进入g0/0/4接口
+   Switch0(config)#interface f0/4 //进入f0/4接口
    Switch0(config-if)#no switchport access vlan // 删除端口下的vlan配置
    Switch0(config-if)#switchport mode trunk //把端口的连接类型设置为trunk模式
    Switch0(config-if)#switchport trunk allowed vlan 2,3 // 允许Trunk接口模式下vlan2,3的数据通过
@@ -390,7 +390,7 @@ PC3       192.168.3.14          255.255.255.0
 .. code-block:: sh
    :linenos:
 
-   Switch1(config)#interface f0/4 //进入g0/0/4接口
+   Switch1(config)#interface f0/4 //进入f0/4接口
    Switch1(config-if)#no switchport access vlan
    Switch1(config-if)#switchport mode trunk //把端口的连接类型设置为trunk模式
    Switch1(config-if)#switchport trunk allowed vlan 2,3

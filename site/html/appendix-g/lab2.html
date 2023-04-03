@@ -126,6 +126,23 @@
 <a class="reference internal image-reference" href="../_images/lab2.png"><img alt="../_images/lab2.png" src="../_images/lab2.png" style="width: 235.0px; height: 291.0px;" /></a>
 <p>首先，你需要先检查 “C:\Users\你自己电脑的用户名\AppData\Local\CMakeTools\CMakeTools-tools-kits.json”文件，该文件正常的配置应该如下图所示。</p>
 <img alt="../_images/lab2-2.png" src="../_images/lab2-2.png" />
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="p">[</span><span class="w"></span>
+<span class="linenos"> 2</span><span class="w">  </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 3</span><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GCC 10.3.0 x86_64-w64-mingw32&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="nt">&quot;compilers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 5</span><span class="w">      </span><span class="nt">&quot;C&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-gcc.exe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="linenos"> 6</span><span class="w">      </span><span class="nt">&quot;CXX&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\TDM-GCC-64\\bin\\x86_64-w64-mingw32-g++.exe&quot;</span><span class="w"></span>
+<span class="linenos"> 7</span><span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="linenos"> 8</span><span class="w">    </span><span class="nt">&quot;preferredGenerator&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos"> 9</span><span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MinGW Makefiles&quot;</span><span class="w"></span>
+<span class="linenos">10</span><span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="linenos">11</span><span class="w">    </span><span class="nt">&quot;environmentVariables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="linenos">12</span><span class="w">      </span><span class="nt">&quot;CMT_MINGW_PATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;C:\\TDM-GCC-64\\bin&quot;</span><span class="w"></span>
+<span class="linenos">13</span><span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">14</span><span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="linenos">15</span><span class="p">]</span><span class="w"></span>
+</pre></div>
+</div>
 <p>如果你电脑中该文件的gcc不一样，比如是C:\TDM-GCC-64\bin\gcc.exe。你可以参考以下步骤来修改：</p>
 <p>单击VSCode的左下角齿轮图标，选择“设置”。</p>
 <img alt="../_images/lab2-6.png" src="../_images/lab2-6.png" />
