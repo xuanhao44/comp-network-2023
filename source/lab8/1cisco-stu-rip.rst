@@ -338,17 +338,17 @@ R1路由表:
 在Cisco Packet Tracer软件右下角有“Simulation”按钮，点击该按钮就进入了仿真模式。
 
 .. image:: cisco-stu-1.png
-  :scale: 80%
+  :scale: 100%
 
 在“Event List Filters-Visible Events”窗口栏中显示捕获的协议，这里面有很多是我们不需要观察的协议。单击Show All/None，也就是不显示任何协议。然后，再单击Edit Filters。在弹出的窗口里，选择IPv4选项卡，选择ARP、ICMP、RIP这三种协议，本实验只需观察这三种协议即可。
 
 .. image:: cisco-15.png
-  :scale: 80%
+  :scale: 100%
 
 单击“Auto Capture / Play”按钮，让网络设备开始运行。此时，我们可以观察数据包的传输过程。包转发需要一些时间，请耐心等待。
 
 .. image:: cisco-stu-2.png
-  :scale: 80%
+  :scale: 100%
 
 .. image:: cisco-stu-3.png
 
@@ -371,12 +371,12 @@ R1路由表:
 单击“Back”按钮，选择到18.262s行的Router0，再点击Router0上的“信封”按钮，在弹出窗口的Outbound PDU Details选项卡中，可以看到这个RIP数据包携带有达到1.1.1.1网络的跳数为16，也就是不可达。
 
 .. image:: cisco-stu-5.png
-  :scale: 80%
+  :scale: 100%
 
 单击“Capture / Forward”按钮，18.263s，该RIP包到达Router1后，Router1也立刻转发该路由信息。也就是，一条路有切断，全网通告。
 
 .. image:: cisco-stu-6.png
-  :scale: 80%
+  :scale: 100%
 
 由此可知，在网络发生改变时，RIP路由协议会及时触发更新，而不是等到下一个30s后才发出路由信息。
 

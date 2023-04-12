@@ -425,11 +425,11 @@
 <section id="id14">
 <h3><span class="section-number">6.5.1. </span>进入仿真调试模式<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
 <p>在Cisco Packet Tracer软件右下角有“Simulation”按钮，点击该按钮就进入了仿真模式。</p>
-<a class="reference internal image-reference" href="../_images/cisco-stu-1.png"><img alt="../_images/cisco-stu-1.png" src="../_images/cisco-stu-1.png" style="width: 332.8px; height: 170.4px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-stu-1.png"><img alt="../_images/cisco-stu-1.png" src="../_images/cisco-stu-1.png" style="width: 416.0px; height: 213.0px;" /></a>
 <p>在“Event List Filters-Visible Events”窗口栏中显示捕获的协议，这里面有很多是我们不需要观察的协议。单击Show All/None，也就是不显示任何协议。然后，再单击Edit Filters。在弹出的窗口里，选择IPv4选项卡，选择ARP、ICMP、RIP这三种协议，本实验只需观察这三种协议即可。</p>
-<a class="reference internal image-reference" href="../_images/cisco-151.png"><img alt="../_images/cisco-151.png" src="../_images/cisco-151.png" style="width: 252.8px; height: 284.8px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-151.png"><img alt="../_images/cisco-151.png" src="../_images/cisco-151.png" style="width: 316.0px; height: 356.0px;" /></a>
 <p>单击“Auto Capture / Play”按钮，让网络设备开始运行。此时，我们可以观察数据包的传输过程。包转发需要一些时间，请耐心等待。</p>
-<a class="reference internal image-reference" href="../_images/cisco-stu-2.png"><img alt="../_images/cisco-stu-2.png" src="../_images/cisco-stu-2.png" style="width: 268.8px; height: 46.400000000000006px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-stu-2.png"><img alt="../_images/cisco-stu-2.png" src="../_images/cisco-stu-2.png" style="width: 336.0px; height: 58.0px;" /></a>
 <img alt="../_images/cisco-stu-3.png" src="../_images/cisco-stu-3.png" />
 <p>上图中，在8.440时刻，从Router0发出来了两个RIP数据包。点击“forward”前向三角按钮，在8.441s，这两个数据包分别被传输到Switch0和Router1。再次点击“forward”前向三角按钮，数据包在8.442s到达PC0，而之前到达Router1的数据没有在此时转发出来。这是因为Router1收到RIP协议数据包后，需要更新自身的路由表，然后等到它的下一个发包时刻再转发出路由数据包。13.078s，此时轮到Router1对外转发它的路由信息。13.079s数据包分别到达Router0和Switch1。由此我们可以观察数据包的传输过程。</p>
 <p>在上图中，我们可以看到Router0第一次发出RIP数据包是在8.440s，第二次发送RIP数据包是在37.666s，第三次是在66.796s，相差间隔差不多是30s，这也验证了RIP是每30s将自己所知道的路由信息广播出去。</p>
@@ -441,9 +441,9 @@
 <img alt="../_images/cisco-stu-4.png" src="../_images/cisco-stu-4.png" />
 <p>图中，2.601s，Router0发出两个RIP数据包。当我们输入`no interface loopback 1`命令断开loopback 1时，在18.262s，Router0又发出两个RIP数据包。此时，距离上一个Router0发出数据的时间还没有到达30s。</p>
 <p>单击“Back”按钮，选择到18.262s行的Router0，再点击Router0上的“信封”按钮，在弹出窗口的Outbound PDU Details选项卡中，可以看到这个RIP数据包携带有达到1.1.1.1网络的跳数为16，也就是不可达。</p>
-<a class="reference internal image-reference" href="../_images/cisco-stu-5.png"><img alt="../_images/cisco-stu-5.png" src="../_images/cisco-stu-5.png" style="width: 747.2px; height: 642.4000000000001px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-stu-5.png"><img alt="../_images/cisco-stu-5.png" src="../_images/cisco-stu-5.png" style="width: 934.0px; height: 803.0px;" /></a>
 <p>单击“Capture / Forward”按钮，18.263s，该RIP包到达Router1后，Router1也立刻转发该路由信息。也就是，一条路有切断，全网通告。</p>
-<a class="reference internal image-reference" href="../_images/cisco-stu-6.png"><img alt="../_images/cisco-stu-6.png" src="../_images/cisco-stu-6.png" style="width: 744.0px; height: 643.2px;" /></a>
+<a class="reference internal image-reference" href="../_images/cisco-stu-6.png"><img alt="../_images/cisco-stu-6.png" src="../_images/cisco-stu-6.png" style="width: 930.0px; height: 804.0px;" /></a>
 <p>由此可知，在网络发生改变时，RIP路由协议会及时触发更新，而不是等到下一个30s后才发出路由信息。</p>
 <div class="admonition attention">
 <p class="admonition-title">注意</p>
