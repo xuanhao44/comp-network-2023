@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>实验目的 &mdash; 计算机网络实验指导书 - 2023春季 | 哈工大（深圳） v1.0 文档</title>
+  <title>1. 实验目的 &mdash; 计算机网络实验指导书 - 2023春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -20,7 +20,9 @@
         <script src="../_static/js/baidu-tongji.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
-    <link rel="search" title="搜索" href="../search.html" /> 
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="Lab5：协议栈之IP协议实现" href="../lab5/index.html" />
+    <link rel="prev" title="Lab4：RIP路由配置及协议分析" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,12 +41,55 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">实验</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../lab0/index.html">计算机网络实验概述</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab4/index.html">Lab1：VLAN 与接口模式配置</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab2/index.html">Lab2：协议栈之Eth协议实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab3/index.html">Lab3：协议栈之ARP协议实现</a></li>
-<li class="toctree-l1"><a class="reference internal" href="index.html">Lab4：RIP路由配置及协议分析</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Lab4：RIP路由配置及协议分析</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. 实验目的</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">2. 实验任务</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3. 实验原理</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rip">3.1. RIP概要</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.2. RIP协议特点</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.3. RIP报文格式</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">4. 实验环境与分组</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">5. 实验组网</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">6. 实验步骤</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">6.1. 搭建网络拓扑</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcip">6.2. 配置三台PC的IP地址</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">6.3. 配置路由器、交换机基本信息和计算机的网关</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#r0ip">6.3.1. 在路由器R0上配置端口的IP地址</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r0">6.3.2. 查看R0路由表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r1ip">6.3.3. 在路由器R1上配置端口的IP地址</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r1-r0r1">6.3.4. 查看R1路由表，并观察R0和R1的连通性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">6.3.5. 配置三台计算机的网关</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r0ping-r1">6.3.6. 在R0上ping R1验证连通性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pc0ping-r0">6.3.7. 在PC0上ping R0验证连通性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pc1ping-r1">6.3.8. 在PC1上ping R1验证连通性</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pc0ping-pc1">6.3.9. 在PC0上ping PC1验证连通性</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">6.4. 配置RIP协议及查看路由表，并测试连通性</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#r0rip">6.4.1. 在路由器R0上启用RIP协议</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r1rip">6.4.2. 路由器R1上启用RIP协议</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#r0r1">6.4.3. 查看R0和R1的路由表</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pc0pc1">6.4.4. 测试PC0到PC1之间的连通性</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">6.5. 触发更新和水平分割</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">6.5.1. 进入仿真调试模式</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">6.5.2. 观察触发更新报文</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">6.5.3. 观察取消水平分割前后报文差异</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">7. 实验提交</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../lab5/index.html">Lab5：协议栈之IP协议实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab6/index.html">Lab6：协议栈之ICMP协议实现</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../lab7/index.html">Lab7：协议栈之UDP协议实现</a></li>
@@ -77,9 +122,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>实验目的</li>
+          <li><a href="index.html">Lab4：RIP路由配置及协议分析</a> &raquo;</li>
+      <li><span class="section-number">1. </span>实验目的</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/lab8/1cisco-rip.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/lab8/1cisco-stu-rip.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -88,7 +134,7 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1>实验目的<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">1. </span>实验目的<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
 <ol class="arabic simple">
 <li><p>了解动态路由协议的原理与应用。</p></li>
 <li><p>熟悉RIP协议的特点，理解水平分割、触发更新和毒性逆转的作用。</p></li>
@@ -96,17 +142,17 @@
 </ol>
 </section>
 <section id="id2">
-<h1>实验任务<a class="headerlink" href="#id2" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">2. </span>实验任务<a class="headerlink" href="#id2" title="永久链接至标题"></a></h1>
 <p>掌握RIP的配置方法，在cisc packet tracer上截取RIP报文，理解触发更新和水平分割对RIP收敛速度和避免环路的作用。</p>
 </section>
 <section id="id3">
-<h1>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">3. </span>实验原理<a class="headerlink" href="#id3" title="永久链接至标题"></a></h1>
 <section id="rip">
-<h2>RIP概要<a class="headerlink" href="#rip" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">3.1. </span>RIP概要<a class="headerlink" href="#rip" title="永久链接至标题"></a></h2>
 <p>RIP（Routing Information Protocol）是基于距离矢量算法的一种路由协议，它使用“跳数”，即指所经过的路由器的个数来衡量到达目标地址的路由距离，广泛应用于LAN。BSD UNIX系统的routed进程采用了RIP协议，由此RIP得到了迅速的普及。</p>
 </section>
 <section id="id4">
-<h2>RIP协议特点<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">3.2. </span>RIP协议特点<a class="headerlink" href="#id4" title="永久链接至标题"></a></h2>
 <p>RIP协议特点可归纳如下：</p>
 <ol class="arabic simple">
 <li><p>30秒一次，将自己所知道的路由信息广播出去。如果一个路由在180秒内未被刷，就认为网络被断开。</p></li>
@@ -132,7 +178,7 @@
 </div>
 </section>
 <section id="id5">
-<h2>RIP报文格式<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">3.3. </span>RIP报文格式<a class="headerlink" href="#id5" title="永久链接至标题"></a></h2>
 <p>RIP协议使用UDP协议的520端口来发送和接收RIP报文。RIP协议有两个版本：RIPv1和RIPv2。RIPv2是RIPv1的加强版，与RIPv1相比，功能上明显增强，也提高了对错误的抵抗能力。RIPv1的response报文是广播报文，目的地址是255.255.255.255。为了减轻那些不接收RIP协议数据包的主机的不必要负载，RIPv2采用组播地址224.0.0.9进行周期性地广播。</p>
 <p>以下为RIPv2的报文格式，如下图所示。</p>
 <img alt="../_images/RIP格式.png" src="../_images/RIP格式.png" />
@@ -150,11 +196,11 @@
 </section>
 </section>
 <section id="id6">
-<h1>实验环境与分组<a class="headerlink" href="#id6" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">4. </span>实验环境与分组<a class="headerlink" href="#id6" title="永久链接至标题"></a></h1>
 <p>cisco packet tracer模拟器，一人一组。</p>
 </section>
 <section id="id7">
-<h1>实验组网<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">5. </span>实验组网<a class="headerlink" href="#id7" title="永久链接至标题"></a></h1>
 <img alt="../_images/cisco-110.png" src="../_images/cisco-110.png" />
 <div class="admonition note">
 <p class="admonition-title">备注</p>
@@ -191,9 +237,9 @@
 </table>
 </section>
 <section id="id8">
-<h1>实验步骤<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">6. </span>实验步骤<a class="headerlink" href="#id8" title="永久链接至标题"></a></h1>
 <section id="id9">
-<h2>搭建网络拓扑<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">6.1. </span>搭建网络拓扑<a class="headerlink" href="#id9" title="永久链接至标题"></a></h2>
 <p>打开Cisco Packet Tracer软件绘制出组网图。</p>
 <p>路由器型号：1841</p>
 <p>交换机型号：2960</p>
@@ -204,7 +250,7 @@
 </div>
 </section>
 <section id="pcip">
-<h2>配置三台PC的IP地址<a class="headerlink" href="#pcip" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">6.2. </span>配置三台PC的IP地址<a class="headerlink" href="#pcip" title="永久链接至标题"></a></h2>
 <p>按照下表设置PC0、PC1和PC2这三台电脑的IP地址。</p>
 <table class="docutils align-default">
 <colgroup>
@@ -230,9 +276,9 @@
 </table>
 </section>
 <section id="id10">
-<h2>配置路由器、交换机基本信息和计算机的网关<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">6.3. </span>配置路由器、交换机基本信息和计算机的网关<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <section id="r0ip">
-<span id="loopback"></span><h3>在路由器R0上配置端口的IP地址<a class="headerlink" href="#r0ip" title="永久链接至标题"></a></h3>
+<span id="loopback"></span><h3><span class="section-number">6.3.1. </span>在路由器R0上配置端口的IP地址<a class="headerlink" href="#r0ip" title="永久链接至标题"></a></h3>
 <p>路由器在第一次配置时会启动配置向导界面，通常选择no，不进入对话模式，而是直接进入正常配置模式。</p>
 <a class="reference internal image-reference" href="../_images/cisco-25.png"><img alt="../_images/cisco-25.png" src="../_images/cisco-25.png" style="width: 525.6px; height: 504.0px;" /></a>
 <p>配置R0的基本信息。</p>
@@ -259,11 +305,11 @@
 </div>
 </section>
 <section id="r0">
-<h3>查看R0路由表<a class="headerlink" href="#r0" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.3.2. </span>查看R0路由表<a class="headerlink" href="#r0" title="永久链接至标题"></a></h3>
 <a class="reference internal image-reference" href="../_images/cisco-32.png"><img alt="../_images/cisco-32.png" src="../_images/cisco-32.png" style="width: 664.0px; height: 217.60000000000002px;" /></a>
 </section>
 <section id="r1ip">
-<h3>在路由器R1上配置端口的IP地址<a class="headerlink" href="#r1ip" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.3.3. </span>在路由器R1上配置端口的IP地址<a class="headerlink" href="#r1ip" title="永久链接至标题"></a></h3>
 <p>配置R1的基本信息</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span>Router&gt;enable
 <span class="linenos"> 2</span>Router#configure terminal
@@ -286,32 +332,32 @@
 </div>
 </section>
 <section id="r1-r0r1">
-<h3>查看R1路由表，并观察R0和R1的连通性<a class="headerlink" href="#r1-r0r1" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.3.4. </span>查看R1路由表，并观察R0和R1的连通性<a class="headerlink" href="#r1-r0r1" title="永久链接至标题"></a></h3>
 <a class="reference internal image-reference" href="../_images/cisco-42.png"><img alt="../_images/cisco-42.png" src="../_images/cisco-42.png" style="width: 659.2px; height: 220.8px;" /></a>
 <p>R1配置完成后，R0和R1已经连通。此时，再次查看R0路由表，已经可以看到有192.168.1.0/24网段了。</p>
 <a class="reference internal image-reference" href="../_images/cisco-52.png"><img alt="../_images/cisco-52.png" src="../_images/cisco-52.png" style="width: 654.4000000000001px; height: 242.4px;" /></a>
 </section>
 <section id="id11">
-<h3>配置三台计算机的网关<a class="headerlink" href="#id11" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.3.5. </span>配置三台计算机的网关<a class="headerlink" href="#id11" title="永久链接至标题"></a></h3>
 <p>PC0网关为192.168.2.1</p>
 <a class="reference internal image-reference" href="../_images/cisco-62.png"><img alt="../_images/cisco-62.png" src="../_images/cisco-62.png" style="width: 681.6px; height: 601.6px;" /></a>
 <p>PC1和PC2网关为192.168.3.1，配置方法和PC0一样。</p>
 <p>PC0通过默认网关将发往未知网络的数据交由R0处理。同理PC1和PC2通过默认网关将数据交给R1。</p>
 </section>
 <section id="r0ping-r1">
-<h3>在R0上ping R1验证连通性<a class="headerlink" href="#r0ping-r1" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.3.6. </span>在R0上ping R1验证连通性<a class="headerlink" href="#r0ping-r1" title="永久链接至标题"></a></h3>
 <a class="reference internal image-reference" href="../_images/cisco-72.png"><img alt="../_images/cisco-72.png" src="../_images/cisco-72.png" style="width: 582.4px; height: 107.2px;" /></a>
 </section>
 <section id="pc0ping-r0">
-<h3>在PC0上ping R0验证连通性<a class="headerlink" href="#pc0ping-r0" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.3.7. </span>在PC0上ping R0验证连通性<a class="headerlink" href="#pc0ping-r0" title="永久链接至标题"></a></h3>
 <a class="reference internal image-reference" href="../_images/cisco-82.png"><img alt="../_images/cisco-82.png" src="../_images/cisco-82.png" style="width: 681.6px; height: 601.6px;" /></a>
 </section>
 <section id="pc1ping-r1">
-<h3>在PC1上ping R1验证连通性<a class="headerlink" href="#pc1ping-r1" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.3.8. </span>在PC1上ping R1验证连通性<a class="headerlink" href="#pc1ping-r1" title="永久链接至标题"></a></h3>
 <a class="reference internal image-reference" href="../_images/cisco-91.png"><img alt="../_images/cisco-91.png" src="../_images/cisco-91.png" style="width: 681.6px; height: 601.6px;" /></a>
 </section>
 <section id="pc0ping-pc1">
-<h3>在PC0上ping PC1验证连通性<a class="headerlink" href="#pc0ping-pc1" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.3.9. </span>在PC0上ping PC1验证连通性<a class="headerlink" href="#pc0ping-pc1" title="永久链接至标题"></a></h3>
 <a class="reference internal image-reference" href="../_images/cisco-101.png"><img alt="../_images/cisco-101.png" src="../_images/cisco-101.png" style="width: 681.6px; height: 601.6px;" /></a>
 <p>此时，还没有设置RIP路由协议，PC0和PC1还不能相互连通。</p>
 <div class="admonition attention">
@@ -322,10 +368,10 @@
 </section>
 </section>
 <section id="id12">
-<h2>配置RIP协议及查看路由表，并测试连通性<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">6.4. </span>配置RIP协议及查看路由表，并测试连通性<a class="headerlink" href="#id12" title="永久链接至标题"></a></h2>
 <p>为两台路由器配置RIP协议，并通告其网络。具体命令如下：</p>
 <section id="r0rip">
-<h3>在路由器R0上启用RIP协议<a class="headerlink" href="#r0rip" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.4.1. </span>在路由器R0上启用RIP协议<a class="headerlink" href="#r0rip" title="永久链接至标题"></a></h3>
 <p>在R0的全局模式下配置：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#router rip  //启用RIP协议</span>
 <span class="linenos">2</span>R0<span class="o">(</span>config-router<span class="o">)</span><span class="c1">#version 2 // 设置版本号为RIP v2</span>
@@ -340,7 +386,7 @@
 </div>
 </section>
 <section id="r1rip">
-<h3>路由器R1上启用RIP协议<a class="headerlink" href="#r1rip" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.4.2. </span>路由器R1上启用RIP协议<a class="headerlink" href="#r1rip" title="永久链接至标题"></a></h3>
 <p>在R2全局模式下配置：</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>R1<span class="o">(</span>config<span class="o">)</span><span class="c1">#router rip  //启用RIP协议</span>
 <span class="linenos">2</span>R1<span class="o">(</span>config-router<span class="o">)</span><span class="c1">#version 2  // 设置版本号为RIP v2</span>
@@ -355,7 +401,7 @@
 </div>
 </section>
 <section id="r0r1">
-<h3>查看R0和R1的路由表<a class="headerlink" href="#r0r1" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.4.3. </span>查看R0和R1的路由表<a class="headerlink" href="#r0r1" title="永久链接至标题"></a></h3>
 <p>R0路由表:</p>
 <a class="reference internal image-reference" href="../_images/cisco-121.png"><img alt="../_images/cisco-121.png" src="../_images/cisco-121.png" style="width: 652.8000000000001px; height: 251.20000000000002px;" /></a>
 <p>此时，R0上多了一条RIP路由信息，即要达到192.168.3.0/24网段，下一个转发端口是192.168.1.2。</p>
@@ -364,7 +410,7 @@
 <p>此时，R1上多了两条RIP路由信息。</p>
 </section>
 <section id="pc0pc1">
-<h3>测试PC0到PC1之间的连通性<a class="headerlink" href="#pc0pc1" title="永久链接至标题"></a></h3>
+<h3><span class="section-number">6.4.4. </span>测试PC0到PC1之间的连通性<a class="headerlink" href="#pc0pc1" title="永久链接至标题"></a></h3>
 <a class="reference internal image-reference" href="../_images/cisco-131.png"><img alt="../_images/cisco-131.png" src="../_images/cisco-131.png" style="width: 681.6px; height: 601.6px;" /></a>
 <p>配置RIP路由协议后，PC0能访问到PC1了。</p>
 <div class="admonition attention">
@@ -375,27 +421,29 @@
 </section>
 </section>
 <section id="id13">
-<h2>触发更新和水平分割<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
+<h2><span class="section-number">6.5. </span>触发更新和水平分割<a class="headerlink" href="#id13" title="永久链接至标题"></a></h2>
 <section id="id14">
-<h3>进入仿真调试模式<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
-<p>在Cisco Packet Tracer软件菜单栏View -&gt; Simulation Mode，在工作区的右边出现一个“Simulation Panel”，此时就进入了仿真模式。</p>
-<a class="reference internal image-reference" href="../_images/cisco-141.png"><img alt="../_images/cisco-141.png" src="../_images/cisco-141.png" style="width: 559.2px; height: 264.8px;" /></a>
-<p>在“Event List Filters-Visible Events”窗口栏中显示捕获的协议，这里面有很多是我们不需要观察的协议。单击Show All/None，Event List Filters-Visible Events窗口栏中变成None。然后，再点击Edit Filters。在弹出的窗口里，选择IPv4选项卡，选择ARP、ICMP、RIP这三种协议，本实验只需观察这三种协议即可。</p>
+<h3><span class="section-number">6.5.1. </span>进入仿真调试模式<a class="headerlink" href="#id14" title="永久链接至标题"></a></h3>
+<p>在Cisco Packet Tracer软件右下角有“Simulation”按钮，点击该按钮就进入了仿真模式。</p>
+<a class="reference internal image-reference" href="../_images/cisco-stu-1.png"><img alt="../_images/cisco-stu-1.png" src="../_images/cisco-stu-1.png" style="width: 332.8px; height: 170.4px;" /></a>
+<p>在“Event List Filters-Visible Events”窗口栏中显示捕获的协议，这里面有很多是我们不需要观察的协议。单击Show All/None，也就是不显示任何协议。然后，再单击Edit Filters。在弹出的窗口里，选择IPv4选项卡，选择ARP、ICMP、RIP这三种协议，本实验只需观察这三种协议即可。</p>
 <a class="reference internal image-reference" href="../_images/cisco-151.png"><img alt="../_images/cisco-151.png" src="../_images/cisco-151.png" style="width: 252.8px; height: 284.8px;" /></a>
-<p>单击“Play”三角形按钮，让网络设备开始运行。此时，我们可以观察数据包的传输过程。包转发需要一些时间，请耐心等待。</p>
-<a class="reference internal image-reference" href="../_images/cisco-161.png"><img alt="../_images/cisco-161.png" src="../_images/cisco-161.png" style="width: 556.8000000000001px; height: 173.60000000000002px;" /></a>
-<img alt="../_images/cisco-171.png" src="../_images/cisco-171.png" />
-<p>上图中，在17.482s时刻，从Router0发出来了两个RIP数据包。点击“forward”前向三角按钮，在17.483s，这两个数据包分别被传输到Switch0和Router1。再次点击“forward”前向三角按钮，数据包在17.484s到达PC0，而之前到达Router1的数据没有在此时转发出来。这是因为Router1收到RIP协议数据包后，需要更新自身的路由表，然后等到它的下一个发包时刻再转发出路由数据包。22.991s，此时轮到Router1对外转发它的路由信息。22.992s数据包分别到达Router0和Switch1。由此我们可以观察数据包的传输过程。</p>
-<p>在上图中，我们可以看到Router0第一次发出RIP数据包是在17.482s，第二次发送RIP数据包是在45.467s，第三次是在74.955s，相差间隔差不多是30s，这也验证了RIP是每30s将自己所知道的路由信息广播出去。</p>
+<p>单击“Auto Capture / Play”按钮，让网络设备开始运行。此时，我们可以观察数据包的传输过程。包转发需要一些时间，请耐心等待。</p>
+<a class="reference internal image-reference" href="../_images/cisco-stu-2.png"><img alt="../_images/cisco-stu-2.png" src="../_images/cisco-stu-2.png" style="width: 268.8px; height: 46.400000000000006px;" /></a>
+<img alt="../_images/cisco-stu-3.png" src="../_images/cisco-stu-3.png" />
+<p>上图中，在8.440时刻，从Router0发出来了两个RIP数据包。点击“forward”前向三角按钮，在8.441s，这两个数据包分别被传输到Switch0和Router1。再次点击“forward”前向三角按钮，数据包在8.442s到达PC0，而之前到达Router1的数据没有在此时转发出来。这是因为Router1收到RIP协议数据包后，需要更新自身的路由表，然后等到它的下一个发包时刻再转发出路由数据包。13.078s，此时轮到Router1对外转发它的路由信息。13.079s数据包分别到达Router0和Switch1。由此我们可以观察数据包的传输过程。</p>
+<p>在上图中，我们可以看到Router0第一次发出RIP数据包是在8.440s，第二次发送RIP数据包是在37.666s，第三次是在66.796s，相差间隔差不多是30s，这也验证了RIP是每30s将自己所知道的路由信息广播出去。</p>
 </section>
 <section id="id15">
-<h3>观察触发更新报文<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
-<p>单击“Play”键停止抓包，然后单击“Reset Simulation”清空抓包信息。</p>
+<h3><span class="section-number">6.5.2. </span>观察触发更新报文<a class="headerlink" href="#id15" title="永久链接至标题"></a></h3>
+<p>单击“Auto Capture / Play”键停止抓包，然后单击“Reset Simulation”清空抓包信息。</p>
 <p>再按下“Play”键开始抓包。然后在Router0上使用命令no interface loopback1断开回环地址loopback 1，此时Simultaion Panel面板上显示结果如下:</p>
-<img alt="../_images/cisco-181.png" src="../_images/cisco-181.png" />
-<p>图中，21.263s，Router0发出两个RIP数据包。当我们输入no interface loopback 1命令断开loopback 1时，在21.265s，Router0又发出两个RIP数据包。此时，距离上一个Router0发出数据的时间还没有到达30s。</p>
-<p>单击21.265s行的Router0，在弹出窗口的Outbound PDU Details选项卡中，可以看到这个RIP数据包携带有达到1.1.1.1网络的跳数为16，也就是不可达。21.266s，到达Router1后，Router1也立刻转发该路由信息。也就是，一条路有切断，全网通告。</p>
-<a class="reference internal image-reference" href="../_images/cisco-191.png"><img alt="../_images/cisco-191.png" src="../_images/cisco-191.png" style="width: 560.0px; height: 564.0px;" /></a>
+<img alt="../_images/cisco-stu-4.png" src="../_images/cisco-stu-4.png" />
+<p>图中，2.601s，Router0发出两个RIP数据包。当我们输入`no interface loopback 1`命令断开loopback 1时，在18.262s，Router0又发出两个RIP数据包。此时，距离上一个Router0发出数据的时间还没有到达30s。</p>
+<p>单击“Back”按钮，选择到18.262s行的Router0，再点击Router0上的“信封”按钮，在弹出窗口的Outbound PDU Details选项卡中，可以看到这个RIP数据包携带有达到1.1.1.1网络的跳数为16，也就是不可达。</p>
+<a class="reference internal image-reference" href="../_images/cisco-stu-5.png"><img alt="../_images/cisco-stu-5.png" src="../_images/cisco-stu-5.png" style="width: 747.2px; height: 642.4000000000001px;" /></a>
+<p>单击“Capture / Forward”按钮，18.263s，该RIP包到达Router1后，Router1也立刻转发该路由信息。也就是，一条路有切断，全网通告。</p>
+<a class="reference internal image-reference" href="../_images/cisco-stu-6.png"><img alt="../_images/cisco-stu-6.png" src="../_images/cisco-stu-6.png" style="width: 744.0px; height: 643.2px;" /></a>
 <p>由此可知，在网络发生改变时，RIP路由协议会及时触发更新，而不是等到下一个30s后才发出路由信息。</p>
 <div class="admonition attention">
 <p class="admonition-title">注意</p>
@@ -404,19 +452,19 @@
 </div>
 </section>
 <section id="id16">
-<h3>观察取消水平分割前后报文差异<a class="headerlink" href="#id16" title="永久链接至标题"></a></h3>
-<p>参照上述配置方式 <a class="reference internal" href="1cisco-stu-rip.html#loopback"><span class="std std-ref">在路由器R0上配置端口的IP地址</span></a>，重新配置好loopback 1。</p>
+<h3><span class="section-number">6.5.3. </span>观察取消水平分割前后报文差异<a class="headerlink" href="#id16" title="永久链接至标题"></a></h3>
+<p>参照上述配置方式 <a class="reference internal" href="#loopback"><span class="std std-ref">在路由器R0上配置端口的IP地址</span></a>，重新配置好loopback 1。</p>
 <p>单击“Play”键停止抓包，然后单击“Reset Simulation”清空抓包信息。再按下“Play”键开始抓包。接下来，我们观察打开/关闭水平分割的报文。</p>
-<p>我们找到从Router0发出到Switch0的RIP数据包。以下图为例，在8.120s，Switch0收到的RIP路由信息有两条，显示到达192.168.1.0网段需要1跳，到达192.168.3.0网段需要2跳。</p>
-<img alt="../_images/cisco-201.png" src="../_images/cisco-201.png" />
-<p>同样在8.120s，Router1也收到Router0的RIP数据包，在该数据包中，只有到达1.1.1.1网段和192.168.2.0的路由信息，没有192.168.1.0网段和192.168.3.0网段的路由信息。这是因为开启了水平分割（rip配置后默认启动水平分割），Router0是从F0/0端口接收学习到192.168.1.0网段和192.168.3.0网段的路由信息，就不会再从该接口发回去。</p>
-<img alt="../_images/cisco-212.png" src="../_images/cisco-212.png" />
+<p>单击“Back”按钮，选择到3.310s行，我们找到从Router0发出到Switch0的RIP数据包。以下图为例，在3.310s，Switch0收到的RIP路由信息有两条，显示到达192.168.1.0网段需要1跳，到达192.168.3.0网段需要2跳。</p>
+<img alt="../_images/cisco-stu-7.png" src="../_images/cisco-stu-7.png" />
+<p>同样在3.310s，Router1也收到Router0的RIP数据包，在该数据包中，只有到达1.1.1.1网段和192.168.2.0的路由信息，没有192.168.1.0网段和192.168.3.0网段的路由信息。这是因为开启了水平分割（rip配置后默认启动水平分割），Router0是从F0/0端口接收学习到192.168.1.0网段和192.168.3.0网段的路由信息，就不会再从该接口发回去。</p>
+<img alt="../_images/cisco-stu-8.png" src="../_images/cisco-stu-8.png" />
 <p>接着，取消Router0的水平分割，我们继续观察RIP数据包。</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface f0/0</span>
 <span class="linenos">2</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no ip split-horizon</span>
 </pre></div>
 </div>
-<img alt="../_images/cisco-221.png" src="../_images/cisco-221.png" />
+<img alt="../_images/cisco-stu-9.png" src="../_images/cisco-stu-9.png" />
 <p>如上图所示，在取消水平分割后，Router1收到Router0的4条路由协议，多了2条来自192.168.1.0和192.168.3.0的报文。</p>
 <div class="admonition attention">
 <p class="admonition-title">注意</p>
@@ -427,14 +475,17 @@
 </section>
 </section>
 <section id="id17">
-<h1>实验提交<a class="headerlink" href="#id17" title="永久链接至标题"></a></h1>
+<h1><span class="section-number">7. </span>实验提交<a class="headerlink" href="#id17" title="永久链接至标题"></a></h1>
 <p>请参考实验一的提交方式。</p>
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Lab4：RIP路由配置及协议分析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../lab5/index.html" class="btn btn-neutral float-right" title="Lab5：协议栈之IP协议实现" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

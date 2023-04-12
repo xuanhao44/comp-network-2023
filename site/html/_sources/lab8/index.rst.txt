@@ -10,6 +10,6 @@ Lab4：RIP路由配置及协议分析
    :titlesonly:
    :numbered:
 
-   1cisco-rip
+   1cisco-stu-rip
 
 ..   0intro
