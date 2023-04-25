@@ -10,5 +10,5 @@ Lab8：NAT组网
    :titlesonly:
    :numbered:
 
-   1cisco-nat
+   1cisco-nat-stu
 ..   0intro
