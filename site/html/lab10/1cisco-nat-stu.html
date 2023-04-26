@@ -209,10 +209,10 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Router0-G0/0/0</p></td>
+<tr class="row-even"><td><p>Router0-G0/0</p></td>
 <td><p>192.168.3.1/24</p></td>
 </tr>
-<tr class="row-odd"><td><p>Router0-G0/0/1</p></td>
+<tr class="row-odd"><td><p>Router0-G0/1</p></td>
 <td><p>202.169.10.2/24</p></td>
 </tr>
 <tr class="row-even"><td><p>PC0</p></td>
@@ -300,7 +300,7 @@
 <span class="linenos"> 8</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown // 打开g0/0接口（默认接口关闭）</span>
 <span class="linenos"> 9</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
 <span class="linenos">10</span>
-<span class="linenos">11</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/0/1  // 进入g0/1接口模式</span>
+<span class="linenos">11</span>R0<span class="o">(</span>config<span class="o">)</span><span class="c1">#interface g0/1  // 进入g0/1接口模式</span>
 <span class="linenos">12</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#ip address 202.169.10.2 255.255.255.0  //配置g0/1接口ip地址</span>
 <span class="linenos">13</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#no shutdown  // 打开g0/1接口（默认接口关闭）</span>
 <span class="linenos">14</span>R0<span class="o">(</span>config-if<span class="o">)</span><span class="c1">#exit</span>
