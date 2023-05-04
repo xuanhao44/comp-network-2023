@@ -61,7 +61,7 @@
 .. code-block:: sh
    :linenos:
 
-   $ git clone https://gitee.com/hitsz-lab/maillab.git
+   $ git clone https://gitee.com/q601/maillab.git
 
 获取框架代码，将克隆maillab到当前目录。如遇问题请联系老师或助教。
 

@@ -354,7 +354,9 @@ multipart     mixed, alternative, parallel, digest      多种类型的消息
 本地环境搭建
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. important:: 
-  **为了防止频繁使用网络邮件提供商而被封号，可以搭建本地服务器，在上面测试无误后再用网络邮件提供商。** 
+  **为了防止频繁使用网络邮件提供商而被封号，可以搭建本地服务器，在上面测试无误后再用网络邮件提供商。**
+
+  当然，如果不想安装本地邮件服务器（毕竟安装需要花费一定时间），也可以自行 **创建新的163/qq邮箱账号** 以便用于本实验自测（该方案性价比高），这样也就无需担心被封号了：）
 
 本实验可参考 :doc:`/appendix-d/index` 来搭建本地邮件服务器。由于本地邮件服务器只用于测试本实验的实验代码，可通过自己给自己发送邮件的方式来测试邮件客户端是否能正常运行，因此，本地邮件服务器可以不设置DNS。当你编写的邮件客户端能够给本地邮件服务器发送/获取邮件，你就可以尝试给Gmail、QQ、163等网络邮箱发送或获取邮件了。
 
@@ -475,11 +477,11 @@ telnet命令获取邮件
    Escape character is '^]'.
    +OK XMail POP3 Server v1.0 Service Ready(XMail v1.0)
 
-   //输入qq邮箱，此处不需要加密
+   //输入qq邮箱，此处不需要加密。
    user XXXXXXXXXX@qq.com
    +OK
 
-   //输入qq邮箱的授权码，此处不需要加密
+   //输入qq邮箱的授权码（不是密码），此处不需要加密
    pass XXXXXXXXXXXXXXXX
 
    +OK
@@ -510,7 +512,9 @@ telnet命令获取邮件
 telnet测试完成后，保存好wireshark捕获到的报文。
 
 .. important:: 
-  上述是用telnet命令给网络邮箱发送或获取邮件，并使用wireshark工具捕获smtp或pop报文。当你调试你自己写的邮件客户端时，你也可以用wireshark捕获SMTP或POP报文。如果你的代码有问题，就可以通过对比查看wireshark文件，分析报文并查找bug。
+  上述是用telnet命令给网络邮箱发送或获取邮件，并使用wireshark工具捕获smtp或pop报文。本实验就是要编码实现这一过程。
+  
+  当你在调试你自己写的邮件客户端时，你也可以用wireshark捕获SMTP或POP报文。如果你的代码有问题，就可以通过对比查看wireshark文件，分析报文并查找bug。
 
 代码框架说明
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -524,12 +528,12 @@ telnet测试完成后，保存好wireshark捕获到的报文。
 .. code-block:: console
    :linenos:
 
-   ./send RECIPIENT [-s SUBJECT] [-m MESSAGE] [-a ATTACHMENT]
+   ./send [-s SUBJECT] [-m MESSAGE] [-a ATTACHMENT] RECIPIENT
 
-1. RECIPIENT: 收件人地址
-2. SUBJECT: 邮件主题
-3. MESSAGE: 邮件正文或含有邮件正文的文件路径
-4. ATTACHMENT: 邮件附件
+1. SUBJECT: 邮件主题
+#. MESSAGE: 邮件正文或含有邮件正文的文件路径
+#. ATTACHMENT: 邮件附件
+#. RECIPIENT: 收件人地址
 
 recv不需要任何参数，直接执行即可。
 
@@ -550,7 +554,7 @@ recv不需要任何参数，直接执行即可。
 .. code-block:: console
    :linenos:
 
-   ./send example@example.org -s "Mail subject" -m message.txt -a "attachment.zip"
+   ./send -s "Mail subject" -m message.txt -a "attachment.zip" example@example.org
 
 "attachment.zip"可以自己生成或指定。
 
@@ -578,4 +582,4 @@ recv不需要任何参数，直接执行即可。
 提交send.c、recv.c及实验报告。
 
 .. note:: 
-  提交时，请注意保护个人隐私信息，不要在代码中展示用户名或密码，可以将用户名和密码用星号代替。 
+  提交时，请注意保护个人隐私信息，不要在代码中展示用户名或授权码（或密码），可以将用户名和授权码（或密码）用星号代替。 

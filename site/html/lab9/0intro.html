@@ -441,6 +441,7 @@
 <div class="admonition important">
 <p class="admonition-title">重要</p>
 <p><strong>为了防止频繁使用网络邮件提供商而被封号，可以搭建本地服务器，在上面测试无误后再用网络邮件提供商。</strong></p>
+<p>当然，如果不想安装本地邮件服务器（毕竟安装需要花费一定时间），也可以自行 <strong>创建新的163/qq邮箱账号</strong> 以便用于本实验自测（该方案性价比高），这样也就无需担心被封号了：）</p>
 </div>
 <p>本实验可参考 <a class="reference internal" href="../appendix-d/index.html"><span class="doc">附录 D：邮件客户端实验环境</span></a> 来搭建本地邮件服务器。由于本地邮件服务器只用于测试本实验的实验代码，可通过自己给自己发送邮件的方式来测试邮件客户端是否能正常运行，因此，本地邮件服务器可以不设置DNS。当你编写的邮件客户端能够给本地邮件服务器发送/获取邮件，你就可以尝试给Gmail、QQ、163等网络邮箱发送或获取邮件了。</p>
 </section>
@@ -545,11 +546,11 @@
 <span class="linenos"> 6</span><span class="go">Escape character is &#39;^]&#39;.</span>
 <span class="linenos"> 7</span><span class="go">+OK XMail POP3 Server v1.0 Service Ready(XMail v1.0)</span>
 <span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="go">//输入qq邮箱，此处不需要加密</span>
+<span class="linenos"> 9</span><span class="go">//输入qq邮箱，此处不需要加密。</span>
 <span class="linenos">10</span><span class="go">user XXXXXXXXXX@qq.com</span>
 <span class="linenos">11</span><span class="go">+OK</span>
 <span class="linenos">12</span>
-<span class="linenos">13</span><span class="go">//输入qq邮箱的授权码，此处不需要加密</span>
+<span class="linenos">13</span><span class="go">//输入qq邮箱的授权码（不是密码），此处不需要加密</span>
 <span class="linenos">14</span><span class="go">pass XXXXXXXXXXXXXXXX</span>
 <span class="linenos">15</span>
 <span class="linenos">16</span><span class="go">+OK</span>
@@ -580,7 +581,8 @@
 <p>telnet测试完成后，保存好wireshark捕获到的报文。</p>
 <div class="admonition important">
 <p class="admonition-title">重要</p>
-<p>上述是用telnet命令给网络邮箱发送或获取邮件，并使用wireshark工具捕获smtp或pop报文。当你调试你自己写的邮件客户端时，你也可以用wireshark捕获SMTP或POP报文。如果你的代码有问题，就可以通过对比查看wireshark文件，分析报文并查找bug。</p>
+<p>上述是用telnet命令给网络邮箱发送或获取邮件，并使用wireshark工具捕获smtp或pop报文。本实验就是要编码实现这一过程。</p>
+<p>当你在调试你自己写的邮件客户端时，你也可以用wireshark捕获SMTP或POP报文。如果你的代码有问题，就可以通过对比查看wireshark文件，分析报文并查找bug。</p>
 </div>
 </section>
 </section>
@@ -588,14 +590,14 @@
 <h2><span class="section-number">4.3. </span>代码框架说明<a class="headerlink" href="#id10" title="永久链接至标题"></a></h2>
 <p>本实验准备了一个代码框架 <a class="reference external" href="../index.html#id3">实验相关链接</a> ，send.c为邮件发送客户端源程序，recv.c为邮件接收客户端源程序。关于socket套接字接口函数的用法可参考  <a class="reference internal" href="../appendix-d/3socket.html"><span class="doc">socket编程简介</span></a> 。</p>
 <p>请按要求补充这两个文件。执行make编译后，会生成send和recv两个程序。send程序需要接收命令行参数，它的使用方法为：</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">./send RECIPIENT [-s SUBJECT] [-m MESSAGE] [-a ATTACHMENT]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">./send [-s SUBJECT] [-m MESSAGE] [-a ATTACHMENT] RECIPIENT</span>
 </pre></div>
 </div>
 <ol class="arabic simple">
-<li><p>RECIPIENT: 收件人地址</p></li>
 <li><p>SUBJECT: 邮件主题</p></li>
 <li><p>MESSAGE: 邮件正文或含有邮件正文的文件路径</p></li>
 <li><p>ATTACHMENT: 邮件附件</p></li>
+<li><p>RECIPIENT: 收件人地址</p></li>
 </ol>
 <p>recv不需要任何参数，直接执行即可。</p>
 <div class="admonition hint">
@@ -610,7 +612,7 @@
 </pre></div>
 </div>
 <p>运行下述命令发送一封邮件（各项参数请自行替换为有意义的字符串）：</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">./send example@example.org -s &quot;Mail subject&quot; -m message.txt -a &quot;attachment.zip&quot;</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="go">./send -s &quot;Mail subject&quot; -m message.txt -a &quot;attachment.zip&quot; example@example.org</span>
 </pre></div>
 </div>
 <p>“attachment.zip”可以自己生成或指定。</p>
@@ -638,7 +640,7 @@
 <p>提交send.c、recv.c及实验报告。</p>
 <div class="admonition note">
 <p class="admonition-title">备注</p>
-<p>提交时，请注意保护个人隐私信息，不要在代码中展示用户名或密码，可以将用户名和密码用星号代替。</p>
+<p>提交时，请注意保护个人隐私信息，不要在代码中展示用户名或授权码（或密码），可以将用户名和授权码（或密码）用星号代替。</p>
 </div>
 </section>
 

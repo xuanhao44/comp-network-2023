@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>常见问题（2022） &mdash; 计算机网络实验指导书 - 2023春季 | 哈工大（深圳） v1.0 文档</title>
+  <title>5. Lab9 常见问题（MAIL） &mdash; 计算机网络实验指导书 - 2023春季 | 哈工大（深圳） v1.0 文档</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/my_style.css" type="text/css" />
@@ -21,8 +21,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="1. Lab1 常见问题（VLAN）" href="lab1.html" />
-    <link rel="prev" title="附录 F：致谢" href="../appendix-f/index.html" /> 
+    <link rel="prev" title="4. Lab7 常见问题（UDP）" href="lab7.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -62,12 +61,19 @@
 <li class="toctree-l1"><a class="reference internal" href="../appendix-d/index.html">附录 D：邮件客户端实验环境</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-e/index.html">附录 E：参考文献</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../appendix-f/index.html">附录 F：致谢</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">常见问题（2022）</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">常见问题（2022）</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="lab1.html">1. Lab1 常见问题（VLAN）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab2.html">2. Lab2 常见问题（Eth）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab3.html">3. Lab3 常见问题（ARP）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="lab7.html">4. Lab7 常见问题（UDP）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lab9.html">5. Lab9 常见问题（MAIL）</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5. Lab9 常见问题（MAIL）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#send-c">5.1. 测试send.c收到的邮件正文为乱码？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recv-c">5.2. 测试 recv.c 登录失败？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">5.3. 测试 send.c 终端无输出？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">5.4. 向服务器发送的命令得不到回复，终端一直在等待？</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">5.5. 邮件正文为空？</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -86,9 +92,10 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>常见问题（2022）</li>
+          <li><a href="index.html">常见问题（2022）</a> &raquo;</li>
+      <li><span class="section-number">5. </span>Lab9 常见问题（MAIL）</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/appendix-g/index.rst.txt" rel="nofollow"> 查看页面源码</a>
+            <a href="../_sources/appendix-g/lab9.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
   </ul>
   <hr/>
@@ -96,30 +103,46 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="id1">
-<h1>常见问题（2022）<a class="headerlink" href="#id1" title="永久链接至标题"></a></h1>
+  <section id="lab9-mail">
+<h1><span class="section-number">5. </span>Lab9 常见问题（MAIL）<a class="headerlink" href="#lab9-mail" title="永久链接至标题"></a></h1>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="lab1.html">1. Lab1 常见问题（VLAN）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab2.html">2. Lab2 常见问题（Eth）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab3.html">3. Lab3 常见问题（ARP）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab7.html">4. Lab7 常见问题（UDP）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab9.html">5. Lab9 常见问题（MAIL）</a></li>
+</div>
+<section id="send-c">
+<h2><span class="section-number">5.1. </span>测试send.c收到的邮件正文为乱码？<a class="headerlink" href="#send-c" title="永久链接至标题"></a></h2>
+<p>发送邮件正文时忘记转换为 base64 编码。</p>
+</section>
+<section id="recv-c">
+<h2><span class="section-number">5.2. </span>测试 recv.c 登录失败？<a class="headerlink" href="#recv-c" title="永久链接至标题"></a></h2>
+<p>recv 登录时授权码不需要转换 base64 编码。</p>
+</section>
+<section id="id1">
+<h2><span class="section-number">5.3. </span>测试 send.c 终端无输出？<a class="headerlink" href="#id1" title="永久链接至标题"></a></h2>
+<ul class="simple">
+<li><p>host_name 没填对；</p></li>
+<li><p>发送邮箱名和邮箱授权码时没有在末尾加上回车符\r\n。</p></li>
 </ul>
-</div>
-<p>本文档包含了在实验过程中可能会出现的问题以及对应的解决办法，供同学们参考。特别感谢给本课程实验反馈问题、建议及意见的同学。</p>
-<div class="admonition note">
-<p class="admonition-title">备注</p>
-<p>我们提供的实验指导书/实验报告/代码等必然不是最完美的，欢迎大家多多思考，发现更多隐藏的问题并积极与我们交流、探讨，很期待与大家共同学习、进步：）</p>
-</div>
+</section>
+<section id="id2">
+<h2><span class="section-number">5.4. </span>向服务器发送的命令得不到回复，终端一直在等待？<a class="headerlink" href="#id2" title="永久链接至标题"></a></h2>
+<p>发送的命令语句后面要加\r\n或 \n，否则服务器不能识别命令。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">5.5. </span>邮件正文为空？<a class="headerlink" href="#id3" title="永久链接至标题"></a></h2>
+<p>SMTP 只能发送使用 ASCII 码的文本内容，想要传输附件，需要通过 MIME 来提供额外的扩充，然而在 SMTP 中使用 MIME 时，需要额外的定义出一个固定的分隔符，而且格外需要注意的是 MIME 的邮件头是拥有固定的格式字段的，若是对于这些邮件头的填写出现了一点问题，那么服务器在接收到这个邮件的时候就会认为这些东西是乱
+码或者是普通的文本，从而出现了这些内容被误解，从而无法正确地发送邮件。</p>
+<ul class="simple">
+<li><p>可对比telnet指令的wireshark，查看哪里对不上。</p></li>
+<li><p>实验要求能发送文本信息和附件，需按照MIME的格式来指定Content-Type为multipart/mixed类型。</p></li>
+<li><p>注意有部分空行（如在发送context_type后需多加\r\n）并不只是为了美观，而是格式本身的要求。</p></li>
+</ul>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../appendix-f/index.html" class="btn btn-neutral float-left" title="附录 F：致谢" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="lab1.html" class="btn btn-neutral float-right" title="1. Lab1 常见问题（VLAN）" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="lab7.html" class="btn btn-neutral float-left" title="4. Lab7 常见问题（UDP）" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
     </div>
 
   <hr/>

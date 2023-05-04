@@ -75,7 +75,7 @@ connect函数用于向指定的服务器和端口发送连接请求。
 
 1） sockfd参数是socket函数返回的套接字描述符；
 
-2） servaddr参数是服务器的地址和端口，它由struct sockaddr结构体来表示，其定义如下：
+2） servaddr参数是服务器的地址和端口，它由struct sockaddr_in结构体来表示（在connect函数传参时需要强制转换成struct sockaddr * ），其定义如下：
 
 .. code-block:: c
    :linenos:
