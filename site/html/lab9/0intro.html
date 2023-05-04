@@ -454,9 +454,14 @@
 <p>以下是QQ邮箱的POP3/SMTP服务开启方法，你也可以使用其他网络邮箱。</p>
 <img alt="../_images/lab-3.png" src="../_images/lab-3.png" />
 <img alt="../_images/lab-1.png" src="../_images/lab-1.png" />
-<p>在telnet与SMTP交互过程中，你需要提前准备好 <strong>base64编码的邮件用户名和邮件授权码</strong> 。获取一个字符串的base64编码的方法为：</p>
+<p>在telnet与SMTP交互过程中，你需要提前准备好 <strong>base64编码的邮件用户名和邮件授权码</strong> 。获取一个字符串的base64编码的方法为：打开Linux系统的命令行，输入如下命令</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">$ </span><span class="nb">printf</span> <span class="s2">&quot;username&quot;</span> <span class="p">|</span> openssl base64
 </pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">注意</p>
+<p><strong>不要使用OS实验的远程实验平台来做计算机网络实验</strong> ，远程实验平台能够使用telnet命令，也能够编译运行本次实验的代码，但不能使用wireshark来捕获报文，使得实验难以调试。</p>
+<p>建议使用你自己电脑中的Linux系统（可以是虚拟机），也可以使用实验室电脑的Linux系统来完成实验。</p>
 </div>
 </section>
 <section id="wiresharksmtp">
@@ -466,7 +471,7 @@
 <li><p>如何确认上网使用的网卡名称？</p></li>
 </ul>
 <blockquote>
-<div><p>打开“控制面板\网络和 Internet\网络连接”，查看你当前上网使用的网卡。如下图所示，第一排前三个网卡是虚拟网卡，第二排是有线网卡，但都没有插线，只有WLAN网卡是正在使用中的。</p>
+<div><p>打开“控制面板\网络和 Internet\网络连接”，查看你当前上网使用的网卡。如下图所示，第一排前三个网卡是虚拟网卡，第二排是有线网卡，但都没有插线，只有“WLAN网卡”是正在使用中的。</p>
 </div></blockquote>
 <img alt="../_images/lab-4.png" src="../_images/lab-4.png" />
 <p>到wireshark中，点击菜单栏“捕获”，选择“选项”，在弹出的窗口“Input”栏中，选择上网使用的网卡，然后点击“开始”。</p>
@@ -474,7 +479,7 @@
 </section>
 <section id="id8">
 <h3><span class="section-number">4.2.3. </span>telnet命令发邮件<a class="headerlink" href="#id8" title="永久链接至标题"></a></h3>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="go">//在cmd中输入</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="go">//在命令行中输入</span>
 <span class="linenos"> 2</span><span class="go">telnet smtp.qq.com 25</span>
 <span class="linenos"> 3</span>
 <span class="linenos"> 4</span><span class="go">Trying 58.251.106.181...</span>
@@ -482,7 +487,7 @@
 <span class="linenos"> 6</span><span class="go">Escape character is &#39;^]&#39;.</span>
 <span class="linenos"> 7</span><span class="go">220 newxmesmtplogicsvrsza8.qq.com XMail Esmtp QQ Mail Server.</span>
 <span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="go">//在cmd中输入</span>
+<span class="linenos"> 9</span><span class="go">//在命令行中输入</span>
 <span class="linenos">10</span><span class="go">EHLO qq.com</span>
 <span class="linenos">11</span>
 <span class="linenos">12</span><span class="go">250-newxmesmtplogicsvrszc10.qq.com</span>

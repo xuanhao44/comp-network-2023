@@ -374,12 +374,20 @@ telnet命令测试准备工作
 
 .. image:: lab-1.png
 
-在telnet与SMTP交互过程中，你需要提前准备好 **base64编码的邮件用户名和邮件授权码** 。获取一个字符串的base64编码的方法为：
+在telnet与SMTP交互过程中，你需要提前准备好 **base64编码的邮件用户名和邮件授权码** 。获取一个字符串的base64编码的方法为：打开Linux系统的命令行，输入如下命令
 
 .. code-block:: console
    :linenos:
 
    $ printf "username" | openssl base64
+
+..  attention:: 
+  **不要使用OS实验的远程实验平台来做计算机网络实验** ，远程实验平台能够使用telnet命令，也能够编译运行本次实验的代码，但不能使用wireshark来捕获报文，使得实验难以调试。
+
+  建议使用你自己电脑中的Linux系统（可以是虚拟机），也可以使用实验室电脑的Linux系统来完成实验。
+  
+  
+
 
 wireshark捕获smtp报文
 ---------------------------------
@@ -400,7 +408,7 @@ telnet命令发邮件
 .. code-block:: console
    :linenos:
 
-   //在cmd中输入
+   //在命令行中输入
    telnet smtp.qq.com 25
 
    Trying 58.251.106.181...
@@ -408,7 +416,7 @@ telnet命令发邮件
    Escape character is '^]'.
    220 newxmesmtplogicsvrsza8.qq.com XMail Esmtp QQ Mail Server.
    
-   //在cmd中输入
+   //在命令行中输入
    EHLO qq.com
 
    250-newxmesmtplogicsvrszc10.qq.com
